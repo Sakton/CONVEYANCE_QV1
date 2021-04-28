@@ -29,4 +29,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
 	component.qmodel \
 	db_conveyance.qmodel \
-	first_structure.qmodel
+	first_structure.qmodel \
+	plans.txt
