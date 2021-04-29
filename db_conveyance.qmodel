@@ -71,7 +71,7 @@
                          </base-DElement>
                          <object>{b46ba4fa-42c9-4a00-a70d-0c51f97b5c6f}</object>
                          <name>individual</name>
-                         <pos>x:45;y:-275</pos>
+                         <pos>x:110;y:-235</pos>
                          <rect>x:-85;y:-70;w:170;h:140</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -137,7 +137,7 @@
                          </base-DElement>
                          <object>{216937bb-a50c-4a4b-8e5f-6d385c673f69}</object>
                          <name>organization</name>
-                         <pos>x:45;y:-110</pos>
+                         <pos>x:110;y:-70</pos>
                          <rect>x:-85;y:-65;w:170;h:130</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -159,7 +159,7 @@
                          </base-DElement>
                          <object>{a21d77b7-8f9c-43a4-9dbd-75240d4e9a74}</object>
                          <name>type_client</name>
-                         <pos>x:-185;y:-240</pos>
+                         <pos>x:-120;y:-140</pos>
                          <rect>x:-90;y:-60;w:180;h:120</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -177,14 +177,14 @@
                          <uid>{3630700d-99c7-4de7-b875-cff5e125ca19}</uid>
                         </DElement>
                        </base-DElement>
-                       <pos>x:-75;y:-200</pos>
+                       <pos>x:-10;y:-160</pos>
                        <rect>x:-235;y:-180;w:470;h:360</rect>
                       </DBoundary>
                      </instance>
                     </item>
                    </qlist>
                   </elements>
-                  <last-modified>1619693287647</last-modified>
+                  <last-modified>1619701175969</last-modified>
                   <toolbarid>Classes</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -415,14 +415,14 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{cb63cd98-e576-4fcc-a872-113eca46282e}</uid>
+                    <uid>{87118fea-0abf-46a6-921e-7986394c04c1}</uid>
                     <type>1</type>
                     <declaration>type_id</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{9288ddf2-fb83-45d1-af7e-037173df3d5a}</uid>
+                    <uid>{e51a6c4b-d343-47e6-9ba7-3133949e3372}</uid>
                     <type>2</type>
                     <declaration>name VARCHAR(30)</declaration>
                    </MClassMember>
