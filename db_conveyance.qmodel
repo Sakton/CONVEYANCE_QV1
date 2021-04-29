@@ -49,8 +49,8 @@
                          </base-DElement>
                          <object>{5f3a1177-391c-4206-93f1-d6f6f8307f81}</object>
                          <name>Orders</name>
-                         <pos>x:-535;y:-685</pos>
-                         <rect>x:-145;y:-140;w:290;h:280</rect>
+                         <pos>x:-535;y:-690</pos>
+                         <rect>x:-145;y:-135;w:290;h:270</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -70,9 +70,9 @@
                           </DElement>
                          </base-DElement>
                          <object>{b46ba4fa-42c9-4a00-a70d-0c51f97b5c6f}</object>
-                         <name>clients</name>
-                         <pos>x:135;y:-325</pos>
-                         <rect>x:-70;y:-65;w:140;h:130</rect>
+                         <name>individual</name>
+                         <pos>x:45;y:-275</pos>
+                         <rect>x:-85;y:-70;w:170;h:140</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -93,7 +93,7 @@
                          </base-DElement>
                          <object>{b15a4d52-90ee-4cb5-bd33-be8b97718e28}</object>
                          <name>valutas</name>
-                         <pos>x:130;y:-740</pos>
+                         <pos>x:130;y:-760</pos>
                          <rect>x:-75;y:-60;w:150;h:120</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
@@ -115,8 +115,8 @@
                          </base-DElement>
                          <object>{d70666b8-ba3a-4e3e-8fde-3353a8b7cdf6}</object>
                          <name>drivers</name>
-                         <pos>x:130;y:-540</pos>
-                         <rect>x:-70;y:-60;w:140;h:120</rect>
+                         <pos>x:130;y:-600</pos>
+                         <rect>x:-75;y:-60;w:150;h:120</rect>
                          <auto-sized>false</auto-sized>
                          <visual-role>0</visual-role>
                         </DObject>
@@ -125,9 +125,66 @@
                       </DClass>
                      </instance>
                     </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{f5648537-629a-43dc-84c4-28d258b8de67}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{216937bb-a50c-4a4b-8e5f-6d385c673f69}</object>
+                         <name>organization</name>
+                         <pos>x:45;y:-110</pos>
+                         <rect>x:-85;y:-65;w:170;h:130</rect>
+                         <auto-sized>false</auto-sized>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <show-all-members>true</show-all-members>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DClass">
+                      <DClass>
+                       <base-DObject>
+                        <DObject>
+                         <base-DElement>
+                          <DElement>
+                           <uid>{87d3087c-1c1d-411b-ac18-c540d75a797e}</uid>
+                          </DElement>
+                         </base-DElement>
+                         <object>{a21d77b7-8f9c-43a4-9dbd-75240d4e9a74}</object>
+                         <name>type_client</name>
+                         <pos>x:-185;y:-240</pos>
+                         <rect>x:-90;y:-60;w:180;h:120</rect>
+                         <auto-sized>false</auto-sized>
+                         <visual-role>0</visual-role>
+                        </DObject>
+                       </base-DObject>
+                       <show-all-members>true</show-all-members>
+                      </DClass>
+                     </instance>
+                    </item>
+                    <item>
+                     <instance type="DBoundary">
+                      <DBoundary>
+                       <base-DElement>
+                        <DElement>
+                         <uid>{3630700d-99c7-4de7-b875-cff5e125ca19}</uid>
+                        </DElement>
+                       </base-DElement>
+                       <pos>x:-75;y:-200</pos>
+                       <rect>x:-235;y:-180;w:470;h:360</rect>
+                      </DBoundary>
+                     </instance>
+                    </item>
                    </qlist>
                   </elements>
-                  <last-modified>1619524470494</last-modified>
+                  <last-modified>1619693287647</last-modified>
                   <toolbarid>Classes</toolbarid>
                  </MDiagram>
                 </base-MDiagram>
@@ -156,44 +213,51 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{b1be1a9b-21f3-4c05-9daa-bac9c34725a9}</uid>
+                    <uid>{99cb5d24-b02f-414f-a1f3-fddf7d395c1f}</uid>
                     <type>1</type>
-                    <declaration>order_id</declaration>
+                    <declaration>order_id INT PRIM_KEY</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{af0460e7-31c2-4e20-bb45-b9774afeb38e}</uid>
+                    <uid>{8864eeb6-d681-451d-8a80-91f28cfb95ff}</uid>
                     <type>1</type>
-                    <declaration>client_id</declaration>
+                    <declaration>ind_id INT NULL</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{9046be01-5c83-4be7-a288-109f43af7332}</uid>
+                    <uid>{644b8a86-a89b-48ae-a900-d20b99fcd5fd}</uid>
                     <type>1</type>
-                    <declaration>valuta_id</declaration>
+                    <declaration>org_id NULL</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{1fced515-6672-47d2-988c-6f3a00e9e6b4}</uid>
+                    <uid>{1d0837ab-e3b9-42b7-8122-12b0f349472c}</uid>
                     <type>1</type>
-                    <declaration>driver_id</declaration>
+                    <declaration>valuta_id INT FOREIGN KEY</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{d88d8f0c-24ac-4a45-9ba5-13e7ec977b06}</uid>
+                    <uid>{6373bfe6-9346-4862-9651-334bc521731d}</uid>
                     <type>1</type>
-                    <declaration>order_data</declaration>
+                    <declaration>driver_id INT FOREIGN KEY</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{31377fb4-effb-4d27-b6cd-2234e24af8cd}</uid>
+                    <uid>{72c625d9-5dd6-48bb-85f4-8f33c2234cbc}</uid>
                     <type>1</type>
-                    <declaration>order_price</declaration>
+                    <declaration>order_data INT FOREIGN KEY</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{974bb10f-1401-41a1-8705-7b4391849e07}</uid>
+                    <type>1</type>
+                    <declaration>order_price INT FOREIGN KEY</declaration>
                    </MClassMember>
                   </item>
                  </qlist>
@@ -216,16 +280,16 @@
                     <uid>{b46ba4fa-42c9-4a00-a70d-0c51f97b5c6f}</uid>
                    </MElement>
                   </base-MElement>
-                  <name>clients</name>
+                  <name>individual</name>
                  </MObject>
                 </base-MObject>
                 <members>
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{44ec83a4-7592-4b67-8aed-20ea95779b7a}</uid>
+                    <uid>{a217b0e2-5f57-4e19-9cae-70f6c0f294e6}</uid>
                     <type>1</type>
-                    <declaration>client_id</declaration>
+                    <declaration>ind_id</declaration>
                    </MClassMember>
                   </item>
                  </qlist>
@@ -255,7 +319,7 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{fe0a4d0a-7bab-4f31-b0b1-f15bc33ad02a}</uid>
+                    <uid>{0f8ee74d-b67d-4be1-a3df-b5726a810c6c}</uid>
                     <type>1</type>
                     <declaration>valuta_id</declaration>
                    </MClassMember>
@@ -287,9 +351,80 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{3dc4b12e-ffe9-4d5e-9791-9f58e1cd767a}</uid>
+                    <uid>{189d7420-4aea-466b-b9ce-a2d3246aab76}</uid>
                     <type>1</type>
                     <declaration>driver_id</declaration>
+                   </MClassMember>
+                  </item>
+                 </qlist>
+                </members>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{216937bb-a50c-4a4b-8e5f-6d385c673f69}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{216937bb-a50c-4a4b-8e5f-6d385c673f69}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>organization</name>
+                 </MObject>
+                </base-MObject>
+                <members>
+                 <qlist>
+                  <item>
+                   <MClassMember>
+                    <uid>{ca459074-bd15-40d5-bcf0-c2167b21fc07}</uid>
+                    <type>1</type>
+                    <declaration>org_id</declaration>
+                   </MClassMember>
+                  </item>
+                 </qlist>
+                </members>
+               </MClass>
+              </instance>
+             </target>
+            </handle>
+           </item>
+           <item>
+            <handle>
+             <uid>{a21d77b7-8f9c-43a4-9dbd-75240d4e9a74}</uid>
+             <target>
+              <instance type="MClass">
+               <MClass>
+                <base-MObject>
+                 <MObject>
+                  <base-MElement>
+                   <MElement>
+                    <uid>{a21d77b7-8f9c-43a4-9dbd-75240d4e9a74}</uid>
+                   </MElement>
+                  </base-MElement>
+                  <name>type_client</name>
+                 </MObject>
+                </base-MObject>
+                <members>
+                 <qlist>
+                  <item>
+                   <MClassMember>
+                    <uid>{cb63cd98-e576-4fcc-a872-113eca46282e}</uid>
+                    <type>1</type>
+                    <declaration>type_id</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{9288ddf2-fb83-45d1-af7e-037173df3d5a}</uid>
+                    <type>2</type>
+                    <declaration>name VARCHAR(30)</declaration>
                    </MClassMember>
                   </item>
                  </qlist>
