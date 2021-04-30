@@ -287,9 +287,16 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{a217b0e2-5f57-4e19-9cae-70f6c0f294e6}</uid>
+                    <uid>{6fdcbb07-9522-4bd9-ac93-d9bca56ebfb7}</uid>
                     <type>1</type>
                     <declaration>ind_id</declaration>
+                   </MClassMember>
+                  </item>
+                  <item>
+                   <MClassMember>
+                    <uid>{fa0c8565-3587-4929-b6ee-12119ad89c7a}</uid>
+                    <type>2</type>
+                    <declaration>name VARCHAR(64)</declaration>
                    </MClassMember>
                   </item>
                  </qlist>
@@ -415,14 +422,14 @@
                  <qlist>
                   <item>
                    <MClassMember>
-                    <uid>{87118fea-0abf-46a6-921e-7986394c04c1}</uid>
+                    <uid>{27926b1c-8922-4edd-b610-c44d21178883}</uid>
                     <type>1</type>
                     <declaration>type_id</declaration>
                    </MClassMember>
                   </item>
                   <item>
                    <MClassMember>
-                    <uid>{e51a6c4b-d343-47e6-9ba7-3133949e3372}</uid>
+                    <uid>{9130cc1e-ae8c-41df-9df4-a38fb96eba1b}</uid>
                     <type>2</type>
                     <declaration>name VARCHAR(30)</declaration>
                    </MClassMember>
