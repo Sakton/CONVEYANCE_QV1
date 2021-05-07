@@ -9,21 +9,21 @@ class MainWindow;
 
 class MainWindow : public QMainWindow
 {
-    Q_OBJECT
-
-public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow( );
-
-private:
-    void createMenu( );
-    QToolBar *createToolBar( );
-
-private:
-    void createFileMenu( );
-
-private:
-    Ui::MainWindow *ui;
+  Q_OBJECT
+  
+ public:
+  explicit MainWindow( QWidget *parent = nullptr );
+  ~MainWindow( );
+  
+ private:
+  void createMenu( );
+  QToolBar *createToolBar( );
+  
+ private:
+  void createFileMenu( );
+  
+ private:
+  Ui::MainWindow *ui;
 };
 
 #endif // MAINWINDOW_H
