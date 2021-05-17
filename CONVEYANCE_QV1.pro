@@ -27,6 +27,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+	DB_v1.mwb \
 	component.qmodel \
 	db_conveyance.qmodel \
 	db_model_tables.mwb \
