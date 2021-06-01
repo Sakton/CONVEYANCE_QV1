@@ -28,8 +28,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
 	DB_v1.mwb \
-	component.qmodel \
-	db_conveyance.qmodel \
-	db_model_tables.mwb \
-	first_structure.qmodel \
 	plans.txt
