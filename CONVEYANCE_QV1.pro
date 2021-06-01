@@ -28,4 +28,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
 	DB_v1.mwb \
+	img/icon24.png \
+	img/icon48.png \
+	img/icon96.png \
+	img/splash.jpg \
 	plans.txt
+
+RESOURCES += \
+	source.qrc

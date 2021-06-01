@@ -15,7 +15,20 @@ class MainWindow : public QMainWindow
   explicit MainWindow( QWidget *parent = nullptr );
   ~MainWindow( );
 
- private:
+  // QWidget interface
+protected:
+  void closeEvent( QCloseEvent *event ) override;
+
+  // public:
+  //  QMenu *createPopupMenu( ) override;
+
+public slots:
+
+private:
+  void writeSettings( );
+  void readSettings( );
+
+private:
   Ui::MainWindow *ui;
 };
 
