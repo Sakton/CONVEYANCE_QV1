@@ -18,6 +18,9 @@ ORDER BY vat_stavka;
 SELECT vat_stavka FROM vats
 ORDER BY vat_stavka DESC;
 
+--testes
+INSERT INTO vats ( vat_stavka )
+VALUES (101);
 
 
 
