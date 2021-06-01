@@ -1,0 +1,23 @@
+CREATE DATABASE demo_coveyance_db;
+
+--VATS
+CREATE TABLE vats (
+	vat_id SERIAL,
+	vat_stavka decimal(4, 2) NOT NULL,
+	CONSTRAINT vats_valid CHECK ( vat_stavka > 0 AND vat_stavka < 100 )
+);
+
+INSERT INTO vats ( vat_stavka )
+VALUES ( 15 ), ( 18 ), ( 19 ), ( 20 ), ( 21 ), ( 23 ), ( 25 ), ( 27 );
+
+SELECT vat_stavka FROM vats;
+
+SELECT vat_stavka FROM vats
+ORDER BY vat_stavka;
+
+SELECT vat_stavka FROM vats
+ORDER BY vat_stavka DESC;
+
+
+
+
