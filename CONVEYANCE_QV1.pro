@@ -1,4 +1,5 @@
-QT       += core gui
+QT += core gui
+QT += axcontainer
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -31,6 +32,7 @@ DISTFILES += \
 	DBcommands.txt \
 	IshodnyDanny/Adresses.ods \
 	IshodnyDanny/Adresses.xls \
+	Zadachi \
 	img/icon24.png \
 	img/icon48.png \
 	img/icon96.png \

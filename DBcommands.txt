@@ -20,13 +20,27 @@ ORDER BY vat_stavka DESC;
 
 --testes
 INSERT INTO vats ( vat_stavka )
-VALUES (-1);
+VALUES (-1); -- + ERROR RANGE
 
 --CITIES
 CREATE TABLE sities (
 	city_id SERIAL,
-	city_name VARCHAR( 256 ) NOT NULL
+	city_name VARCHAR( 256 ) NOT NULL UNIQUE
 );
+
+INSERT INTO sities ( city_name )
+VALUES ( 'Nürnberg-Hafen' ),
+	   ( 'Frankfurt(Oder)'),
+	   ( 'Hamburg' ),
+	   ( 'Isernhagen' ),
+	   ( 'Fuldabrück' ),
+	   ( 'Göttingen' );
+	   
+INSERT INTO sities ( city_name )
+VALUES ( 'Göttingen' );
+	   
+SELECT * FROM sities; --ERROR UNIQ
+
 
 
 

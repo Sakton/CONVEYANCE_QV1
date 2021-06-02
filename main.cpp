@@ -2,6 +2,8 @@
 #include <QApplication>
 #include <QSplashScreen>
 
+// #include <QAxObject>
+
 // global
 void setsApp( QApplication &app );
 
