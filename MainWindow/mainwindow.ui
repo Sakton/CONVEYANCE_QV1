@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>956</width>
-    <height>478</height>
+    <width>948</width>
+    <height>546</height>
    </rect>
   </property>
   <property name="font">
@@ -27,7 +27,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>956</width>
+     <width>948</width>
      <height>23</height>
     </rect>
    </property>
@@ -57,8 +57,8 @@
     <property name="title">
      <string>Ордера</string>
     </property>
-    <addaction name="action_2"/>
-    <addaction name="action_3"/>
+    <addaction name="actionCreateOrder"/>
+    <addaction name="actionShowAllOrder"/>
    </widget>
    <widget class="QMenu" name="menuFactura">
     <property name="font">
@@ -72,7 +72,7 @@
     <property name="title">
      <string>Фактуры</string>
     </property>
-    <addaction name="action_5"/>
+    <addaction name="actionCreateFacture"/>
    </widget>
    <widget class="QMenu" name="menuCatalog">
     <property name="font">
@@ -183,16 +183,28 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionQuit">
+   <property name="icon">
+    <iconset resource="../source.qrc">
+     <normaloff>:/img/filequit.png</normaloff>:/img/filequit.png</iconset>
+   </property>
    <property name="text">
     <string>Выход</string>
    </property>
   </action>
-  <action name="action_2">
+  <action name="actionCreateOrder">
+   <property name="icon">
+    <iconset resource="../source.qrc">
+     <normaloff>:/img/create_order24.png</normaloff>:/img/create_order24.png</iconset>
+   </property>
    <property name="text">
     <string>Создать</string>
    </property>
   </action>
-  <action name="action_3">
+  <action name="actionShowAllOrder">
+   <property name="icon">
+    <iconset resource="../source.qrc">
+     <normaloff>:/img/show_all24.png</normaloff>:/img/show_all24.png</iconset>
+   </property>
    <property name="text">
     <string>Показать все</string>
    </property>
@@ -202,9 +214,16 @@
     <string>Найти</string>
    </property>
   </action>
-  <action name="action_5">
+  <action name="actionCreateFacture">
+   <property name="icon">
+    <iconset resource="../source.qrc">
+     <normaloff>:/img/create_order24.png</normaloff>:/img/create_order24.png</iconset>
+   </property>
    <property name="text">
     <string>Создать</string>
+   </property>
+   <property name="toolTip">
+    <string>Создать Фактуру</string>
    </property>
   </action>
   <action name="actionAbout">
@@ -234,7 +253,9 @@
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="../source.qrc"/>
+ </resources>
  <connections>
   <connection>
    <sender>actionQuit</sender>

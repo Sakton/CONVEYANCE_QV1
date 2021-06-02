@@ -20,7 +20,15 @@ ORDER BY vat_stavka DESC;
 
 --testes
 INSERT INTO vats ( vat_stavka )
-VALUES (101);
+VALUES (-1);
+
+--CITIES
+CREATE TABLE sities (
+	city_id SERIAL,
+	city_name VARCHAR( 256 ) NOT NULL
+);
+
+
 
 
 

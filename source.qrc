@@ -4,5 +4,26 @@
         <file>img/icon48.png</file>
         <file>img/icon96.png</file>
         <file>img/splash.jpg</file>
+        <file>img/create_order24.png</file>
+        <file>img/editcut.png</file>
+        <file>img/editdelete.png</file>
+        <file>img/editdemote.png</file>
+        <file>img/editdown.png</file>
+        <file>img/editpaste.png</file>
+        <file>img/editpromote.png</file>
+        <file>img/editup.png</file>
+        <file>img/filenew.png</file>
+        <file>img/fileopen.png</file>
+        <file>img/filequit.png</file>
+        <file>img/filesave.png</file>
+        <file>img/history.png</file>
+        <file>img/next.png</file>
+        <file>img/prev.png</file>
+        <file>img/reload.png</file>
+        <file>img/seturl.png</file>
+        <file>img/stop.png</file>
+        <file>img/zoomin.png</file>
+        <file>img/zoomout.png</file>
+        <file>img/show_all24.png</file>
     </qresource>
 </RCC>

@@ -27,6 +27,7 @@ public slots:
 private:
   void writeSettings( );
   void readSettings( );
+  void createToolBar( );
 
 private:
   Ui::MainWindow *ui;

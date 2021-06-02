@@ -2,10 +2,13 @@
 #include <QApplication>
 #include <QSplashScreen>
 
+// global
+void setsApp( QApplication &app );
+
+//***********************************************
 int main( int argc, char *argv[] ) {
   QApplication a( argc, argv );
-  a.setApplicationName( "" );
-  a.setApplicationVersion( "" );
+  setsApp( a );
 
   QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
   splash.show( );
@@ -15,4 +18,12 @@ int main( int argc, char *argv[] ) {
 
   splash.finish( &w );
   return a.exec( );
+}
+//***********************************************
+
+void setsApp( QApplication &app ) {
+  app.setApplicationName( "CONVEYANCE" );
+  app.setApplicationVersion( "1.00" );
+  app.setApplicationDisplayName( "CONVEYANCE" );
+  app.setWindowIcon( QIcon( ":/img/icon24.png" ) );
 }
