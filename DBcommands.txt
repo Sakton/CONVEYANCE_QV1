@@ -1,5 +1,7 @@
 CREATE DATABASE demo_coveyance_db;
 
+-- CREATE TYPE type_names_attributes AS ( name varchar(256) );
+
 --VATS
 CREATE TABLE vats (
 	vat_id SERIAL,
@@ -28,6 +30,7 @@ CREATE TABLE sities (
 	city_name VARCHAR( 256 ) NOT NULL UNIQUE
 );
 
+
 INSERT INTO sities ( city_name )
 VALUES ( 'Nürnberg-Hafen' ),
 	   ( 'Frankfurt(Oder)'),
@@ -40,6 +43,61 @@ INSERT INTO sities ( city_name )
 VALUES ( 'Göttingen' );
 	   
 SELECT * FROM sities; --ERROR UNIQ
+
+-- ALTER TABLE sities ALTER COLUMN city_name TYPE type_names_attributes 
+-- USING SET city_name;
+
+-- DISTRICTS
+/*
+CREATE TABLE districts (
+	district_id SERIAL,
+	district_name VARCHAR(256) NOT NULL
+);
+
+INSERT INTO districts ( district_name ) 
+VALUES ();
+*/
+-- STRDETS
+
+CREATE TABLE streets (
+	street_id SERIAL,
+	street_name varchar ( 256 ) NOT NULL
+);
+
+INSERT INTO streets ( street_name )
+VALUES (' Rotterdamer Straße'),
+	   ( 'Goepelstrasse' ),
+	   ( 'Reichenstraße' ),
+	   ( 'Werner-Siemens-Str.' ),
+	   ( 'Rahlstedter Str.' ),
+	   ( 'Owiedenfeldstrase' );
+
+-- LOCALITYS
+CREATE TABLE localitys (
+	locality_id SERIAL,
+	locality_name varchar( 256 )
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
