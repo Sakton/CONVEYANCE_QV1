@@ -1,3 +1,19 @@
+
+/*
+NO ACTION
+Выдать ошибку, показывающую, что при удалении или изменении записи произойдёт нарушение ограничения внешнего ключа. Для отложенных ограничений ошибка произойдёт в момент проверки ограничения, если строки, ссылающиеся на эту запись, по-прежнему будут существовать. Этот вариант действия подразумевается по умолчанию.
+RESTRICT
+Выдать ошибку, показывающую, что при удалении или изменении записи произойдёт нарушение ограничения внешнего ключа. Этот вариант подобен NO ACTION, но эта проверка будет неоткладываемой.
+CASCADE
+Удалить все строки, ссылающиеся на удаляемую запись, либо поменять значения в ссылающихся столбцах на новые значения во внешних столбцах, в соответствии с операцией.
+SET NULL
+Установить ссылающиеся столбцы равными NULL.
+SET DEFAULT
+Установить в ссылающихся столбцах значения по умолчанию. (Если эти значения не равны NULL, во внешней таблице должна быть строка, соответствующая набору значений по умолчанию; в противном случае операция завершится ошибкой.)
+
+*/
+
+
 CREATE DATABASE demo_coveyance_db;
 
 -- CREATE TYPE type_names_attributes AS ( name varchar(256) );
@@ -5,9 +21,13 @@ CREATE DATABASE demo_coveyance_db;
 --VATS
 CREATE TABLE vats (
 	vat_id SERIAL,
-	vat_stavka decimal(4, 2) NOT NULL,
-	CONSTRAINT vats_valid CHECK ( vat_stavka > 0 AND vat_stavka < 100 )
+	vat_stavka decimal(4, 2) NOT NULL UNIQUE,
+	CONSTRAINT vats_valid CHECK ( vat_stavka > 0 AND vat_stavka < 100 ),
+	PRIMARY KEY ( vat_id )
 );
+
+-- ALTER TABLE vats ADD PRIMARY KEY ( vat_id );
+-- ALTER TABLE vats ADD UNIQUE ( vat_stavka );
 
 INSERT INTO vats ( vat_stavka )
 VALUES ( 15 ), ( 18 ), ( 19 ), ( 20 ), ( 21 ), ( 23 ), ( 25 ), ( 27 );
@@ -27,9 +47,14 @@ VALUES (-1); -- + ERROR RANGE
 --CITIES
 CREATE TABLE sities (
 	city_id SERIAL,
-	city_name VARCHAR( 256 ) NOT NULL UNIQUE
+	city_name VARCHAR( 256 ) NOT NULL UNIQUE,
+	PRIMARY KEY ( city_id )
 );
 
+
+
+-- ALTER TABLE sities ADD PRIMARY KEY ( city_id );
+-- ALTER TABLE sities ADD UNIQUE ( city_name );
 
 INSERT INTO sities ( city_name )
 VALUES ( 'Nürnberg-Hafen' ),
@@ -64,6 +89,8 @@ CREATE TABLE streets (
 	street_name varchar ( 256 ) NOT NULL
 );
 
+-- ALTER TABLE streets ADD PRIMARY KEY (street_id);
+
 INSERT INTO streets ( street_name )
 VALUES (' Rotterdamer Straße'),
 	   ( 'Goepelstrasse' ),
@@ -72,11 +99,25 @@ VALUES (' Rotterdamer Straße'),
 	   ( 'Rahlstedter Str.' ),
 	   ( 'Owiedenfeldstrase' );
 
--- LOCALITYS
-CREATE TABLE localitys (
+-- LOCALITYS -- ???
+/*
+CREATE TABLE localitys ( 
 	locality_id SERIAL,
-	locality_name varchar( 256 )
+	locality_name varchar( 256 ) UNIQUE
 );
+*/
+
+CREATE TABLE countrys (
+	country_id SERIAL,
+	vat_id int NOT NULL,
+	country_name varchar(256) NOT NULL UNIQUE,
+	PRIMARY KEY ( country_id ),
+	FOREIGN KEY ( vat_id ) REFERENCES vats ( vat_id ),
+	ON UPDATE SET NULL,
+	ON DELETE SET NULL
+);
+
+
 
 
 
