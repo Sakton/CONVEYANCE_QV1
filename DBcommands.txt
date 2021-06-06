@@ -32,6 +32,8 @@ CREATE TABLE vats (
 INSERT INTO vats ( vat_stavka )
 VALUES ( 15 ), ( 18 ), ( 19 ), ( 20 ), ( 21 ), ( 23 ), ( 25 ), ( 27 );
 
+SELECT * FROM vats;
+
 SELECT vat_stavka FROM vats;
 
 SELECT vat_stavka FROM vats
@@ -111,17 +113,30 @@ CREATE TABLE countrys (
 	country_id SERIAL,
 	vat_id int NOT NULL,
 	country_name varchar(256) NOT NULL UNIQUE,
+	country_abbreviated char(4) NOT NULL UNIQUE,
 	PRIMARY KEY ( country_id ),
-	FOREIGN KEY ( vat_id ) REFERENCES vats ( vat_id ),
-	ON UPDATE SET NULL,
-	ON DELETE SET NULL
+	FOREIGN KEY ( vat_id ) REFERENCES vats ( vat_id )
+	ON UPDATE SET NULL ON DELETE SET NULL
 );
 
+-- ALTER TABLE countrys ADD COLUMN country_abbreviated char(4) NOT NULL UNIQUE;
+ALTER TABLE RENAME COLUMN country_abbreviated TO country_abbreviated_2;
 
+CREATE OR REPLACE FUNCTION get_vat_id ( vat_st DECIMAL ) RETURNS INT AS
+	' SELECT vat_id FROM vats WHERE vat_stavka = vat_st; '
+LANGUAGE SQL;
 
+SELECT get_vat_id (20);
 
+INSERT INTO countrys ( vat_id, country_name, country_abbreviated )
+VALUES ( ( SELECT get_vat_id (20) ), 'Австрия', 'AT' );
 
+INSERT INTO countrys ( vat_id, country_name, country_abbreviated )
+VALUES ( ( SELECT get_vat_id (20) ), 'Белоруссия', 'BY' ),
+	   ( ( SELECT get_vat_id (21) ), 'Бельгия', 'BE' ),
+	   ( ( SELECT get_vat_id (27) ), 'Венгрия', 'HU' );
 
+SELECT * FROM countrys;
 
 
 
