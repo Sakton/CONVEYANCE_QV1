@@ -20,14 +20,16 @@ CREATE DATABASE demo_coveyance_db;
 
 --VATS
 CREATE TABLE vats (
-	vat_id SERIAL,
+	vat_id SERIAL UNIQUE,
 	vat_stavka decimal(4, 2) NOT NULL UNIQUE,
 	CONSTRAINT vats_valid CHECK ( vat_stavka > 0 AND vat_stavka < 100 ),
 	PRIMARY KEY ( vat_id )
 );
 
--- ALTER TABLE vats ADD PRIMARY KEY ( vat_id );
+ALTER TABLE vats ADD PRIMARY KEY ( vat_id );
 -- ALTER TABLE vats ADD UNIQUE ( vat_stavka );
+-- ALTER TABLE vats ADD UNIQUE ( vat_id );
+/*
 
 INSERT INTO vats ( vat_stavka )
 VALUES ( 15 ), ( 18 ), ( 19 ), ( 20 ), ( 21 ), ( 23 ), ( 25 ), ( 27 );
@@ -45,20 +47,20 @@ ORDER BY vat_stavka DESC;
 --testes
 INSERT INTO vats ( vat_stavka )
 VALUES (-1); -- + ERROR RANGE
-
+*/
 --CITIES
-CREATE TABLE sities (
-	city_id SERIAL,
+CREATE TABLE сities (
+	city_id SERIAL UNIQUE,
 	city_name VARCHAR( 256 ) NOT NULL UNIQUE,
 	PRIMARY KEY ( city_id )
 );
 
+ALTER TABLE cities RENAME TO cities;
+-- ALTER TABLE cities ADD UNIQUE ( city_id );
+-- ALTER TABLE cities ADD PRIMARY KEY ( city_id );
+-- ALTER TABLE cities ADD UNIQUE ( city_name );
 
-
--- ALTER TABLE sities ADD PRIMARY KEY ( city_id );
--- ALTER TABLE sities ADD UNIQUE ( city_name );
-
-INSERT INTO sities ( city_name )
+INSERT INTO cities ( city_name )
 VALUES ( 'Nürnberg-Hafen' ),
 	   ( 'Frankfurt(Oder)'),
 	   ( 'Hamburg' ),
@@ -66,12 +68,12 @@ VALUES ( 'Nürnberg-Hafen' ),
 	   ( 'Fuldabrück' ),
 	   ( 'Göttingen' );
 	   
-INSERT INTO sities ( city_name )
+INSERT INTO cities ( city_name )
 VALUES ( 'Göttingen' );
 	   
-SELECT * FROM sities; --ERROR UNIQ
+SELECT * FROM cities; --ERROR UNIQ
 
--- ALTER TABLE sities ALTER COLUMN city_name TYPE type_names_attributes 
+-- ALTER TABLE cities ALTER COLUMN city_name TYPE type_names_attributes 
 -- USING SET city_name;
 
 -- DISTRICTS
@@ -87,10 +89,11 @@ VALUES ();
 -- STRDETS
 
 CREATE TABLE streets (
-	street_id SERIAL,
+	street_id SERIAL UNIQUE,
 	street_name varchar ( 256 ) NOT NULL
 );
 
+-- ALTER TABLE streets ADD UNIQUE ( street_id );
 -- ALTER TABLE streets ADD PRIMARY KEY (street_id);
 
 INSERT INTO streets ( street_name )
@@ -110,17 +113,18 @@ CREATE TABLE localitys (
 */
 
 CREATE TABLE countrys (
-	country_id SERIAL,
+	country_id SERIAL UNIQUE,
 	vat_id int NOT NULL,
 	country_name varchar(256) NOT NULL UNIQUE,
-	country_abbreviated char(4) NOT NULL UNIQUE,
+	country_abbreviated_2 char(4) NOT NULL UNIQUE,
 	PRIMARY KEY ( country_id ),
 	FOREIGN KEY ( vat_id ) REFERENCES vats ( vat_id )
 	ON UPDATE SET NULL ON DELETE SET NULL
 );
 
 -- ALTER TABLE countrys ADD COLUMN country_abbreviated char(4) NOT NULL UNIQUE;
-ALTER TABLE RENAME COLUMN country_abbreviated TO country_abbreviated_2;
+-- ALTER TABLE RENAME COLUMN country_abbreviated TO country_abbreviated_2;
+ALTER TABLE countrys ADD UNIQUE ( country_id );
 
 CREATE OR REPLACE FUNCTION get_vat_id ( vat_st DECIMAL ) RETURNS INT AS
 	' SELECT vat_id FROM vats WHERE vat_stavka = vat_st; '
@@ -131,15 +135,42 @@ SELECT get_vat_id (20);
 INSERT INTO countrys ( vat_id, country_name, country_abbreviated )
 VALUES ( ( SELECT get_vat_id (20) ), 'Австрия', 'AT' );
 
-INSERT INTO countrys ( vat_id, country_name, country_abbreviated )
+INSERT INTO countrys ( vat_id, country_name, country_abbreviated_2 )
 VALUES ( ( SELECT get_vat_id (20) ), 'Белоруссия', 'BY' ),
 	   ( ( SELECT get_vat_id (21) ), 'Бельгия', 'BE' ),
 	   ( ( SELECT get_vat_id (27) ), 'Венгрия', 'HU' );
 
 SELECT * FROM countrys;
 
+-- *************************************************
+CREATE TYPE Type_Adress AS ENUM ( 'FACT', 'LEGAL' );
+
+CREATE TABLE adress (
+	adres_id SERIAL UNIQUE,
+	country_id INT,
+	city_id INT,
+	street_id INT,
+	locality_id INT,
+	adres_type Type_Adress, -- тип адреса (физический, юридический)
+	PRIMARY KEY ( adres_id ),
+	FOREIGN KEY ( country_id ) REFERENCES countrys ( country_id )
+		ON DELETE SET NULL,
+	FOREIGN KEY ( city_id ) REFERENCES cities ( city_id )
+		ON DELETE SET NULL,
+	FOREIGN KEY ( street_id ) REFERENCES streets ( street_id )
+		ON DELETE SET NULL,
+	CHECK ( adres_type IN ( 'FACT', 'LEGAL') )
+);
 
 
+
+/*
+CREATE OR REPLACE FUNCTION add_adress ( country VARCHAR,
+										city VARCHAR,
+										street VARCHAR,
+										locality VARCHAR,
+										type_addr Type_Adress ) RETURNS VOID
+*/
 
 
 
