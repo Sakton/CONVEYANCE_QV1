@@ -150,7 +150,6 @@ CREATE TABLE adress (
 	country_id INT,
 	city_id INT,
 	street_id INT,
-	locality_id INT,
 	adres_type Type_Adress, -- тип адреса (физический, юридический)
 	PRIMARY KEY ( adres_id ),
 	FOREIGN KEY ( country_id ) REFERENCES countrys ( country_id )
@@ -163,7 +162,6 @@ CREATE TABLE adress (
 );
 
 
-
 /*
 CREATE OR REPLACE FUNCTION add_adress ( country VARCHAR,
 										city VARCHAR,
@@ -172,6 +170,20 @@ CREATE OR REPLACE FUNCTION add_adress ( country VARCHAR,
 										type_addr Type_Adress ) RETURNS VOID
 */
 
+CREATE FUNCTION id_country ( cntr VARCHAR ) RETURNS INT AS 
+	'SELECT country_id FROM countrys WHERE country_name = cntr' LANGUAGE SQL;
+	
+CREATE FUNCTION id_city ( ct VARCHAR ) RETURNS INT AS 
+	' SELECT city_id FROM cities WHERE city_name = ct ' LANGUAGE SQL;
+
+CREATE FUNCTION id_street( st VARCHAR ) RETURNS INT AS
+	'SELECT street_id FROM streets WHERE street_name = st' LANGUAGE SQL;
+
+CREATE OR REPLACE FUNCTION insert_adress ( cntr VARCHAR, ct VARCHAR, strt VARCHAR, type_adress Type_Adress DEFAULT 'FACT' ) 
+RETURNS VOID AS
+	' INSERT INTO adress ( country_id, city_id, street_id, adres_type )
+	VALUES (  ( SELECT id_country( cntr ) ), ( SELECT id_city( ct ) ), ( SELECT id_street( strt ) ), type_adress )' 
+LANGUAGE SQL ;
 
 
 

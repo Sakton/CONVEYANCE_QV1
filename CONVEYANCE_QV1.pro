@@ -28,6 +28,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
+	DB.txt \
 	DB_v1.mwb \
 	DBcommands.txt \
 	IshodnyDanny/Adresses.ods \
