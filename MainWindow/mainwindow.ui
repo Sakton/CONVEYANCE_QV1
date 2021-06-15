@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>948</width>
-    <height>546</height>
+    <width>891</width>
+    <height>528</height>
    </rect>
   </property>
   <property name="font">
@@ -19,15 +19,56 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string/>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="tabPosition">
+       <enum>QTabWidget::North</enum>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="elideMode">
+       <enum>Qt::ElideLeft</enum>
+      </property>
+      <property name="documentMode">
+       <bool>false</bool>
+      </property>
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+      <property name="tabBarAutoHide">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Tab 1</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Tab 2</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>948</width>
+     <width>891</width>
      <height>23</height>
     </rect>
    </property>
@@ -41,7 +82,7 @@
      </font>
     </property>
     <property name="title">
-     <string>Файл</string>
+     <string>...:|:...</string>
     </property>
     <addaction name="actionQuit"/>
    </widget>
@@ -56,6 +97,12 @@
     </property>
     <property name="title">
      <string>Ордера</string>
+    </property>
+    <property name="separatorsCollapsible">
+     <bool>false</bool>
+    </property>
+    <property name="toolTipsVisible">
+     <bool>false</bool>
     </property>
     <addaction name="actionCreateOrder"/>
     <addaction name="actionShowAllOrder"/>
@@ -100,19 +147,6 @@
     </property>
     <property name="title">
      <string>Автопарк</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="menuRegistrer">
-    <property name="font">
-     <font>
-      <family>Verdana</family>
-      <pointsize>9</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="title">
-     <string>Регистры</string>
     </property>
    </widget>
    <widget class="QMenu" name="menuReport">
@@ -178,7 +212,6 @@
    <addaction name="menuPersonal"/>
    <addaction name="menuTool"/>
    <addaction name="menuCatalog"/>
-   <addaction name="menuRegistrer"/>
    <addaction name="menu_8"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>

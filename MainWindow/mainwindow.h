@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+class QToolBar;
+
 namespace Ui {
 class MainWindow;
 }
@@ -18,9 +20,7 @@ class MainWindow : public QMainWindow
   // QWidget interface
 protected:
   void closeEvent( QCloseEvent *event ) override;
-
-  // public:
-  //  QMenu *createPopupMenu( ) override;
+  void contextMenuEvent( QContextMenuEvent *event ) override;
 
 public slots:
 
@@ -28,9 +28,11 @@ private:
   void writeSettings( );
   void readSettings( );
   void createToolBar( );
+  void createStatusBar( );
 
 private:
   Ui::MainWindow *ui;
+  QToolBar *tool;
 };
 
 #endif // MAINWINDOW_H
