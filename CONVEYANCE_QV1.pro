@@ -10,15 +10,18 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Adress/addadress.cpp \
     Adress/adress.cpp \
     MainWindow/mainwindow.cpp \
     main.cpp
 
 HEADERS += \
+	Adress/addadress.h \
 	Adress/adress.h \
 	MainWindow/mainwindow.h
 
 FORMS += \
+	Adress/addadress.ui \
 	Adress/adress.ui \
 	MainWindow/mainwindow.ui
 
@@ -41,6 +44,7 @@ DISTFILES += \
 	doc/Zadachi \
 	doc/db_model_tables.mwb.bak \
 	doc/plans.txt \
+	img/adress.png \
 	img/icon24.png \
 	img/icon48.png \
 	img/icon96.png \

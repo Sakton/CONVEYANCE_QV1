@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+class QSqlTableModel;
+
 namespace Ui {
 class Adress;
 }
@@ -16,7 +18,11 @@ public:
   ~Adress();
 
 private:
+  void createTableAdressModel( );
+
+private:
   Ui::Adress *ui;
+  QSqlTableModel *model;
 };
 
 #endif // ADRESS_H

@@ -1,12 +1,15 @@
+#include "Adress/addadress.h"
+#include "Adress/adress.h"
 #include "MainWindow/mainwindow.h"
-#include "adress.h"
 #include <QApplication>
 #include <QSplashScreen>
-
-// #include <QAxObject>
+#include <QSqlDatabase>
 
 // global
 void setsApp( QApplication &app );
+// tempory
+
+void createDbConnection( );
 
 //***********************************************
 int main( int argc, char *argv[] ) {
@@ -18,11 +21,15 @@ int main( int argc, char *argv[] ) {
 
   //  MainWindow w;
   //  w.show( );
+  createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
 
-  Adress w;
-  w.show( );
+  //  Adress w;
+  //  w.show( );
 
-  splash.finish( &w );
+  AddAdress *w = new AddAdress;
+  w->show( );
+
+  splash.finish( w );
   return a.exec( );
 }
 //***********************************************
@@ -32,4 +39,15 @@ void setsApp( QApplication &app ) {
   app.setApplicationVersion( "1.00" );
   app.setApplicationDisplayName( "CONVEYANCE" );
   app.setWindowIcon( QIcon( ":/img/icon24.png" ) );
+}
+
+void createDbConnection( ) {
+  QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", "DB" );
+  db.setHostName( "localhost" );
+  db.setPort( 5432 );
+  db.setDatabaseName( "demo_coveyance_db" );
+  db.setUserName( "postgres" );
+  db.setPassword( "postgres" );
+  bool ok = db.open( );
+  qDebug( ) << "database status = " << ok;
 }

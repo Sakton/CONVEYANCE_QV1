@@ -179,16 +179,35 @@ CREATE FUNCTION id_city ( ct VARCHAR ) RETURNS INT AS
 CREATE FUNCTION id_street( st VARCHAR ) RETURNS INT AS
 	'SELECT street_id FROM streets WHERE street_name = st' LANGUAGE SQL;
 
-CREATE OR REPLACE FUNCTION insert_adress ( cntr VARCHAR, ct VARCHAR, strt VARCHAR, type_adress Type_Adress DEFAULT 'FACT' ) 
+CREATE OR REPLACE FUNCTION insert_adress ( cntr VARCHAR, ct VARCHAR, strt VARCHAR, type_adress Type_Adress DEFAULT 'FACT' )
 RETURNS VOID AS
 	' INSERT INTO adress ( country_id, city_id, street_id, adres_type )
 	VALUES (  ( SELECT id_country( cntr ) ), ( SELECT id_city( ct ) ), ( SELECT id_street( strt ) ), type_adress )' 
 LANGUAGE SQL ;
 
-
-
-
-
+/*
+CREATE OR REPLACE FUNCTION insert_adress ( cntr VARCHAR, ct VARCHAR, strt VARCHAR, type_adress Type_Adress DEFAULT 'FACT' )
+RETURNS VOID AS
+'INSERT INTO adress ( country_id, city_id, street_id, adres_type )
+	VALUES (
+		( WHEN (SELECT id_country( cntr )) IS NULL THEN (
+															INSERT INTO country ( country_name ) VALUES ( cntr ),
+															( SELECT id_country ( cntr ) )
+														 ) 
+		),
+		( WHEN ( SELECT id_city( ct ) ) IS NULL THEN (
+													INSERT INTO cities ( city_name ) VALUES (ct),
+													SELECT id_city( ct )
+													)
+		),
+		( WHEN ( SELECT id_street( strt ) ) IS NULL THEN (
+														INSERT INTO street ( street_name ) VALUES ( strt ),
+														SELECT id_street( strt )
+														)
+		),
+	type_adress )'
+LANGUAGE SQL;
+*/
 
 
 
