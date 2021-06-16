@@ -1,4 +1,5 @@
 #include "MainWindow/mainwindow.h"
+#include "adress.h"
 #include <QApplication>
 #include <QSplashScreen>
 
@@ -15,7 +16,10 @@ int main( int argc, char *argv[] ) {
   QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
   splash.show( );
 
-  MainWindow w;
+  //  MainWindow w;
+  //  w.show( );
+
+  Adress w;
   w.show( );
 
   splash.finish( &w );

@@ -30,6 +30,8 @@ private:
   void createToolBar( );
   void createStatusBar( );
 
+  void createDatabaseConnection( );
+
 private:
   Ui::MainWindow *ui;
   QToolBar *tool;

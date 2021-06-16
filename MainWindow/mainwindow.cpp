@@ -3,12 +3,14 @@
 #include <QAction>
 #include <QCloseEvent>
 #include <QMenuBar>
+#include <QSqlDatabase>
 #include <QToolBar>
 
 MainWindow::MainWindow( QWidget *parent ) : QMainWindow( parent ), ui( new Ui::MainWindow ) {
   ui->setupUi( this );
   readSettings( );
   createToolBar( );
+  createDatabaseConnection( );
 }
 
 MainWindow::~MainWindow( ) {
@@ -39,4 +41,15 @@ void MainWindow::createToolBar( ) {
   tool->addAction( "Tab1" );
   tool->addAction( "Tab2" );
   addToolBar( Qt::ToolBarArea::TopToolBarArea, tool );
+}
+
+void MainWindow::createDatabaseConnection( ) {
+  QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", "DB" );
+  db.setHostName( "localhost" );
+  db.setPort( 5432 );
+  db.setDatabaseName( "demo_coveyance_db" );
+  db.setUserName( "postgres" );
+  db.setPassword( "postgres" );
+  bool ok = db.open( );
+  qDebug( ) << "database status = " << ok;
 }
