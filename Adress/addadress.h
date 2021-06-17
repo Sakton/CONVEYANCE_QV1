@@ -23,6 +23,9 @@ public slots:
   void reject( ) override;
 
 private:
+  void setsComboBoxCounry( );
+
+private:
   Ui::AddAdress *ui;
   QSqlQueryModel *modelCounrys;
   QSqlQueryModel *modelCities;

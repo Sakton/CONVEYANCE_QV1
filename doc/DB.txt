@@ -24,6 +24,7 @@ CREATE TABLE countrys (
 	vat_id int NOT NULL,
 	country_name varchar(256) NOT NULL UNIQUE,
 	country_abbreviated_2 char(4) NOT NULL UNIQUE,
+	country_icon VARCHAR(256),
 	PRIMARY KEY ( country_id ),
 	FOREIGN KEY ( vat_id ) REFERENCES vats ( vat_id )
 	ON UPDATE SET NULL ON DELETE SET NULL

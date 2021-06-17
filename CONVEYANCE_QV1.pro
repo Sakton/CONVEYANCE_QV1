@@ -45,6 +45,32 @@ DISTFILES += \
 	doc/db_model_tables.mwb.bak \
 	doc/plans.txt \
 	img/adress.png \
+	img/flagCountrys/austria.png \
+	img/flagCountrys/belarus.png \
+	img/flagCountrys/belgium.png \
+	img/flagCountrys/czech_republic.png \
+	img/flagCountrys/denmark.png \
+	img/flagCountrys/estonia.png \
+	img/flagCountrys/finland.png \
+	img/flagCountrys/france.png \
+	img/flagCountrys/germany.png \
+	img/flagCountrys/greece.png \
+	img/flagCountrys/hungary.png \
+	img/flagCountrys/iceland.png \
+	img/flagCountrys/italy.png \
+	img/flagCountrys/latvia.png \
+	img/flagCountrys/luxembourg.png \
+	img/flagCountrys/malta.png \
+	img/flagCountrys/netherlands.png \
+	img/flagCountrys/norway.png \
+	img/flagCountrys/poland.png \
+	img/flagCountrys/portugal.png \
+	img/flagCountrys/russia.png \
+	img/flagCountrys/slovakia.png \
+	img/flagCountrys/slovenia.png \
+	img/flagCountrys/spain.png \
+	img/flagCountrys/sweden.png \
+	img/flagCountrys/switzerland.png \
 	img/icon24.png \
 	img/icon48.png \
 	img/icon96.png \

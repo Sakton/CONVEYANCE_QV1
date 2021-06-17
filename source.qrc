@@ -25,5 +25,31 @@
         <file>img/zoomin.png</file>
         <file>img/zoomout.png</file>
         <file>img/show_all24.png</file>
+        <file>img/flagCountrys/austria.png</file>
+        <file>img/flagCountrys/belarus.png</file>
+        <file>img/flagCountrys/belgium.png</file>
+        <file>img/flagCountrys/czech_republic.png</file>
+        <file>img/flagCountrys/denmark.png</file>
+        <file>img/flagCountrys/estonia.png</file>
+        <file>img/flagCountrys/finland.png</file>
+        <file>img/flagCountrys/france.png</file>
+        <file>img/flagCountrys/germany.png</file>
+        <file>img/flagCountrys/greece.png</file>
+        <file>img/flagCountrys/hungary.png</file>
+        <file>img/flagCountrys/iceland.png</file>
+        <file>img/flagCountrys/italy.png</file>
+        <file>img/flagCountrys/latvia.png</file>
+        <file>img/flagCountrys/luxembourg.png</file>
+        <file>img/flagCountrys/malta.png</file>
+        <file>img/flagCountrys/netherlands.png</file>
+        <file>img/flagCountrys/norway.png</file>
+        <file>img/flagCountrys/poland.png</file>
+        <file>img/flagCountrys/portugal.png</file>
+        <file>img/flagCountrys/russia.png</file>
+        <file>img/flagCountrys/slovakia.png</file>
+        <file>img/flagCountrys/slovenia.png</file>
+        <file>img/flagCountrys/spain.png</file>
+        <file>img/flagCountrys/sweden.png</file>
+        <file>img/flagCountrys/switzerland.png</file>
     </qresource>
 </RCC>

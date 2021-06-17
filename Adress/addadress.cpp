@@ -10,9 +10,13 @@ AddAdress::AddAdress(QWidget *parent) :
       ui(new Ui::AddAdress)
 {
   ui->setupUi(this);
-  modelCounrys = new QSqlQueryModel( this );
-  modelCounrys->setQuery( "SELECT country_name FROM countrys ORDER BY countrys", QSqlDatabase::database( "DB" ) );
-  // TODO ТУТ
+  setWindowTitle( tr( "Добавить Адрес" ) );
+  setsComboBoxCounry( );
+
+  modelCities = new QSqlQueryModel( this );
+  modelCities->setQuery( "SELECT city_name FROM cities ORDER BY city_name", QSqlDatabase::database( "DB" ) );
+  ui->comboBoxCity->setModel( modelCities );
+
   ui->comboBoxType->addItems( QStringList( ) << tr( "Фактический" ) << tr( "Юридический" ) );
 }
 
@@ -25,29 +29,14 @@ AddAdress::~AddAdress()
 
 void AddAdress::accept( ) {
   QSqlDatabase db = QSqlDatabase::database( "DB" );
-  QString country = ui->lineCountry->text( );
-  QString city = ui->lineEditCity->text( );
+  QString country = ui->comboBoxCountry->currentText( );
+  QString city = ui->comboBoxCity->currentText( );
   QString adress = ui->lineEditAdress->text( );
   QString index = ui->lineEditIndex->text( );
   int ind = ui->comboBoxType->currentIndex( );
   QString type = "FACT";
   if ( ind )
     type = "LEGAL";
-
-  //  QSqlQuery addCountryQuery( db );
-  //  addCountryQuery.prepare( "INSERT INTO countrys ( country_name ) VALUES (:country)" );
-  //  addCountryQuery.bindValue( ":country", country );
-  //  addCountryQuery.exec( );
-
-  //  QSqlQuery addCityQuery( db );
-  //  addCityQuery.prepare( "INSERT INTO cities ( city_name ) VALUES (:city)" );
-  //  addCityQuery.bindValue( ":city", city );
-  //  addCityQuery.exec( );
-
-  //  QSqlQuery addStreetQuery( db );
-  //  addStreetQuery.prepare( "INSERT INTO streets ( street_name ) VALUES (:adres)" );
-  //  addStreetQuery.bindValue( ":adres", adress );
-  //  addStreetQuery.exec( );
 
   QSqlQuery query( db );
   query.prepare( "SELECT insert_adress(:country, :city, :adress, :type);" );
@@ -61,5 +50,11 @@ void AddAdress::accept( ) {
 
 void AddAdress::reject( ) {
   qDebug( ) << "regect";
-  this->deleteLater( );
+  // this->deleteLater( );
+}
+
+void AddAdress::setsComboBoxCounry( ) {
+  modelCounrys = new QSqlQueryModel( this );
+  modelCounrys->setQuery( "SELECT country_name, country_id FROM countrys ORDER BY country_name", QSqlDatabase::database( "DB" ) );
+  ui->comboBoxCountry->setModel( modelCounrys );
 }

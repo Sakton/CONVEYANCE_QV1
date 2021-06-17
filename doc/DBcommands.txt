@@ -117,6 +117,7 @@ CREATE TABLE countrys (
 	vat_id int NOT NULL,
 	country_name varchar(256) NOT NULL UNIQUE,
 	country_abbreviated_2 char(4) NOT NULL UNIQUE,
+	country_icon VARCHAR(256),
 	PRIMARY KEY ( country_id ),
 	FOREIGN KEY ( vat_id ) REFERENCES vats ( vat_id )
 	ON UPDATE SET NULL ON DELETE SET NULL
@@ -124,7 +125,8 @@ CREATE TABLE countrys (
 
 -- ALTER TABLE countrys ADD COLUMN country_abbreviated char(4) NOT NULL UNIQUE;
 -- ALTER TABLE RENAME COLUMN country_abbreviated TO country_abbreviated_2;
-ALTER TABLE countrys ADD UNIQUE ( country_id );
+-- ALTER TABLE countrys ADD UNIQUE ( country_id );
+ALTER TABLE countrys ADD COLUMN country_icon VARCHAR(256);
 
 CREATE OR REPLACE FUNCTION get_vat_id ( vat_st DECIMAL ) RETURNS INT AS
 	' SELECT vat_id FROM vats WHERE vat_stavka = vat_st; '
