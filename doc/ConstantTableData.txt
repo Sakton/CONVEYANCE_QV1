@@ -6,4 +6,33 @@ CREATE TABLE vats (
 );
 
 INSERT INTO vats ( vat_stavka )
+VALUES (20), (13), (10),(0.5),(12),(6),(9),(5),(27),(18),(19),(7),(24),(25),(13.5),(4.8),(11),(4),(8),(3.8),(2.5),(17),
+(14), (3), (15), (23), (9.5), (1), (5.5), (2.1), (7.7), (3.7)\
+ON CONFLICT ( vat_stavka ) DO NOTHING; --ничего не делать если уже есть такая запись
+
+CREATE TABLE countrys (
+	country_id SERIAL UNIQUE,
+	vat_id int NOT NULL,
+	vat_name VARCHAR(10),
+	country_name varchar(256) NOT NULL UNIQUE,
+	country_abbreviated_2 char(4) NOT NULL UNIQUE,
+	country_abbreviated_3 char(4) NOT NULL UNIQUE,
+	country_icon VARCHAR(256),
+	PRIMARY KEY ( country_id ),
+	FOREIGN KEY ( vat_id ) REFERENCES vats ( vat_id )
+	ON UPDATE SET NULL ON DELETE SET NULL
+);
+
+INSERT INTO ( vat_id, vat_name, country_name, country_abbreviated_2, country_abbreviated_3, country_icon )
 VALUES 
+      ( ( SELECT get_vat_id( 20 ) ), 'USt', 'Австрия', 'AT', 'AUT', 'austria.png' ), --1
+	  ( ( SELECT get_vat_id( 20 ) ), 'TVSH', 'Белоруссия', 'BY', 'BLR', 'belarus.png' ) --2
+			  
+			  
+			  ;
+
+
+
+
+
+

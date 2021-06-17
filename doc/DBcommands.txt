@@ -26,13 +26,18 @@ CREATE TABLE vats (
 	PRIMARY KEY ( vat_id )
 );
 
-ALTER TABLE vats ADD PRIMARY KEY ( vat_id );
+-- ALTER TABLE vats ADD PRIMARY KEY ( vat_id );
 -- ALTER TABLE vats ADD UNIQUE ( vat_stavka );
 -- ALTER TABLE vats ADD UNIQUE ( vat_id );
 /*
 
 INSERT INTO vats ( vat_stavka )
 VALUES ( 15 ), ( 18 ), ( 19 ), ( 20 ), ( 21 ), ( 23 ), ( 25 ), ( 27 );
+
+INSERT INTO vats ( vat_stavka )
+VALUES (20), (13), (10),(0.5),(12),(6),(9),(5),(27),(18),(19),(7),(24),(25),(13.5),(4.8),(11),(4),(8),(3.8),(2.5),(17),
+(14), (3), (15), (23), (9.5), (1), (5.5), (2.1), (7.7), (3.7)\
+ON CONFLICT ( vat_stavka ) DO NOTHING; --ничего не делать если уже есть такая запись
 
 SELECT * FROM vats;
 

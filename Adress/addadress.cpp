@@ -54,7 +54,7 @@ void AddAdress::reject( ) {
 }
 
 void AddAdress::setsComboBoxCounry( ) {
-  modelCounrys = new QSqlQueryModel( this );
-  modelCounrys->setQuery( "SELECT country_name, country_id FROM countrys ORDER BY country_name", QSqlDatabase::database( "DB" ) );
-  ui->comboBoxCountry->setModel( modelCounrys );
+  //  modelCounrys = new QSqlQueryModel( this );
+  //  modelCounrys->setQuery( "SELECT country_name, country_id FROM countrys ORDER BY country_name", QSqlDatabase::database( "DB" ) );
+  //  ui->comboBoxCountry->setModel( modelCounrys );
 }

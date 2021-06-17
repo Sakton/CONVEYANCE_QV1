@@ -51,5 +51,6 @@
         <file>img/flagCountrys/spain.png</file>
         <file>img/flagCountrys/sweden.png</file>
         <file>img/flagCountrys/switzerland.png</file>
+        <file>img/flagCountrys/bulgaria.png</file>
     </qresource>
 </RCC>
