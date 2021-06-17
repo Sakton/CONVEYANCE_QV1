@@ -123,10 +123,13 @@ CREATE TABLE countrys (
 	ON UPDATE SET NULL ON DELETE SET NULL
 );
 
+INSERT INTO countrys ( vat_id, country_name, country_abbreviated_2, country_icon )
+VALUES ();
+
 -- ALTER TABLE countrys ADD COLUMN country_abbreviated char(4) NOT NULL UNIQUE;
 -- ALTER TABLE RENAME COLUMN country_abbreviated TO country_abbreviated_2;
 -- ALTER TABLE countrys ADD UNIQUE ( country_id );
-ALTER TABLE countrys ADD COLUMN country_icon VARCHAR(256);
+-- ALTER TABLE countrys ADD COLUMN country_icon VARCHAR(256);
 
 CREATE OR REPLACE FUNCTION get_vat_id ( vat_st DECIMAL ) RETURNS INT AS
 	' SELECT vat_id FROM vats WHERE vat_stavka = vat_st; '

@@ -70,6 +70,36 @@ RETURNS VOID AS
 	VALUES (  ( SELECT id_country( cntr ) ), ( SELECT id_city( ct ) ), ( SELECT id_street( strt ) ), type_adress )' 
 LANGUAGE SQL;
 
+-- СПРАВОЧНИКИ КОНСТАНТНЫЕ ТАБЛИЦЫ
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

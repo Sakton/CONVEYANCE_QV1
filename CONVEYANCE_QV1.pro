@@ -37,6 +37,7 @@ DISTFILES += \
 	Dump/dump.sql \
 	IshodnyDanny/Adresses.ods \
 	IshodnyDanny/Adresses.xls \
+	doc/ConstantTableData.txt \
 	doc/DB.txt \
 	doc/DB_v1.mwb \
 	doc/DB_v1.mwb.bak \
