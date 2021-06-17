@@ -1,0 +1,9 @@
+CREATE TABLE vats (
+	vat_id SERIAL UNIQUE,
+	vat_stavka decimal(4, 2) NOT NULL UNIQUE,
+	CONSTRAINT vats_valid CHECK ( vat_stavka > 0 AND vat_stavka < 100 ),
+	PRIMARY KEY ( vat_id )
+);
+
+INSERT INTO vats ( vat_stavka )
+VALUES 

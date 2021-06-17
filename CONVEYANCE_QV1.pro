@@ -45,6 +45,7 @@ DISTFILES += \
 	doc/Zadachi \
 	doc/db_model_tables.mwb.bak \
 	doc/plans.txt \
+	doc/vat_stavki.ods \
 	img/adress.png \
 	img/flagCountrys/austria.png \
 	img/flagCountrys/belarus.png \
