@@ -12,24 +12,60 @@ ON CONFLICT ( vat_stavka ) DO NOTHING; --ничего не делать если
 
 CREATE TABLE countrys (
 	country_id SERIAL UNIQUE,
-	vat_id int NOT NULL,
-	vat_name VARCHAR(10),
-	country_name varchar(256) NOT NULL UNIQUE,
-	country_abbreviated_2 char(4) NOT NULL UNIQUE,
-	country_abbreviated_3 char(4) NOT NULL UNIQUE,
+	vat_id INT NOT NULL,
+	vatname_id INT NOT NULL,
+	country_name VARCHAR(256) NOT NULL UNIQUE,
+	country_abbreviated_2 VARCHAR(4) NOT NULL UNIQUE,
+	country_abbreviated_3 VARCHAR(4) NOT NULL UNIQUE,
 	country_icon VARCHAR(256),
 	PRIMARY KEY ( country_id ),
 	FOREIGN KEY ( vat_id ) REFERENCES vats ( vat_id )
-	ON UPDATE SET NULL ON DELETE SET NULL
+		ON UPDATE SET NULL ON DELETE SET NULL,
+	FOREIGN KEY ( vatname_id ) REFERENCES vatnames ( vatname_id )
+		ON UPDATE SET NULL ON DELETE SET NULL
 );
 
 INSERT INTO ( vat_id, vat_name, country_name, country_abbreviated_2, country_abbreviated_3, country_icon )
 VALUES 
-      ( ( SELECT get_vat_id( 20 ) ), 'USt', 'Австрия', 'AT', 'AUT', 'austria.png' ), --1
-	  ( ( SELECT get_vat_id( 20 ) ), 'TVSH', 'Белоруссия', 'BY', 'BLR', 'belarus.png' ) --2
-			  
-			  
-			  ;
+      ( ( SELECT get_vat_id( 20 ) ), ( SELECT id_vatnames( 'USt' ) ), 'Австрия', 'AT', 'AUT', 'austria.png' ), --1
+	  ( ( SELECT get_vat_id( 20 ) ), ( SELECT id_vatnames( 'TVSH' ) ), 'Белоруссия', 'BY', 'BLR', 'belarus.png' ), --2
+	  ( ( SELECT get_vat_id( 21 ) ), ( SELECT id_vatnames('BTW/TVA', 'Бельгия', 'BE', 'BEL', 'belgium.png' ), --3
+	  ( ( SELECT get_vat_id( 20 ) ), ( SELECT id_vatnames('DDS') ), 'Болгария', 'BG', 'BGR', 'bulgaria.png' ), --4
+	  ( ( SELECT get_vat_id( 20 ) ), ( SELECT id_vatnames('VAT') ), 'Великобритания,', 'GB', 'GBR', 'united_kingdom.png' ) --5
+	  ( ( SELECT get_vat_id( 27 ) ), ( SELECT id_vatnames('AFA') ), 'Венгрия', 'HU', 'HUN', 'hungary.png'), --6
+	  ( ( SELECT get_vat_id( 19 ) ), ( SELECT id_vatnames('USt') ), 'Германия', 'DE', 'DEU', 'germany.png' ), --7
+	  ( ( SELECT get_vat_id( 21 ) ), ( SELECT id_vatnames('BTW') ), 'Нидерланды', 'NL', 'NLD', 'netherlands.png' ), --8
+	  ( ( SELECT get_vat_id( 24 ) ), ( SELECT id_vatnames('FPA') ), 'Греция', 'GR', 'GRC', 'greece.png' ), --9
+	  ( ( SELECT get_vat_id( 25 ) ), ( SELECT id_vatnames('MOMS') ), 'Дания', 'DK', 'DNK', 'denmark.png' ), --10
+	  ( ( SELECT get_vat_id( 21 ) ), ( SELECT id_vatnames('VAT') ), 'Ирландия', 'IE', 'IRL', 'ireland.png' ), --11
+	  ( ( SELECT get_vat_id( 24 ) ), ( SELECT id_vatnames('VASK') ), 'Исландия', 'IS', 'ISL', 'iceland.png' ), --12
+	  ( ( SELECT get_vat_id( 21 ) ), ( SELECT id_vatnames('IVA') ), 'Испания', 'ES', 'ESP', 'spain.png' ), --13
+	  ( ( SELECT get_vat_id( 22 ) ), ( SELECT id_vatnames('IVA') ), 'Италия', 'IT', 'ITA', 'italy.png' ), --14
+	  ( ( SELECT get_vat_id( 19 ) ), ( SELECT id_vatnames('FPA') ), 'Кипр', 'CY', 'CYP', 'cyprus.png' ), --	15
+	  ( ( SELECT get_vat_id( 21 ) ), ( SELECT id_vatnames('PVN') ), 'Латвия', 'LV', 'LVA', 'latvia.png' ), --16
+	  ( ( SELECT get_vat_id( 21 ) ), ( SELECT id_vatnames('PVM') ), 'Литва', 'LT', 'LTU', 'lithuania.png' ), --17
+	  ( ( SELECT get_vat_id( 8 ) ), ( SELECT id_vatnames('MwSt') ), 'Лихтенштейн', 'LI', 'LIE', 'liechtenstein.png' ), --18
+	  ( ( SELECT get_vat_id( 17 ) ), ( SELECT id_vatnames('MwSt') ), 'Люксембург', 'LU', 'LUX', 'luxembourg.png' ), --19
+	  ( ( SELECT get_vat_id( 18 ) ), ( SELECT id_vatnames('VAT') ), 'Мальта', 'MT', 'MLT', 'malta.png'), --20
+	  ( ( SELECT get_vat_id( 20 ) ), ( SELECT id_vatnames('TVA') ), 'Молдавия' ) --		
+	;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

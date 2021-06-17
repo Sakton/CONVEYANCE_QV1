@@ -52,5 +52,10 @@
         <file>img/flagCountrys/sweden.png</file>
         <file>img/flagCountrys/switzerland.png</file>
         <file>img/flagCountrys/bulgaria.png</file>
+        <file>img/flagCountrys/united_kingdom.png</file>
+        <file>img/flagCountrys/ireland.png</file>
+        <file>img/flagCountrys/cyprus.png</file>
+        <file>img/flagCountrys/lithuania.png</file>
+        <file>img/flagCountrys/liechtenstein.png</file>
     </qresource>
 </RCC>

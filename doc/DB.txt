@@ -8,6 +8,12 @@ CREATE TABLE vats (
 	PRIMARY KEY ( vat_id )
 );
 
+CREATE TABLE vatnames (
+	vatname_id SERIAL UNIQUE,
+	vatname_name VARCHAR( 10 ),
+	PRIMARY KEY ( vatname_id )
+);
+
 CREATE TABLE сities (
 	city_id SERIAL UNIQUE,
 	city_name VARCHAR( 256 ) NOT NULL UNIQUE,
@@ -21,13 +27,17 @@ CREATE TABLE streets (
 
 CREATE TABLE countrys (
 	country_id SERIAL UNIQUE,
-	vat_id int NOT NULL,
-	country_name varchar(256) NOT NULL UNIQUE,
-	country_abbreviated_2 char(4) NOT NULL UNIQUE,
+	vat_id INT NOT NULL,
+	vatname_id INT NOT NULL,
+	country_name VARCHAR(256) NOT NULL UNIQUE,
+	country_abbreviated_2 VARCHAR(4) NOT NULL UNIQUE,
+	country_abbreviated_3 VARCHAR(4) NOT NULL UNIQUE,
 	country_icon VARCHAR(256),
 	PRIMARY KEY ( country_id ),
 	FOREIGN KEY ( vat_id ) REFERENCES vats ( vat_id )
-	ON UPDATE SET NULL ON DELETE SET NULL
+		ON UPDATE SET NULL ON DELETE SET NULL,
+	FOREIGN KEY ( vatname_id ) REFERENCES vatnames ( vatname_id )
+		ON UPDATE SET NULL ON DELETE SET NULL
 );
 
 CREATE OR REPLACE FUNCTION get_vat_id ( vat_st DECIMAL ) RETURNS INT AS
@@ -68,6 +78,10 @@ CREATE OR REPLACE FUNCTION insert_adress ( cntr VARCHAR, ct VARCHAR, strt VARCHA
 RETURNS VOID AS
 	' INSERT INTO adress ( country_id, city_id, street_id, adres_type )
 	VALUES (  ( SELECT id_country( cntr ) ), ( SELECT id_city( ct ) ), ( SELECT id_street( strt ) ), type_adress )' 
+LANGUAGE SQL;
+
+CREATE OR REPLACE FUNCTION id_vatnames ( nm VARCHAR ) RETURNS INT AS
+' SELECT vatname_id FROM vatnames WHERE vatname_name = nm '
 LANGUAGE SQL;
 
 -- СПРАВОЧНИКИ КОНСТАНТНЫЕ ТАБЛИЦЫ
