@@ -57,5 +57,12 @@
         <file>img/flagCountrys/cyprus.png</file>
         <file>img/flagCountrys/lithuania.png</file>
         <file>img/flagCountrys/liechtenstein.png</file>
+        <file>img/flagCountrys/moldova.png</file>
+        <file>img/flagCountrys/romania.png</file>
+        <file>img/flagCountrys/serbia.png</file>
+        <file>img/flagCountrys/turkey.png</file>
+        <file>img/flagCountrys/ukraine.png</file>
+        <file>img/flagCountrys/croatia.png</file>
+        <file>img/flagCountrys/montenegro.png</file>
     </qresource>
 </RCC>

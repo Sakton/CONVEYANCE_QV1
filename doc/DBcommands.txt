@@ -32,6 +32,8 @@ CREATE TABLE vatnames (
 	PRIMARY KEY ( vatname_id )
 );
 
+
+
 -- ALTER TABLE vats ADD PRIMARY KEY ( vat_id );
 -- ALTER TABLE vats ADD UNIQUE ( vat_stavka );
 -- ALTER TABLE vats ADD UNIQUE ( vat_id );
