@@ -11,6 +11,8 @@ CONFIG += c++11
 SOURCES += \
     Adress/addadress.cpp \
     Adress/adress.cpp \
+    Adress/citydialog.cpp \
+    ElementsWidgets/comboboxcity.cpp \
     ElementsWidgets/comboboxcountrys.cpp \
     MainWindow/mainwindow.cpp \
     main.cpp
@@ -18,12 +20,15 @@ SOURCES += \
 HEADERS += \
 	Adress/addadress.h \
 	Adress/adress.h \
+	Adress/citydialog.h \
+	ElementsWidgets/comboboxcity.h \
 	ElementsWidgets/comboboxcountrys.h \
 	MainWindow/mainwindow.h
 
 FORMS += \
 	Adress/addadress.ui \
 	Adress/adress.ui \
+	Adress/citydialog.ui \
 	MainWindow/mainwindow.ui
 
 TRANSLATIONS += \
@@ -82,4 +87,6 @@ DISTFILES += \
 RESOURCES += \
 	source.qrc
 
-INCLUDEPATH += \ElementsWidgets
+#INCLUDEPATH += \ElementsWidgets
+# TODO тут как то не так
+INCLUDEPATH += E:\CPP\MyProects\CONVEYANCE_QV1\CONVEYANCE_QV1\ElementsWidgets

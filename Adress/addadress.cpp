@@ -33,14 +33,14 @@ void AddAdress::accept( ) {
   if ( ind )
     type = "LEGAL";
 
-  QSqlQuery query( db );
-  query.prepare( "SELECT insert_adress(:country, :city, :adress, :type);" );
-  query.bindValue( ":country", country );
-  query.bindValue( ":city", city );
-  query.bindValue( ":adress", adress );
-  query.bindValue( ":type", type );
-  if ( !query.exec( ) )
-    qDebug( ) << "Choto ne tak";
+  //  QSqlQuery query( db );
+  //  query.prepare( "SELECT insert_adress(:country, :city, :adress, :type);" );
+  //  query.bindValue( ":country", country );
+  //  query.bindValue( ":city", city );
+  //  query.bindValue( ":adress", adress );
+  //  query.bindValue( ":type", type );
+  //  if ( !query.exec( ) )
+  //    qDebug( ) << "Choto ne tak";
 }
 
 void AddAdress::reject( ) {
@@ -48,18 +48,11 @@ void AddAdress::reject( ) {
   // this->deleteLater( );
 }
 
-void AddAdress::slotSelectsItemsComboBox( int idx ) {
-  qDebug( ) << "index = " << idx;
-  int id = ui->comboBoxCountry->itemData( idx ).toInt( );
-  qDebug( ) << "id = " << id;
-}
-
-void AddAdress::setsComboBoxCity( int id ) {
-  QSqlQuery query( QSqlDatabase::database( "DB" ) );
-  QSqlQueryModel modelCity;
+void AddAdress::slotSelectCountry( int idx ) {
+  ui->comboBoxCity->getCity( ui->comboBoxCountry->itemData( idx ).toInt( ) );
 }
 
 void AddAdress::connected( ) {
   connect( ui->comboBoxCountry, QOverload< int >::of( &QComboBox::currentIndexChanged ), this,
-           QOverload< int >::of( &AddAdress::slotSelectsItemsComboBox ) );
+           QOverload< int >::of( &AddAdress::slotSelectCountry ) );
 }

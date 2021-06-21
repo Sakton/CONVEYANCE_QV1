@@ -21,11 +21,9 @@ public:
 public slots:
   void accept( ) override;
   void reject( ) override;
-  void slotSelectsItemsComboBox( int idx );
+  void slotSelectCountry( int idx );
 
 private:
-  //  void setsComboBoxCounry( );
-  void setsComboBoxCity( int id );
   void connected( );
 
 private:

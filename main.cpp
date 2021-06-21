@@ -1,5 +1,7 @@
 #include "Adress/addadress.h"
 #include "Adress/adress.h"
+#include "Adress/citydialog.h"
+#include "ElementsWidgets/comboboxcity.h"
 #include "ElementsWidgets/comboboxcountrys.h"
 #include "MainWindow/mainwindow.h"
 #include <QApplication>
@@ -20,18 +22,19 @@ int main( int argc, char *argv[] ) {
   QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
   splash.show( );
 
-  //  MainWindow w;
-  //  w.show( );
   createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
 
   //  Adress w;
-  //  w.show( );
 
-  AddAdress w;
-  w.show( );
+  //  AddAdress w;
 
   //  ComboBoxCountrys w;
-  //  w.show( );
+
+  //  ComboBoxCity w;
+
+  CityDialog w;
+
+  w.show( );
 
   splash.finish( &w );
   return a.exec( );
