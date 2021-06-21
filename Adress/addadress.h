@@ -32,6 +32,4 @@ private:
   QSqlQueryModel *modelCities;
 };
 
-// sdfsdfsf
-
 #endif // ADDADRESS_H
