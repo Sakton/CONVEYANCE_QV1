@@ -68,6 +68,8 @@ CREATE TABLE сities (
 	PRIMARY KEY ( city_id )
 );
 
+ALTER TABLE cities ADD COLUMN country_id INT /*NOT NULL*/;
+
 ALTER TABLE cities RENAME TO cities;
 -- ALTER TABLE cities ADD UNIQUE ( city_id );
 -- ALTER TABLE cities ADD PRIMARY KEY ( city_id );

@@ -41,7 +41,7 @@
       <widget class="QComboBox" name="comboBoxType"/>
      </item>
      <item row="0" column="1">
-      <widget class="QComboBox" name="comboBoxCountry"/>
+      <widget class="ComboBoxCountrys" name="comboBoxCountry"/>
      </item>
      <item row="1" column="1">
       <widget class="QComboBox" name="comboBoxCity"/>
@@ -69,7 +69,7 @@
      <item row="0" column="2">
       <widget class="QPushButton" name="pushButtonAddCountry">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -112,6 +112,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ComboBoxCountrys</class>
+   <extends>QComboBox</extends>
+   <header>comboboxcountrys.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

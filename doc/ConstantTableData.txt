@@ -48,7 +48,7 @@ VALUES
 	  ( ( SELECT get_vat_id( 20::DECIMAL ) ), ( SELECT id_vatnames( 'TVSH' ) ), 'Белоруссия', 'BY', 'BLR', 'belarus.png' ), --2
 	  ( ( SELECT get_vat_id( 21::DECIMAL ) ), ( SELECT id_vatnames('BTW/TVA') ), 'Бельгия', 'BE', 'BEL', 'belgium.png' ), --3
 	  ( ( SELECT get_vat_id( 20::DECIMAL ) ), ( SELECT id_vatnames('DDS') ), 'Болгария', 'BG', 'BGR', 'bulgaria.png' ), --4
-	  ( ( SELECT get_vat_id( 20::DECIMAL ) ), ( SELECT id_vatnames('VAT') ), 'Великобритания,', 'GB', 'GBR', 'united_kingdom.png' ), --5
+	  ( ( SELECT get_vat_id( 20::DECIMAL ) ), ( SELECT id_vatnames('VAT') ), 'Великобритания', 'GB', 'GBR', 'united_kingdom.png' ), --5
 	  ( ( SELECT get_vat_id( 27::DECIMAL ) ), ( SELECT id_vatnames('AFA') ), 'Венгрия', 'HU', 'HUN', 'hungary.png'), --6
 	  ( ( SELECT get_vat_id( 19::DECIMAL ) ), ( SELECT id_vatnames('USt') ), 'Германия', 'DE', 'DEU', 'germany.png' ), --7
 	  ( ( SELECT get_vat_id( 21::DECIMAL ) ), ( SELECT id_vatnames('BTW') ), 'Нидерланды', 'NL', 'NLD', 'netherlands.png' ), --8

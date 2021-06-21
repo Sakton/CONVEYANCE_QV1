@@ -11,12 +11,7 @@ AddAdress::AddAdress(QWidget *parent) :
 {
   ui->setupUi(this);
   setWindowTitle( tr( "Добавить Адрес" ) );
-  setsComboBoxCounry( );
-
-  modelCities = new QSqlQueryModel( this );
-  modelCities->setQuery( "SELECT city_name FROM cities ORDER BY city_name", QSqlDatabase::database( "DB" ) );
-  ui->comboBoxCity->setModel( modelCities );
-
+  connected( );
   ui->comboBoxType->addItems( QStringList( ) << tr( "Фактический" ) << tr( "Юридический" ) );
 }
 
@@ -53,8 +48,18 @@ void AddAdress::reject( ) {
   // this->deleteLater( );
 }
 
-void AddAdress::setsComboBoxCounry( ) {
-  //  modelCounrys = new QSqlQueryModel( this );
-  //  modelCounrys->setQuery( "SELECT country_name, country_id FROM countrys ORDER BY country_name", QSqlDatabase::database( "DB" ) );
-  //  ui->comboBoxCountry->setModel( modelCounrys );
+void AddAdress::slotSelectsItemsComboBox( int idx ) {
+  qDebug( ) << "index = " << idx;
+  int id = ui->comboBoxCountry->itemData( idx ).toInt( );
+  qDebug( ) << "id = " << id;
+}
+
+void AddAdress::setsComboBoxCity( int id ) {
+  QSqlQuery query( QSqlDatabase::database( "DB" ) );
+  QSqlQueryModel modelCity;
+}
+
+void AddAdress::connected( ) {
+  connect( ui->comboBoxCountry, QOverload< int >::of( &QComboBox::currentIndexChanged ), this,
+           QOverload< int >::of( &AddAdress::slotSelectsItemsComboBox ) );
 }

@@ -1,5 +1,6 @@
 #include "Adress/addadress.h"
 #include "Adress/adress.h"
+#include "ElementsWidgets/comboboxcountrys.h"
 #include "MainWindow/mainwindow.h"
 #include <QApplication>
 #include <QSplashScreen>
@@ -26,10 +27,13 @@ int main( int argc, char *argv[] ) {
   //  Adress w;
   //  w.show( );
 
-  AddAdress *w = new AddAdress;
-  w->show( );
+  AddAdress w;
+  w.show( );
 
-  splash.finish( w );
+  //  ComboBoxCountrys w;
+  //  w.show( );
+
+  splash.finish( &w );
   return a.exec( );
 }
 //***********************************************

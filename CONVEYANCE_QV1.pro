@@ -1,5 +1,4 @@
 QT += core gui sql
-#QT += axcontainer
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -12,12 +11,14 @@ CONFIG += c++11
 SOURCES += \
     Adress/addadress.cpp \
     Adress/adress.cpp \
+    ElementsWidgets/comboboxcountrys.cpp \
     MainWindow/mainwindow.cpp \
     main.cpp
 
 HEADERS += \
 	Adress/addadress.h \
 	Adress/adress.h \
+	ElementsWidgets/comboboxcountrys.h \
 	MainWindow/mainwindow.h
 
 FORMS += \
@@ -80,3 +81,5 @@ DISTFILES += \
 
 RESOURCES += \
 	source.qrc
+
+INCLUDEPATH += \ElementsWidgets

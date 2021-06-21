@@ -21,9 +21,12 @@ public:
 public slots:
   void accept( ) override;
   void reject( ) override;
+  void slotSelectsItemsComboBox( int idx );
 
 private:
-  void setsComboBoxCounry( );
+  //  void setsComboBoxCounry( );
+  void setsComboBoxCity( int id );
+  void connected( );
 
 private:
   Ui::AddAdress *ui;
