@@ -36,6 +36,8 @@ int main( int argc, char *argv[] ) {
 
   w.show( );
 
+  // test git
+
   splash.finish( &w );
   return a.exec( );
 }
