@@ -1,6 +1,8 @@
 #ifndef ADDADRESS_H
 #define ADDADRESS_H
 
+// TODO + ВАЛИДАТОРЫ
+
 #include <QDialog>
 
 class QSqlQueryModel;
@@ -17,14 +19,15 @@ public:
   explicit AddAdress(QWidget *parent = nullptr);
   ~AddAdress( );
 
-  // QDialog interface
 public slots:
-  void accept( ) override;
-  void reject( ) override;
+  void slotAccept( );
   void slotSelectCountry( int idx );
+  void slotClickedAddCityButton( );
+  void slotFinishedAddingCity( int resAdding );
+  void slotFactIndexAddingCity( int factIndexAdding );
 
 private:
-  void connected( );
+  void connecteds( );
 
 private:
   Ui::AddAdress *ui;

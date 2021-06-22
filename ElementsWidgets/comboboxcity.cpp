@@ -4,7 +4,6 @@
 #include <QSqlQuery>
 
 ComboBoxCity::ComboBoxCity( QWidget *parent ) : QComboBox( parent ), currentIdCountry { 0 } {
-  // TODO какоето начальное значение
 }
 
 void ComboBoxCity::getCity( int idCountry ) {
@@ -19,4 +18,12 @@ void ComboBoxCity::getCity( int idCountry ) {
       addItem( query.value( "city_name" ).toString( ), query.value( "city_id" ) );
     }
   }
+}
+
+void ComboBoxCity::update( ) {
+  getCity( currentIdCountry );
+}
+
+void ComboBoxCity::update( int idCity ) {
+  getCity( idCity );
 }

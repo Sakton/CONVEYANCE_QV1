@@ -26,13 +26,13 @@ int main( int argc, char *argv[] ) {
 
   //  Adress w;
 
-  //  AddAdress w;
+  AddAdress w;
 
   //  ComboBoxCountrys w;
 
-  //  ComboBoxCity w;
+  // ComboBoxCity w;
 
-  CityDialog w;
+  // CityDialog w;
 
   w.show( );
 

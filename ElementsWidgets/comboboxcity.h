@@ -11,6 +11,10 @@ public:
 
   void getCity( int idCountry );
 
+public slots:
+  void update( );
+  void update( int idCity );
+
 private:
   int currentIdCountry;
 };

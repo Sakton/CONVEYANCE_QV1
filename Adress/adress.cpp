@@ -29,3 +29,6 @@ void Adress::createTableAdressModel( ) {
   if ( !model->select( ) )
     qDebug( ) << "select NO";
 }
+
+void Adress::connecteds( ) {
+}

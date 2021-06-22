@@ -14,11 +14,14 @@ class Adress : public QWidget
   Q_OBJECT
 
 public:
-  explicit Adress(QWidget *parent = nullptr);
+  enum Regim { INSERT, UPDATE };
+  explicit Adress( QWidget *parent = nullptr );
+  explicit Adress( int id, QWidget *parent = nullptr );
   ~Adress();
 
 private:
   void createTableAdressModel( );
+  void connecteds( );
 
 private:
   Ui::Adress *ui;

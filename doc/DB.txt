@@ -17,6 +17,7 @@ CREATE TABLE vatnames (
 CREATE TABLE сities (
 	city_id SERIAL UNIQUE,
 	city_name VARCHAR( 256 ) NOT NULL UNIQUE,
+	country_id INT,
 	PRIMARY KEY ( city_id )
 );
 
@@ -74,17 +75,21 @@ CREATE FUNCTION id_city ( ct VARCHAR ) RETURNS INT AS
 CREATE FUNCTION id_street( st VARCHAR ) RETURNS INT AS
 	'SELECT street_id FROM streets WHERE street_name = st' LANGUAGE SQL;
 	
-CREATE OR REPLACE FUNCTION insert_adress ( cntr VARCHAR, ct VARCHAR, strt VARCHAR, type_adress Type_Adress DEFAULT 'FACT' ) 
-RETURNS VOID AS
-	' INSERT INTO adress ( country_id, city_id, street_id, adres_type )
+CREATE OR REPLACE FUNCTION insert_adress ( cntr VARCHAR, ct VARCHAR, strt VARCHAR, type_adress Type_Adress DEFAULT 'FACT' ) RETURNS VOID AS ' INSERT INTO adress ( country_id, city_id, street_id, adres_type )
 	VALUES (  ( SELECT id_country( cntr ) ), ( SELECT id_city( ct ) ), ( SELECT id_street( strt ) ), type_adress )' 
+LANGUAGE SQL;
+ --ПЕРЕГРУЗКА
+CREATE OR REPLACE FUNCTION insert_adress ( cntr VARCHAR, ct VARCHAR, strt VARCHAR, a_index VARCHAR, type_adress Type_Adress DEFAULT 'FACT' ) RETURNS VOID AS ' INSERT INTO adress ( country_id, city_id, street_id, adres_index, adres_type )
+	VALUES (  ( SELECT id_country( cntr ) ), ( SELECT id_city( ct ) ), ( SELECT id_street( strt ) ), a_index, type_adress )' 
 LANGUAGE SQL;
 
 CREATE OR REPLACE FUNCTION id_vatnames ( nm VARCHAR ) RETURNS INT AS
-' SELECT vatname_id FROM vatnames WHERE vatname_name = nm '
+    ' SELECT vatname_id FROM vatnames WHERE vatname_name = nm '
 LANGUAGE SQL;
 
--- СПРАВОЧНИКИ КОНСТАНТНЫЕ ТАБЛИЦЫ
+CREATE OR REPLACE FUNCTION get_id_country ( nm VARCHAR ) RETURNS INT AS
+ 'SELECT country_id FROM countrys WHERE country_name = nm'
+LANGUAGE SQL;
 
 
 

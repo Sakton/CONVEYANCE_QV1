@@ -84,7 +84,7 @@ VALUES
 	  ( ( SELECT get_vat_id( 25::DECIMAL) ), ( SELECT id_vatnames('MOMS') ), 'Швеция', 'SE', 'SWE', 'sweden.png' ),--38
 	  ( ( SELECT get_vat_id( 20::DECIMAL ) ), ( SELECT id_vatnames('KM') ), 'Эстония', 'EE', 'EST', 'estonia.png' );--39		
 
-INSERT INTO 
+
 
 
 

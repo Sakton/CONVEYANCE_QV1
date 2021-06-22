@@ -65,12 +65,13 @@ VALUES (-1); -- + ERROR RANGE
 CREATE TABLE сities (
 	city_id SERIAL UNIQUE,
 	city_name VARCHAR( 256 ) NOT NULL UNIQUE,
+	country_id INT,
 	PRIMARY KEY ( city_id )
 );
 
 ALTER TABLE cities ADD COLUMN country_id INT /*NOT NULL*/;
 
-ALTER TABLE cities RENAME TO cities;
+-- ALTER TABLE cities RENAME TO cities;
 -- ALTER TABLE cities ADD UNIQUE ( city_id );
 -- ALTER TABLE cities ADD PRIMARY KEY ( city_id );
 -- ALTER TABLE cities ADD UNIQUE ( city_name );
@@ -241,7 +242,9 @@ CREATE OR REPLACE FUNCTION get_id_country ( nm VARCHAR ) RETURNS INT AS
  'SELECT country_id FROM countrys WHERE country_name = nm'
 LANGUAGE SQL;
 
-
+CREATE OR REPLACE FUNCTION addCity ( nm VARCHAR, idCountry INT ) RETURNS VOID AS
+' INSERT INTO cities ( city_name, country_id ) VALUES ( nm, idCountry ) '
+LANGUAGE SQL;
 
 
 

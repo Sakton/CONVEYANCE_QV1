@@ -21,6 +21,7 @@ HEADERS += \
 	Adress/addadress.h \
 	Adress/adress.h \
 	Adress/citydialog.h \
+	Constants.h \
 	ElementsWidgets/comboboxcity.h \
 	ElementsWidgets/comboboxcountrys.h \
 	MainWindow/mainwindow.h
