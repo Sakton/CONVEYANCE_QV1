@@ -1,0 +1,14 @@
+//***************************************** --1-- ********************************************************
+Есть таблица в файле EXEL - такого формата:
+1. ячейка - название конторы
+2. ячейка - адрес в формате ( странаб индекс, город, улица, дом, номер( номер - строение ) )
+
+  FRACHT FWO AG  	        Deutschland, 90451, Nürnberg-Hafen, Rotterdamer Straße 7
+  Polkotrans GmbH 	        Deutschland, 15234, Frankfurt (Oder), Goepelstrasse 90
+  zipmend GmbH	                Deutschland, 20457, Hamburg, Große Reichenstraße 27
+  C.E. Noerpel GmbH	        Deutschland, 22113, Hamburg, Werner-Siemens-Str. 13-15
+  DAGO Express Kurierdienst	Deutschland, 22149, Hamburg, Rahlstedter Str. 14
+
+3. Получить мульти-словарь контора - адреса ( где адрес это структура с полями )
+
+//*********************************************

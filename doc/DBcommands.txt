@@ -1,0 +1,283 @@
+
+/*
+NO ACTION
+Выдать ошибку, показывающую, что при удалении или изменении записи произойдёт нарушение ограничения внешнего ключа. Для отложенных ограничений ошибка произойдёт в момент проверки ограничения, если строки, ссылающиеся на эту запись, по-прежнему будут существовать. Этот вариант действия подразумевается по умолчанию.
+RESTRICT
+Выдать ошибку, показывающую, что при удалении или изменении записи произойдёт нарушение ограничения внешнего ключа. Этот вариант подобен NO ACTION, но эта проверка будет неоткладываемой.
+CASCADE
+Удалить все строки, ссылающиеся на удаляемую запись, либо поменять значения в ссылающихся столбцах на новые значения во внешних столбцах, в соответствии с операцией.
+SET NULL
+Установить ссылающиеся столбцы равными NULL.
+SET DEFAULT
+Установить в ссылающихся столбцах значения по умолчанию. (Если эти значения не равны NULL, во внешней таблице должна быть строка, соответствующая набору значений по умолчанию; в противном случае операция завершится ошибкой.)
+
+*/
+
+
+CREATE DATABASE demo_coveyance_db;
+
+-- CREATE TYPE type_names_attributes AS ( name varchar(256) );
+
+--VATS
+CREATE TABLE vats (
+	vat_id SERIAL UNIQUE,
+	vat_stavka decimal(4, 2) NOT NULL UNIQUE,
+	CONSTRAINT vats_valid CHECK ( vat_stavka > 0 AND vat_stavka < 100 ),
+	PRIMARY KEY ( vat_id )
+);
+
+CREATE TABLE vatnames (
+	vatname_id SERIAL UNIQUE,
+	vatname_name VARCHAR( 10 ),
+	PRIMARY KEY ( vatname_id )
+);
+
+
+
+-- ALTER TABLE vats ADD PRIMARY KEY ( vat_id );
+-- ALTER TABLE vats ADD UNIQUE ( vat_stavka );
+-- ALTER TABLE vats ADD UNIQUE ( vat_id );
+/*
+
+INSERT INTO vats ( vat_stavka )
+VALUES ( 15 ), ( 18 ), ( 19 ), ( 20 ), ( 21 ), ( 23 ), ( 25 ), ( 27 );
+
+INSERT INTO vats ( vat_stavka )
+VALUES (20), (13), (10),(0.5),(12),(6),(9),(5),(27),(18),(19),(7),(24),(25),(13.5),(4.8),(11),(4),(8),(3.8),(2.5),(17),
+(14), (3), (15), (23), (9.5), (1), (5.5), (2.1), (7.7), (3.7)\
+ON CONFLICT ( vat_stavka ) DO NOTHING; --ничего не делать если уже есть такая запись
+
+SELECT * FROM vats;
+
+SELECT vat_stavka FROM vats;
+
+SELECT vat_stavka FROM vats
+ORDER BY vat_stavka;
+
+SELECT vat_stavka FROM vats
+ORDER BY vat_stavka DESC;
+
+--testes
+INSERT INTO vats ( vat_stavka )
+VALUES (-1); -- + ERROR RANGE
+*/
+--CITIES
+CREATE TABLE сities (
+	city_id SERIAL UNIQUE,
+	city_name VARCHAR( 256 ) NOT NULL UNIQUE,
+	PRIMARY KEY ( city_id )
+);
+
+ALTER TABLE cities ADD COLUMN country_id INT /*NOT NULL*/;
+
+ALTER TABLE cities RENAME TO cities;
+-- ALTER TABLE cities ADD UNIQUE ( city_id );
+-- ALTER TABLE cities ADD PRIMARY KEY ( city_id );
+-- ALTER TABLE cities ADD UNIQUE ( city_name );
+
+INSERT INTO cities ( city_name )
+VALUES ( 'Nürnberg-Hafen' ),
+	   ( 'Frankfurt(Oder)'),
+	   ( 'Hamburg' ),
+	   ( 'Isernhagen' ),
+	   ( 'Fuldabrück' ),
+	   ( 'Göttingen' );
+	   
+INSERT INTO cities ( city_name )
+VALUES ( 'Göttingen' );
+	   
+SELECT * FROM cities; --ERROR UNIQ
+
+-- ALTER TABLE cities ALTER COLUMN city_name TYPE type_names_attributes 
+-- USING SET city_name;
+
+-- DISTRICTS
+/*
+CREATE TABLE districts (
+	district_id SERIAL,
+	district_name VARCHAR(256) NOT NULL
+);
+
+INSERT INTO districts ( district_name ) 
+VALUES ();
+*/
+-- STRDETS
+
+CREATE TABLE streets (
+	street_id SERIAL UNIQUE,
+	street_name varchar ( 256 ) NOT NULL
+);
+
+-- ALTER TABLE streets ADD UNIQUE ( street_id );
+-- ALTER TABLE streets ADD PRIMARY KEY (street_id);
+
+INSERT INTO streets ( street_name )
+VALUES (' Rotterdamer Straße'),
+	   ( 'Goepelstrasse' ),
+	   ( 'Reichenstraße' ),
+	   ( 'Werner-Siemens-Str.' ),
+	   ( 'Rahlstedter Str.' ),
+	   ( 'Owiedenfeldstrase' );
+
+-- LOCALITYS -- ???
+/*
+CREATE TABLE localitys ( 
+	locality_id SERIAL,
+	locality_name varchar( 256 ) UNIQUE
+);
+*/
+
+CREATE TABLE countrys (
+	country_id SERIAL UNIQUE,
+	vat_id INT NOT NULL,
+	vatname_id INT NOT NULL,
+	country_name VARCHAR(256) NOT NULL UNIQUE,
+	country_abbreviated_2 VARCHAR(4) NOT NULL UNIQUE,
+	country_abbreviated_3 VARCHAR(4) NOT NULL UNIQUE,
+	country_icon VARCHAR(256),
+	PRIMARY KEY ( country_id ),
+	FOREIGN KEY ( vat_id ) REFERENCES vats ( vat_id )
+		ON UPDATE SET NULL ON DELETE SET NULL,
+	FOREIGN KEY ( vatname_id ) REFERENCES vatnames ( vatname_id )
+		ON UPDATE SET NULL ON DELETE SET NULL
+);
+
+INSERT INTO countrys ( vat_id, country_name, country_abbreviated_2, country_icon )
+VALUES ();
+
+-- ALTER TABLE countrys ADD COLUMN country_abbreviated char(4) NOT NULL UNIQUE;
+-- ALTER TABLE RENAME COLUMN country_abbreviated TO country_abbreviated_2;
+-- ALTER TABLE countrys ADD UNIQUE ( country_id );
+-- ALTER TABLE countrys ADD COLUMN country_icon VARCHAR(256);
+
+CREATE OR REPLACE FUNCTION get_vat_id ( vat_st DECIMAL ) RETURNS INT AS
+	' SELECT vat_id FROM vats WHERE vat_stavka = vat_st; '
+LANGUAGE SQL;
+
+SELECT get_vat_id (20);
+
+INSERT INTO countrys ( vat_id, country_name, country_abbreviated )
+VALUES ( ( SELECT get_vat_id (20) ), 'Австрия', 'AT' );
+
+INSERT INTO countrys ( vat_id, country_name, country_abbreviated_2 )
+VALUES ( ( SELECT get_vat_id (20) ), 'Белоруссия', 'BY' ),
+	   ( ( SELECT get_vat_id (21) ), 'Бельгия', 'BE' ),
+	   ( ( SELECT get_vat_id (27) ), 'Венгрия', 'HU' );
+
+SELECT * FROM countrys;
+
+-- *************************************************
+CREATE TYPE Type_Adress AS ENUM ( 'FACT', 'LEGAL' );
+
+CREATE TABLE adress (
+	adres_id SERIAL UNIQUE,
+	country_id INT,
+	city_id INT,
+	street_id INT,
+	adres_type Type_Adress, -- тип адреса (физический, юридический)
+	PRIMARY KEY ( adres_id ),
+	FOREIGN KEY ( country_id ) REFERENCES countrys ( country_id )
+		ON DELETE SET NULL,
+	FOREIGN KEY ( city_id ) REFERENCES cities ( city_id )
+		ON DELETE SET NULL,
+	FOREIGN KEY ( street_id ) REFERENCES streets ( street_id )
+		ON DELETE SET NULL,
+	CHECK ( adres_type IN ( 'FACT', 'LEGAL') )
+);
+
+
+/*
+CREATE OR REPLACE FUNCTION add_adress ( country VARCHAR,
+										city VARCHAR,
+										street VARCHAR,
+										locality VARCHAR,
+										type_addr Type_Adress ) RETURNS VOID
+*/
+
+CREATE FUNCTION id_country ( cntr VARCHAR ) RETURNS INT AS 
+	'SELECT country_id FROM countrys WHERE country_name = cntr' LANGUAGE SQL;
+	
+CREATE FUNCTION id_city ( ct VARCHAR ) RETURNS INT AS 
+	' SELECT city_id FROM cities WHERE city_name = ct ' LANGUAGE SQL;
+
+CREATE FUNCTION id_street( st VARCHAR ) RETURNS INT AS
+	'SELECT street_id FROM streets WHERE street_name = st' LANGUAGE SQL;
+
+CREATE OR REPLACE FUNCTION insert_adress ( cntr VARCHAR, ct VARCHAR, strt VARCHAR, type_adress Type_Adress DEFAULT 'FACT' )
+RETURNS VOID AS
+	' INSERT INTO adress ( country_id, city_id, street_id, adres_type )
+	VALUES (  ( SELECT id_country( cntr ) ), ( SELECT id_city( ct ) ), ( SELECT id_street( strt ) ), type_adress )' 
+LANGUAGE SQL ;
+
+CREATE OR REPLACE FUNCTION id_vatnames ( nm VARCHAR ) RETURNS INT AS
+' SELECT vatname_id FROM vatnames WHERE vatname_name = nm '
+LANGUAGE SQL;
+
+/*
+CREATE OR REPLACE FUNCTION insert_adress ( cntr VARCHAR, ct VARCHAR, strt VARCHAR, type_adress Type_Adress DEFAULT 'FACT' )
+RETURNS VOID AS
+'INSERT INTO adress ( country_id, city_id, street_id, adres_type )
+	VALUES (
+		( WHEN (SELECT id_country( cntr )) IS NULL THEN (
+															INSERT INTO country ( country_name ) VALUES ( cntr ),
+															( SELECT id_country ( cntr ) )
+														 ) 
+		),
+		( WHEN ( SELECT id_city( ct ) ) IS NULL THEN (
+													INSERT INTO cities ( city_name ) VALUES (ct),
+													SELECT id_city( ct )
+													)
+		),
+		( WHEN ( SELECT id_street( strt ) ) IS NULL THEN (
+														INSERT INTO street ( street_name ) VALUES ( strt ),
+														SELECT id_street( strt )
+														)
+		),
+	type_adress )'
+LANGUAGE SQL;
+*/
+
+CREATE OR REPLACE FUNCTION get_id_country ( nm VARCHAR ) RETURNS INT AS
+ 'SELECT country_id FROM countrys WHERE country_name = nm'
+LANGUAGE SQL;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
