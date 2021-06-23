@@ -84,7 +84,15 @@ VALUES
 	  ( ( SELECT get_vat_id( 25::DECIMAL) ), ( SELECT id_vatnames('MOMS') ), 'Швеция', 'SE', 'SWE', 'sweden.png' ),--38
 	  ( ( SELECT get_vat_id( 20::DECIMAL ) ), ( SELECT id_vatnames('KM') ), 'Эстония', 'EE', 'EST', 'estonia.png' );--39		
 
-
+CREATE OR REPLACE VIEW adress_view AS
+	SELECT ad.adres_id, cntr.country_name, ad.adres_index, ct.city_name, st.street_name
+FROM adress AS ad 
+	LEFT JOIN countrys AS cntr
+		ON ad.country_id = cntr.country_id
+	LEFT JOIN cities AS ct
+		ON ad.city_id = ct.city_id
+	LEFT JOIN streets AS st
+		ON ad.street_id = st.street_id;
 
 
 

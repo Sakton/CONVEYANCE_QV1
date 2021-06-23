@@ -64,6 +64,18 @@ CREATE TABLE adress (
 	CHECK ( adres_type IN ( 'FACT', 'LEGAL') )
 );
 
+
+CREATE OR REPLACE VIEW adress_view AS
+	SELECT ad.adres_id, cntr.country_name, ad.adres_index, ct.city_name, st.street_name
+FROM adress AS ad 
+	LEFT JOIN countrys AS cntr
+		ON ad.country_id = cntr.country_id
+	LEFT JOIN cities AS ct
+		ON ad.city_id = ct.city_id
+	LEFT JOIN streets AS st
+		ON ad.street_id = st.street_id;
+
+	
 ALTER TABLE adress ADD COLUMN adres_index VARCHAR(10);
 
 CREATE FUNCTION id_country ( cntr VARCHAR ) RETURNS INT AS 

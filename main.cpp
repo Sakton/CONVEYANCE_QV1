@@ -1,10 +1,12 @@
 #include "Adress/addadress.h"
 #include "Adress/adress.h"
+#include "Adress/adressview.h"
 #include "Adress/citydialog.h"
 #include "ElementsWidgets/comboboxcity.h"
 #include "ElementsWidgets/comboboxcountrys.h"
 #include "MainWindow/mainwindow.h"
 #include <QApplication>
+#include <QLabel>
 #include <QSplashScreen>
 #include <QSqlDatabase>
 
@@ -26,13 +28,17 @@ int main( int argc, char *argv[] ) {
 
   //  Adress w;
 
-  AddAdress w;
+  // AddAdress w;
 
   //  ComboBoxCountrys w;
 
   // ComboBoxCity w;
 
   // CityDialog w;
+
+  // QLabel *w = new QLabel( "<img source = \":/img/flagCountrys/austria.png\"><H3>AUSTRIA</H3></img>" );
+
+  AdressView w;
 
   w.show( );
 

@@ -143,9 +143,6 @@ CREATE TABLE countrys (
 		ON UPDATE SET NULL ON DELETE SET NULL
 );
 
-INSERT INTO countrys ( vat_id, country_name, country_abbreviated_2, country_icon )
-VALUES ();
-
 -- ALTER TABLE countrys ADD COLUMN country_abbreviated char(4) NOT NULL UNIQUE;
 -- ALTER TABLE RENAME COLUMN country_abbreviated TO country_abbreviated_2;
 -- ALTER TABLE countrys ADD UNIQUE ( country_id );
@@ -246,7 +243,7 @@ CREATE OR REPLACE FUNCTION addCity ( nm VARCHAR, idCountry INT ) RETURNS VOID AS
 ' INSERT INTO cities ( city_name, country_id ) VALUES ( nm, idCountry ) '
 LANGUAGE SQL;
 
-
+SELECT 
 
 
 
