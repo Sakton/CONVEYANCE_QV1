@@ -10,10 +10,11 @@ AdressView::AdressView(QWidget *parent) :
 {
   ui->setupUi( this );
   createModel( );
-  ui->tableView->setModel( model );
   AdressCountryDelegate *d = new AdressCountryDelegate;
+  ui->tableView->setModel( model );
   ui->tableView->setItemDelegate( d );
   ui->tableView->setColumnHidden( 0, true );
+  ui->tableView->setColumnHidden( 1, true );
 }
 
 AdressView::~AdressView()
@@ -24,9 +25,9 @@ AdressView::~AdressView()
 void AdressView::createModel( ) {
   model = new QSqlTableModel( this, QSqlDatabase::database( NAME_DB_ALL ) );
   model->setTable( "adress_view" );
-  model->setHeaderData( 1, Qt::Orientation::Horizontal, tr( "СТРАНА" ) );
-  model->setHeaderData( 2, Qt::Orientation::Horizontal, tr( "ИНДЕКС" ) );
-  model->setHeaderData( 3, Qt::Orientation::Horizontal, tr( "ГОРОД" ) );
-  model->setHeaderData( 4, Qt::Orientation::Horizontal, tr( "АДРЕС" ) );
+  model->setHeaderData( 2, Qt::Orientation::Horizontal, tr( "СТРАНА" ) );
+  model->setHeaderData( 3, Qt::Orientation::Horizontal, tr( "ИНДЕКС" ) );
+  model->setHeaderData( 4, Qt::Orientation::Horizontal, tr( "ГОРОД" ) );
+  model->setHeaderData( 5, Qt::Orientation::Horizontal, tr( "АДРЕС" ) );
   model->select( );
 }

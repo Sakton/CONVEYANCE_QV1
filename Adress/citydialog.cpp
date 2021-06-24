@@ -13,8 +13,7 @@ CityDialog::CityDialog( int indexList, QWidget *parent ) : QDialog( parent ), ui
   connecteds( );
 }
 
-CityDialog::~CityDialog()
-{
+CityDialog::~CityDialog( ) {
   delete ui;
 }
 
