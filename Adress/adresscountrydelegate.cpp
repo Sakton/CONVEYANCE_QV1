@@ -19,9 +19,13 @@ void AdressCountryDelegate::paint( QPainter *painter, const QStyleOptionViewItem
     //      qDebug( ) << "SELECTED ";
     //    }
 
+    QStyleOptionViewItem opt = option;
+    opt.showDecorationSelected = true;
+    option.widget->style( )->drawControl( QStyle::CE_ItemViewItem, &opt, painter, option.widget );
+
     painter->save( );
 
-    painter->fillRect( option.rect, Qt::lightGray );
+    // painter->fillRect( option.rect, Qt::lightGray );
     QString fileName;
     const QSqlTableModel *m = qobject_cast< const QSqlTableModel * >( index.model( ) );
     if ( m ) {
@@ -36,6 +40,7 @@ void AdressCountryDelegate::paint( QPainter *painter, const QStyleOptionViewItem
     painter->drawText( tt, Qt::AlignCenter, index.model( )->data( index ).toString( ) );
 
     painter->restore( );
+
   } else {
     return QStyledItemDelegate::paint( painter, option, index );
   }
