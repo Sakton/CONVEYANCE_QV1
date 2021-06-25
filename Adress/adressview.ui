@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>416</width>
-    <height>240</height>
+    <width>824</width>
+    <height>412</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,6 +23,9 @@
        <bold>true</bold>
       </font>
      </property>
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustToContents</enum>
+     </property>
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>
@@ -36,6 +39,9 @@
       <enum>QAbstractItemView::SelectRows</enum>
      </property>
      <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="wordWrap">
       <bool>true</bool>
      </property>
      <attribute name="horizontalHeaderCascadingSectionResizes">

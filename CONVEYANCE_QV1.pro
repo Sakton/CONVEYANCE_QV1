@@ -11,10 +11,10 @@ CONFIG += c++11
 SOURCES += \
     Adress/addadress.cpp \
     Adress/adress.cpp \
+    Adress/adresscountrydelegate.cpp \
+    Adress/adresstableview.cpp \
     Adress/adressview.cpp \
     Adress/citydialog.cpp \
-    ElementsWidgets/adresscountrydelegate.cpp \
-    ElementsWidgets/adresstableview.cpp \
     ElementsWidgets/comboboxcity.cpp \
     ElementsWidgets/comboboxcountrys.cpp \
     MainWindow/mainwindow.cpp \
@@ -23,11 +23,11 @@ SOURCES += \
 HEADERS += \
 	Adress/addadress.h \
 	Adress/adress.h \
+	Adress/adresscountrydelegate.h \
+	Adress/adresstableview.h \
 	Adress/adressview.h \
 	Adress/citydialog.h \
 	Constants.h \
-	ElementsWidgets/adresscountrydelegate.h \
-	ElementsWidgets/adresstableview.h \
 	ElementsWidgets/comboboxcity.h \
 	ElementsWidgets/comboboxcountrys.h \
 	MainWindow/mainwindow.h
@@ -96,4 +96,4 @@ DISTFILES += \
 RESOURCES += \
 	source.qrc
 
-INCLUDEPATH += $$PWD\CONVEYANCE_QV1\ElementsWidgets
+INCLUDEPATH += $$PWD\ElementsWidgets

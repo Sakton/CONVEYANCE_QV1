@@ -1,6 +1,6 @@
 #include "adressview.h"
 #include "Constants.h"
-#include "ElementsWidgets/adresscountrydelegate.h"
+#include "adresscountrydelegate.h"
 #include "ui_adressview.h"
 #include <QSqlTableModel>
 
@@ -15,6 +15,7 @@ AdressView::AdressView(QWidget *parent) :
   ui->tableView->setItemDelegate( d );
   ui->tableView->setColumnHidden( 0, true );
   ui->tableView->setColumnHidden( 1, true );
+  ui->tableView->horizontalHeader( )->setSectionResizeMode( QHeaderView::ResizeMode::Stretch );
 }
 
 AdressView::~AdressView()
