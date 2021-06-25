@@ -15,7 +15,7 @@
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <widget class="QTableView" name="tableView">
+    <widget class="AdressTableView" name="tableView">
      <property name="font">
       <font>
        <family>Verdana</family>
@@ -63,6 +63,16 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>AdressTableView</class>
+   <extends>QTableView</extends>
+   <header>adresstableview.h</header>
+   <slots>
+    <slot>slotSelectedRow(QModelIndex*)</slot>
+   </slots>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

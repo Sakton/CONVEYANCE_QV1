@@ -6,7 +6,7 @@
 class AdressTableView : public QTableView {
   Q_OBJECT
 public:
-  AdressTableView();
+  AdressTableView( QWidget * parent = nullptr );
 };
 
 #endif // ADRESSTABLEVIEW_H
