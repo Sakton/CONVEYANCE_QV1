@@ -23,7 +23,7 @@ CREATE TABLE сities (
 
 CREATE TABLE streets (
 	street_id SERIAL UNIQUE,
-	street_name varchar ( 256 ) NOT NULL
+	street_name varchar ( 256 ) NOT NULL UNIQUE
 );
 
 CREATE TABLE countrys (
@@ -91,9 +91,13 @@ CREATE OR REPLACE FUNCTION insert_adress ( cntr VARCHAR, ct VARCHAR, strt VARCHA
 	VALUES (  ( SELECT id_country( cntr ) ), ( SELECT id_city( ct ) ), ( SELECT id_street( strt ) ), type_adress )' 
 LANGUAGE SQL;
  --ПЕРЕГРУЗКА
-CREATE OR REPLACE FUNCTION insert_adress ( cntr VARCHAR, ct VARCHAR, strt VARCHAR, a_index VARCHAR, type_adress Type_Adress DEFAULT 'FACT' ) RETURNS VOID AS ' INSERT INTO adress ( country_id, city_id, street_id, adres_index, adres_type )
-	VALUES (  ( SELECT id_country( cntr ) ), ( SELECT id_city( ct ) ), ( SELECT id_street( strt ) ), a_index, type_adress )' 
+CREATE OR REPLACE FUNCTION insert_adress ( cntr VARCHAR, ct VARCHAR, strt VARCHAR, a_index VARCHAR, type_adress Type_Adress DEFAULT 'FACT' ) RETURNS VOID AS 
+	' INSERT INTO adress ( country_id, city_id, street_id, adres_index, adres_type )
+	VALUES (  ( SELECT id_country( cntr ) ), ( SELECT id_city( ct ) ), ( SELECT id_street( strt ) ), a_index, type_adress )'
 LANGUAGE SQL;
+
+
+-- SELECT ( SELECT street_id FROM street_name WHERE street_name =  )
 
 CREATE OR REPLACE FUNCTION id_vatnames ( nm VARCHAR ) RETURNS INT AS
     ' SELECT vatname_id FROM vatnames WHERE vatname_name = nm '

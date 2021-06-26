@@ -106,7 +106,7 @@ VALUES ();
 
 CREATE TABLE streets (
 	street_id SERIAL UNIQUE,
-	street_name varchar ( 256 ) NOT NULL
+	street_name varchar ( 256 ) NOT NULL UNIQUE
 );
 
 -- ALTER TABLE streets ADD UNIQUE ( street_id );

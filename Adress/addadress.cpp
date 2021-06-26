@@ -9,10 +9,7 @@
 #include <QSqlQueryModel>
 #include <algorithm>
 
-AddAdress::AddAdress(QWidget *parent) :
-      QDialog(parent),
-      ui(new Ui::AddAdress)
-{
+AddAdress::AddAdress( QWidget * parent ) : QDialog( parent ), ui( new Ui::AddAdress ) {
   ui->setupUi(this);
   setWindowTitle( tr( "Добавить Адрес" ) );
   connecteds( );
@@ -39,7 +36,12 @@ void AddAdress::slotAccept( ) {
     type = "LEGAL";
 
   QSqlQuery query( db );
-  query.prepare( "SELECT insert_adress(:country, :city, :adress, :adress_index, :type);" );
+  QString qs = QString( "INSERT INTO streets ( street_name ) VALUES ( '%1' )" ).arg( adress );
+  query.exec( qs );
+  query.clear( );
+
+  query.prepare( "SELECT insert_adress(:country, :city, :adress, "
+                 ":adress_index, :type);" );
   query.bindValue( ":country", country );
   query.bindValue( ":city", city );
   query.bindValue( ":adress", adress );
