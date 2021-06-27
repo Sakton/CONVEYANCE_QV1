@@ -2,24 +2,21 @@
 #include "Constants.h"
 #include "addadress.h"
 #include "adresscountrydelegate.h"
+#include "adressdialog.h"
 #include "ui_adressview.h"
 #include <QContextMenuEvent>
 #include <QMenu>
+#include <QSqlRecord>
 #include <QSqlTableModel>
 
-AdressView::AdressView(QWidget *parent) :
-      QWidget(parent),
-      ui(new Ui::AdressView)
-{
+AdressView::AdressView( QWidget * parent ) : QWidget( parent ), ui( new Ui::AdressView ), model { nullptr } {
   ui->setupUi( this );
   createModel( );
-  AdressCountryDelegate *d = new AdressCountryDelegate;
   ui->tableView->setModel( model );
-  ui->tableView->setItemDelegate( d );
+  ui->tableView->setItemDelegate( new AdressCountryDelegate( ui->tableView ) );
   ui->tableView->setColumnHidden( 0, true );
   ui->tableView->setColumnHidden( 1, true );
-  ui->tableView->horizontalHeader( )->setSectionResizeMode(
-      QHeaderView::ResizeMode::Stretch );
+  ui->tableView->horizontalHeader( )->setSectionResizeMode( QHeaderView::ResizeMode::Stretch );
 
   connect(
       ui->tableView,
@@ -29,8 +26,8 @@ AdressView::AdressView(QWidget *parent) :
 
 AdressView::~AdressView( ) { delete ui; }
 
-void AdressView::slotSelectedRow( const QModelIndex & indeRowSelected ) {
-  qDebug( ) << "indexRow = " << indeRowSelected.row( );
+void AdressView::slotSelectedRow( const QModelIndex & indexRowSelected ) {
+  qDebug( ) << "indexRow = " << indexRowSelected.row( );
 }
 
 void AdressView::slotEditActionContextMenu( bool ) {
@@ -38,8 +35,14 @@ void AdressView::slotEditActionContextMenu( bool ) {
 }
 
 void AdressView::slotAddActionContextMenu( bool ) {
-  qDebug( ) << "AddAction";
-  AddAdress addDialog( this );
+  //  AddAdress addDialog( this );
+  //  addDialog.exec( );
+
+  QSqlRecord record = model->record( ui->tableView->selectionModel( )->currentIndex( ).row( ) );
+  QString nameCountry = record.value( 2 ).toString( );
+
+  AdressDialog addDialog( model, this );
+  addDialog.slotSetCountry( nameCountry );
   addDialog.exec( );
 }
 
@@ -56,6 +59,8 @@ void AdressView::createModel( ) {
 }
 
 void AdressView::contextMenuEvent( QContextMenuEvent * event ) {
+  //выбранный индекс модели -> выбранная строка
+
   QMenu contextMenu( this );
   // TODO тут возможно придется изменить
   QAction actionEditRow( tr( "Править" ), &contextMenu );

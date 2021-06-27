@@ -22,6 +22,16 @@ AddAdress::~AddAdress()
   delete ui;
 }
 
+void AddAdress::accept( ) {
+  qDebug( ) << "accept";
+  QDialog::accept( );
+}
+
+void AddAdress::reject( ) {
+  qDebug( ) << "regect";
+  QDialog::reject( );
+}
+
 // Deutschland, 74321, Bietigheim-Bissingen, Stuttgarter Straße 59
 
 void AddAdress::slotAccept( ) {
@@ -73,7 +83,7 @@ void AddAdress::slotFactIndexAddingCity( int factIndexAdding ) {
 }
 
 void AddAdress::connecteds( ) {
-  connect( ui->buttonBox, QOverload<>::of( &QDialogButtonBox::accepted ), this, QOverload<>::of( &AddAdress::slotAccept ) );
+  // connect( ui->buttonBox, QOverload<>::of( &QDialogButtonBox::accepted ), this, QOverload<>::of( &AddAdress::slotAccept ) );
   connect( ui->comboBoxCountry, QOverload< int >::of( &QComboBox::currentIndexChanged ), this,
            QOverload< int >::of( &AddAdress::slotSelectCountry ) );
   connect( ui->pushButtonAddCity, QOverload< bool >::of( &QPushButton::clicked ), this, QOverload<>::of( &AddAdress::slotClickedAddCityButton ) );

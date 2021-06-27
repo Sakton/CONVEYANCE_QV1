@@ -14,11 +14,14 @@ class CityDialog : public QDialog
   Q_OBJECT
 
 public:
-  explicit CityDialog( int indexList = 0, QWidget *parent = nullptr );
+  explicit CityDialog( int indexList, QWidget * parent = nullptr );
   ~CityDialog( );
 
 public slots:
   void slotAccepted( );
+  // QDialog interface
+  void accept( ) override;
+  void reject( ) override;
 
 private:
   void connecteds( );
@@ -31,7 +34,7 @@ signals:
   //этот сигнал испускается с фактическим измененным индексом
 
 private:
-  Ui::CityDialog *ui;
+  Ui::CityDialog * ui;
 };
 
 #endif // CITYDIALOG_H

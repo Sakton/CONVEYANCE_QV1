@@ -20,6 +20,9 @@ public:
   ~AddAdress( );
 
 public slots:
+  // QDialog interface
+  void accept( ) override;
+  void reject( ) override;
   void slotAccept( );
   void slotSelectCountry( int idx );
   void slotClickedAddCityButton( );
@@ -32,7 +35,7 @@ private:
 private:
   Ui::AddAdress *ui;
   QSqlQueryModel *modelCounrys;
-  QSqlQueryModel *modelCities;
+  QSqlQueryModel * modelCities;
 };
 
 // sdfsdfsf

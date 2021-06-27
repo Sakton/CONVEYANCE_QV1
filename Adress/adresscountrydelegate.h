@@ -6,8 +6,9 @@
 class AdressCountryDelegate : public QStyledItemDelegate
 {
   Q_OBJECT
-  // QAbstractItemDelegate interface
 public:
+  explicit AdressCountryDelegate( QObject * parent );
+  // QAbstractItemDelegate interface
   void paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const override;
 };
 

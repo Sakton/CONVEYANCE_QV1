@@ -12,6 +12,7 @@ SOURCES += \
     Adress/addadress.cpp \
     Adress/adress.cpp \
     Adress/adresscountrydelegate.cpp \
+    Adress/adressdialog.cpp \
     Adress/adresstableview.cpp \
     Adress/adressview.cpp \
     Adress/citydialog.cpp \
@@ -24,6 +25,7 @@ HEADERS += \
 	Adress/addadress.h \
 	Adress/adress.h \
 	Adress/adresscountrydelegate.h \
+	Adress/adressdialog.h \
 	Adress/adresstableview.h \
 	Adress/adressview.h \
 	Adress/citydialog.h \
@@ -35,6 +37,7 @@ HEADERS += \
 FORMS += \
 	Adress/addadress.ui \
 	Adress/adress.ui \
+	Adress/adressdialog.ui \
 	Adress/adressview.ui \
 	Adress/citydialog.ui \
 	MainWindow/mainwindow.ui

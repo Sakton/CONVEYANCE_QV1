@@ -8,7 +8,9 @@
 #include <QSqlRecord>
 #include <QSqlTableModel>
 
-void AdressCountryDelegate::paint( QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index ) const {
+AdressCountryDelegate::AdressCountryDelegate( QObject * parent ) : QStyledItemDelegate( parent ) {}
+
+void AdressCountryDelegate::paint( QPainter * painter, const QStyleOptionViewItem & option, const QModelIndex & index ) const {
   if ( index.column( ) == 2 ) {
 
     QStyleOptionViewItem opt = option;

@@ -10,10 +10,11 @@ public:
   explicit ComboBoxCity( QWidget *parent = nullptr );
 
   void getCity( int idCountry );
+  int getCurrentIdCountry( ) const;
 
 public slots:
-  void update( );
-  void update( int idCity );
+  void updateCity( );
+  void updateCity( int idCountry );
 
 private:
   int currentIdCountry;
