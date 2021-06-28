@@ -243,7 +243,10 @@ CREATE OR REPLACE FUNCTION addCity ( nm VARCHAR, idCountry INT ) RETURNS VOID AS
 ' INSERT INTO cities ( city_name, country_id ) VALUES ( nm, idCountry ) '
 LANGUAGE SQL;
 
-SELECT 
+SELECT ( SELECT street_id FROM streets WHERE street_name = 'UL. POLNA 4/2' ) IS NULL;
+
+CASE WHEN ( SELECT street_id FROM streets WHERE street_name = 'UL. POLNA 4/2' ) IS NULL
+		THEN ( INSERT INTO streets ( street_name ) VALUES ( 'UL. POLNA 4/2' ) )
 
 
 
