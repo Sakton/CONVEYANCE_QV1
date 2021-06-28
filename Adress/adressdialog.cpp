@@ -1,4 +1,5 @@
 #include "adressdialog.h"
+#include "Constants.h"
 #include "citydialog.h"
 #include "ui_adressdialog.h"
 
@@ -54,7 +55,15 @@ void AdressDialog::reject( ) {
 
 void AdressDialog::addRecord( ) {
   readForm( );
-  QSqlQuery query;
+  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
+  QString qs = QString( " SELECT insertOrIgnoreStreet('%1');" ).arg( poles.at( 3 ) );
+
+  qDebug( ) << qs;
+
+  if ( !query.exec( qs ) ) {
+    QMessageBox::warning( this, "ERROR", "Error add street", QMessageBox::StandardButton::Ok );
+  }
+  query.clear( );
   query.prepare( "SELECT insert_adress(:country, :city, :adress, "
                  ":adress_index, :type);" );
   query.bindValue( ":country", poles.at( 0 ) );
@@ -62,10 +71,13 @@ void AdressDialog::addRecord( ) {
   query.bindValue( ":adress_index", poles.at( 2 ) );
   query.bindValue( ":adress", poles.at( 3 ) );
   query.bindValue( ":type", poles.at( 4 ) );
+
   if ( !query.exec( ) )
     QMessageBox::warning( this, "ERROR", "Error add adress", QMessageBox::StandardButton::Ok );
   else
     emit signalUpdateTableToDb( );
+
+  qDebug( ) << query.lastQuery( );
 }
 
 void AdressDialog::updateRecord( ) {

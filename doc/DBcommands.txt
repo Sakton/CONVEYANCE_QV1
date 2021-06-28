@@ -239,15 +239,43 @@ CREATE OR REPLACE FUNCTION get_id_country ( nm VARCHAR ) RETURNS INT AS
  'SELECT country_id FROM countrys WHERE country_name = nm'
 LANGUAGE SQL;
 
-CREATE OR REPLACE FUNCTION addCity ( nm VARCHAR, idCountry INT ) RETURNS VOID AS
-' INSERT INTO cities ( city_name, country_id ) VALUES ( nm, idCountry ) '
+
+
+SELECT  (SELECT street_id FROM streets WHERE street_name = 'UL. POLNA 4/2') IS NULL;
+
+IF NOT EXISTS ( SELECT street_id FROM streets WHERE street_name = 'UL. POLNA 4/2' )
+	BEGIN
+		INSERT INTO streets ( street_name ) VALUES ( 'UL. POLNA 4/2' )
+	END;
+
+DO$$
+BEGIN
+IF(  SELECT street_id FROM streets WHERE street_name = 'UL. POLNA 4/2' ) IS NULL
+	THEN  INSERT INTO streets ( street_name ) VALUES ( 'UL. POLNA 4/2' );
+END IF;
+END
+$$
+
+/*
+CREATE FUNCTION insertOrIgnoreStreet( strt VARCHAR ) RETURNS VOID AS
+' IF(  SELECT street_id FROM streets WHERE street_name = 'strt' ) IS NULL
+	THEN  INSERT INTO streets ( street_name ) VALUES ( 'strt' );
+END IF; '
 LANGUAGE SQL;
+*/
 
-SELECT ( SELECT street_id FROM streets WHERE street_name = 'UL. POLNA 4/2' ) IS NULL;
-
-CASE WHEN ( SELECT street_id FROM streets WHERE street_name = 'UL. POLNA 4/2' ) IS NULL
-		THEN ( INSERT INTO streets ( street_name ) VALUES ( 'UL. POLNA 4/2' ) )
-
+CREATE OR REPLACE FUNCTION insertOrIgnoreStreet( strt VARCHAR ) RETURNS BOOL AS
+$$
+BEGIN
+	IF(  SELECT street_id FROM streets WHERE street_name = strt ) IS NULL
+		THEN  INSERT INTO streets ( street_name ) VALUES ( strt );
+			RETURN TRUE;
+		ELSE 
+			RETURN FALSE;
+	END IF;
+END;
+$$
+LANGUAGE plpgsql;
 
 
 
