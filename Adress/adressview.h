@@ -4,6 +4,7 @@
 #include <QWidget>
 
 class QSqlTableModel;
+class QSqlRelationalTableModel;
 class QModelIndex;
 class QMenu;
 
@@ -24,6 +25,7 @@ public slots:
   void slotEditActionContextMenu( bool );
   void slotAddActionContextMenu( bool );
   void slotDelActionContextMenu( bool );
+  void updateModel( );
 
 private:
   void createModel( );
@@ -35,6 +37,7 @@ protected:
 private:
   Ui::AdressView *ui;
   QSqlTableModel * model;
+  // QSqlRelationalTableModel *rmodel;
   // QModelIndex * selectedIndex;
   // QMenu * contextMenu;
 };

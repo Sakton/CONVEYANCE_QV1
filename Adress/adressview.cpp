@@ -7,6 +7,7 @@
 #include <QContextMenuEvent>
 #include <QMenu>
 #include <QSqlRecord>
+#include <QSqlRelationalTableModel>
 #include <QSqlTableModel>
 
 AdressView::AdressView( QWidget * parent ) : QWidget( parent ), ui( new Ui::AdressView ), model { nullptr } {
@@ -41,12 +42,20 @@ void AdressView::slotAddActionContextMenu( bool ) {
   QSqlRecord record = model->record( ui->tableView->selectionModel( )->currentIndex( ).row( ) );
   QString nameCountry = record.value( 2 ).toString( );
 
-  AdressDialog addDialog( model, this );
+  AdressDialog addDialog( model, AdressDialog::Regim::ADD, this );
+  connect( &addDialog, QOverload<>::of( &AdressDialog::signalUpdateTableToDb ), this, QOverload<>::of( &AdressView::updateModel ) );
   addDialog.slotSetCountry( nameCountry );
   addDialog.exec( );
 }
 
 void AdressView::slotDelActionContextMenu( bool ) { qDebug( ) << "DelAction"; }
+
+void AdressView::updateModel( ) {
+  qDebug( ) << "AdressView::updateModel()";
+  model->select( );
+  ui->tableView->setModel( model );
+  ui->tableView->update( );
+}
 
 void AdressView::createModel( ) {
   model = new QSqlTableModel( this, QSqlDatabase::database( NAME_DB_ALL ) );
