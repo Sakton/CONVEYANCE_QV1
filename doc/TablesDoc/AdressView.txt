@@ -1,0 +1,84 @@
+-- Базовые классы:
+
+CREATE TABLE сities (
+	city_id SERIAL UNIQUE,
+	city_name VARCHAR( 256 ) NOT NULL UNIQUE,
+	country_id INT,
+	PRIMARY KEY ( city_id )
+);
+
+CREATE TABLE streets (
+	street_id SERIAL UNIQUE,
+	street_name varchar ( 256 ) NOT NULL UNIQUE
+);
+
+CREATE TABLE countrys (
+	country_id SERIAL UNIQUE,
+	vat_id INT NOT NULL,
+	vatname_id INT NOT NULL,
+	country_name VARCHAR(256) NOT NULL UNIQUE,
+	country_abbreviated_2 VARCHAR(4) NOT NULL UNIQUE,
+	country_abbreviated_3 VARCHAR(4) NOT NULL UNIQUE,
+	country_icon VARCHAR(256),
+	PRIMARY KEY ( country_id ),
+	FOREIGN KEY ( vat_id ) REFERENCES vats ( vat_id )
+		ON UPDATE SET NULL ON DELETE SET NULL,
+	FOREIGN KEY ( vatname_id ) REFERENCES vatnames ( vatname_id )
+		ON UPDATE SET NULL ON DELETE SET NULL
+);
+
+CREATE TABLE adress (
+	adres_id SERIAL UNIQUE,
+	country_id INT,
+	city_id INT,
+	street_id INT,
+	adres_type Type_Adress, -- тип адреса (физический, юридический)
+	adres_index VARCHAR(10),
+	PRIMARY KEY ( adres_id ),
+	FOREIGN KEY ( country_id ) REFERENCES countrys ( country_id )
+		ON DELETE SET NULL,
+	FOREIGN KEY ( city_id ) REFERENCES cities ( city_id )
+		ON DELETE SET NULL,
+	FOREIGN KEY ( street_id ) REFERENCES streets ( street_id )
+		ON DELETE SET NULL,
+	CHECK ( adres_type IN ( 'FACT', 'LEGAL') )
+);
+
+-- ПРЕДСТАВЛЕНИЕ
+
+CREATE OR REPLACE VIEW adress_view AS
+	SELECT ad.adres_id, cntr.country_name, ad.adres_index, ct.city_name, st.street_name, cntr.country_icon
+FROM adress AS ad 
+	LEFT JOIN countrys AS cntr
+		ON ad.country_id = cntr.country_id
+	LEFT JOIN cities AS ct
+		ON ad.city_id = ct.city_id
+	LEFT JOIN streets AS st
+		ON ad.street_id = st.street_id;
+		
+		
+-- 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

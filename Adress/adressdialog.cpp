@@ -6,9 +6,14 @@
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <QSqlRecord>
+#include <QSqlTableModel>
 
-AdressDialog::AdressDialog( QSqlTableModel *tView, Regim rg, QWidget *parent )
-    : QDialog( parent ), ui( new Ui::AdressDialog ), tVw { tView }, regim { rg } {
+enum class CULUMN_ADRESS : char {
+
+};
+
+AdressDialog::AdressDialog( QSqlTableModel *model, Regim rg, QWidget *parent )
+    : QDialog( parent ), ui( new Ui::AdressDialog ), model { model }, regim { rg } {
   ui->setupUi( this );
   ui->comboBoxType->addItems( QStringList( ) << tr( "Фактический" ) << tr( "Юридический" ) );
   ui->comboBoxCity->updateCity( ui->comboBoxCountry->currentData( ).toInt( ) );
@@ -46,6 +51,7 @@ void AdressDialog::accept( ) {
     updateRecord( );
     break;
   }
+  QDialog::accept( );
 }
 
 void AdressDialog::reject( ) {
@@ -56,23 +62,13 @@ void AdressDialog::reject( ) {
 void AdressDialog::addRecord( ) {
   readForm( );
   QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
-  QString qs = QString( " SELECT insertOrIgnoreStreet('%1');" ).arg( poles.at( 3 ) );
-
-  qDebug( ) << qs;
-
-  if ( !query.exec( qs ) ) {
-    QMessageBox::warning( this, "ERROR", "Error add street", QMessageBox::StandardButton::Ok );
-  }
-  query.clear( );
-  query.prepare( "SELECT insert_adress(:country, :city, :adress, "
-                 ":adress_index, :type);" );
-  query.bindValue( ":country", poles.at( 0 ) );
-  query.bindValue( ":city", poles.at( 1 ) );
-  query.bindValue( ":adress_index", poles.at( 2 ) );
-  query.bindValue( ":adress", poles.at( 3 ) );
-  query.bindValue( ":type", poles.at( 4 ) );
-
-  if ( !query.exec( ) )
+  QString qs = QString( "SELECT insertOrIgnoreStreet('%3'); SELECT insert_adress('%1', '%2', '%3', '%4', '%5');" )
+                   .arg( poles.at( 0 ) )
+                   .arg( poles.at( 1 ) )
+                   .arg( poles.at( 2 ) )
+                   .arg( poles.at( 3 ) )
+                   .arg( castAdres( poles.at( 4 ) ) );
+  if ( !query.exec( qs ) )
     QMessageBox::warning( this, "ERROR", "Error add adress", QMessageBox::StandardButton::Ok );
   else
     emit signalUpdateTableToDb( );
@@ -86,8 +82,8 @@ void AdressDialog::updateRecord( ) {
 
 void AdressDialog::readForm( ) {
   poles.clear( );
-  poles << ui->comboBoxCountry->currentText( ) << ui->comboBoxCity->currentText( ) << ui->lineEditIndex->text( ).simplified( )
-        << ui->lineEditAdress->text( ).simplified( ) << ui->comboBoxType->currentText( );
+  poles << ui->comboBoxCountry->currentText( ) << ui->comboBoxCity->currentText( ) << ui->lineEditAdress->text( ).simplified( )
+        << ui->lineEditIndex->text( ).simplified( ) << ui->comboBoxType->currentText( );
 }
 
 void AdressDialog::setRegimWindowTitle( ) {
@@ -98,4 +94,10 @@ void AdressDialog::setRegimWindowTitle( ) {
   case AdressDialog::Regim::UPDATE:
     setWindowTitle( tr( "ИЗМЕНИТЬ АДРЕС" ) );
   }
+}
+
+QString AdressDialog::castAdres( const QString &tAdr ) {
+  if ( tAdr == tr( "Фактический" ) )
+    return "FACT";
+  return "LEGAL";
 }

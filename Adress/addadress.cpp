@@ -48,7 +48,6 @@ void AddAdress::slotAccept( ) {
   QSqlQuery query( db );
   QString qs = QString( "INSERT INTO streets ( street_name ) VALUES ( '%1' )" ).arg( adress );
   query.exec( qs );
-  query.clear( );
 
   query.prepare( "SELECT insert_adress(:country, :city, :adress, "
                  ":adress_index, :type);" );

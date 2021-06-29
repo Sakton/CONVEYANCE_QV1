@@ -76,7 +76,7 @@ FROM adress AS ad
 		ON ad.street_id = st.street_id;
 
 	
-ALTER TABLE adress ADD COLUMN adres_index VARCHAR(10);
+--ALTER TABLE adress ADD COLUMN adres_index VARCHAR(10);
 
 CREATE FUNCTION id_country ( cntr VARCHAR ) RETURNS INT AS 
 	'SELECT country_id FROM countrys WHERE country_name = cntr' LANGUAGE SQL;
@@ -119,6 +119,7 @@ END;
 $$
 LANGUAGE plpgsql;
 --**************
+
 -- *************
 CREATE OR REPLACE FUNCTION insertOrIgnoreStreet( strt VARCHAR ) RETURNS BOOL AS
 $$
@@ -134,6 +135,13 @@ $$
 LANGUAGE plpgsql;
 --**************
 
+CREATE OR REPLACE FUNCTION cast_TypeAdress ( nameTypeAdress VARCHAR ) RETURNS VOID AS
+$$
+BEGIN
+	SELECT CASE nameTypeAdress WHEN 'Фактический' THEN 'FACT'::Type_Adress ELSE 'LEGAL'::Type_Adress END;
+END;
+$$
+LANGUAGE SQL;
 
 
 

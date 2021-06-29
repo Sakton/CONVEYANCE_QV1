@@ -60,6 +60,8 @@ DISTFILES += \
 	doc/DB_v1.mwb \
 	doc/DB_v1.mwb.bak \
 	doc/DBcommands.txt \
+	doc/TablesDoc/Adress.txt \
+	doc/TablesDoc/AdressView.txt \
 	doc/Zadachi \
 	doc/db_model_tables.mwb.bak \
 	doc/plans.txt \
