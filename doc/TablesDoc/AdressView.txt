@@ -56,9 +56,21 @@ FROM adress AS ad
 	LEFT JOIN streets AS st
 		ON ad.street_id = st.street_id;
 		
+-- TRIGGER FUNCTION
+CREATE OR REPLACE FUNCTION func_to_trigger_insupddel_adress_view() RETURNS TRIGGER
+$$
+BEGIN
+	INSERT INTO adress ( country_id, city_id, street_id, adres_index, adres_type )
+	VALUES (  ( SELECT id_country( cntr ) ), ( SELECT id_city( ct ) ), ( SELECT id_street( strt ) ), a_index, type_adress );
+END;
+$$ LANGUAGE plpgsql;
+
 		
--- 
-		
+-- TRIGGERS
+CREATE TRIGGER trigger_insupddel_adress_view INSTEAD OF INSERT ON adress_view 
+FOR EACH ROW
+EXECUTE FUNCTION func_to_trigger_insupddel_adress_view();
+
 		
 		
 		
