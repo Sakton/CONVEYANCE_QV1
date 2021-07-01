@@ -8,12 +8,7 @@
 #include <QSqlRecord>
 #include <QSqlTableModel>
 
-enum class CULUMN_ADRESS : char {
-
-};
-
-AdressDialog::AdressDialog( QSqlTableModel *model, Regim rg, QWidget *parent )
-    : QDialog( parent ), ui( new Ui::AdressDialog ), model { model }, regim { rg } {
+AdressDialog::AdressDialog( QSqlTableModel *model, QWidget *parent ) : QDialog( parent ), ui( new Ui::AdressDialog ), model { model } {
   ui->setupUi( this );
   ui->comboBoxType->addItems( QStringList( ) << tr( "Фактический" ) << tr( "Юридический" ) );
   ui->comboBoxCity->updateCity( ui->comboBoxCountry->currentData( ).toInt( ) );
@@ -24,7 +19,9 @@ AdressDialog::AdressDialog( QSqlTableModel *model, Regim rg, QWidget *parent )
   setRegimWindowTitle( );
 }
 
-AdressDialog::~AdressDialog( ) { delete ui; }
+AdressDialog::~AdressDialog( ) {
+  delete ui;
+}
 
 void AdressDialog::slotAddCity( ) {
   CityDialog cityDialog( ui->comboBoxCountry->currentIndex( ) );
@@ -43,19 +40,11 @@ void AdressDialog::slotCountryIndexChanged( int idx ) {
 }
 
 void AdressDialog::accept( ) {
-  switch ( regim ) {
-  case AdressDialog::Regim::ADD:
-    addRecord( );
-    break;
-  case AdressDialog::Regim::UPDATE:
-    updateRecord( );
-    break;
-  }
+  addRecord( );
   QDialog::accept( );
 }
 
 void AdressDialog::reject( ) {
-  qDebug( ) << "AdressDialog::reject( )";
   QDialog::reject( );
 }
 
@@ -72,8 +61,6 @@ void AdressDialog::addRecord( ) {
     QMessageBox::warning( this, "ERROR", "Error add adress", QMessageBox::StandardButton::Ok );
   else
     emit signalUpdateTableToDb( );
-
-  qDebug( ) << query.lastQuery( );
 }
 
 void AdressDialog::updateRecord( ) {
@@ -87,13 +74,7 @@ void AdressDialog::readForm( ) {
 }
 
 void AdressDialog::setRegimWindowTitle( ) {
-  switch ( regim ) {
-  case AdressDialog::Regim::ADD:
-    setWindowTitle( tr( "ДОБАВИТЬ АДРЕС" ) );
-    break;
-  case AdressDialog::Regim::UPDATE:
-    setWindowTitle( tr( "ИЗМЕНИТЬ АДРЕС" ) );
-  }
+  setWindowTitle( tr( "ДОБАВИТЬ АДРЕС" ) );
 }
 
 QString AdressDialog::castAdres( const QString &tAdr ) {

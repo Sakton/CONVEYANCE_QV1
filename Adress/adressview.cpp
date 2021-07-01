@@ -6,6 +6,8 @@
 #include "ui_adressview.h"
 #include <QContextMenuEvent>
 #include <QMenu>
+#include <QSqlError>
+#include <QSqlQuery>
 #include <QSqlRecord>
 #include <QSqlRelationalTableModel>
 #include <QSqlTableModel>
@@ -29,6 +31,7 @@ AdressView::~AdressView( ) { delete ui; }
 
 void AdressView::slotSelectedRow( const QModelIndex & indexRowSelected ) {
   qDebug( ) << "indexRow = " << indexRowSelected.row( );
+  QModelIndex selected = ui->tableView->selectionModel( )->currentIndex( );
 }
 
 void AdressView::slotEditActionContextMenu( bool ) {
@@ -36,9 +39,6 @@ void AdressView::slotEditActionContextMenu( bool ) {
 }
 
 void AdressView::slotAddActionContextMenu( bool ) {
-  //  AddAdress addDialog( this );
-  //  addDialog.exec( );
-
   QSqlRecord record = model->record( ui->tableView->selectionModel( )->currentIndex( ).row( ) );
   QString nameCountry = record.value( 2 ).toString( );
 
@@ -48,10 +48,19 @@ void AdressView::slotAddActionContextMenu( bool ) {
   addDialog.exec( );
 }
 
-void AdressView::slotDelActionContextMenu( bool ) { qDebug( ) << "DelAction"; }
+void AdressView::slotDelActionContextMenu( bool ) {
+  QModelIndex selected = ui->tableView->selectionModel( )->currentIndex( );
+  QString curIdTableAdress = model->record( selected.row( ) ).value( "adres_id" ).toString( );
+  // TODO нужно ли оставлять тут ???
+  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
+  if ( !query.exec( "DELETE FROM adress WHERE adres_id = " + curIdTableAdress ) ) {
+    qDebug( ) << "ERROR DELETE QUERY: " << query.lastError( ).text( );
+  }
+  updateModel( );
+}
 
 void AdressView::updateModel( ) {
-  qDebug( ) << "AdressView::updateModel()";
+  // TODO тут перезапрашиваем модель после вставки ( минусы: перезапрос )
   model->select( );
   ui->tableView->setModel( model );
   ui->tableView->update( );

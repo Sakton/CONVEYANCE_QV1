@@ -1,17 +1,5 @@
 -- Базовые классы:
 
-CREATE TABLE сities (
-	city_id SERIAL UNIQUE,
-	city_name VARCHAR( 256 ) NOT NULL UNIQUE,
-	country_id INT,
-	PRIMARY KEY ( city_id )
-);
-
-CREATE TABLE streets (
-	street_id SERIAL UNIQUE,
-	street_name varchar ( 256 ) NOT NULL UNIQUE
-);
-
 CREATE TABLE countrys (
 	country_id SERIAL UNIQUE,
 	vat_id INT NOT NULL,
@@ -44,8 +32,8 @@ CREATE TABLE adress (
 	CHECK ( adres_type IN ( 'FACT', 'LEGAL') )
 );
 
--- ПРЕДСТАВЛЕНИЕ
 
+-- ПРЕДСТАВЛЕНИЕ
 CREATE OR REPLACE VIEW adress_view AS
 	SELECT ad.adres_id, cntr.country_name, ad.adres_index, ct.city_name, st.street_name, cntr.country_icon
 FROM adress AS ad 
@@ -55,24 +43,27 @@ FROM adress AS ad
 		ON ad.city_id = ct.city_id
 	LEFT JOIN streets AS st
 		ON ad.street_id = st.street_id;
-		
+
+
 -- TRIGGER FUNCTION
-CREATE OR REPLACE FUNCTION func_to_trigger_insupddel_adress_view() RETURNS TRIGGER
+CREATE OR REPLACE FUNCTION func_to_trigger_insupddel_adress_view() RETURNS TRIGGER AS
 $$
 BEGIN
+	SELECT insertOrIgnoreStreet( NOW.street_name );
 	INSERT INTO adress ( country_id, city_id, street_id, adres_index, adres_type )
-	VALUES (  ( SELECT id_country( cntr ) ), ( SELECT id_city( ct ) ), ( SELECT id_street( strt ) ), a_index, type_adress );
-END;
-$$ LANGUAGE plpgsql;
+	VALUES (  ( SELECT id_country( NOW.country_name ) ), ( SELECT id_city( NOW.city_name ) ), ( SELECT id_street( NOW.street_name ) ), NOW.adres_index, NOW.adres_type );
+END
+$$
+LANGUAGE plpgsql;
 
-		
+
 -- TRIGGERS
-CREATE TRIGGER trigger_insupddel_adress_view INSTEAD OF INSERT ON adress_view 
+CREATE TRIGGER trigger_insupddel_adress_view INSTEAD OF INSERT ON adress_view
 FOR EACH ROW
 EXECUTE FUNCTION func_to_trigger_insupddel_adress_view();
 
 		
-		
+INSERT INTO adress_view ( country_name, adres_index, city_name, street_name, country_icon )
 		
 		
 		

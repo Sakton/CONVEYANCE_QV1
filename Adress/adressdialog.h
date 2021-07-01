@@ -15,8 +15,7 @@ class AdressDialog : public QDialog
   Q_OBJECT
 
 public:
-  enum Regim { ADD, UPDATE };
-  explicit AdressDialog( QSqlTableModel *model, Regim rg = ADD, QWidget *parent = nullptr );
+  AdressDialog( QSqlTableModel *model, QWidget *parent = nullptr );
   ~AdressDialog( );
 
 public slots:
@@ -40,7 +39,6 @@ signals:
 private:
   Ui::AdressDialog * ui;
   QSqlTableModel *model;
-  Regim regim;
   QStringList poles;
 };
 

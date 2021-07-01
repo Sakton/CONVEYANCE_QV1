@@ -55,6 +55,7 @@ DISTFILES += \
 	Dump/dump.sql \
 	IshodnyDanny/Adresses.ods \
 	IshodnyDanny/Adresses.xls \
+	doc/BaseTable.txt \
 	doc/ConstantTableData.txt \
 	doc/DB.txt \
 	doc/DB_v1.mwb \
