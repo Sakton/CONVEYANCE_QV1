@@ -31,11 +31,11 @@ AdressView::~AdressView( ) { delete ui; }
 
 void AdressView::slotSelectedRow( const QModelIndex & indexRowSelected ) {
   qDebug( ) << "indexRow = " << indexRowSelected.row( );
-  QModelIndex selected = ui->tableView->selectionModel( )->currentIndex( );
 }
 
 void AdressView::slotEditActionContextMenu( bool ) {
   qDebug( ) << "EditAction";
+  QModelIndex selected = ui->tableView->selectionModel( )->currentIndex( );
 }
 
 void AdressView::slotAddActionContextMenu( bool ) {
