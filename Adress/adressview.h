@@ -37,9 +37,6 @@ protected:
 private:
   Ui::AdressView *ui;
   QSqlTableModel * model;
-  // QSqlRelationalTableModel *rmodel;
-  // QModelIndex * selectedIndex;
-  // QMenu * contextMenu;
 };
 
 #endif // ADRESSVIEW_H

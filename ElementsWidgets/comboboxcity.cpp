@@ -10,9 +10,6 @@ void ComboBoxCity::getCity( int idCountry ) {
   currentIdCountry = idCountry;
   QSqlQuery query( QSqlDatabase::database( "DB" ) );
   QString qs = QString( "SELECT city_id, city_name FROM cities WHERE country_id = %1 ORDER BY city_name;" ).arg( idCountry );
-
-  // qDebug( ) << qs;
-
   query.exec( qs );
   if ( query.isActive( ) ) {
     clear( );

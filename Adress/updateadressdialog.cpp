@@ -23,7 +23,11 @@ void UpdateAdressDialog::init( ) {
     qDebug( ) << "ERROR QUERY ON UNIT UPDATE FORM ADRESS";
   }
   query.next( );
-  qDebug( ) << "query.record( ).value(  adres_id ) = " << query.record( ).value( "adres_id" ).toInt( );
-  // qDebug( ) << ui->comboBoxCity->findData( query.record( ).value( "adres_id" ) );
-  // ui->comboBoxCountry->setCurrentIndex( ui->comboBoxCity->findData( query.record( ).value( "adres_id" ) ) );
+  QSqlRecord rec = query.record( );
+  ui->comboBoxCountry->setCurrentIndex( ui->comboBoxCountry->findText( rec.value( "country_name" ).toString( ) ) );
+  ui->comboBoxCity->updateCity( ui->comboBoxCountry->currentData( ).toInt( ) );
+  ui->comboBoxCity->setCurrentIndex( ui->comboBoxCity->findText( rec.value( "city_name" ).toString( ) ) );
+  ui->lineEditAdress->setText( rec.value( "street_name" ).toString( ) );
+  ui->lineEditIndex->setText( rec.value( "adres_index" ).toString( ) );
+  // ui->comboBoxType->setCurrentIndex( ui->comboBoxType->find( rec.value("") ) );
 }

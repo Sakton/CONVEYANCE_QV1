@@ -39,6 +39,7 @@ void AdressView::slotEditActionContextMenu( bool ) {
   UpdateAdressDialog dialog { id, model, this };
   dialog.setWindowTitle( tr( "ПРАВКА" ) );
   dialog.exec( );
+  updateModel( );
 }
 
 void AdressView::slotAddActionContextMenu( bool ) {
@@ -46,9 +47,9 @@ void AdressView::slotAddActionContextMenu( bool ) {
   QString nameCountry = record.value( 2 ).toString( );
 
   AdressDialog addDialog( model, this );
-  connect( &addDialog, QOverload<>::of( &AdressDialog::signalUpdateTableToDb ), this, QOverload<>::of( &AdressView::updateModel ) );
   addDialog.slotSetCountry( nameCountry );
   addDialog.exec( );
+  updateModel( );
 }
 
 void AdressView::slotDelActionContextMenu( bool ) {

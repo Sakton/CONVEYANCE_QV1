@@ -19,6 +19,7 @@ SOURCES += \
     Adress/updateadressdialog.cpp \
     ElementsWidgets/comboboxcity.cpp \
     ElementsWidgets/comboboxcountrys.cpp \
+    ElementsWidgets/comboboxtypeadress.cpp \
     MainWindow/mainwindow.cpp \
     main.cpp
 
@@ -34,6 +35,7 @@ HEADERS += \
 	Constants.h \
 	ElementsWidgets/comboboxcity.h \
 	ElementsWidgets/comboboxcountrys.h \
+	ElementsWidgets/comboboxtypeadress.h \
 	MainWindow/mainwindow.h
 
 FORMS += \

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>UpdateAdressDialog</class>
+ <class>AddAdress</class>
  <widget class="QDialog" name="AddAdress">
   <property name="geometry">
    <rect>
@@ -94,7 +94,7 @@
       <widget class="QLineEdit" name="lineEditIndex"/>
      </item>
      <item row="4" column="1" colspan="2">
-      <widget class="QComboBox" name="comboBoxType">
+      <widget class="ComboBoxTypeAdress" name="comboBoxType">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -117,6 +117,11 @@
    <class>ComboBoxCity</class>
    <extends>QComboBox</extends>
    <header>comboboxcity.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ComboBoxTypeAdress</class>
+   <extends>QComboBox</extends>
+   <header>comboboxtypeadress.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

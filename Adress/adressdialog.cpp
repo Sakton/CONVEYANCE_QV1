@@ -1,6 +1,7 @@
 #include "adressdialog.h"
 #include "Constants.h"
 #include "citydialog.h"
+#include "comboboxtypeadress.h"
 #include "ui_adressdialog.h"
 
 #include <QMessageBox>
@@ -51,7 +52,7 @@ void AdressDialog::reject( ) {
 void AdressDialog::addRecord( ) {
   readForm( );
   QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
-  QString qs = QString( "SELECT insertOrIgnoreStreet('%3'); SELECT insert_adress('%1', '%2', '%3', '%4', '%5');" )
+  QString qs = QString { "SELECT insertOrIgnoreStreet('%3'); SELECT insert_adress('%1', '%2', '%3', '%4', '%5');" }
                    .arg( poles.at( 0 ) )
                    .arg( poles.at( 1 ) )
                    .arg( poles.at( 2 ) )
