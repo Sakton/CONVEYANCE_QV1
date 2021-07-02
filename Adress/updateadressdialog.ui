@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AddAdress</class>
+ <class>UpdateAdressDialog</class>
  <widget class="QDialog" name="AddAdress">
   <property name="geometry">
    <rect>
