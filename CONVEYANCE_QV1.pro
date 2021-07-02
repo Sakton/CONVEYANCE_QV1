@@ -16,6 +16,7 @@ SOURCES += \
     Adress/adresstableview.cpp \
     Adress/adressview.cpp \
     Adress/citydialog.cpp \
+    Adress/updateadressdialog.cpp \
     ElementsWidgets/comboboxcity.cpp \
     ElementsWidgets/comboboxcountrys.cpp \
     MainWindow/mainwindow.cpp \
@@ -29,6 +30,7 @@ HEADERS += \
 	Adress/adresstableview.h \
 	Adress/adressview.h \
 	Adress/citydialog.h \
+	Adress/updateadressdialog.h \
 	Constants.h \
 	ElementsWidgets/comboboxcity.h \
 	ElementsWidgets/comboboxcountrys.h \
@@ -40,6 +42,7 @@ FORMS += \
 	Adress/adressdialog.ui \
 	Adress/adressview.ui \
 	Adress/citydialog.ui \
+	Adress/updateadressdialog.ui \
 	MainWindow/mainwindow.ui
 
 TRANSLATIONS += \

@@ -4,6 +4,7 @@
 #include "adresscountrydelegate.h"
 #include "adressdialog.h"
 #include "ui_adressview.h"
+#include "updateadressdialog.h"
 #include <QContextMenuEvent>
 #include <QMenu>
 #include <QSqlError>
@@ -34,8 +35,10 @@ void AdressView::slotSelectedRow( const QModelIndex & indexRowSelected ) {
 }
 
 void AdressView::slotEditActionContextMenu( bool ) {
-  qDebug( ) << "EditAction";
-  QModelIndex selected = ui->tableView->selectionModel( )->currentIndex( );
+  int id = model->record( ui->tableView->selectionModel( )->currentIndex( ).row( ) ).value( "adres_id" ).toInt( );
+  UpdateAdressDialog dialog { id, model, this };
+  dialog.setWindowTitle( tr( "ПРАВКА" ) );
+  dialog.exec( );
 }
 
 void AdressView::slotAddActionContextMenu( bool ) {
@@ -52,7 +55,7 @@ void AdressView::slotDelActionContextMenu( bool ) {
   QModelIndex selected = ui->tableView->selectionModel( )->currentIndex( );
   QString curIdTableAdress = model->record( selected.row( ) ).value( "adres_id" ).toString( );
   // TODO нужно ли оставлять тут ???
-  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
+  QSqlQuery query { QSqlDatabase::database( NAME_DB_ALL ) };
   if ( !query.exec( "DELETE FROM adress WHERE adres_id = " + curIdTableAdress ) ) {
     qDebug( ) << "ERROR DELETE QUERY: " << query.lastError( ).text( );
   }
@@ -67,7 +70,7 @@ void AdressView::updateModel( ) {
 }
 
 void AdressView::createModel( ) {
-  model = new QSqlTableModel( this, QSqlDatabase::database( NAME_DB_ALL ) );
+  model = new QSqlTableModel { this, QSqlDatabase::database( NAME_DB_ALL ) };
   model->setTable( "adress_view" );
   model->setHeaderData( 2, Qt::Orientation::Horizontal, tr( "СТРАНА" ) );
   model->setHeaderData( 3, Qt::Orientation::Horizontal, tr( "ИНДЕКС" ) );
