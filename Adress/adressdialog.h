@@ -28,18 +28,10 @@ public slots:
 
 private:
   void addRecord( );
-  void updateRecord( );
-  void readForm( );
-  void setRegimWindowTitle( );
-  QString castAdres( const QString &tAdr );
-
-signals:
-  void signalUpdateTableToDb( );
 
 private:
   Ui::AdressDialog * ui;
   QSqlTableModel *model;
-  QStringList poles;
 };
 
 #endif // ADRESSDIALOG_H

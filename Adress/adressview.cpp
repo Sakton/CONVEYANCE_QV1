@@ -3,6 +3,7 @@
 #include "addadress.h"
 #include "adresscountrydelegate.h"
 #include "adressdialog.h"
+#include "adresssqltablemodel.h"
 #include "ui_adressview.h"
 #include "updateadressdialog.h"
 #include <QContextMenuEvent>
@@ -16,16 +17,9 @@
 AdressView::AdressView( QWidget * parent ) : QWidget( parent ), ui( new Ui::AdressView ), model { nullptr } {
   ui->setupUi( this );
   createModel( );
-  ui->tableView->setModel( model );
-  ui->tableView->setItemDelegate( new AdressCountryDelegate( ui->tableView ) );
-  ui->tableView->setColumnHidden( 0, true );
-  ui->tableView->setColumnHidden( 1, true );
-  ui->tableView->horizontalHeader( )->setSectionResizeMode( QHeaderView::ResizeMode::Stretch );
-
-  connect(
-      ui->tableView,
-      QOverload< const QModelIndex & >::of( &QTableView::clicked ), this,
-      QOverload< const QModelIndex & >::of( &AdressView::slotSelectedRow ) );
+  tuningTableView( );
+  connect( ui->tableView, QOverload< const QModelIndex & >::of( &QTableView::clicked ), this,
+           QOverload< const QModelIndex & >::of( &AdressView::slotSelectedRow ) );
 }
 
 AdressView::~AdressView( ) { delete ui; }
@@ -36,10 +30,11 @@ void AdressView::slotSelectedRow( const QModelIndex & indexRowSelected ) {
 
 void AdressView::slotEditActionContextMenu( bool ) {
   int id = model->record( ui->tableView->selectionModel( )->currentIndex( ).row( ) ).value( "adres_id" ).toInt( );
-  UpdateAdressDialog dialog { id, model, this };
-  dialog.setWindowTitle( tr( "ПРАВКА" ) );
-  dialog.exec( );
-  updateModel( );
+  if ( id > 0 ) { //если есть записи то окрыть окошко
+    UpdateAdressDialog dialog { id, model, this };
+    dialog.exec( );
+    updateModel( );
+  }
 }
 
 void AdressView::slotAddActionContextMenu( bool ) {
@@ -65,19 +60,29 @@ void AdressView::slotDelActionContextMenu( bool ) {
 
 void AdressView::updateModel( ) {
   // TODO тут перезапрашиваем модель после вставки ( минусы: перезапрос )
+  // так как работа идет с представлением оно не сохраняется
   model->select( );
   ui->tableView->setModel( model );
   ui->tableView->update( );
 }
 
 void AdressView::createModel( ) {
-  model = new QSqlTableModel { this, QSqlDatabase::database( NAME_DB_ALL ) };
+  model = new AdressSqlTableModel { this, QSqlDatabase::database( NAME_DB_ALL ) };
   model->setTable( "adress_view" );
   model->setHeaderData( 2, Qt::Orientation::Horizontal, tr( "СТРАНА" ) );
   model->setHeaderData( 3, Qt::Orientation::Horizontal, tr( "ИНДЕКС" ) );
   model->setHeaderData( 4, Qt::Orientation::Horizontal, tr( "ГОРОД" ) );
   model->setHeaderData( 5, Qt::Orientation::Horizontal, tr( "АДРЕС" ) );
+  model->setHeaderData( 6, Qt::Orientation::Horizontal, tr( "ТИП" ) );
   model->select( );
+}
+
+void AdressView::tuningTableView( ) {
+  ui->tableView->setModel( model );
+  ui->tableView->setItemDelegate( new AdressCountryDelegate( ui->tableView ) );
+  ui->tableView->setColumnHidden( 0, true );
+  ui->tableView->setColumnHidden( 1, true );
+  ui->tableView->horizontalHeader( )->setSectionResizeMode( QHeaderView::ResizeMode::Stretch );
 }
 
 void AdressView::contextMenuEvent( QContextMenuEvent * event ) {
@@ -85,19 +90,18 @@ void AdressView::contextMenuEvent( QContextMenuEvent * event ) {
 
   QMenu contextMenu( this );
   // TODO тут возможно придется изменить
-  QAction actionEditRow( tr( "Править" ), &contextMenu );
   QAction actionAddRow( tr( "Добавить" ), &contextMenu );
+  QAction actionEditRow( tr( "Править" ), &contextMenu );
   QAction actionDelRow( tr( "Удалить" ), &contextMenu );
 
   connect( &actionEditRow, QOverload< bool >::of( &QAction::triggered ), this,
            QOverload< bool >::of( &AdressView::slotEditActionContextMenu ) );
   connect( &actionAddRow, QOverload< bool >::of( &QAction::triggered ), this,
            QOverload< bool >::of( &AdressView::slotAddActionContextMenu ) );
-  connect( &actionDelRow, QOverload< bool >::of( &QAction::triggered ), this,
-           QOverload< bool >::of( &AdressView::slotDelActionContextMenu ) );
+  connect( &actionDelRow, QOverload< bool >::of( &QAction::triggered ), this, QOverload< bool >::of( &AdressView::slotDelActionContextMenu ) );
 
-  contextMenu.addAction( &actionEditRow );
   contextMenu.addAction( &actionAddRow );
+  contextMenu.addAction( &actionEditRow );
   contextMenu.addAction( &actionDelRow );
 
   contextMenu.exec( event->globalPos( ) );

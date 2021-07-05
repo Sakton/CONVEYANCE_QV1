@@ -4,7 +4,6 @@
 #include <QWidget>
 
 class QSqlTableModel;
-class QSqlRelationalTableModel;
 class QModelIndex;
 class QMenu;
 
@@ -29,6 +28,7 @@ public slots:
 
 private:
   void createModel( );
+  void tuningTableView( );
 
   // QWidget interface
 protected:
@@ -36,7 +36,7 @@ protected:
 
 private:
   Ui::AdressView *ui;
-  QSqlTableModel * model;
+  QSqlTableModel *model;
 };
 
 #endif // ADRESSVIEW_H

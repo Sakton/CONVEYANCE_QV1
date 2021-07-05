@@ -15,7 +15,11 @@ class UpdateAdressDialog : public QDialog
 
 public:
   explicit UpdateAdressDialog( int id, QSqlTableModel *m, QWidget *parent = nullptr );
-  ~UpdateAdressDialog();
+  ~UpdateAdressDialog( );
+
+  // QDialog interface
+public slots:
+  void accept( ) override;
 
 private:
   void init( );

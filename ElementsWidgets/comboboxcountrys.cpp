@@ -13,4 +13,5 @@ ComboBoxCountrys::ComboBoxCountrys( QWidget *parent ) : QComboBox( parent ) {
     addItem( icon, txt, id );
     setIconSize( QSize( 24, 24 ) );
   }
+  setCurrentIndex( 0 );
 }

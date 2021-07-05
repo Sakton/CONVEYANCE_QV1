@@ -1,43 +1,43 @@
-#ifndef ADDADRESS_H
-#define ADDADRESS_H
+//#ifndef ADDADRESS_H
+//#define ADDADRESS_H
 
-// TODO + ВАЛИДАТОРЫ
+//// TODO + ВАЛИДАТОРЫ
 
-#include <QDialog>
+//#include <QDialog>
 
-class QSqlQueryModel;
+// class QSqlQueryModel;
 
-namespace Ui {
-class AddAdress;
-}
+// namespace Ui {
+// class AddAdress;
+//}
 
-class AddAdress : public QDialog
-{
-  Q_OBJECT
+// class AddAdress : public QDialog
+//{
+//  Q_OBJECT
 
-public:
-  explicit AddAdress(QWidget *parent = nullptr);
-  ~AddAdress( );
+// public:
+//  explicit AddAdress(QWidget *parent = nullptr);
+//  ~AddAdress( );
 
-public slots:
-  // QDialog interface
-  void accept( ) override;
-  void reject( ) override;
-  void slotAccept( );
-  void slotSelectCountry( int idx );
-  void slotClickedAddCityButton( );
-  void slotFinishedAddingCity( int resAdding );
-  void slotFactIndexAddingCity( int factIndexAdding );
+// public slots:
+//  // QDialog interface
+//  void accept( ) override;
+//  void reject( ) override;
+//  void slotAccept( );
+//  void slotSelectCountry( int idx );
+//  void slotClickedAddCityButton( );
+//  void slotFinishedAddingCity( int resAdding );
+//  void slotFactIndexAddingCity( int factIndexAdding );
 
-private:
-  void connecteds( );
+// private:
+//  void connecteds( );
 
-private:
-  Ui::AddAdress *ui;
-  QSqlQueryModel *modelCounrys;
-  QSqlQueryModel * modelCities;
-};
+// private:
+//  Ui::AddAdress *ui;
+//  QSqlQueryModel *modelCounrys;
+//  QSqlQueryModel * modelCities;
+//};
 
-// sdfsdfsf
+//// sdfsdfsf
 
-#endif // ADDADRESS_H
+//#endif // ADDADRESS_H

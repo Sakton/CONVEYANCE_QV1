@@ -3,6 +3,7 @@
 #include "ui_updateadressdialog.h"
 
 #include <QMessageBox>
+#include <QSqlError>
 #include <QSqlQuery>
 #include <QSqlRecord>
 
@@ -10,10 +11,35 @@ UpdateAdressDialog::UpdateAdressDialog( int id, QSqlTableModel *m, QWidget *pare
     : QDialog( parent ), ui( new Ui::UpdateAdressDialog ), model { m }, curId { id } {
   ui->setupUi(this);
   init( );
+  setWindowTitle( "ОБНОВИТЬ" );
 }
 
 UpdateAdressDialog::~UpdateAdressDialog( ) {
   delete ui;
+}
+
+void UpdateAdressDialog::accept( ) {
+  QString country = ui->comboBoxCountry->currentText( );
+  QString city = ui->comboBoxCity->currentText( );
+  QString street = ui->lineEditAdress->text( ).simplified( );
+  QString index = ui->lineEditIndex->text( ).simplified( );
+  QString type = ui->comboBoxType->currentText( );
+
+  QString qs = QString( "CALL update_adress (%1, '%2', '%3', '%4', '%5', '%6');" )
+                   .arg( curId )
+                   .arg( country )
+                   .arg( city )
+                   .arg( street )
+                   .arg( index )
+                   .arg( type );
+  qDebug( ) << qs;
+
+  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
+  if ( !query.exec( qs ) ) {
+    qDebug( ) << query.lastError( ).text( );
+  }
+
+  QDialog::accept( );
 }
 
 void UpdateAdressDialog::init( ) {
@@ -22,12 +48,13 @@ void UpdateAdressDialog::init( ) {
   if ( !query.exec( qs ) ) {
     qDebug( ) << "ERROR QUERY ON UNIT UPDATE FORM ADRESS";
   }
-  query.next( );
+  query.next( ); //курсор после запроса стоит перед 1 строкой, поэтому его надо 1 раз сдвинуть
   QSqlRecord rec = query.record( );
   ui->comboBoxCountry->setCurrentIndex( ui->comboBoxCountry->findText( rec.value( "country_name" ).toString( ) ) );
   ui->comboBoxCity->updateCity( ui->comboBoxCountry->currentData( ).toInt( ) );
   ui->comboBoxCity->setCurrentIndex( ui->comboBoxCity->findText( rec.value( "city_name" ).toString( ) ) );
   ui->lineEditAdress->setText( rec.value( "street_name" ).toString( ) );
   ui->lineEditIndex->setText( rec.value( "adres_index" ).toString( ) );
-  // ui->comboBoxType->setCurrentIndex( ui->comboBoxType->find( rec.value("") ) );
+  ( rec.value( "adres_type" ).toString( ) == QString { tr( "Фактический" ) } ) ? ui->comboBoxType->setCurrentIndex( 0 )
+                                                                               : ui->comboBoxType->setCurrentIndex( 1 );
 }

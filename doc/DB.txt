@@ -45,9 +45,9 @@ CREATE OR REPLACE FUNCTION get_vat_id ( vat_st DECIMAL ) RETURNS INT AS
 	' SELECT vat_id FROM vats WHERE vat_stavka = vat_st; '
 LANGUAGE SQL;
 
-CREATE TYPE Type_Adress AS ENUM ( 'FACT', 'LEGAL' );
+/* CREATE TYPE Type_Adress AS ENUM ( 'FACT', 'LEGAL' ); */
 
-CREATE TABLE adress (
+/* CREATE TABLE adress (
 	adres_id SERIAL UNIQUE,
 	country_id INT,
 	city_id INT,
@@ -62,20 +62,21 @@ CREATE TABLE adress (
 	FOREIGN KEY ( street_id ) REFERENCES streets ( street_id )
 		ON DELETE SET NULL,
 	CHECK ( adres_type IN ( 'FACT', 'LEGAL') )
-);
+); */
 
 
-CREATE OR REPLACE VIEW adress_view AS
-	SELECT ad.adres_id, cntr.country_name, ad.adres_index, ct.city_name, st.street_name, cntr.country_icon
-FROM adress AS ad 
-	LEFT JOIN countrys AS cntr
-		ON ad.country_id = cntr.country_id
-	LEFT JOIN cities AS ct
-		ON ad.city_id = ct.city_id
-	LEFT JOIN streets AS st
-		ON ad.street_id = st.street_id;
+CREATE OR REPLACE MATER VIEW adress_view AS
+ SELECT ad.adres_id,
+        cntr.country_icon,
+		cntr.country_name,
+		ad.adres_index,
+		ct.city_name,
+		st.street_name
+   FROM adress ad
+     LEFT JOIN countrys cntr ON ad.country_id = cntr.country_id
+     LEFT JOIN cities ct ON ad.city_id = ct.city_id
+     LEFT JOIN streets st ON ad.street_id = st.street_id;
 
-	
 --ALTER TABLE adress ADD COLUMN adres_index VARCHAR(10);
 
 CREATE FUNCTION id_country ( cntr VARCHAR ) RETURNS INT AS 
@@ -111,7 +112,7 @@ LANGUAGE SQL;
 CREATE FUNCTION insertOrIgnoreStreet( strt VARCHAR ) RETURNS VOID AS
 $$
 BEGIN
-	IF(  SELECT street_id FROM streets WHERE street_name = 'strt' ) IS NULL
+	IF ( SELECT street_id FROM streets WHERE street_name = 'strt' ) IS NULL
 	THEN  INSERT INTO streets ( street_name ) VALUES ( 'strt' );
 	RETURN;
 	END IF;
