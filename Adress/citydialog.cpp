@@ -9,8 +9,8 @@
 
 CityDialog::CityDialog( int indexList, QWidget *parent ) : QDialog( parent ), ui( new Ui::CityDialog ) {
   ui->setupUi(this);
+  setWindowTitle( tr( "ДОБАВИТЬ ГОРОД" ) );
   ui->comboBoxCountrys->setCurrentIndex( indexList );
-  //  connecteds( );
 }
 
 CityDialog::~CityDialog( ) {

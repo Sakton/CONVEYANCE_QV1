@@ -12,7 +12,7 @@ class UpdateCityDialog : public QDialog
   Q_OBJECT
 
 public:
-  explicit UpdateCityDialog( int idSity, QWidget *parent = nullptr );
+  explicit UpdateCityDialog( const QString &cityName, QWidget *parent = nullptr );
   ~UpdateCityDialog();
 
   // QDialog interface
@@ -21,7 +21,7 @@ public slots:
 
 private:
   Ui::UpdateCityDialog *ui;
-  int curId;
+  QString curCity;
 };
 
 #endif // UPDATECITYDIALOG_H

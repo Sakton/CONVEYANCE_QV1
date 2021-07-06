@@ -1,6 +1,7 @@
 #include "updateadressdialog.h"
 #include "Constants.h"
 #include "ui_updateadressdialog.h"
+#include "updatecitydialog.h"
 
 #include <QMessageBox>
 #include <QSqlError>
@@ -9,9 +10,10 @@
 
 UpdateAdressDialog::UpdateAdressDialog( int id, QSqlTableModel *m, QWidget *parent )
     : QDialog( parent ), ui( new Ui::UpdateAdressDialog ), model { m }, curId { id } {
-  ui->setupUi(this);
+  ui->setupUi( this );
+  setWindowTitle( tr( "ОБНОВИТЬ" ) );
   init( );
-  setWindowTitle( "ОБНОВИТЬ" );
+  connect( ui->pushButtonEditCity, QOverload< bool >::of( &QPushButton::clicked ), this, QOverload<>::of( &UpdateAdressDialog::slotEditCity ) );
 }
 
 UpdateAdressDialog::~UpdateAdressDialog( ) {
@@ -32,14 +34,18 @@ void UpdateAdressDialog::accept( ) {
                    .arg( street )
                    .arg( index )
                    .arg( type );
-  qDebug( ) << qs;
 
   QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
   if ( !query.exec( qs ) ) {
     qDebug( ) << query.lastError( ).text( );
   }
-
   QDialog::accept( );
+}
+
+void UpdateAdressDialog::slotEditCity( ) {
+  UpdateCityDialog dialog( ui->comboBoxCity->currentText( ), this );
+  if ( dialog.exec( ) )
+    init( );
 }
 
 void UpdateAdressDialog::init( ) {

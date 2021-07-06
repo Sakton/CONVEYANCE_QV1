@@ -20,6 +20,7 @@ public:
   // QDialog interface
 public slots:
   void accept( ) override;
+  void slotEditCity( );
 
 private:
   void init( );
