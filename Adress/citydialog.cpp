@@ -27,21 +27,15 @@ void CityDialog::accept( ) {
     QMessageBox::warning( this, "ERROR INSERT", "Error insert city", QMessageBox::StandardButton::Ok );
   }
   emit signalChangedIndex( ui->comboBoxCountrys->currentData( ).toInt( ) );
+  //если в вызванном дилоге пользователь меняет город на другой, сообщаем это родительскому виджету
   QDialog::accept( );
 }
 
-void CityDialog::reject( ) { QDialog::reject( ); }
-
-void CityDialog::connecteds( ) {
-  connect( ui->buttonBox, QOverload<>::of( &QDialogButtonBox::accepted ), this, QOverload<>::of( &CityDialog::slotAccepted ) );
+void CityDialog::reject( ) {
+  QDialog::reject( );
 }
 
 void CityDialog::podgotovkaNameCity( QString &s ) {
   std::transform( s.begin( ), s.end( ), s.begin( ), []( QChar ch ) { return ch.toLower( ); } );
   s.front( ) = s.front( ).toUpper( );
 }
-
-// void CityDialog::setsValidator( ) {
-//  // QRegularExpressionValidator val( QRegularExpression( "A-Z" ) );
-//  // могут быть разные языки!!! и символы Unicode
-//}

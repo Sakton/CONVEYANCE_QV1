@@ -23,7 +23,6 @@ public slots:
   void reject( ) override;
 
 private:
-  void connecteds( );
   void podgotovkaNameCity( QString &s );
 
 signals:
