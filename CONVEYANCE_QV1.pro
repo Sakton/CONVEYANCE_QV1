@@ -19,6 +19,7 @@ SOURCES += \
     Adress/citydialog.cpp \
     Adress/updateadressdialog.cpp \
     Adress/updatecitydialog.cpp \
+    Cars/addbrandcardialog.cpp \
     ElementsWidgets/comboboxcity.cpp \
     ElementsWidgets/comboboxcountrys.cpp \
     ElementsWidgets/comboboxtypeadress.cpp \
@@ -36,6 +37,7 @@ HEADERS += \
 	Adress/citydialog.h \
 	Adress/updateadressdialog.h \
 	Adress/updatecitydialog.h \
+	Cars/addbrandcardialog.h \
 	Constants.h \
 	ElementsWidgets/comboboxcity.h \
 	ElementsWidgets/comboboxcountrys.h \
@@ -50,6 +52,7 @@ FORMS += \
 	Adress/citydialog.ui \
 	Adress/updateadressdialog.ui \
 	Adress/updatecitydialog.ui \
+	Cars/addbrandcardialog.ui \
 	MainWindow/mainwindow.ui
 
 TRANSLATIONS += \
@@ -66,6 +69,7 @@ DISTFILES += \
 	IshodnyDanny/Adresses.ods \
 	IshodnyDanny/Adresses.xls \
 	doc/BaseTable.txt \
+	doc/Cars.txt \
 	doc/ConstantTableData.txt \
 	doc/DB.txt \
 	doc/DB_v1.mwb \

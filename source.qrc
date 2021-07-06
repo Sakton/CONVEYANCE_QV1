@@ -64,5 +64,7 @@
         <file>img/flagCountrys/ukraine.png</file>
         <file>img/flagCountrys/croatia.png</file>
         <file>img/flagCountrys/montenegro.png</file>
+        <file>img/No_image.png</file>
+        <file>img/TestImg/Alpha-Romeo-150x150.jpg</file>
     </qresource>
 </RCC>
