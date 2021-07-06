@@ -23,5 +23,4 @@ void AddBrandCarDialog::init( ) {
 void AddBrandCarDialog::slotChangeLogo( ) {
   qDebug( ) << "slotChangeLogo";
   QFileDialog file( this );
-  // file.setF
 }
