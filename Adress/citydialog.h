@@ -18,7 +18,6 @@ public:
   ~CityDialog( );
 
 public slots:
-  void slotAccepted( );
   // QDialog interface
   void accept( ) override;
   void reject( ) override;
@@ -26,7 +25,6 @@ public slots:
 private:
   void connecteds( );
   void podgotovkaNameCity( QString &s );
-  // void setsValidator( );
 
 signals:
   void signalChangedIndex( int changedIndexFact );

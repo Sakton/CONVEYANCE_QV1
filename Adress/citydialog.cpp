@@ -17,18 +17,6 @@ CityDialog::~CityDialog( ) {
   delete ui;
 }
 
-void CityDialog::slotAccepted( ) {
-  //  QString city = ui->lineEditEnterCity->text( ).simplified( );
-  //  podgotovkaNameCity( city );
-  //  int idCountry = ui->comboBoxCountrys->itemData( ui->comboBoxCountrys->currentIndex( ) ).toInt( );
-  //  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
-  //  QString qs = QString( "SELECT addCity('%1', %2);" ).arg( city ).arg( idCountry );
-  //  if ( !query.exec( qs ) ) {
-  //    QMessageBox::warning( this, "ERROR INSERT", "Error insert city", QMessageBox::StandardButton::Ok );
-  //  }
-  //  emit signalChangedIndex( ui->comboBoxCountrys->currentIndex( ) );
-}
-
 void CityDialog::accept( ) {
   QString city = ui->lineEditEnterCity->text( ).simplified( );
   podgotovkaNameCity( city );
