@@ -29,10 +29,11 @@ void AddBrandCarDialog::slotChangeLogo( ) {
   QString imgFile = QFileDialog::getOpenFileName( this, tr( "ОТКРЫТЬ ФАЙЛ" ), "../", tr( "Image(*.png, *.jpg)" ) );
   if ( !imgFile.isEmpty( ) ) {
     QPixmap imgPix( imgFile );
-    imgPix = imgPix.scaled( ui->labelLogo->sizeHint( ) );
+    // TODO метод требует доработки в части масштабирования прямоугольных изображений
+    // imgPix = imgPix.scaled( ui->labelLogo->sizeHint( ) );
+    ui->labelLogo->setScaledContents( true );
     ui->labelLogo->setPixmap( imgPix );
     ui->labelLogo->setProperty( "ImgPath", imgFile );
-    update( );
   }
 }
 
