@@ -1,13 +1,12 @@
 -- BASE TABLE
 CREATE SCHEMA IF NOT EXISTS auto; -- Пространство имен для таблиц авто
 
-CREATE TABLE autobrands (
+CREATE TABLE auto.autobrands (
 	autobrand_id SERIAL UNIQUE,
 	autobrand_name VARCHAR(256) UNIQUE NOT NULL,
 	autobrand_icon VARCHAR(256) DEFAULT ('no_icon.png')
 );
 
-CREATE TABLE autocategorys (
+CREATE TABLE auto.autocategorys (
 	autocategory_id SERIAL UNIQUE,
-	
 );
