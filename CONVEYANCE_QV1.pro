@@ -55,7 +55,6 @@ FORMS += \
 	Adress/updateadressdialog.ui \
 	Adress/updatecitydialog.ui \
 	Cars/addbrandcardialog.ui \
-	ElementsWidgets/comboboxcarbrand.ui \
 	MainWindow/mainwindow.ui
 
 TRANSLATIONS += \

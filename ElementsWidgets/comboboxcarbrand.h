@@ -1,22 +1,13 @@
 #ifndef COMBOBOXCARBRAND_H
 #define COMBOBOXCARBRAND_H
 
-#include <QWidget>
+#include <QComboBox>
 
-namespace Ui {
-class comboBoxCarBrand;
-}
-
-class comboBoxCarBrand : public QWidget
-{
+class ComboBoxCarBrand : public QComboBox {
   Q_OBJECT
-
 public:
-  explicit comboBoxCarBrand(QWidget *parent = nullptr);
-  ~comboBoxCarBrand();
-
-private:
-  Ui::comboBoxCarBrand *ui;
+  ComboBoxCarBrand( QWidget *parent = nullptr );
+  void init( );
 };
 
 #endif // COMBOBOXCARBRAND_H
