@@ -39,8 +39,6 @@ int main( int argc, char *argv[] ) {
   AddBrandCarDialog w;
   w.show( );
 
-  // test git
-
   splash.finish( &w );
   return a.exec( );
 }

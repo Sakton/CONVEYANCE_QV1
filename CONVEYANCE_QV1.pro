@@ -21,6 +21,7 @@ SOURCES += \
     Adress/updatecitydialog.cpp \
     Cars/addbrandcardialog.cpp \
     ElementsWidgets/comboboxcarbrand.cpp \
+    ElementsWidgets/comboboxcarmodel.cpp \
     ElementsWidgets/comboboxcity.cpp \
     ElementsWidgets/comboboxcountrys.cpp \
     ElementsWidgets/comboboxtypeadress.cpp \
@@ -41,6 +42,7 @@ HEADERS += \
 	Cars/addbrandcardialog.h \
 	Constants.h \
 	ElementsWidgets/comboboxcarbrand.h \
+	ElementsWidgets/comboboxcarmodel.h \
 	ElementsWidgets/comboboxcity.h \
 	ElementsWidgets/comboboxcountrys.h \
 	ElementsWidgets/comboboxtypeadress.h \
