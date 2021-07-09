@@ -16,7 +16,12 @@ void ComboBoxCarBrand::init( ) {
     QString fileName = query.value( "autobrand_icon" ).toString( );
     QString pathPix;
     ( fileName != QLatin1String( NAME_EMPTY_IMG_ICON ) ) ? pathPix = QString( QDir::currentPath( ) + "/" + NAME_DIR_LOGOBRANDS + "/" + fileName )
-                                                         : pathPix = QString( "qrc:/img/No_image.png" );
+                                                         : pathPix = QString( ":/img/No_image.png" );
     addItem( QIcon { QPixmap { pathPix } }, query.value( "autobrand_name" ).toString( ), query.value( "autobrand_id" ) );
   }
+}
+
+void ComboBoxCarBrand::update( ) {
+  clear( );
+  init( );
 }

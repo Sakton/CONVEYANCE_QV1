@@ -8,6 +8,7 @@ class ComboBoxCarBrand : public QComboBox {
 public:
   ComboBoxCarBrand( QWidget *parent = nullptr );
   void init( );
+  void update( );
 };
 
 #endif // COMBOBOXCARBRAND_H

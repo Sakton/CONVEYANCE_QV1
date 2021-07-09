@@ -39,10 +39,10 @@ int main( int argc, char *argv[] ) {
   // CityDialog w;
 
   // QLabel *w = new QLabel( "<img source = \":/img/flagCountrys/austria.png\"><H3>AUSTRIA</H3></img>" );
+  // ComboBoxCarBrand w;
 
-  // AddBrandCarDialog w;
+  AddBrandCarDialog w;
 
-  ComboBoxCarBrand w;
   w.show( );
 
   // test git
