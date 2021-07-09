@@ -28,21 +28,15 @@ int main( int argc, char *argv[] ) {
 
   createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
 
-  //  Adress w;
-
+  // Adress w;
   // AddAdress w;
-
-  //  ComboBoxCountrys w;
-
+  // ComboBoxCountrys w;
   // ComboBoxCity w;
-
   // CityDialog w;
-
   // QLabel *w = new QLabel( "<img source = \":/img/flagCountrys/austria.png\"><H3>AUSTRIA</H3></img>" );
   // ComboBoxCarBrand w;
 
   AddBrandCarDialog w;
-
   w.show( );
 
   // test git
