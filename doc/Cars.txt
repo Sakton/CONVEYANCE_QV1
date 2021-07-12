@@ -9,4 +9,6 @@ CREATE TABLE auto.autobrands (
 
 CREATE TABLE auto.autocategorys (
 	autocategory_id SERIAL UNIQUE,
+	autocategory_name VARCHAR(256)
 );
+
