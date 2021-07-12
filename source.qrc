@@ -66,5 +66,21 @@
         <file>img/flagCountrys/montenegro.png</file>
         <file>img/No_image.png</file>
         <file>img/TestImg/Alpha-Romeo-150x150.jpg</file>
+        <file>img/CategoriesAuto/A.png</file>
+        <file>img/CategoriesAuto/B.png</file>
+        <file>img/CategoriesAuto/B1.png</file>
+        <file>img/CategoriesAuto/BE.png</file>
+        <file>img/CategoriesAuto/C.png</file>
+        <file>img/CategoriesAuto/C1.png</file>
+        <file>img/CategoriesAuto/C1E.png</file>
+        <file>img/CategoriesAuto/CE.png</file>
+        <file>img/CategoriesAuto/D1.png</file>
+        <file>img/CategoriesAuto/D1E.png</file>
+        <file>img/CategoriesAuto/M.png</file>
+        <file>img/CategoriesAuto/A1.png</file>
+        <file>img/CategoriesAuto/D.png</file>
+        <file>img/CategoriesAuto/DE.png</file>
+        <file>img/CategoriesAuto/Tb.png</file>
+        <file>img/CategoriesAuto/Tm.png</file>
     </qresource>
 </RCC>
