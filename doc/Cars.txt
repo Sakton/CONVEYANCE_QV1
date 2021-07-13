@@ -78,29 +78,29 @@ CREATE TABLE auto.carsmodels (
 	autobrand_id INTEGER NOT NULL,
 	autocategory_id INTEGER NOT NULL,
 	carsmodel_name VARCHAR ( 200 ),
-	FOREIGN KEY ( autobrand_id ) REFERENCES cars.autobrands ( autobrand_id ), -- NO ACTION по умолчанию
-	FOREIGN KEY ( autocategory_id ) REFERENCES cars.autocategories ( autocategory_id ) -- NO ACTION по умолчанию
+	FOREIGN KEY ( autobrand_id ) REFERENCES auto.autobrands ( autobrand_id ), -- NO ACTION по умолчанию
+	FOREIGN KEY ( autocategory_id ) REFERENCES auto.autocategories ( autocategory_id ) -- NO ACTION по умолчанию
 );
 -- NO ACTION - не даст удалить связанную строку из базовой тавблицы
 
 -- Так как данные берутся из comboBox, а они из БД, то такие записи существуют
-CREATE OR REPLACE FUNCTION getAutobrand_id ( nameBrand VARCHAR ) RETURNS INTEGER AS
+CREATE OR REPLACE FUNCTION auto.getAutobrand_id ( nameBrand VARCHAR ) RETURNS INTEGER AS
 $$
 	SELECT autobrand_id FROM auto.autobrands WHERE autobrand_name = nameBrand;
 $$ 
 LANGUAGE SQL;
 --*************
-CREATE OR REPLACE FUNCTION getAutocategory_id ( nameCategory VARCHAR ) RETURNS INTEGER AS
+CREATE OR REPLACE FUNCTION auto.getAutocategory_id ( nameCategory VARCHAR ) RETURNS INTEGER AS
 $$
 	SELECT autocategory_id FROM auto.autocategories WHERE autocategory_name = nameCategory;
 $$
 LANGUAGE SQL;
 -- ************
-CREATE OR REPLACE PROCEDURE add_carmodel ( nameBrand VARCHAR, nameCategory VARCHAR, carModel VARCHAR ) 
+CREATE OR REPLACE PROCEDURE auto.add_carmodel ( nameBrand VARCHAR, nameCategory VARCHAR, carModel VARCHAR ) 
 LANGUAGE SQL
 AS $$
 	INSERT INTO auto.carsmodels ( autobrand_id, autocategory_id, carsmodel_name )
-	VALUES ( ( SELECT getAutobrand_id(nameBrand) ), ( SELECT getAutocategory_id(nameCategory) ), carModel );
+	VALUES ( ( SELECT auto.getAutobrand_id(nameBrand) ), ( SELECT auto.getAutocategory_id(nameCategory) ), carModel );
 $$;
 
 

@@ -20,6 +20,7 @@ SOURCES += \
     Adress/updateadressdialog.cpp \
     Adress/updatecitydialog.cpp \
     Cars/addbrandcardialog.cpp \
+    Cars/addcarmodeldialog.cpp \
     ElementsWidgets/comboboxcarbrand.cpp \
     ElementsWidgets/comboboxcarcategories.cpp \
     ElementsWidgets/comboboxcarmodel.cpp \
@@ -41,6 +42,7 @@ HEADERS += \
 	Adress/updateadressdialog.h \
 	Adress/updatecitydialog.h \
 	Cars/addbrandcardialog.h \
+	Cars/addcarmodeldialog.h \
 	Constants.h \
 	ElementsWidgets/comboboxcarbrand.h \
 	ElementsWidgets/comboboxcarcategories.h \
@@ -59,6 +61,7 @@ FORMS += \
 	Adress/updateadressdialog.ui \
 	Adress/updatecitydialog.ui \
 	Cars/addbrandcardialog.ui \
+	Cars/addcarmodeldialog.ui \
 	MainWindow/mainwindow.ui
 
 TRANSLATIONS += \
