@@ -90,17 +90,17 @@ $$
 $$ 
 LANGUAGE SQL;
 --*************
-CREATE OR REPLACE FUNCTION auto.getAutocategory_id ( nameCategory VARCHAR ) RETURNS INTEGER AS
+CREATE OR REPLACE FUNCTION auto.getAutocategory_id ( symbolCategory VARCHAR ) RETURNS INTEGER AS
 $$
-	SELECT autocategory_id FROM auto.autocategories WHERE autocategory_name = nameCategory;
+	SELECT autocategory_id FROM auto.autocategories WHERE autocategory_symbol = symbolCategory;
 $$
 LANGUAGE SQL;
 -- ************
-CREATE OR REPLACE PROCEDURE auto.add_carmodel ( nameBrand VARCHAR, nameCategory VARCHAR, carModel VARCHAR ) 
+CREATE OR REPLACE PROCEDURE auto.add_carmodel ( nameBrand VARCHAR, symbolCategory VARCHAR, carModel VARCHAR ) 
 LANGUAGE SQL
 AS $$
 	INSERT INTO auto.carsmodels ( autobrand_id, autocategory_id, carsmodel_name )
-	VALUES ( ( SELECT auto.getAutobrand_id(nameBrand) ), ( SELECT auto.getAutocategory_id(nameCategory) ), carModel );
+	VALUES ( ( SELECT auto.getAutobrand_id(nameBrand) ), ( SELECT auto.getAutocategory_id(symbolCategory) ), carModel );
 $$;
 
 

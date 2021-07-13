@@ -52,11 +52,10 @@ void AddBrandCarDialog::accept( ) {
     if ( !dir.exists( QDir::currentPath( ) + "/" + NAME_DIR_LOGOBRANDS ) ) {
       dir.mkdir( QDir::currentPath( ) + "/" + NAME_DIR_LOGOBRANDS );
     }
-    QString path = QDir::currentPath( ) + "/" + NAME_DIR_LOGOBRANDS + "/" + fileNameIcon;
     bool ok = ui->labelLogo->pixmap( ).save( QDir::currentPath( ) + "/" + NAME_DIR_LOGOBRANDS + "/" + fileNameIcon );
     if ( !ok ) {
       QMessageBox::warning( this, tr( "ОШИБКА СОХРАНЕНИЯ" ), tr( "ОШИБКА СОХРАНЕНИЯ ФАЙЛА процесс прерван" ) );
-      return QDialog::accept( );
+      return;
     }
   }
   insertDb( nameBrand, fileNameIcon );
@@ -66,7 +65,8 @@ void AddBrandCarDialog::accept( ) {
 void AddBrandCarDialog::insertDb( const QString &nameBrand, const QString &fileNameIcon ) {
   QString qs;
   if ( !fileNameIcon.isEmpty( ) )
-    qs = QString( "INSERT INTO auto.autobrands (autobrand_name, autobrand_icon) VALUES ('%1', '%2')" ).arg( nameBrand ).arg( fileNameIcon );
+    qs = QString( "INSERT INTO auto.autobrands (autobrand_name, autobrand_icon) VALUES ('%1', '%2')" )
+             .arg( nameBrand, fileNameIcon );
   else
     qs = QString( "INSERT INTO auto.autobrands (autobrand_name) VALUES ('%1')" ).arg( nameBrand );
   QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
