@@ -7,10 +7,14 @@ ComboBoxCarCategories::ComboBoxCarCategories( QWidget *parent ) : QComboBox( par
 }
 
 void ComboBoxCarCategories::init( ) {
-  QString qs = QString( "SELECT autocategory_id, autocategory_name, autocategory_symbol, autocategory_icon"
+  QString qs = QString( "SELECT autocategory_id, autocategory_symbol, autocategory_icon "
                         "FROM auto.autocategoryes;" );
   QSqlQuery query( qs, QSqlDatabase::database( NAME_DB_ALL ) );
   while ( query.next( ) ) {
-    QString nameFileIconImg = query.value( "autocategory_icon" ).toString( );
+    QVariant id = query.value( "autocategory_id" );
+    QString categorySymbol = query.value( "autocategory_symbol" ).toString( );
+    QString nameFilePathIconImg = QString( ":/img/CategoriesAuto/" ) + query.value( "autocategory_icon" ).toString( );
+    addItem( QIcon { nameFilePathIconImg }, categorySymbol, id );
+    setIconSize( QSize { 76, 24 } );
   }
 }

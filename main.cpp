@@ -4,6 +4,7 @@
 #include "Adress/citydialog.h"
 #include "Cars/addbrandcardialog.h"
 #include "ElementsWidgets/comboboxcarbrand.h"
+#include "ElementsWidgets/comboboxcarcategories.h"
 #include "ElementsWidgets/comboboxcity.h"
 #include "ElementsWidgets/comboboxcountrys.h"
 #include "MainWindow/mainwindow.h"
@@ -36,7 +37,7 @@ int main( int argc, char *argv[] ) {
   // QLabel *w = new QLabel( "<img source = \":/img/flagCountrys/austria.png\"><H3>AUSTRIA</H3></img>" );
   // ComboBoxCarBrand w;
 
-  AddBrandCarDialog w;
+  ComboBoxCarCategories w;
   w.show( );
 
   splash.finish( &w );
