@@ -1,13 +1,4 @@
-#include "Adress/addadress.h"
-#include "Adress/adress.h"
-#include "Adress/adressview.h"
-#include "Adress/citydialog.h"
-#include "Cars/addbrandcardialog.h"
-#include "Cars/addcarmodeldialog.h"
-#include "ElementsWidgets/comboboxcarbrand.h"
-#include "ElementsWidgets/comboboxcarcategories.h"
-#include "ElementsWidgets/comboboxcity.h"
-#include "ElementsWidgets/comboboxcountrys.h"
+#include "Contract/createcontractdialog.h"
 #include "MainWindow/mainwindow.h"
 #include <QApplication>
 #include <QLabel>
@@ -38,7 +29,7 @@ int main( int argc, char *argv[] ) {
   // QLabel *w = new QLabel( "<img source = \":/img/flagCountrys/austria.png\"><H3>AUSTRIA</H3></img>" );
   // ComboBoxCarBrand w;
 
-  AddCarModelDialog w;
+  CreateContractDialog w;
   // AddBrandCarDialog w;
   w.show( );
 

@@ -21,6 +21,7 @@ SOURCES += \
     Adress/updatecitydialog.cpp \
     Cars/addbrandcardialog.cpp \
     Cars/addcarmodeldialog.cpp \
+    Contract/createcontractdialog.cpp \
     ElementsWidgets/comboboxcarbrand.cpp \
     ElementsWidgets/comboboxcarcategories.cpp \
     ElementsWidgets/comboboxcarmodel.cpp \
@@ -44,6 +45,7 @@ HEADERS += \
 	Cars/addbrandcardialog.h \
 	Cars/addcarmodeldialog.h \
 	Constants.h \
+	Contract/createcontractdialog.h \
 	ElementsWidgets/comboboxcarbrand.h \
 	ElementsWidgets/comboboxcarcategories.h \
 	ElementsWidgets/comboboxcarmodel.h \
@@ -62,6 +64,7 @@ FORMS += \
 	Adress/updatecitydialog.ui \
 	Cars/addbrandcardialog.ui \
 	Cars/addcarmodeldialog.ui \
+	Contract/createcontractdialog.ui \
 	MainWindow/mainwindow.ui
 
 TRANSLATIONS += \
@@ -80,10 +83,16 @@ DISTFILES += \
 	doc/BaseTable.txt \
 	doc/Cars.txt \
 	doc/ConstantTableData.txt \
+	doc/Contracts.txt \
 	doc/DB.txt \
+	doc/DB_demo_t1.mwb \
 	doc/DB_v1.mwb \
 	doc/DB_v1.mwb.bak \
 	doc/DBcommands.txt \
+	doc/Emploee.txt \
+	doc/Payment.txt \
+	doc/Routes.txt \
+	doc/Shippers.txt \
 	doc/TablesDoc/Adress.txt \
 	doc/TablesDoc/AdressView.txt \
 	doc/Zadachi \
