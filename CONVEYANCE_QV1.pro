@@ -29,6 +29,7 @@ SOURCES += \
     ElementsWidgets/comboboxcountrys.cpp \
     ElementsWidgets/comboboxtypeadress.cpp \
     MainWindow/mainwindow.cpp \
+    Orders/createorderdialog.cpp \
     main.cpp
 
 HEADERS += \
@@ -52,7 +53,8 @@ HEADERS += \
 	ElementsWidgets/comboboxcity.h \
 	ElementsWidgets/comboboxcountrys.h \
 	ElementsWidgets/comboboxtypeadress.h \
-	MainWindow/mainwindow.h
+	MainWindow/mainwindow.h \
+	Orders/createorderdialog.h
 
 FORMS += \
 	Adress/addadress.ui \
@@ -65,7 +67,8 @@ FORMS += \
 	Cars/addbrandcardialog.ui \
 	Cars/addcarmodeldialog.ui \
 	Contract/createcontractdialog.ui \
-	MainWindow/mainwindow.ui
+	MainWindow/mainwindow.ui \
+	Orders/createorderdialog.ui
 
 TRANSLATIONS += \
     CONVEYANCE_QV1_pl_PL.ts
@@ -90,6 +93,7 @@ DISTFILES += \
 	doc/DB_v1.mwb.bak \
 	doc/DBcommands.txt \
 	doc/Emploee.txt \
+	doc/Orders.txt \
 	doc/Payment.txt \
 	doc/Routes.txt \
 	doc/Shippers.txt \

@@ -1,0 +1,11 @@
+CREATE SCHEMA orders;
+
+CREATE TABLE orders (
+	order_id SERIAL UNIQUE, -- 
+	shipper_id INTEGER, -- отправитель грузов (shipper)
+	emploee_id INTEGER, -- работник ( в т.ч. водители )
+	routes_id INTEGER, -- маршрут ( их храним )
+	order_date DATE, -- дата создания ордера
+	order_contractNumber VARCHAR(200), -- номер договора - основания
+	order_note TEXT --заметки по договору
+);

@@ -1,5 +1,5 @@
-#include "Contract/createcontractdialog.h"
 #include "MainWindow/mainwindow.h"
+#include "Orders/createorderdialog.h"
 #include <QApplication>
 #include <QLabel>
 #include <QSplashScreen>
@@ -29,7 +29,7 @@ int main( int argc, char *argv[] ) {
   // QLabel *w = new QLabel( "<img source = \":/img/flagCountrys/austria.png\"><H3>AUSTRIA</H3></img>" );
   // ComboBoxCarBrand w;
 
-  CreateContractDialog w;
+  CreateOrderDialog w;
   // AddBrandCarDialog w;
   w.show( );
 
