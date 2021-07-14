@@ -19,6 +19,12 @@ SOURCES += \
     Adress/citydialog.cpp \
     Adress/updateadressdialog.cpp \
     Adress/updatecitydialog.cpp \
+    Cars/addbrandcardialog.cpp \
+    Cars/addcarmodeldialog.cpp \
+    Contract/createcontractdialog.cpp \
+    ElementsWidgets/comboboxcarbrand.cpp \
+    ElementsWidgets/comboboxcarcategories.cpp \
+    ElementsWidgets/comboboxcarmodel.cpp \
     ElementsWidgets/comboboxcity.cpp \
     ElementsWidgets/comboboxcountrys.cpp \
     ElementsWidgets/comboboxtypeadress.cpp \
@@ -36,7 +42,13 @@ HEADERS += \
 	Adress/citydialog.h \
 	Adress/updateadressdialog.h \
 	Adress/updatecitydialog.h \
+	Cars/addbrandcardialog.h \
+	Cars/addcarmodeldialog.h \
 	Constants.h \
+	Contract/createcontractdialog.h \
+	ElementsWidgets/comboboxcarbrand.h \
+	ElementsWidgets/comboboxcarcategories.h \
+	ElementsWidgets/comboboxcarmodel.h \
 	ElementsWidgets/comboboxcity.h \
 	ElementsWidgets/comboboxcountrys.h \
 	ElementsWidgets/comboboxtypeadress.h \
@@ -50,6 +62,9 @@ FORMS += \
 	Adress/citydialog.ui \
 	Adress/updateadressdialog.ui \
 	Adress/updatecitydialog.ui \
+	Cars/addbrandcardialog.ui \
+	Cars/addcarmodeldialog.ui \
+	Contract/createcontractdialog.ui \
 	MainWindow/mainwindow.ui
 
 TRANSLATIONS += \
@@ -66,11 +81,18 @@ DISTFILES += \
 	IshodnyDanny/Adresses.ods \
 	IshodnyDanny/Adresses.xls \
 	doc/BaseTable.txt \
+	doc/Cars.txt \
 	doc/ConstantTableData.txt \
+	doc/Contracts.txt \
 	doc/DB.txt \
+	doc/DB_demo_t1.mwb \
 	doc/DB_v1.mwb \
 	doc/DB_v1.mwb.bak \
 	doc/DBcommands.txt \
+	doc/Emploee.txt \
+	doc/Payment.txt \
+	doc/Routes.txt \
+	doc/Shippers.txt \
 	doc/TablesDoc/Adress.txt \
 	doc/TablesDoc/AdressView.txt \
 	doc/Zadachi \

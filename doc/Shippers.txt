@@ -1,0 +1,2 @@
+-- отправитель грузов (shipper)
+CREATE SCHEMA shipper;

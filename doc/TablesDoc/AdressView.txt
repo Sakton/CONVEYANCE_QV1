@@ -21,9 +21,9 @@ CREATE TABLE countrys (
 	country_icon VARCHAR(256),
 	PRIMARY KEY ( country_id ),
 	FOREIGN KEY ( vat_id ) REFERENCES vats ( vat_id )
-		ON UPDATE SET NULL ON DELETE SET NULL,
+		ON DELETE SET NULL,
 	FOREIGN KEY ( vatname_id ) REFERENCES vatnames ( vatname_id )
-		ON UPDATE SET NULL ON DELETE SET NULL
+		ON DELETE SET NULL
 );
 
 CREATE TABLE adress (

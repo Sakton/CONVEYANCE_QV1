@@ -1,9 +1,4 @@
-#include "Adress/addadress.h"
-#include "Adress/adress.h"
-#include "Adress/adressview.h"
-#include "Adress/citydialog.h"
-#include "ElementsWidgets/comboboxcity.h"
-#include "ElementsWidgets/comboboxcountrys.h"
+#include "Contract/createcontractdialog.h"
 #include "MainWindow/mainwindow.h"
 #include <QApplication>
 #include <QLabel>
@@ -26,23 +21,17 @@ int main( int argc, char *argv[] ) {
 
   createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
 
-  //  Adress w;
-
+  // Adress w;
   // AddAdress w;
-
-  //  ComboBoxCountrys w;
-
+  // ComboBoxCountrys w;
   // ComboBoxCity w;
-
   // CityDialog w;
-
   // QLabel *w = new QLabel( "<img source = \":/img/flagCountrys/austria.png\"><H3>AUSTRIA</H3></img>" );
+  // ComboBoxCarBrand w;
 
-  AdressView w;
-
+  CreateContractDialog w;
+  // AddBrandCarDialog w;
   w.show( );
-
-  // test git
 
   splash.finish( &w );
   return a.exec( );
