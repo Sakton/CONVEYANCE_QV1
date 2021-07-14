@@ -1,2 +1,8 @@
 -- отправитель грузов (shipper)
-CREATE SCHEMA shipper;
+
+CREATE SCHEMA IF NOT EXISTS shipper;
+
+CREATE TABLE shippers (
+	shipper_id SERIAL UNIQUE, -- PK
+	shipper_name VARCHAR(200)
+);

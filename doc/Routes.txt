@@ -1,1 +1,10 @@
+-- маршрут
+
 CREATE SCHEMA route;
+
+CREATE TABLE routes (
+	route_id SERIAL UNIQUE, --PK
+	route_arrival INTEGER, -- доезд ( прибытие ) км.
+	route_route INTEGER, -- маршрут ( путь ) км.
+ 	route_ante MONEY -- ставка ( усл. ед. )
+);

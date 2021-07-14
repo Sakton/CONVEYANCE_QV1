@@ -7,7 +7,6 @@
 
 AddCarModelDialog::AddCarModelDialog( QWidget * parent ) : QDialog( parent ), ui( new Ui::AddCarModelDialog ) {
   ui->setupUi( this );
-  setWindowTitle( tr( "Добавить Марку Автомобиля" ) );
 }
 
 AddCarModelDialog::~AddCarModelDialog( ) { delete ui; }

@@ -1,1 +1,10 @@
+-- оплата
+
 CREATE SCHEMA payment;
+
+CREATE TABLE payments (
+	payment_id SERIAL UNIQUE, -- PK
+	payment_cost MONEY, -- оплата ( деньги )
+	payment_period VARCHAR(10), -- период оплаты ( поле под замену на FK ( пока для теста ) )
+	payment_currency VARCHAR(10) -- валюта оплаты ( поле под замену на FK ( пока для теста ) )
+);

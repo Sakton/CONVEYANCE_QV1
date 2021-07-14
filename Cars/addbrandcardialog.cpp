@@ -10,7 +10,6 @@
 
 AddBrandCarDialog::AddBrandCarDialog( QWidget *parent ) : QDialog( parent ), ui( new Ui::AddBrandCarDialog ) {
   ui->setupUi(this);
-  setWindowTitle( tr( "ДОБАВИТЬ МАРКУ АВТОМОБИЛЯ" ) );
   connect( ui->pushButtonChangeLogo, QOverload< bool >::of( &QPushButton::clicked ), this, QOverload<>::of( &AddBrandCarDialog::slotChangeLogo ) );
   init( );
 }
