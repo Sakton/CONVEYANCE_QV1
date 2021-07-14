@@ -29,8 +29,8 @@ void AddBrandCarDialog::slotChangeLogo( ) {
   QString imgFile = QFileDialog::getOpenFileName( this, tr( "ОТКРЫТЬ ФАЙЛ" ), "../", tr( "Image(*.png, *.jpg)" ) );
   if ( !imgFile.isEmpty( ) ) {
     QPixmap imgPix( imgFile );
-    // TODO метод требует доработки в части масштабирования прямоугольных изображений
-    // imgPix = imgPix.scaled( ui->labelLogo->sizeHint( ) );
+    // TODO метод требует доработки в части масштабирования прямоугольных изображений, обработка фотографии???
+    imgPix = imgPix.scaled( ui->labelLogo->sizeHint( ) ); // ????
     ui->labelLogo->setScaledContents( true );
     ui->labelLogo->setPixmap( imgPix );
     ui->labelLogo->setProperty( "ImgPath", imgFile );
@@ -41,7 +41,7 @@ void AddBrandCarDialog::accept( ) {
   QString nameBrand = ui->lineEditBrand->text( );
   if ( nameBrand.isEmpty( ) ) {
     QMessageBox::critical( this, tr( "ПУСТОЕ ПОЛЕ" ), tr( "ПОЛЕ БРЕНД НЕ МОЖЕТ БЫТЬ ПУСТЫМ" ) );
-    return QDialog::accept( );
+    return;
   }
   QString imgPath = ui->labelLogo->property( "ImgPath" ).toString( );
   QString fileNameIcon { "" };

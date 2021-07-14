@@ -39,6 +39,7 @@ int main( int argc, char *argv[] ) {
   // ComboBoxCarBrand w;
 
   AddCarModelDialog w;
+  // AddBrandCarDialog w;
   w.show( );
 
   splash.finish( &w );
