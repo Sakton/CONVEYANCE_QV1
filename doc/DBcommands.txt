@@ -15,6 +15,7 @@ SET DEFAULT
 
 CREATE DATABASE demo_coveyance_db;
 
+
 --VATS
 CREATE TABLE vats (
 	vat_id SERIAL UNIQUE,
