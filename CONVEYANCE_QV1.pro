@@ -27,6 +27,7 @@ SOURCES += \
     ElementsWidgets/comboboxcarmodel.cpp \
     ElementsWidgets/comboboxcity.cpp \
     ElementsWidgets/comboboxcountrys.cpp \
+    ElementsWidgets/comboboxpaymentperiod.cpp \
     ElementsWidgets/comboboxtypeadress.cpp \
     MainWindow/mainwindow.cpp \
     Orders/createorderdialog.cpp \
@@ -52,6 +53,7 @@ HEADERS += \
 	ElementsWidgets/comboboxcarmodel.h \
 	ElementsWidgets/comboboxcity.h \
 	ElementsWidgets/comboboxcountrys.h \
+	ElementsWidgets/comboboxpaymentperiod.h \
 	ElementsWidgets/comboboxtypeadress.h \
 	MainWindow/mainwindow.h \
 	Orders/createorderdialog.h
