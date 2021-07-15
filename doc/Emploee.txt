@@ -1,7 +1,7 @@
 -- работник ( не только водитель кто угодно )
-CREATE SCHEMA emploee;
+CREATE SCHEMA IF NOT EXISTS emploee;
 
-CREATE TABLE emploees (
+CREATE TABLE emploee.emploees (
 	emploee_id SERIAL UNIQUE, -- PK
 	emploee_name VARCHAR(200)
 );

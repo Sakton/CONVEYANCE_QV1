@@ -8,3 +8,7 @@ CreateOrderDialog::CreateOrderDialog( QWidget *parent ) : QDialog( parent ), ui(
 CreateOrderDialog::~CreateOrderDialog( ) {
   delete ui;
 }
+
+void CreateOrderDialog::accept( ) {
+  QDialog::accept( );
+}

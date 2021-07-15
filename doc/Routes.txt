@@ -1,8 +1,8 @@
 -- маршрут
 
-CREATE SCHEMA route;
+CREATE SCHEMA IF NOT EXISTS route;
 
-CREATE TABLE routes (
+CREATE TABLE route.routes (
 	route_id SERIAL UNIQUE, --PK
 	route_arrival INTEGER, -- доезд ( прибытие ) км.
 	route_route INTEGER, -- маршрут ( путь ) км.

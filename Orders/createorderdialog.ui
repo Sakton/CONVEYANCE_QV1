@@ -131,6 +131,25 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="accelerated">
+             <bool>false</bool>
+            </property>
+            <property name="showGroupSeparator" stdset="0">
+             <bool>false</bool>
+            </property>
+            <property name="calendarPopup">
+             <bool>false</bool>
+            </property>
+            <property name="date">
+             <date>
+              <year>2021</year>
+              <month>1</month>
+              <day>8</day>
+             </date>
+            </property>
            </widget>
           </item>
           <item row="3" column="2">
@@ -206,12 +225,18 @@
             <property name="alignment">
              <set>Qt::AlignCenter</set>
             </property>
+            <property name="maximum">
+             <number>10000</number>
+            </property>
            </widget>
           </item>
           <item row="1" column="1">
            <widget class="QSpinBox" name="spinBox_3">
             <property name="alignment">
              <set>Qt::AlignCenter</set>
+            </property>
+            <property name="maximum">
+             <number>10000</number>
             </property>
            </widget>
           </item>
@@ -224,7 +249,7 @@
              <number>2</number>
             </property>
             <property name="maximum">
-             <double>1.000000000000000</double>
+             <double>1000.000000000000000</double>
             </property>
             <property name="singleStep">
              <double>0.010000000000000</double>
@@ -275,7 +300,7 @@
            </widget>
           </item>
           <item row="1" column="0">
-           <widget class="QComboBox" name="comboBox_5">
+           <widget class="ComboBoxPeriodSendMail" name="comboBox_5">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -401,18 +426,24 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QSpinBox" name="spinBox">
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="1">
            <widget class="ComboBoxPaymentPeriod" name="comboBox_3"/>
           </item>
           <item row="1" column="2">
-           <widget class="QComboBox" name="comboBox_4"/>
+           <widget class="ComboBoxCurrency" name="comboBox_4"/>
+          </item>
+          <item row="1" column="0">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="maximum">
+             <double>99999999.989999994635582</double>
+            </property>
+            <property name="value">
+             <double>0.010000000000000</double>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -438,6 +469,16 @@
    <class>ComboBoxPaymentPeriod</class>
    <extends>QComboBox</extends>
    <header>comboboxpaymentperiod.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ComboBoxCurrency</class>
+   <extends>QComboBox</extends>
+   <header>comboboxcurrency.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ComboBoxPeriodSendMail</class>
+   <extends>QComboBox</extends>
+   <header>comboboxperiodsendmail.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -27,7 +27,9 @@ SOURCES += \
     ElementsWidgets/comboboxcarmodel.cpp \
     ElementsWidgets/comboboxcity.cpp \
     ElementsWidgets/comboboxcountrys.cpp \
+    ElementsWidgets/comboboxcurrency.cpp \
     ElementsWidgets/comboboxpaymentperiod.cpp \
+    ElementsWidgets/comboboxperiodsendmail.cpp \
     ElementsWidgets/comboboxtypeadress.cpp \
     MainWindow/mainwindow.cpp \
     Orders/createorderdialog.cpp \
@@ -53,7 +55,9 @@ HEADERS += \
 	ElementsWidgets/comboboxcarmodel.h \
 	ElementsWidgets/comboboxcity.h \
 	ElementsWidgets/comboboxcountrys.h \
+	ElementsWidgets/comboboxcurrency.h \
 	ElementsWidgets/comboboxpaymentperiod.h \
+	ElementsWidgets/comboboxperiodsendmail.h \
 	ElementsWidgets/comboboxtypeadress.h \
 	MainWindow/mainwindow.h \
 	Orders/createorderdialog.h
@@ -85,6 +89,7 @@ DISTFILES += \
 	Dump/dump.sql \
 	IshodnyDanny/Adresses.ods \
 	IshodnyDanny/Adresses.xls \
+	doc/Adres.txt \
 	doc/BaseTable.txt \
 	doc/Cars.txt \
 	doc/ConstantTableData.txt \
