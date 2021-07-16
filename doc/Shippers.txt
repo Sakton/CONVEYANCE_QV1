@@ -10,15 +10,22 @@ CREATE TABLE shipper.shippers (
 --тестировать
 CREATE OR REPLACE FUNCTION shipper.getShipper_id( shipperName VARCHAR ) RETURNS INTEGER AS
 $$
-DECLARE id INTEGER DEFAULT -1;
+DECLARE id INTEGER;
 	BEGIN
-		SELECT shipper_id INTO id FROM shipper.shippers WHERE  shipper_name = shipperName;
-		IF ( id = -1 ) THEN
-			INSERT INTO shipper.shippers ( shipper_name ) VALUES (shipperName);
-			SELECT curval( shipper.shippers.shipper_id ) INTO id;
+		id = ( SELECT shipper_id FROM shipper.shippers WHERE  shipper_name = shipperName );
+		IF ( id IS NULL ) THEN
+			BEGIN
+				INSERT INTO shipper.shippers ( shipper_name ) VALUES (shipperName);
+				id = ( SELECT lastval( ) ) ;
+			END;
 		END IF;
 		RETURN id;
 	END;
 $$
 LANGUAGE plpgsql;
 
+--test
+/*
+SELECT shipper.getShipper_id('R & K');
+SELECT shipper.getShipper_id('Красное - Белое');
+*/
