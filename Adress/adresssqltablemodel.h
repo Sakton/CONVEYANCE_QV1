@@ -1,3 +1,7 @@
+/*
+Производный класс, для поправки метода data() в части выравнивания данных в представлении
+*/
+
 #ifndef ADRESSSQLTABLEMODEL_H
 #define ADRESSSQLTABLEMODEL_H
 

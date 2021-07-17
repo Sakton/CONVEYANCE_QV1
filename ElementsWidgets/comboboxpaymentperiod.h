@@ -1,3 +1,5 @@
+/* Комбо-бокс для отображения списка периодов оплаты */
+
 #ifndef COMBOBOXPAYMENTPERIOD_H
 #define COMBOBOXPAYMENTPERIOD_H
 #include <QComboBox>

@@ -1,3 +1,5 @@
+/* Комбо-бокс для отображения списка периодов высылки докуметов почтой */
+
 #ifndef COMBOBOXPERIODSENDMAIL_H
 #define COMBOBOXPERIODSENDMAIL_H
 

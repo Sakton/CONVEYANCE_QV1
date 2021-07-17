@@ -4,7 +4,7 @@
 
 ComboBoxCountrys::ComboBoxCountrys( QWidget *parent ) : QComboBox( parent ) {
   QSqlQuery query( QSqlDatabase::database( "DB" ) );
-  QString sq( "SELECT country_id, country_name, country_icon FROM countrys ORDER BY country_name;" );
+  QString sq( "SELECT country_id, country_name, country_icon FROM adres.countrys ORDER BY country_name;" );
   query.exec( sq );
   while ( query.next( ) ) {
     QIcon icon( QPixmap( QString( ":/img/flagCountrys/%1" ).arg( query.value( "country_icon" ).toString( ) ) ) );

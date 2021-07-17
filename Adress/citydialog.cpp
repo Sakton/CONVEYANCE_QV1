@@ -22,12 +22,12 @@ void CityDialog::accept( ) {
   podgotovkaNameCity( city );
   int idCountry = ui->comboBoxCountrys->itemData( ui->comboBoxCountrys->currentIndex( ) ).toInt( );
   QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
-  QString qs = QString( "SELECT addCity('%1', %2);" ).arg( city ).arg( idCountry );
+  QString qs = QString( "CALL adres.addCity('%1', %2);" ).arg( city ).arg( idCountry );
   if( !query.exec( qs ) ) {
-    QMessageBox::warning( this, "ERROR INSERT", "Error insert city", QMessageBox::StandardButton::Ok );
+    QMessageBox::warning( this, "ERROR INSERT", query.lastError( ).text( ), QMessageBox::StandardButton::Ok );
   }
-  emit signalChangedIndex( ui->comboBoxCountrys->currentData( ).toInt( ) );
   //если в вызванном дилоге пользователь меняет город на другой, сообщаем это родительскому виджету
+  emit signalChangedIndex( ui->comboBoxCountrys->currentData( ).toInt( ) );
   QDialog::accept( );
 }
 

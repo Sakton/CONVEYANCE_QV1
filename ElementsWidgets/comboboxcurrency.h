@@ -1,3 +1,5 @@
+/* Комбо-бокс для отображения списка валют */
+
 #ifndef COMBOBOXCURRENCY_H
 #define COMBOBOXCURRENCY_H
 

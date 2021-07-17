@@ -2,7 +2,8 @@
 #include <QLineEdit>
 
 ComboBoxPeriodSendMail::ComboBoxPeriodSendMail( QWidget *parent ) : QComboBox( parent ) {
-  QStringList listItem { "1 день", "2 дня", "4 дня", "8 дней", "14 дней", "nd" };
+  QStringList listItem { tr( "5 день" ),  tr( "7 дня" ),   tr( "10 дня" ),  tr( "14 дней" ),
+                         tr( "20 дней" ), tr( "25 дней" ), tr( "30 дней" ), tr( "e-mail" ) };
   addItems( listItem );
   setEditable( true );
   lineEdit( )->setAlignment( Qt::AlignCenter );

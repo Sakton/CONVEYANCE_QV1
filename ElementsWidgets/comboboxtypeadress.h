@@ -1,3 +1,5 @@
+/* Комбо-бокс типа адреса */
+
 #ifndef COMBOBOXTYPEADRESS_H
 #define COMBOBOXTYPEADRESS_H
 

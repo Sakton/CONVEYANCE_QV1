@@ -41,7 +41,7 @@ void AdressView::slotAddActionContextMenu( bool ) {
   QSqlRecord record = model->record( ui->tableView->selectionModel( )->currentIndex( ).row( ) );
   QString nameCountry = record.value( 2 ).toString( );
 
-  AdressDialog addDialog( model, this );
+  AdressDialog addDialog( /*model,*/ this );
   addDialog.slotSetCountry( nameCountry );
   addDialog.exec( );
   updateModel( );

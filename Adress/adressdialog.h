@@ -1,3 +1,8 @@
+/*
+Далоговое окно добавления адреса
+Класс принимает в конструкторе SQL модель
+*/
+
 #ifndef ADRESSDIALOG_H
 #define ADRESSDIALOG_H
 
@@ -15,7 +20,7 @@ class AdressDialog : public QDialog
   Q_OBJECT
 
 public:
-  AdressDialog( QSqlTableModel *model, QWidget *parent = nullptr );
+  AdressDialog( /*QSqlTableModel *model,*/ QWidget * parent = nullptr );
   ~AdressDialog( );
 
 public slots:
@@ -31,7 +36,7 @@ private:
 
 private:
   Ui::AdressDialog * ui;
-  QSqlTableModel *model;
+  // QSqlTableModel *model;
 };
 
 #endif // ADRESSDIALOG_H

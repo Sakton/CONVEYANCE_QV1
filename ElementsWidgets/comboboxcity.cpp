@@ -1,4 +1,5 @@
 #include "comboboxcity.h"
+#include "Constants.h"
 
 #include <QSqlError>
 #include <QSqlQuery>
@@ -8,14 +9,13 @@ ComboBoxCity::ComboBoxCity( QWidget *parent ) : QComboBox( parent ), currentIdCo
 
 void ComboBoxCity::getCity( int idCountry ) {
   currentIdCountry = idCountry;
-  QSqlQuery query( QSqlDatabase::database( "DB" ) );
-  QString qs = QString( "SELECT city_id, city_name FROM cities WHERE country_id = %1 ORDER BY city_name;" ).arg( idCountry );
+  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
+  QString qs =
+      QString( "SELECT city_id, city_name FROM adres.сities WHERE country_id = %1 ORDER BY city_name;" ).arg( idCountry );
   query.exec( qs );
-  if ( query.isActive( ) ) {
-    clear( );
-    while ( query.next( ) ) {
-      addItem( query.value( "city_name" ).toString( ), query.value( "city_id" ) );
-    }
+  clear( );
+  while( query.next( ) ) {
+    addItem( query.value( "city_name" ).toString( ), query.value( "city_id" ) );
   }
 }
 

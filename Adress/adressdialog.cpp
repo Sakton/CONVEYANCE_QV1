@@ -10,8 +10,7 @@
 #include <QSqlRecord>
 #include <QSqlTableModel>
 
-AdressDialog::AdressDialog( QSqlTableModel * model, QWidget * parent )
-    : QDialog( parent ), ui( new Ui::AdressDialog ), model { model } {
+AdressDialog::AdressDialog( QWidget * parent ) : QDialog( parent ), ui( new Ui::AdressDialog ) /*, model { model }*/ {
   ui->setupUi( this );
   ui->comboBoxCity->updateCity( ui->comboBoxCountry->currentData( ).toInt( ) );
   connect( ui->pushButtonAddCity, QOverload< bool >::of( &QPushButton::clicked ), this,

@@ -25,21 +25,21 @@ SET DEFAULT
 
 CREATE SCHEMA IF NOT EXISTS adres;
 
--- ***********
+-- ТАБЛИЦА "СТРАНЫ"
 CREATE TABLE adres.countrys (
-    country_id SERIAL UNIQUE,
-    vat_id INTEGER NOT NULL,
-    vatname_id INT NOT NULL,
-    country_name VARCHAR(256) NOT NULL UNIQUE,
-    country_abbreviated_2 VARCHAR(4) NOT NULL UNIQUE,
-    country_abbreviated_3 VARCHAR(4) NOT NULL UNIQUE,
-    country_icon VARCHAR(256),
+    country_id SERIAL UNIQUE,                         -- PK
+    vat_id INTEGER NOT NULL,                          -- FK на ID VAT(НДС)
+    vatname_id INT NOT NULL,                          -- FK на ID абрревиатуры НДСов разных стран европы
+    country_name VARCHAR(256) NOT NULL UNIQUE,        -- название страны
+    country_abbreviated_2 VARCHAR(4) NOT NULL UNIQUE, -- аббревиатура из 2 символов
+    country_abbreviated_3 VARCHAR(4) NOT NULL UNIQUE, -- аббревиатура из 3 символов
+    country_icon VARCHAR(256),                        -- имя файла иконки для страны
     PRIMARY KEY ( country_id ),
     FOREIGN KEY ( vat_id ) REFERENCES vat.vats ( vat_id ) ON UPDATE SET NULL ON DELETE SET NULL,
     FOREIGN KEY ( vatname_id ) REFERENCES vat.vatnames ( vatname_id ) ON UPDATE SET NULL ON DELETE SET NULL
 );
 
--- ***********
+-- ВТАВКА СПРАСОЧНЫХ ДАННЫХ В ТАБЛИЦУ "СТРАНЫ" -- это константы
 INSERT INTO adres.countrys ( vat_id, vatname_id, country_name, country_abbreviated_2, country_abbreviated_3, country_icon )
 VALUES 
     ( ( SELECT vat.getVatId(  20::DECIMAL ) ), ( SELECT vat.getVatNames( 'USt'    ) ), 'Австрия', 'AT', 'AUT', 'austria.png' ), --1
@@ -82,75 +82,96 @@ VALUES
     ( ( SELECT vat.getVatId(  25::DECIMAL ) ), ( SELECT vat.getVatNames( 'MOMS'	  ) ), 'Швеция', 'SE', 'SWE', 'sweden.png' ),--38
     ( ( SELECT vat.getVatId(  20::DECIMAL ) ), ( SELECT vat.getVatNames( 'KM'	  ) ), 'Эстония', 'EE', 'EST', 'estonia.png' );--39
 
--- ***********
+-- ТАБЛИЦА "ГОРОДА"
+CREATE TABLE adres.сities (
+    city_id SERIAL UNIQUE,                      -- РК
+    city_name VARCHAR( 256 ) NOT NULL UNIQUE,   -- название города
+    country_id INTEGER,                         -- FK на ID страны
+    PRIMARY KEY ( city_id ),
+    FOREIGN KEY ( country_id ) REFERENCES adres.countrys ( country_id ) ON DELETE RESTRICT
+);
+
+-- ТАБЛИЦА "УЛИЦА"
 CREATE TABLE adres.streets (
-    street_id SERIAL UNIQUE,
-    street_name VARCHAR ( 256 ) NOT NULL UNIQUE,
+    street_id SERIAL UNIQUE,                     -- PK
+    street_name VARCHAR ( 256 ) NOT NULL UNIQUE, -- улица ( предполагается временно: улица, дом, номер дома и тд. )
     PRIMARY KEY (street_id)
 );
 
--- ***********
-CREATE TABLE adres.сities (
-    city_id SERIAL UNIQUE,
-    city_name VARCHAR( 256 ) NOT NULL UNIQUE,
-    country_id INTEGER,
-    PRIMARY KEY ( city_id )
-);
-
--- ***********
+-- ТАБЛИЦА "АДРЕС"
 CREATE TABLE adres.adress (
-    adres_id SERIAL UNIQUE,
-    country_id INTEGER,
-    city_id INTEGER,
-    street_id INTEGER,
-    adres_type Type_Adress, -- тип адреса (физический, юридический)
+    adres_id SERIAL UNIQUE,                                                                 -- PK
+    -- country_id INTEGER,                                                                  -- FK на ID страны ( этот ключ не нужен, так как он есть в таблице "ГОРОДА" )
+    city_id INTEGER,                                                                        -- FK на ID "ГОРОД"
+    street_id INTEGER,                                                                      -- FK на ID "УЛИЦА" ( одинаковая ( улица ) адрес может быть в разных городах )
+    adres_index VARCHAR( 20 ),                                                              -- почтовый индекс
+    adres_type VARCHAR( 20 ),                                                               -- тип адреса (физический, юридический)
     PRIMARY KEY ( adres_id ),
-    FOREIGN KEY ( country_id ) REFERENCES adres.countrys ( country_id ) ON DELETE SET NULL,
-    FOREIGN KEY ( city_id ) REFERENCES adres.cities ( city_id ) ON DELETE SET NULL,
+    -- FOREIGN KEY ( country_id ) REFERENCES adres.countrys ( country_id ) ON DELETE SET NULL,
+    FOREIGN KEY ( city_id ) REFERENCES adres.сities ( city_id ) ON DELETE SET NULL,
     FOREIGN KEY ( street_id ) REFERENCES adres.streets ( street_id ) ON DELETE SET NULL,
-    CHECK ( adres_type IN ( 'Физический', 'Юридический') )
+    CHECK ( adres_type IN ( 'Физический', 'Юридический') )                                  -- доменное ограничение по полю "тип адреса"
 );
 
+-- ПРЕДСТАВЛЕНИЕ АДРЕСА
+CREATE MATERIALIZED VIEW adres.adressView AS
+    SELECT ad.adres_id, tmp.country_icon, tmp.country_name, ad.adres_index, ct.city_name, st.street_name -- как бэ интерфейс тот-же
+    FROM adres.adress AS ad
+    LEFT JOIN adres.сities AS ct ON ad.city_id = ct.city_id
+    LEFT JOIN adres.streets AS st ON ad.street_id = st.street_id
+    LEFT JOIN (
+                SELECT cn.country_id, cn.country_icon, cn.country_name
+                FROM adres.countrys AS cn
+                INNER JOIN adres.сities AS ct
+                ON cn.country_id = ct.country_id
+              ) AS tmp ON tmp.country_id = ct.country_id;
 
--- ***********
-CREATE OR REPLACE MATERIALIZED VIEW adres.adressView AS
+/*
+CREATE MATERIALIZED VIEW adres.adressView AS
     SELECT ad.adres_id, cntr.country_icon, cntr.country_name, ad.adres_index, ct.city_name, st.street_name
     FROM adres.adress AS ad
     LEFT JOIN adres.countrys AS cntr ON ad.country_id = cntr.country_id
-    LEFT JOIN adres.cities AS ct ON ad.city_id = ct.city_id
+    LEFT JOIN adres.сities AS ct ON ad.city_id = ct.city_id
     LEFT JOIN adres.streets AS st ON ad.street_id = st.street_id;
-	
+*/
 
--- ***********
+-- ФУНКЦИЯ ПОЛУЧЕНИЯ ID СТРАНЫ ПО НАЗВАНИЮ
 CREATE FUNCTION adres.getCountryId ( cntr VARCHAR ) RETURNS INTEGER AS
 $$
     SELECT country_id FROM adres.countrys WHERE country_name = cntr;
 $$ LANGUAGE SQL;
 
+-- ПРОЦЕДУРА ВСТАВКИ ГОРОДА ПО ИМЕНИ И ID СТРАНЫ
+CREATE PROCEDURE adres.addCity( nameCity VARCHAR, idCountry INTEGER ) LANGUAGE SQL AS
+$$
+    INSERT INTO adres.сities ( city_name, country_id ) VALUES ( nameCity, idCountry );
+$$;
 
--- ***********
+-- ФУНКЦИЯ ПОЛУЧЕНИЯ ID ГОРОДА ПО НАЗВАНИЮ
 CREATE FUNCTION adres.getCityId ( ct VARCHAR ) RETURNS INTEGER AS 
 $$ 
     SELECT city_id FROM adres.cities WHERE city_name = ct;
 $$ LANGUAGE SQL;
 
-
--- ***********
+-- ФУНКЦИЯ ПОЛУЧЕНИЯ ID УЛИЦЫ ( ПОДАДРЕСА ( УЛИЦА-ДОМ-ОФИС№ И Т.Д. ) ),
+-- ЕСЛИ ТАКОЙ УЛИЦЫ НЕТ ТО ВСТАВКА ЕЕ И ВОЗВРАТ ID
+-- ЕСЛИ ЕСТЬ ТО ПРОСТО ВОЗВРАТ ID
 CREATE FUNCTION adres.getStreetId( st VARCHAR ) RETURNS INTEGER AS 
 $$ 
-DECLARE id INTEGER IS NULL;
+DECLARE id INTEGER DEFAULT NULL;
     BEGIN
         id = ( SELECT street_id FROM adres.streets WHERE street_name = st );
         IF ( id IS NULL ) THEN
-        INSERT INTO adres.streets ( street_name ) VALUES ( 'st' );
-    id = ( SELECT lastval() );
-    END IF;
-RETURN id;
-END;
-$$ LANGUAGE SQL;
+            BEGIN
+                INSERT INTO adres.streets ( street_name ) VALUES ( 'st' );
+                id = ( SELECT lastval() );
+            END;
+        END IF;
+    RETURN id;
+    END;
+$$ LANGUAGE plpgsql;
 
-
--- ***********
+-- ПРОЦЕДУРА ВСТАВКИ ВСЕГО АДРЕСА: СТРАНА, ГОРОД, УЛИЦА, ИНДЕКС, ТИП
 CREATE OR REPLACE PROCEDURE insertAdress ( cntr VARCHAR, ct VARCHAR, strt VARCHAR, idx VARCHAR, type_adress VARCHAR ) LANGUAGE SQL AS 
 $$
     INSERT INTO adres.adress ( country_id, city_id, street_id, adres_index, adres_type )
