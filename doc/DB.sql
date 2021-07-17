@@ -1,3 +1,4 @@
+/*
 -- чистовик
 CREATE DATABASE demo_coveyance_db;
 
@@ -26,6 +27,8 @@ CREATE TABLE streets (
 	street_name varchar ( 256 ) NOT NULL UNIQUE
 );
 
+
+
 CREATE TABLE countrys (
 	country_id SERIAL UNIQUE,
 	vat_id INT NOT NULL,
@@ -36,37 +39,20 @@ CREATE TABLE countrys (
 	country_icon VARCHAR(256),
 	PRIMARY KEY ( country_id ),
 	FOREIGN KEY ( vat_id ) REFERENCES vats ( vat_id )
-	
 		ON UPDATE SET NULL ON DELETE SET NULL,
 	FOREIGN KEY ( vatname_id ) REFERENCES vatnames ( vatname_id )
 		ON UPDATE SET NULL ON DELETE SET NULL
 );
 
+
+
+
 CREATE OR REPLACE FUNCTION get_vat_id ( vat_st DECIMAL ) RETURNS INT AS
 	' SELECT vat_id FROM vats WHERE vat_stavka = vat_st; '
 LANGUAGE SQL;
 
-/* CREATE TYPE Type_Adress AS ENUM ( 'FACT', 'LEGAL' ); */
 
-/* CREATE TABLE adress (
-	adres_id SERIAL UNIQUE,
-	country_id INT,
-	city_id INT,
-	street_id INT,
-	adres_type Type_Adress, -- тип адреса (физический, юридический)
-	adres_index VARCHAR(10),
-	PRIMARY KEY ( adres_id ),
-	FOREIGN KEY ( country_id ) REFERENCES countrys ( country_id )
-		ON DELETE SET NULL,
-	FOREIGN KEY ( city_id ) REFERENCES cities ( city_id )
-		ON DELETE SET NULL,
-	FOREIGN KEY ( street_id ) REFERENCES streets ( street_id )
-		ON DELETE SET NULL,
-	CHECK ( adres_type IN ( 'FACT', 'LEGAL') )
-); */
-
-
-CREATE OR REPLACE MATER VIEW adress_view AS
+CREATE OR REPLACE VIEW adress_view AS
  SELECT ad.adres_id,
         cntr.country_icon,
 		cntr.country_name,
@@ -77,37 +63,41 @@ CREATE OR REPLACE MATER VIEW adress_view AS
      LEFT JOIN countrys cntr ON ad.country_id = cntr.country_id
      LEFT JOIN cities ct ON ad.city_id = ct.city_id
      LEFT JOIN streets st ON ad.street_id = st.street_id;
+	 
+
 
 --ALTER TABLE adress ADD COLUMN adres_index VARCHAR(10);
 
 CREATE FUNCTION id_country ( cntr VARCHAR ) RETURNS INT AS 
 	'SELECT country_id FROM countrys WHERE country_name = cntr' LANGUAGE SQL;
+
 	
 CREATE FUNCTION id_city ( ct VARCHAR ) RETURNS INT AS 
 	' SELECT city_id FROM cities WHERE city_name = ct ' LANGUAGE SQL;
 
 CREATE FUNCTION id_street( st VARCHAR ) RETURNS INT AS
 	'SELECT street_id FROM streets WHERE street_name = st' LANGUAGE SQL;
-	
-CREATE OR REPLACE FUNCTION insert_adress ( cntr VARCHAR, ct VARCHAR, strt VARCHAR, type_adress Type_Adress DEFAULT 'FACT' ) RETURNS VOID AS ' INSERT INTO adress ( country_id, city_id, street_id, adres_type )
-	VALUES (  ( SELECT id_country( cntr ) ), ( SELECT id_city( ct ) ), ( SELECT id_street( strt ) ), type_adress )' 
-LANGUAGE SQL;
- --ПЕРЕГРУЗКА
-CREATE OR REPLACE FUNCTION insert_adress ( cntr VARCHAR, ct VARCHAR, strt VARCHAR, a_index VARCHAR, type_adress Type_Adress DEFAULT 'FACT' ) RETURNS VOID AS 
-	' INSERT INTO adress ( country_id, city_id, street_id, adres_index, adres_type )
-	VALUES (  ( SELECT id_country( cntr ) ), ( SELECT id_city( ct ) ), ( SELECT id_street( strt ) ), a_index, type_adress )'
-LANGUAGE SQL;
+		
 
 
--- SELECT ( SELECT street_id FROM street_name WHERE street_name =  )
+CREATE OR REPLACE PROCEDURE insert_adress ( cntr VARCHAR, ct VARCHAR, strt VARCHAR, type_adress Type_Adress DEFAULT 'FACT' ) LANGUAGE SQL AS 
+$$
+	INSERT INTO adress ( country_id, city_id, street_id, adres_type )
+	VALUES (  ( SELECT id_country( cntr ) ), ( SELECT id_city( ct ) ), ( SELECT id_street( strt ) ), type_adress );
+$$;
+*/
 
+/*
 CREATE OR REPLACE FUNCTION id_vatnames ( nm VARCHAR ) RETURNS INT AS
     ' SELECT vatname_id FROM vatnames WHERE vatname_name = nm '
 LANGUAGE SQL;
+*/
 
+/*
 CREATE OR REPLACE FUNCTION get_id_country ( nm VARCHAR ) RETURNS INT AS
  'SELECT country_id FROM countrys WHERE country_name = nm'
 LANGUAGE SQL;
+*/
 
 -- *************
 CREATE FUNCTION insertOrIgnoreStreet( strt VARCHAR ) RETURNS VOID AS
@@ -121,6 +111,7 @@ END;
 $$
 LANGUAGE plpgsql;
 --**************
+
 
 -- *************
 CREATE OR REPLACE FUNCTION insertOrIgnoreStreet( strt VARCHAR ) RETURNS BOOL AS
@@ -136,6 +127,7 @@ END;
 $$
 LANGUAGE plpgsql;
 --**************
+
 
 CREATE OR REPLACE FUNCTION cast_TypeAdress ( nameTypeAdress VARCHAR ) RETURNS VOID AS
 $$

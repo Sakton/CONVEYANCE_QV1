@@ -2,6 +2,8 @@
 
 CREATE SCHEMA IF NOT EXISTS route;
 
+
+-- ***********
 CREATE TABLE route.routes (
 	route_id SERIAL UNIQUE, --PK
 --	adres_id INTEGER, -- адрес старта
@@ -11,13 +13,19 @@ CREATE TABLE route.routes (
  	route_ante MONEY -- ставка ( усл. ед. )
 );
 
+
+-- ***********
 CREATE OR REPLACE PROCEDURE route.insertRoute(arrival INTEGER, rout INTEGER, ante NUMERIC) LANGUAGE SQL AS
 $$
 	INSERT INTO route.routes(route_arrival, route_route, route_ante) VALUES (arrival, rout, ante::MONEY);
 $$;
 
+
+-- ***********
 CALL route.insertRoute( 100, 200, 300.25);
 
+
+-- ***********
 CREATE OR REPLACE FUNCTION route.getRout_id ( arrival INTEGER, route INTEGER, ante NUMERIC ) RETURNS INTEGER AS
 $$
 DECLARE id INTEGER DEFAULT NULL;

@@ -58,12 +58,7 @@ void AdressDialog::addRecord( ) {
   QString type = ui->comboBoxType->currentText( );
 
   QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
-  QString qs = QString { "CALL insertOrIgnoreStreet('%3'); CALL insert_adress('%1', '%2', '%3', '%4', '%5');" }
-                   .arg( country )
-                   .arg( city )
-                   .arg( adress )
-                   .arg( index )
-                   .arg( type );
+  QString qs = QString { "CALL insertAdress('%1', '%2', '%3', '%4', '%5');" }.arg( country, city, adress, index, type );
   if ( !query.exec( qs ) )
     QMessageBox::warning( this, "ERROR", "Error add adress: " + query.lastError( ).text( ), QMessageBox::StandardButton::Ok );
 }

@@ -2,12 +2,16 @@
 
 CREATE SCHEMA IF NOT EXISTS shipper;
 
+
+-- ***********
 CREATE TABLE shipper.shippers (
 	shipper_id SERIAL UNIQUE, -- PK
 	shipper_name VARCHAR(200)
 );
 
+
 --тестировать
+-- ***********
 CREATE OR REPLACE FUNCTION shipper.getShipper_id( shipperName VARCHAR ) RETURNS INTEGER AS
 $$
 DECLARE id INTEGER;

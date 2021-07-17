@@ -1,13 +1,15 @@
--- BASE TABLE
-CREATE SCHEMA IF NOT EXISTS auto; -- Пространство имен для таблиц авто
+-- машины
+CREATE SCHEMA IF NOT EXISTS cars; -- Пространство имен для таблиц авто
 
-CREATE TABLE auto.autobrands (
+-- ***********
+CREATE TABLE cars.autobrands (
 	autobrand_id SERIAL UNIQUE,
 	autobrand_name VARCHAR(256) UNIQUE NOT NULL,
 	autobrand_icon VARCHAR(256) DEFAULT ('no_icon.png')
 );
 
-CREATE TABLE auto.autocategories ( -- Категории прав и автомобилей
+-- ***********
+CREATE TABLE cars.autocategories ( -- Категории прав и автомобилей
 	autocategory_id SERIAL UNIQUE,
 	autocategory_name VARCHAR(256) NOT NULL,
 	autocategory_symbol VARCHAR (5) NOT NULL,
@@ -15,11 +17,10 @@ CREATE TABLE auto.autocategories ( -- Категории прав и автом�
 	autocategory_description TEXT
 );
 
-
 https://profi-prim.ru/article/kategorii-prav#:~:text=%D0%B2%20%D1%81%D0%B5%D0%B3%D0%BE%D0%B4%D0%BD%D1%8F%D1%88%D0%BD%D0%B5%D0%BC%20%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%B5.-,%D0%92%20%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B8%20%D1%81%D1%83%D1%89%D0%B5%D1%81%D1%82%D0%B2%D1%83%D0%B5%D1%82%2010%20%D0%BA%D0%B0%D1%82%D0%B5%D0%B3%D0%BE%D1%80%D0%B8%D0%B9%20%D0%BF%D1%80%D0%B0%D0%B2%3A%20%D0%9C%20%E2%80%94%20%D0%BC%D0%BE%D0%BF%D0%B5%D0%B4%D1%8B%20%D0%B8%20%D0%BB%D0%B5%D0%B3%D0%BA%D0%B8%D0%B5,%D1%82%D0%BE%D0%BD%D0%BD%3B%20%D0%A1%D0%95%20%E2%80%94%20%D0%B3%D1%80%D1%83%D0%B7%D0%BE%D0%B2%D1%8B%D0%B5%20%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%BE%D0%B1%D0%B8%D0%BB%D0%B8%20%D1%81
 
-
-INSERT INTO auto.autocategories ( autocategory_name, autocategory_symbol, autocategory_icon, autocategory_description )
+-- ***********
+INSERT INTO cars.autocategories ( autocategory_name, autocategory_symbol, autocategory_icon, autocategory_description )
 VALUES ( 'Мопеды и Легкие квадрициклы','M','M.png','Категория М дает право водить мопеды и легкие квадрициклы.
 												    Особенность управления этими ТС в том, что ими можно управлять 
 												    имея любую другую категорию водительских прав. За исключением 
@@ -72,35 +73,38 @@ VALUES ( 'Мопеды и Легкие квадрициклы','M','M.png','Ка
 		( 'Троллейбусы', 'Tb', 'Tb.png', 'Дают право управлять троллейбусами' ),
 		( 'Трамваи', 'Tm', 'Tm.png', 'Дают право управлять трамваями' );
 
-
-CREATE TABLE auto.carsmodels (
+-- ***********
+CREATE TABLE cars.carsmodels (
 	carsmodel_id SERIAL UNIQUE,
 	autobrand_id INTEGER NOT NULL,
 	autocategory_id INTEGER NOT NULL,
 	carsmodel_name VARCHAR ( 200 ),
-	FOREIGN KEY ( autobrand_id ) REFERENCES auto.autobrands ( autobrand_id ), -- NO ACTION по умолчанию
-	FOREIGN KEY ( autocategory_id ) REFERENCES auto.autocategories ( autocategory_id ) -- NO ACTION по умолчанию
+	FOREIGN KEY ( autobrand_id ) REFERENCES cars.autobrands ( autobrand_id ), -- NO ACTION по умолчанию
+	FOREIGN KEY ( autocategory_id ) REFERENCES cars.autocategories ( autocategory_id ) -- NO ACTION по умолчанию
 );
 -- NO ACTION - не даст удалить связанную строку из базовой тавблицы
 
 -- Так как данные берутся из comboBox, а они из БД, то такие записи существуют
-CREATE OR REPLACE FUNCTION auto.getAutobrand_id ( nameBrand VARCHAR ) RETURNS INTEGER AS
+-- ***********
+CREATE OR REPLACE FUNCTION cars.getAutobrand_id ( nameBrand VARCHAR ) RETURNS INTEGER AS
 $$
-	SELECT autobrand_id FROM auto.autobrands WHERE autobrand_name = nameBrand;
+	SELECT autobrand_id FROM cars.autobrands WHERE autobrand_name = nameBrand;
 $$ 
 LANGUAGE SQL;
+
 --*************
-CREATE OR REPLACE FUNCTION auto.getAutocategory_id ( symbolCategory VARCHAR ) RETURNS INTEGER AS
+CREATE OR REPLACE FUNCTION cars.getAutocategory_id ( symbolCategory VARCHAR ) RETURNS INTEGER AS
 $$
-	SELECT autocategory_id FROM auto.autocategories WHERE autocategory_symbol = symbolCategory;
+	SELECT autocategory_id FROM cars.autocategories WHERE autocategory_symbol = symbolCategory;
 $$
 LANGUAGE SQL;
+
 -- ************
-CREATE OR REPLACE PROCEDURE auto.add_carmodel ( nameBrand VARCHAR, symbolCategory VARCHAR, carModel VARCHAR ) 
+CREATE OR REPLACE PROCEDURE cars.add_carmodel ( nameBrand VARCHAR, symbolCategory VARCHAR, carModel VARCHAR ) 
 LANGUAGE SQL
 AS $$
-	INSERT INTO auto.carsmodels ( autobrand_id, autocategory_id, carsmodel_name )
-	VALUES ( ( SELECT auto.getAutobrand_id(nameBrand) ), ( SELECT auto.getAutocategory_id(symbolCategory) ), carModel );
+	INSERT INTO cars.carsmodels ( autobrand_id, autocategory_id, carsmodel_name )
+	VALUES ( ( SELECT cars.getAutobrand_id(nameBrand) ), ( SELECT cars.getAutocategory_id(symbolCategory) ), carModel );
 $$;
 
 

@@ -64,10 +64,10 @@ void AddBrandCarDialog::accept( ) {
 void AddBrandCarDialog::insertDb( const QString &nameBrand, const QString &fileNameIcon ) {
   QString qs;
   if ( !fileNameIcon.isEmpty( ) )
-    qs = QString( "INSERT INTO auto.autobrands (autobrand_name, autobrand_icon) VALUES ('%1', '%2')" )
+    qs = QString( "INSERT INTO cars.autobrands (autobrand_name, autobrand_icon) VALUES ('%1', '%2')" )
              .arg( nameBrand, fileNameIcon );
   else
-    qs = QString( "INSERT INTO auto.autobrands (autobrand_name) VALUES ('%1')" ).arg( nameBrand );
+    qs = QString( "INSERT INTO cars.autobrands (autobrand_name) VALUES ('%1')" ).arg( nameBrand );
   QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
   if ( !query.exec( qs ) ) {
     QMessageBox::critical( this, tr( "ОШИБКА ВСТАВКИ В БД" ), query.lastError( ).text( ) );

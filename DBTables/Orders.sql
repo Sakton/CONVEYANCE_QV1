@@ -2,6 +2,7 @@
 
 CREATE SCHEMA IF NOT EXISTS orders;
 
+-- ***********
 CREATE TABLE orders (
 	order_id SERIAL UNIQUE, -- PK
 	shipper_id INTEGER, -- FK отправитель грузов (shipper)

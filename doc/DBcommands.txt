@@ -1,21 +1,31 @@
 
 /*
 NO ACTION
-Выдать ошибку, показывающую, что при удалении или изменении записи произойдёт нарушение ограничения внешнего ключа. Для отложенных ограничений ошибка произойдёт в момент проверки ограничения, если строки, ссылающиеся на эту запись, по-прежнему будут существовать. Этот вариант действия подразумевается по умолчанию.
+Выдать ошибку, показывающую, что при удалении или изменении записи 
+произойдёт нарушение ограничения внешнего ключа. Для отложенных ограничений 
+ошибка произойдёт в момент проверки ограничения, если строки, ссылающиеся на эту запись, 
+по-прежнему будут существовать. Этот вариант действия подразумевается по умолчанию.
+
 RESTRICT
-Выдать ошибку, показывающую, что при удалении или изменении записи произойдёт нарушение ограничения внешнего ключа. Этот вариант подобен NO ACTION, но эта проверка будет неоткладываемой.
+Выдать ошибку, показывающую, что при удалении или изменении записи 
+произойдёт нарушение ограничения внешнего ключа. Этот вариант подобен NO ACTION, но эта проверка будет неоткладываемой.
+
 CASCADE
-Удалить все строки, ссылающиеся на удаляемую запись, либо поменять значения в ссылающихся столбцах на новые значения во внешних столбцах, в соответствии с операцией.
+Удалить все строки, ссылающиеся на удаляемую запись, либо поменять 
+значения в ссылающихся столбцах на новые значения во внешних столбцах, в соответствии с операцией.
+
 SET NULL
 Установить ссылающиеся столбцы равными NULL.
-SET DEFAULT
-Установить в ссылающихся столбцах значения по умолчанию. (Если эти значения не равны NULL, во внешней таблице должна быть строка, соответствующая набору значений по умолчанию; в противном случае операция завершится ошибкой.)
 
+SET DEFAULT
+Установить в ссылающихся столбцах значения по умолчанию. 
+(Если эти значения не равны NULL, во внешней таблице должна быть строка, 
+соответствующая набору значений по умолчанию; в противном случае операция завершится ошибкой.)
 */
 
-CREATE DATABASE demo_coveyance_db;
+-- CREATE DATABASE demo_coveyance_db;
 
-
+/*
 --VATS
 CREATE TABLE vats (
 	vat_id SERIAL UNIQUE,
@@ -45,6 +55,8 @@ CREATE TABLE streets (
 	street_name varchar ( 256 ) NOT NULL UNIQUE
 );
 
+
+
 CREATE TABLE countrys (
 	country_id SERIAL UNIQUE,
 	vat_id INT NOT NULL,
@@ -59,6 +71,7 @@ CREATE TABLE countrys (
 	FOREIGN KEY ( vatname_id ) REFERENCES vatnames ( vatname_id )
 		ON UPDATE SET NULL ON DELETE SET NULL
 );
+
 
 CREATE TABLE adress (
 	adres_id SERIAL UNIQUE,
@@ -76,14 +89,19 @@ CREATE TABLE adress (
 	CHECK ( adres_type IN ( 'FACT', 'LEGAL') )
 );
 
-CREATE FUNCTION id_country ( cntr VARCHAR ) RETURNS INT 
+
+CREATE FUNCTION id_country ( cntr VARCHAR ) RETURNS INTEGER
 AS $$ SELECT country_id FROM countrys WHERE country_name = cntr $$ LANGUAGE SQL;
+
+
 	
 CREATE FUNCTION id_city ( ct VARCHAR ) RETURNS INT 
 AS $$ SELECT city_id FROM cities WHERE city_name = ct $$ LANGUAGE SQL;
 
+
 CREATE FUNCTION id_street( st VARCHAR ) RETURNS INT 
 AS $$ SELECT street_id FROM streets WHERE street_name = st $$ LANGUAGE SQL;
+
 
 CREATE OR REPLACE PROCEDURE insert_adress ( cntr VARCHAR, ct VARCHAR, strt VARCHAR, idx VARCHAR, type_adress VARCHAR )
 LANGUAGE SQL
@@ -92,28 +110,17 @@ AS $$
 	VALUES (  ( SELECT id_country( cntr ) ), ( SELECT id_city( ct ) ), ( SELECT id_street( strt ) ), idx, type_adress );
 $$;
 
+
+
 CREATE OR REPLACE FUNCTION id_vatnames ( nm VARCHAR ) RETURNS INT AS
 ' SELECT vatname_id FROM vatnames WHERE vatname_name = nm '
 LANGUAGE SQL;
 
+*/
+
 CREATE OR REPLACE FUNCTION get_id_country ( nm VARCHAR ) RETURNS INT AS
  'SELECT country_id FROM countrys WHERE country_name = nm'
 LANGUAGE SQL;
-
-SELECT  (SELECT street_id FROM streets WHERE street_name = 'UL. POLNA 4/2') IS NULL;
-
-IF NOT EXISTS ( SELECT street_id FROM streets WHERE street_name = 'UL. POLNA 4/2' )
-	BEGIN
-		INSERT INTO streets ( street_name ) VALUES ( 'UL. POLNA 4/2' )
-	END;
-
-DO$$
-BEGIN
-IF(  SELECT street_id FROM streets WHERE street_name = 'UL. POLNA 4/2' ) IS NULL
-	THEN  INSERT INTO streets ( street_name ) VALUES ( 'UL. POLNA 4/2' );
-END IF;
-END
-$$
 
 CREATE OR REPLACE FUNCTION insertOrIgnoreStreet( strt VARCHAR ) RETURNS BOOL AS
 $$
@@ -127,22 +134,6 @@ BEGIN
 END;
 $$
 LANGUAGE plpgsql;
-
--- TRIGGER FUNCTION
-CREATE OR REPLACE FUNCTION func_to_trigger_insupddel_adress_view() RETURNS TRIGGER AS
-$$
-BEGIN
-	SELECT insertOrIgnoreStreet( NOW.street_name );
-	INSERT INTO adress ( country_id, city_id, street_id, adres_index, adres_type )
-	VALUES (  ( SELECT id_country( NOW.country_name ) ), ( SELECT id_city( NOW.city_name ) ), ( SELECT id_street( NOW.street_name ) ), NOW.adres_index, NOW.adres_type );
-END
-$$
-LANGUAGE plpgsql;
-
--- TRIGGERS
-CREATE TRIGGER trigger_insupddel_adress_view INSTEAD OF INSERT ON adress_view
-FOR EACH ROW
-EXECUTE FUNCTION func_to_trigger_insupddel_adress_view();
 
 
 

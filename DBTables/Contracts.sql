@@ -9,4 +9,4 @@ CREATE TABLE contracts (
 	contract_number VARCHAR(200), -- номер договора
 	
 	contract_note TEXT --заметки по договору
-); 
+);
