@@ -1,4 +1,4 @@
-CREATE SCHEMA contract;
+CREATE SCHEMA IF NOT EXISTS contract;
 
 CREATE TABLE contracts (
 	contract_id SERIAL UNIQUE, -- 
