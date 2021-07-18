@@ -30,9 +30,9 @@ int main( int argc, char *argv[] ) {
   // QLabel *w = new QLabel( "<img source = \":/img/flagCountrys/austria.png\"><H3>AUSTRIA</H3></img>" );
   // ComboBoxCarBrand w;
 
-  // CreateOrderDialog w;
+  CreateOrderDialog w;
   // AddBrandCarDialog w;
-  AdressDialog w;
+  // AdressDialog w;
   w.show( );
 
   splash.finish( &w );

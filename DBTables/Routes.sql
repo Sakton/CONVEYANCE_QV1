@@ -6,11 +6,11 @@ CREATE SCHEMA IF NOT EXISTS route;
 -- ***********
 CREATE TABLE route.routes (
 	route_id SERIAL UNIQUE, --PK
---	adres_id INTEGER, -- адрес старта
---	adres_id INTEGER, -- адрес прибытия
-	route_arrival INTEGER, -- доезд ( прибытие ) км.
-	route_route INTEGER, -- маршрут ( путь ) км.
- 	route_ante MONEY -- ставка ( усл. ед. )
+--	adres_id INTEGER,       -- адрес старта
+--	adres_id INTEGER,       -- адрес прибытия
+        route_arrival INTEGER,  -- доезд ( прибытие ) км.
+        route_route INTEGER,    -- маршрут ( путь ) км.
+        route_ante MONEY        -- ставка ( усл. ед. )
 );
 
 
