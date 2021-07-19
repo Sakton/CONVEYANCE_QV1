@@ -14,9 +14,12 @@ public:
   explicit CreateOrderDialog( QWidget *parent = nullptr );
   ~CreateOrderDialog( );
 
-  // QDialog interface
 public slots:
   void accept( ) override;
+  void slotAddShipper( );
+
+private:
+  void connects( );
 
 private:
   Ui::CreateOrderDialog *ui;

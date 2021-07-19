@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>385</width>
-    <height>572</height>
+    <width>420</width>
+    <height>614</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -35,7 +35,7 @@
            </widget>
           </item>
           <item row="2" column="2">
-           <widget class="QPushButton" name="pushButton_2">
+           <widget class="QPushButton" name="pushButtonAddShipper">
             <property name="maximumSize">
              <size>
               <width>40</width>
@@ -48,7 +48,7 @@
            </widget>
           </item>
           <item row="2" column="3">
-           <widget class="QPushButton" name="pushButton_3">
+           <widget class="QPushButton" name="pushButtonUpdateShipper">
             <property name="maximumSize">
              <size>
               <width>40</width>
@@ -74,7 +74,7 @@
            <widget class="QLineEdit" name="lineEdit"/>
           </item>
           <item row="2" column="1">
-           <widget class="QComboBox" name="comboBox"/>
+           <widget class="ComboBoxShippers" name="comboBox"/>
           </item>
           <item row="3" column="0">
            <widget class="QLabel" name="label_4">
@@ -440,6 +440,9 @@
             <property name="maximum">
              <double>99999999.989999994635582</double>
             </property>
+            <property name="singleStep">
+             <double>0.010000000000000</double>
+            </property>
             <property name="value">
              <double>0.010000000000000</double>
             </property>
@@ -479,6 +482,11 @@
    <class>ComboBoxPeriodSendMail</class>
    <extends>QComboBox</extends>
    <header>comboboxperiodsendmail.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ComboBoxShippers</class>
+   <extends>QComboBox</extends>
+   <header>comboboxshippers.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

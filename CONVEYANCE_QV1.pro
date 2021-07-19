@@ -31,10 +31,12 @@ SOURCES += \
     ElementsWidgets/comboboxcurrency.cpp \
     ElementsWidgets/comboboxpaymentperiod.cpp \
     ElementsWidgets/comboboxperiodsendmail.cpp \
+    ElementsWidgets/comboboxshippers.cpp \
     ElementsWidgets/comboboxtypeadress.cpp \
     MainWindow/mainwindow.cpp \
     MyTests/testqsqltableformform.cpp \
     Orders/createorderdialog.cpp \
+    Shippers/addshipperdialog.cpp \
     main.cpp
 
 HEADERS += \
@@ -61,10 +63,12 @@ HEADERS += \
 	ElementsWidgets/comboboxcurrency.h \
 	ElementsWidgets/comboboxpaymentperiod.h \
 	ElementsWidgets/comboboxperiodsendmail.h \
+	ElementsWidgets/comboboxshippers.h \
 	ElementsWidgets/comboboxtypeadress.h \
 	MainWindow/mainwindow.h \
 	MyTests/testqsqltableformform.h \
-	Orders/createorderdialog.h
+	Orders/createorderdialog.h \
+	Shippers/addshipperdialog.h
 
 FORMS += \
 	Adress/addadress.ui \
@@ -79,7 +83,8 @@ FORMS += \
 	Contract/createcontractdialog.ui \
 	MainWindow/mainwindow.ui \
 	MyTests/testqsqltableformform.ui \
-	Orders/createorderdialog.ui
+	Orders/createorderdialog.ui \
+	Shippers/addshipperdialog.ui
 
 TRANSLATIONS += \
     CONVEYANCE_QV1_pl_PL.ts
@@ -102,6 +107,7 @@ DISTFILES += \
     DBTables/Shippers.sql \
     DBTables/VATs.sql \
 	Dump/dump.sql \
+	Dump/dump1.sql \
 	IshodnyDanny/Adresses.ods \
 	IshodnyDanny/Adresses.xls \
 	doc/BaseTable.txt \
