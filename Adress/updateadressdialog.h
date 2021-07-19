@@ -7,14 +7,14 @@ namespace Ui {
 class UpdateAdressDialog;
 }
 
-class QSqlTableModel;
+class QSqlQueryModel;
 
 class UpdateAdressDialog : public QDialog
 {
   Q_OBJECT
 
 public:
-  explicit UpdateAdressDialog( int id, QSqlTableModel *m, QWidget *parent = nullptr );
+  explicit UpdateAdressDialog( int id, QSqlQueryModel *m, QWidget *parent = nullptr );
   ~UpdateAdressDialog( );
 
   // QDialog interface
@@ -27,7 +27,7 @@ private:
 
 private:
   Ui::UpdateAdressDialog *ui;
-  QSqlTableModel *model;
+  QSqlQueryModel *model;
   int curId;
 };
 

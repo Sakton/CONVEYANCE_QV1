@@ -13,6 +13,7 @@ SOURCES += \
     Adress/adress.cpp \
     Adress/adresscountrydelegate.cpp \
     Adress/adressdialog.cpp \
+    Adress/adresssqlquerymodel.cpp \
     Adress/adresssqltablemodel.cpp \
     Adress/adresstableview.cpp \
     Adress/adressview.cpp \
@@ -32,6 +33,7 @@ SOURCES += \
     ElementsWidgets/comboboxperiodsendmail.cpp \
     ElementsWidgets/comboboxtypeadress.cpp \
     MainWindow/mainwindow.cpp \
+    MyTests/testqsqltableformform.cpp \
     Orders/createorderdialog.cpp \
     main.cpp
 
@@ -40,6 +42,7 @@ HEADERS += \
 	Adress/adress.h \
 	Adress/adresscountrydelegate.h \
 	Adress/adressdialog.h \
+	Adress/adresssqlquerymodel.h \
 	Adress/adresssqltablemodel.h \
 	Adress/adresstableview.h \
 	Adress/adressview.h \
@@ -60,6 +63,7 @@ HEADERS += \
 	ElementsWidgets/comboboxperiodsendmail.h \
 	ElementsWidgets/comboboxtypeadress.h \
 	MainWindow/mainwindow.h \
+	MyTests/testqsqltableformform.h \
 	Orders/createorderdialog.h
 
 FORMS += \
@@ -74,6 +78,7 @@ FORMS += \
 	Cars/addcarmodeldialog.ui \
 	Contract/createcontractdialog.ui \
 	MainWindow/mainwindow.ui \
+	MyTests/testqsqltableformform.ui \
 	Orders/createorderdialog.ui
 
 TRANSLATIONS += \

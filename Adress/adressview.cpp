@@ -68,7 +68,7 @@ void AdressView::updateModel( ) {
 
 void AdressView::createModel( ) {
   model = new AdressSqlTableModel { this, QSqlDatabase::database( NAME_DB_ALL ) };
-  model->setTable( "adress_view" );
+  model->setTable( "adres.adressview" );
   model->setHeaderData( 2, Qt::Orientation::Horizontal, tr( "СТРАНА" ) );
   model->setHeaderData( 3, Qt::Orientation::Horizontal, tr( "ИНДЕКС" ) );
   model->setHeaderData( 4, Qt::Orientation::Horizontal, tr( "ГОРОД" ) );

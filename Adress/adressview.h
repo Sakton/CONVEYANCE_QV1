@@ -32,7 +32,7 @@ private:
 
   // QWidget interface
 protected:
-  void contextMenuEvent( QContextMenuEvent * event ) override;
+  void contextMenuEvent( QContextMenuEvent *event ) override;
 
 private:
   Ui::AdressView *ui;

@@ -8,7 +8,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 
-UpdateAdressDialog::UpdateAdressDialog( int id, QSqlTableModel *m, QWidget *parent )
+UpdateAdressDialog::UpdateAdressDialog( int id, QSqlQueryModel *m, QWidget *parent )
     : QDialog( parent ), ui( new Ui::UpdateAdressDialog ), model { m }, curId { id } {
   ui->setupUi( this );
   setWindowTitle( tr( "ОБНОВИТЬ" ) );

@@ -1,10 +1,13 @@
 #include "Adress/adressdialog.h"
+#include "Adress/adressview.h"
 #include "MainWindow/mainwindow.h"
 #include "Orders/createorderdialog.h"
 #include <QApplication>
 #include <QLabel>
 #include <QSplashScreen>
 #include <QSqlDatabase>
+
+#include "MyTests/testqsqltableformform.h"
 
 // global
 void setsApp( QApplication &app );
@@ -30,9 +33,12 @@ int main( int argc, char *argv[] ) {
   // QLabel *w = new QLabel( "<img source = \":/img/flagCountrys/austria.png\"><H3>AUSTRIA</H3></img>" );
   // ComboBoxCarBrand w;
 
-  CreateOrderDialog w;
   // AddBrandCarDialog w;
   // AdressDialog w;
+  // AdressView w;
+  // TestQSqlTableFormForm w;
+
+  CreateOrderDialog w;
   w.show( );
 
   splash.finish( &w );
