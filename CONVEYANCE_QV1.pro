@@ -29,6 +29,7 @@ SOURCES += \
     ElementsWidgets/comboboxcity.cpp \
     ElementsWidgets/comboboxcountrys.cpp \
     ElementsWidgets/comboboxcurrency.cpp \
+    ElementsWidgets/comboboxfunctionworker.cpp \
     ElementsWidgets/comboboxpaymentperiod.cpp \
     ElementsWidgets/comboboxperiodsendmail.cpp \
     ElementsWidgets/comboboxshippers.cpp \
@@ -62,6 +63,7 @@ HEADERS += \
 	ElementsWidgets/comboboxcity.h \
 	ElementsWidgets/comboboxcountrys.h \
 	ElementsWidgets/comboboxcurrency.h \
+	ElementsWidgets/comboboxfunctionworker.h \
 	ElementsWidgets/comboboxpaymentperiod.h \
 	ElementsWidgets/comboboxperiodsendmail.h \
 	ElementsWidgets/comboboxshippers.h \
