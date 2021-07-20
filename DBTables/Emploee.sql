@@ -62,6 +62,13 @@ $$
 	VALUES ( ( SELECT emploee.getFunctionWorkerId( functionWorkerName ) ), ( SELECT cars.getAutocategory_id( autocategoryName ) ), emploeeName );
 $$;
 
+-- ПРОЦЕДУРА ВСТАВКИ ДАННЫХ В ТАБЛИЦУ СОТРУДНИК ( ПЕРЕГРУЗКА )
+-- связано с тем что в обьекте списка хранится еще id и его можно взять
+CREATE PROCEDURE emploee.addEmploee ( functionWorkerId INTEGER, autocategoryId INTEGER, emploeeName VARCHAR ) LANGUAGE SQL AS
+$$
+    INSERT INTO emploee.emploees ( functionWorker_id, autocategory_id, emploee_name )
+	VALUES ( functionWorkerId, autocategoryId, emploeeName );
+$$;
 
 -- test
 SELECT emploee.getEmploee_id ( 'Васька Пупочек' );

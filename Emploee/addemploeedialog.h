@@ -17,6 +17,10 @@ public:
   // QDialog interface
 public slots:
   void accept( ) override;
+  void slotCallAddFunctionWorkDialog( );
+
+private:
+  void connects( ) const;
 
 private:
   Ui::AddEmploeeDialog * ui;

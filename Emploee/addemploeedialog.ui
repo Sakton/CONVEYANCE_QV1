@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>ДОБАВИТЬ РАБОТНИКА</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="1" column="0">
@@ -47,7 +47,7 @@
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QComboBox" name="comboBoxFunctionWork">
+      <widget class="ComboBoxFunctionWorker" name="comboBoxFunctionWork">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -68,10 +68,10 @@
       </widget>
      </item>
      <item row="1" column="2">
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="pushButtonAddFunction">
        <property name="maximumSize">
         <size>
-         <width>40</width>
+         <width>30</width>
          <height>16777215</height>
         </size>
        </property>
@@ -95,6 +95,11 @@
    <class>ComboBoxCarCategories</class>
    <extends>QComboBox</extends>
    <header>comboboxcarcategories.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ComboBoxFunctionWorker</class>
+   <extends>QComboBox</extends>
+   <header>comboboxfunctionworker.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
