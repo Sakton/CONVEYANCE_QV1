@@ -1,25 +1,51 @@
--- машины
+/*
+NO ACTION
+Выдать ошибку, показывающую, что при удалении или изменении записи
+произойдёт нарушение ограничения внешнего ключа. Для отложенных ограничений
+ошибка произойдёт в момент проверки ограничения, если строки, ссылающиеся на эту запись,
+по-прежнему будут существовать. Этот вариант действия подразумевается по умолчанию.
+
+RESTRICT
+Выдать ошибку, показывающую, что при удалении или изменении записи
+произойдёт нарушение ограничения внешнего ключа. Этот вариант подобен NO ACTION, но эта проверка будет неоткладываемой.
+
+CASCADE
+Удалить все строки, ссылающиеся на удаляемую запись, либо поменять
+значения в ссылающихся столбцах на новые значения во внешних столбцах, в соответствии с операцией.
+
+SET NULL
+Установить ссылающиеся столбцы равными NULL.
+
+SET DEFAULT
+Установить в ссылающихся столбцах значения по умолчанию.
+(Если эти значения не равны NULL, во внешней таблице должна быть строка,
+соответствующая набору значений по умолчанию; в противном случае операция завершится ошибкой.)
+*/
+
+-- ОБЛАСТЬ ИМЕН МАШИНЫ
 CREATE SCHEMA IF NOT EXISTS cars; -- Пространство имен для таблиц авто
 
--- ***********
+-- ТАБЛИЦА БРЕНДЫ АВТОМОБИЛЬНЫЕ
 CREATE TABLE cars.autobrands (
-	autobrand_id SERIAL UNIQUE,
-	autobrand_name VARCHAR(256) UNIQUE NOT NULL,
-	autobrand_icon VARCHAR(256) DEFAULT ('no_icon.png')
+	autobrand_id SERIAL UNIQUE,				-- PK
+	autobrand_name VARCHAR(256) UNIQUE NOT NULL,		-- ИМЯ БРЕНДА
+	autobrand_icon VARCHAR(256) DEFAULT ('no_icon.png'),	-- ИМЯ ФАЙЛА ИКОНКИ БРЕНДА
+	PRIMARY KEY ( autobrand_id )
 );
 
--- ***********
-CREATE TABLE cars.autocategories ( -- Категории прав и автомобилей
-	autocategory_id SERIAL UNIQUE,
-	autocategory_name VARCHAR(256) NOT NULL,
-	autocategory_symbol VARCHAR (5) NOT NULL,
-	autocategory_icon VARCHAR(64),
-	autocategory_description TEXT
+-- СПРАВОЧНАЯ ТАБЛИЦА КАТЕГОРИИ АВТО И ВОДИТЕЛЬСКИХ ПРАВ
+CREATE TABLE cars.autocategories (
+	autocategory_id SERIAL UNIQUE,				-- PK
+	autocategory_name VARCHAR(256) NOT NULL,		-- ИМЯ КАТЕГОРИИ
+	autocategory_symbol VARCHAR (5) NOT NULL,		-- ОБОЗНАЧЕНИЕ КАТЕГОРИИ
+	autocategory_icon VARCHAR(64),				-- ИМЯ ФАЙЛА ПИКТОГРАММЫ КАТЕГОРИИ
+	autocategory_description TEXT,				-- КРАТКОЕ ОПИСАНИЕ КАТЕГОРИИ ( справочная информация для оператора не знакомого с этим )
+	PRIMARY KEY ( autocategory_id )
 );
 
 https://profi-prim.ru/article/kategorii-prav#:~:text=%D0%B2%20%D1%81%D0%B5%D0%B3%D0%BE%D0%B4%D0%BD%D1%8F%D1%88%D0%BD%D0%B5%D0%BC%20%D1%82%D0%B5%D0%BA%D1%81%D1%82%D0%B5.-,%D0%92%20%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D0%B8%20%D1%81%D1%83%D1%89%D0%B5%D1%81%D1%82%D0%B2%D1%83%D0%B5%D1%82%2010%20%D0%BA%D0%B0%D1%82%D0%B5%D0%B3%D0%BE%D1%80%D0%B8%D0%B9%20%D0%BF%D1%80%D0%B0%D0%B2%3A%20%D0%9C%20%E2%80%94%20%D0%BC%D0%BE%D0%BF%D0%B5%D0%B4%D1%8B%20%D0%B8%20%D0%BB%D0%B5%D0%B3%D0%BA%D0%B8%D0%B5,%D1%82%D0%BE%D0%BD%D0%BD%3B%20%D0%A1%D0%95%20%E2%80%94%20%D0%B3%D1%80%D1%83%D0%B7%D0%BE%D0%B2%D1%8B%D0%B5%20%D0%B0%D0%B2%D1%82%D0%BE%D0%BC%D0%BE%D0%B1%D0%B8%D0%BB%D0%B8%20%D1%81
 
--- ***********
+-- ВСТАВКА СПРАВОЧНЫХ ДАННЫХ
 INSERT INTO cars.autocategories ( autocategory_name, autocategory_symbol, autocategory_icon, autocategory_description )
 VALUES ( 'Мопеды и Легкие квадрициклы','M','M.png','Категория М дает право водить мопеды и легкие квадрициклы.
 												    Особенность управления этими ТС в том, что ими можно управлять 
@@ -73,38 +99,36 @@ VALUES ( 'Мопеды и Легкие квадрициклы','M','M.png','Ка
 		( 'Троллейбусы', 'Tb', 'Tb.png', 'Дают право управлять троллейбусами' ),
 		( 'Трамваи', 'Tm', 'Tm.png', 'Дают право управлять трамваями' );
 
--- ***********
+-- ТАБЛИЦА МОДЕЛИ АВТОМОБИЛЕЙ
 CREATE TABLE cars.carsmodels (
-	carsmodel_id SERIAL UNIQUE,
-	autobrand_id INTEGER NOT NULL,
-	autocategory_id INTEGER NOT NULL,
-	carsmodel_name VARCHAR ( 200 ),
-	FOREIGN KEY ( autobrand_id ) REFERENCES cars.autobrands ( autobrand_id ), -- NO ACTION по умолчанию
-	FOREIGN KEY ( autocategory_id ) REFERENCES cars.autocategories ( autocategory_id ) -- NO ACTION по умолчанию
+	carsmodel_id SERIAL UNIQUE,			    -- PK
+	autobrand_id INTEGER NOT NULL,			    -- FK КАКОМУ БРЕНДУ ПРИНАДЛЕЖИТ
+	autocategory_id INTEGER NOT NULL,		    -- FK К КАКОЙ КАТЕГОРИИ ОТНОСИТСЯ
+	carsmodel_name VARCHAR ( 200 ),			    -- ИМЯ МОДЕЛИ
+	PRIMARY KEY ( carsmodel_id ),
+	FOREIGN KEY ( autobrand_id ) REFERENCES cars.autobrands ( autobrand_id ),	    -- NO ACTION по умолчанию
+	FOREIGN KEY ( autocategory_id ) REFERENCES cars.autocategories ( autocategory_id )  -- NO ACTION по умолчанию
 );
 -- NO ACTION - не даст удалить связанную строку из базовой тавблицы
 
+-- ФУНКЦИЯ ВОЗВРАЩАЕТ ID БРЕНДА ПО ЕГО ИМЕНИ
 -- Так как данные берутся из comboBox, а они из БД, то такие записи существуют
--- ***********
-CREATE OR REPLACE FUNCTION cars.getAutobrand_id ( nameBrand VARCHAR ) RETURNS INTEGER AS
+CREATE OR REPLACE FUNCTION cars.getAutobrand_id ( nameBrand VARCHAR ) RETURNS INTEGER LANGUAGE SQL AS
 $$
 	SELECT autobrand_id FROM cars.autobrands WHERE autobrand_name = nameBrand;
-$$ 
-LANGUAGE SQL;
+$$;
 
---*************
-CREATE OR REPLACE FUNCTION cars.getAutocategory_id ( symbolCategory VARCHAR ) RETURNS INTEGER AS
+-- ФУНКЦИЯ ВОЗВРАЩАЕТ ID КАТЕГОРИИ ПО ЕЕ ИМЕНИ
+CREATE OR REPLACE FUNCTION cars.getAutocategory_id ( symbolCategory VARCHAR ) RETURNS INTEGER LANGUAGE SQL AS
 $$
 	SELECT autocategory_id FROM cars.autocategories WHERE autocategory_symbol = symbolCategory;
-$$
-LANGUAGE SQL;
+$$;
 
--- ************
-CREATE OR REPLACE PROCEDURE cars.add_carmodel ( nameBrand VARCHAR, symbolCategory VARCHAR, carModel VARCHAR ) 
-LANGUAGE SQL
-AS $$
+-- ПРОЦЕДУРА ДОБАВЛЕНИЯ МОДЕЛИ
+CREATE OR REPLACE PROCEDURE cars.add_carmodel ( nameBrand VARCHAR, symbolCategory VARCHAR, carModel VARCHAR ) LANGUAGE SQL AS
+$$
 	INSERT INTO cars.carsmodels ( autobrand_id, autocategory_id, carsmodel_name )
-	VALUES ( ( SELECT cars.getAutobrand_id(nameBrand) ), ( SELECT cars.getAutocategory_id(symbolCategory) ), carModel );
+	    VALUES ( ( SELECT cars.getAutobrand_id( nameBrand ) ), ( SELECT cars.getAutocategory_id( symbolCategory ) ), carModel );
 $$;
 
 

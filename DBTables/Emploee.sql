@@ -1,29 +1,67 @@
+/*
+NO ACTION
+Выдать ошибку, показывающую, что при удалении или изменении записи
+произойдёт нарушение ограничения внешнего ключа. Для отложенных ограничений
+ошибка произойдёт в момент проверки ограничения, если строки, ссылающиеся на эту запись,
+по-прежнему будут существовать. Этот вариант действия подразумевается по умолчанию.
+
+RESTRICT
+Выдать ошибку, показывающую, что при удалении или изменении записи
+произойдёт нарушение ограничения внешнего ключа. Этот вариант подобен NO ACTION, но эта проверка будет неоткладываемой.
+
+CASCADE
+Удалить все строки, ссылающиеся на удаляемую запись, либо поменять
+значения в ссылающихся столбцах на новые значения во внешних столбцах, в соответствии с операцией.
+
+SET NULL
+Установить ссылающиеся столбцы равными NULL.
+
+SET DEFAULT
+Установить в ссылающихся столбцах значения по умолчанию.
+(Если эти значения не равны NULL, во внешней таблице должна быть строка,
+соответствующая набору значений по умолчанию; в противном случае операция завершится ошибкой.)
+*/
+
 -- работник ( не только водитель кто угодно )
 CREATE SCHEMA IF NOT EXISTS emploee;
 
 
--- ***********
-CREATE TABLE emploee.emploees (
-	emploee_id SERIAL UNIQUE, -- PK
-	emploee_name VARCHAR(200) --имя работника
+-- ТАБЛИЦА ДОЛЖНОСТЬ НА ФИРМЕ
+CREATE TABLE emploee.functionWorker (
+    functionWorker_id SERIAL UNIQUE,		-- PK
+    functionWorker_name	VARCHAR(128) UNIQUE,	-- Наименование должности
+    PRIMARY KEY( functionWorker_id )
 );
 
 
--- ***********
-CREATE OR REPLACE FUNCTION emploee.getEmploee_id ( nameEmploee VARCHAR ) RETURNS INTEGER AS
+cars.autocategories
+-- ТАБЛИЦА СОТРУДНИКИ
+CREATE TABLE emploee.emploees (
+	emploee_id SERIAL UNIQUE,		-- PK
+	functionWorker_id INTEGER NOT NULL,	-- FK
+	autocategory_id INTEGER,		-- Категория прав
+	emploee_name VARCHAR(200),		-- имя работника
+	PRIMARY KEY (emploee_id),
+	FOREIGN KEY ( functionWorker_id ) REFERENCES emploee.functionWorker ( functionWorker_id )
+	    ON DELETE CASCADE ON UPDATE CASCADE,
+	FOREIGN KEY ( autocategory_id )  REFERENCES cars.autocategories ( autocategory_id ) ON DELETE SET NULL
+);
+
+
+-- ФУНКЦИЯ ВОЗВРАЩАЕТ ID СОТРУДНИКА ПО ИМЕНИ
+CREATE FUNCTION emploee.getFunctionWorkerId( functionWorkerName VARCHAR ) RETURNS INTEGER LANGUAGE SQL AS
 $$
-	DECLARE id INTEGER DEFAULT NULL;
-	BEGIN
-		id = ( SELECT emploee_id FROM emploee.emploees WHERE  emploee_name = nameEmploee );
-		IF ( id IS NULL ) THEN
-			BEGIN
-				INSERT INTO emploee.emploees ( emploee_name ) VALUES ( nameEmploee );
-				id = ( SELECT lastval() );
-			END;
-		END IF;
-		RETURN id;
-	END;
-$$ LANGUAGE plpgsql;
+    SELECT functionWorker_id FROM emploee.functionWorker WHERE functionWorker_name = functionWorkerName;
+$$;
+
+
+-- ПРОЦЕДУРА ВСТАВКИ ДАННЫХ В ТАБЛИЦУ СОТРУДНИК
+CREATE PROCEDURE emploee.addEmploee ( functionWorkerName VARCHAR, autocategoryName VARCHAR, emploeeName VARCHAR ) LANGUAGE SQL AS
+$$
+    INSERT INTO emploee.emploees ( functionWorker_id, autocategory_id, emploee_name )
+	VALUES ( ( SELECT emploee.getFunctionWorkerId( functionWorkerName ) ), ( SELECT cars.getAutocategory_id( autocategoryName ) ), emploeeName );
+$$;
+
 
 -- test
 SELECT emploee.getEmploee_id ( 'Васька Пупочек' );
