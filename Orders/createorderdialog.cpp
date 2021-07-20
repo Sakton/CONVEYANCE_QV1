@@ -16,7 +16,7 @@ void CreateOrderDialog::accept( ) {
 }
 
 void CreateOrderDialog::slotAddShipper( ) {
-  AddiShipperDialog dialogAddShipper;
+  AddShipperDialog dialogAddShipper;
   dialogAddShipper.exec( );
 }
 

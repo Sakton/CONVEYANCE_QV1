@@ -1,15 +1,17 @@
 #include "addshipperdialog.h"
 #include "Constants.h"
-#include "ui_addishipperdialog.h"
+#include "ui_addshipperdialog.h"
 
 #include <QSqlError>
 #include <QSqlQuery>
 
-AddiShipperDialog::AddiShipperDialog( QWidget * parent ) : QDialog( parent ), ui( new Ui::AddiShipperDialog ) { ui->setupUi( this ); }
+AddShipperDialog::AddShipperDialog( QWidget * parent ) : QDialog( parent ), ui( new Ui::AddShipperDialog ) {
+  ui->setupUi( this );
+}
 
-AddiShipperDialog::~AddiShipperDialog( ) { delete ui; }
+AddShipperDialog::~AddShipperDialog( ) { delete ui; }
 
-void AddiShipperDialog::accept( ) {
+void AddShipperDialog::accept( ) {
   QString name = ui->lineEditName->text( );
   if ( name.isEmpty( ) )
     return;

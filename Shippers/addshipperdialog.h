@@ -4,21 +4,21 @@
 #include <QDialog>
 
 namespace Ui {
-class AddiShipperDialog;
+class AddShipperDialog;
 }
 
-class AddiShipperDialog : public QDialog {
+class AddShipperDialog : public QDialog {
   Q_OBJECT
 
 public:
-  explicit AddiShipperDialog(QWidget *parent = nullptr);
-  ~AddiShipperDialog();
+  explicit AddShipperDialog( QWidget * parent = nullptr );
+  ~AddShipperDialog( );
   // QDialog interface
 public slots:
   void accept( ) override;
 
 private:
-  Ui::AddiShipperDialog * ui;
+  Ui::AddShipperDialog * ui;
 };
 
 #endif // ADDSHIPPERDIALOG_H
