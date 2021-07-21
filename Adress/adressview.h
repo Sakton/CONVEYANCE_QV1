@@ -1,6 +1,8 @@
 #ifndef ADRESSVIEW_H
 #define ADRESSVIEW_H
 
+/* TODO доделать потом делегата для картинки, если ничего не поменяется */
+
 #include <QWidget>
 
 class QSqlTableModel;

@@ -70,7 +70,7 @@ $$
 	VALUES ( functionWorkerId, autocategoryId, emploeeName );
 $$;
 
--- ПРЕДСТАВЛЕНИЕ ДАННЫХ
+-- ПРЕДСТАВЛЕНИЕ
 CREATE VIEW emploee.emploeeView AS
     SELECT e.emploee_id, e.emploee_name, fw.functionWorker_name, cr.autocategory_symbol, cr.autocategory_icon
     FROM emploee.emploees AS e

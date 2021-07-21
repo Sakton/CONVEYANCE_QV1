@@ -115,20 +115,20 @@ CREATE TABLE cars.carsmodels (
 -- Так как данные берутся из comboBox, а они из БД, то такие записи существуют
 CREATE OR REPLACE FUNCTION cars.getAutobrand_id ( nameBrand VARCHAR ) RETURNS INTEGER LANGUAGE SQL AS
 $$
-	SELECT autobrand_id FROM cars.autobrands WHERE autobrand_name = nameBrand;
+    SELECT autobrand_id FROM cars.autobrands WHERE autobrand_name = nameBrand;
 $$;
 
 -- ФУНКЦИЯ ВОЗВРАЩАЕТ ID КАТЕГОРИИ ПО ЕЕ ИМЕНИ
 CREATE OR REPLACE FUNCTION cars.getAutocategory_id ( symbolCategory VARCHAR ) RETURNS INTEGER LANGUAGE SQL AS
 $$
-	SELECT autocategory_id FROM cars.autocategories WHERE autocategory_symbol = symbolCategory;
+    SELECT autocategory_id FROM cars.autocategories WHERE autocategory_symbol = symbolCategory;
 $$;
 
 -- ПРОЦЕДУРА ДОБАВЛЕНИЯ МОДЕЛИ
 CREATE OR REPLACE PROCEDURE cars.add_carmodel ( nameBrand VARCHAR, symbolCategory VARCHAR, carModel VARCHAR ) LANGUAGE SQL AS
 $$
-	INSERT INTO cars.carsmodels ( autobrand_id, autocategory_id, carsmodel_name )
-	    VALUES ( ( SELECT cars.getAutobrand_id( nameBrand ) ), ( SELECT cars.getAutocategory_id( symbolCategory ) ), carModel );
+    INSERT INTO cars.carsmodels ( autobrand_id, autocategory_id, carsmodel_name )
+	VALUES ( ( SELECT cars.getAutobrand_id( nameBrand ) ), ( SELECT cars.getAutocategory_id( symbolCategory ) ), carModel );
 $$;
 
 

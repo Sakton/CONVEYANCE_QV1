@@ -44,9 +44,9 @@ int main( int argc, char *argv[] ) {
   // TestQSqlTableFormForm w;
 
   // AddEmploeeDialog w;
-  EmploeeTableView w;
+  // EmploeeTableView w;
   // AddShipperDialog w;
-  // CreateOrderDialog w;
+  CreateOrderDialog w;
   w.show( );
 
   splash.finish( &w );
