@@ -35,6 +35,9 @@ SOURCES += \
     ElementsWidgets/comboboxshippers.cpp \
     ElementsWidgets/comboboxtypeadress.cpp \
     Emploee/addemploeedialog.cpp \
+    Emploee/addfunctionemploeedialog.cpp \
+    Emploee/emploeesqltablemodel.cpp \
+    Emploee/emploeetableview.cpp \
     MainWindow/mainwindow.cpp \
     MyTests/testqsqltableformform.cpp \
     Orders/createorderdialog.cpp \
@@ -69,6 +72,9 @@ HEADERS += \
 	ElementsWidgets/comboboxshippers.h \
 	ElementsWidgets/comboboxtypeadress.h \
 	Emploee/addemploeedialog.h \
+	Emploee/addfunctionemploeedialog.h \
+	Emploee/emploeesqltablemodel.h \
+	Emploee/emploeetableview.h \
 	MainWindow/mainwindow.h \
 	MyTests/testqsqltableformform.h \
 	Orders/createorderdialog.h \
@@ -86,6 +92,8 @@ FORMS += \
 	Cars/addcarmodeldialog.ui \
 	Contract/createcontractdialog.ui \
 	Emploee/addemploeedialog.ui \
+	Emploee/addfunctionemploeedialog.ui \
+	Emploee/emploeetableview.ui \
 	MainWindow/mainwindow.ui \
 	MyTests/testqsqltableformform.ui \
 	Orders/createorderdialog.ui \

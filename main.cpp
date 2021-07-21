@@ -1,8 +1,12 @@
 #include "Adress/adressdialog.h"
 #include "Adress/adressview.h"
 #include "Emploee/addemploeedialog.h"
+#include "Emploee/emploeetableview.h"
 #include "MainWindow/mainwindow.h"
 #include "Orders/createorderdialog.h"
+
+#include "Shippers/addshipperdialog.h"
+
 #include <QApplication>
 #include <QLabel>
 #include <QSplashScreen>
@@ -39,7 +43,9 @@ int main( int argc, char *argv[] ) {
   // AdressView w;
   // TestQSqlTableFormForm w;
 
-  AddEmploeeDialog w;
+  // AddEmploeeDialog w;
+  EmploeeTableView w;
+  // AddShipperDialog w;
   // CreateOrderDialog w;
   w.show( );
 

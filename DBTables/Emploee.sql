@@ -70,6 +70,16 @@ $$
 	VALUES ( functionWorkerId, autocategoryId, emploeeName );
 $$;
 
+-- ПРЕДСТАВЛЕНИЕ ДАННЫХ
+CREATE VIEW emploee.emploeeView AS
+    SELECT e.emploee_id, e.emploee_name, fw.functionWorker_name, cr.autocategory_symbol, cr.autocategory_icon
+    FROM emploee.emploees AS e
+	INNER JOIN emploee.functionWorker AS fw
+	    ON e.functionWorker_id = fw.functionWorker_id
+	INNER JOIN cars.autocategories AS cr
+	    ON e.autocategory_id = cr.autocategory_id;
+
+
 -- test
 SELECT emploee.getEmploee_id ( 'Васька Пупочек' );
 SELECT emploee.getEmploee_id ( 'Васька Пупочек Пупочек' );

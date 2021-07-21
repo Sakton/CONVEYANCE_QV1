@@ -87,7 +87,6 @@ void AdressView::tuningTableView( ) {
 
 void AdressView::contextMenuEvent( QContextMenuEvent * event ) {
   //выбранный индекс модели -> выбранная строка
-
   QMenu contextMenu( this );
   // TODO тут возможно придется изменить
   QAction actionAddRow( tr( "Добавить" ), &contextMenu );

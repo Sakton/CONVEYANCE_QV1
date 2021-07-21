@@ -2,6 +2,7 @@
 #include "Constants.h"
 #include "ui_addshipperdialog.h"
 
+#include <QMessageBox>
 #include <QSqlError>
 #include <QSqlQuery>
 
@@ -13,8 +14,10 @@ AddShipperDialog::~AddShipperDialog( ) { delete ui; }
 
 void AddShipperDialog::accept( ) {
   QString name = ui->lineEditName->text( );
-  if ( name.isEmpty( ) )
+  if ( name.isEmpty( ) ) {
+    QMessageBox::warning( this, tr( "ПУСТОЕ ПОЛЕ" ), tr( "ПОЛЕ МЕ МОЖЕТ БЫТЬ ПУСТЫМ" ) );
     return;
+  }
   QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
   QString qs = QString { "CALL shipper.addShipper( '%1' )" }.arg( name );
   if ( !query.exec( qs ) )

@@ -6,7 +6,10 @@
 
 ComboBoxFunctionWorker::ComboBoxFunctionWorker( QWidget * parent ) : QComboBox( parent ) { init( ); }
 
+void ComboBoxFunctionWorker::reCreate( ) { init( ); }
+
 void ComboBoxFunctionWorker::init( ) {
+  clear( );
   QString qs { "SELECT functionworker_id, functionworker_name FROM  emploee.functionworker;" };
   QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
   if ( !query.exec( qs ) )
