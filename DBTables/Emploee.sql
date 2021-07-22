@@ -80,8 +80,8 @@ CREATE VIEW emploee.emploeeView AS
 	    ON e.autocategory_id = cr.autocategory_id;
 
 -- ПРЕДСТАВЛЕНИЕ - "ВОДИТЕЛИ"
-CREATE VIEW emploee.voditeli AS
-SELECT emploee_name FROM emploee.emploees WHERE functionWorker_id = ( SELECT emploee.getFunctionWorkerId(  'Водитель'  ) );
+CREATE OR REPLACE VIEW emploee.voditeli AS
+SELECT emploee_id, emploee_name FROM emploee.emploees WHERE functionWorker_id = ( SELECT emploee.getFunctionWorkerId(  'Водитель'  ) );
 -- TODO тут очень плохо!!! в части выбора конкретного названия - не гибко!!!
 
 -- test

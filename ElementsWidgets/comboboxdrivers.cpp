@@ -8,11 +8,10 @@ ComboBoxDrivers::ComboBoxDrivers( QWidget * parent ) : QComboBox( parent ) { ini
 
 void ComboBoxDrivers::init( ) {
   QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
-  QString qs = QString { "SELECT emploee_name FROM emploee.voditeli;" };
+  QString qs = QString { "SELECT emploee_name, emploee_id FROM emploee.voditeli;" };
   if ( !query.exec( qs ) )
     qDebug( ) << query.lastError( ).text( );
   else
-    while ( query.next( ) ) {
-      addItem( query.value( "emploee_name" ).toString( ) );
-    }
+    while ( query.next( ) )
+      addItem( query.value( "emploee_name" ).toString( ), query.value( "emploee_id" ) );
 }
