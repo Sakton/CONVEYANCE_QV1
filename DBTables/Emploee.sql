@@ -48,7 +48,7 @@ CREATE TABLE emploee.emploees (
 );
 
 
--- ФУНКЦИЯ ВОЗВРАЩАЕТ ID СОТРУДНИКА ПО ИМЕНИ
+-- ФУНКЦИЯ ВОЗВРАЩАЕТ ID ДОЛЖНОСТИ ПО НАЗВАНИЮ
 CREATE FUNCTION emploee.getFunctionWorkerId( functionWorkerName VARCHAR ) RETURNS INTEGER LANGUAGE SQL AS
 $$
     SELECT functionWorker_id FROM emploee.functionWorker WHERE functionWorker_name = functionWorkerName;
@@ -70,7 +70,7 @@ $$
 	VALUES ( functionWorkerId, autocategoryId, emploeeName );
 $$;
 
--- ПРЕДСТАВЛЕНИЕ
+-- ПРЕДСТАВЛЕНИЕ "СОТРУДНИКИ"
 CREATE VIEW emploee.emploeeView AS
     SELECT e.emploee_id, e.emploee_name, fw.functionWorker_name, cr.autocategory_symbol, cr.autocategory_icon
     FROM emploee.emploees AS e
@@ -79,6 +79,10 @@ CREATE VIEW emploee.emploeeView AS
 	INNER JOIN cars.autocategories AS cr
 	    ON e.autocategory_id = cr.autocategory_id;
 
+-- ПРЕДСТАВЛЕНИЕ - "ВОДИТЕЛИ"
+CREATE VIEW emploee.voditeli AS
+SELECT emploee_name FROM emploee.emploees WHERE functionWorker_id = ( SELECT emploee.getFunctionWorkerId(  'Водитель'  ) );
+-- TODO тут очень плохо!!! в части выбора конкретного названия - не гибко!!!
 
 -- test
 SELECT emploee.getEmploee_id ( 'Васька Пупочек' );

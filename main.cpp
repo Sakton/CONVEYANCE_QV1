@@ -1,5 +1,6 @@
 #include "Adress/adressdialog.h"
 #include "Adress/adressview.h"
+#include "ElementsWidgets/comboboxdrivers.h"
 #include "Emploee/addemploeedialog.h"
 #include "Emploee/emploeetableview.h"
 #include "MainWindow/mainwindow.h"
@@ -29,19 +30,6 @@ int main( int argc, char *argv[] ) {
   splash.show( );
 
   createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
-
-  // Adress w;
-  // AddAdress w;
-  // ComboBoxCountrys w;
-  // ComboBoxCity w;
-  // CityDialog w;
-  // QLabel *w = new QLabel( "<img source = \":/img/flagCountrys/austria.png\"><H3>AUSTRIA</H3></img>" );
-  // ComboBoxCarBrand w;
-
-  // AddBrandCarDialog w;
-  // AdressDialog w;
-  // AdressView w;
-  // TestQSqlTableFormForm w;
 
   // AddEmploeeDialog w;
   // EmploeeTableView w;

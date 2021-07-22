@@ -97,7 +97,7 @@
            </widget>
           </item>
           <item row="3" column="1">
-           <widget class="QComboBox" name="comboBox_2"/>
+           <widget class="ComboBoxDrivers" name="comboBox_2"/>
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="label_3">
@@ -487,6 +487,11 @@
    <class>ComboBoxShippers</class>
    <extends>QComboBox</extends>
    <header>comboboxshippers.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ComboBoxDrivers</class>
+   <extends>QComboBox</extends>
+   <header>comboboxdrivers.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
