@@ -3,9 +3,9 @@
 CREATE SCHEMA IF NOT EXISTS route;
 
 
--- ***********
+-- ТАБЛИЦА "МАРШРУТ"
 CREATE TABLE route.routes (
-	route_id SERIAL UNIQUE, --PK
+	route_id SERIAL UNIQUE, -- PK
 --	adres_id INTEGER,       -- адрес старта
 --	adres_id INTEGER,       -- адрес прибытия
         route_arrival INTEGER,  -- доезд ( прибытие ) км.
@@ -26,22 +26,22 @@ CALL route.insertRoute( 100, 200, 300.25);
 
 
 -- ***********
-CREATE OR REPLACE FUNCTION route.getRout_id ( arrival INTEGER, route INTEGER, ante NUMERIC ) RETURNS INTEGER AS
+CREATE OR REPLACE FUNCTION route.getRout_id ( arrival INTEGER, route INTEGER, ante NUMERIC ) RETURNS INTEGER LANGUAGE plpgsql AS
 $$
 DECLARE id INTEGER DEFAULT NULL;
-	BEGIN
-		id = ( SELECT route_id FROM route.routes WHERE route_arrival = arrival
-													AND route_route = route
-													AND route_ante = ante::MONEY);
-		IF ( id IS NULL ) THEN
-			BEGIN
-				CALL route.insertRoute(arrival, route, ante);
-				id = ( SELECT lastval() );
-			END;
-		END IF;
-	RETURN id;
-	END;
-$$ LANGUAGE plpgsql;
+    BEGIN
+	id = ( SELECT route_id FROM route.routes WHERE route_arrival = arrival
+						 AND route_route = route
+						 AND route_ante = ante::MONEY);
+	IF ( id IS NULL ) THEN
+	    BEGIN
+		CALL route.insertRoute(arrival, route, ante);
+		id = ( SELECT lastval() );
+	    END;
+	END IF;
+    RETURN id;
+    END;
+$$;
 
 
 --test
