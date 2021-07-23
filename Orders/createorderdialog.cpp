@@ -2,7 +2,9 @@
 #include "Shippers/addshipperdialog.h"
 #include "ui_createorderdialog.h"
 
+#include "Constants.h"
 #include <QMessageBox>
+#include <QSqlQuery>
 
 CreateOrderDialog::CreateOrderDialog( QWidget *parent ) : QDialog( parent ), ui( new Ui::CreateOrderDialog ) {
   ui->setupUi(this);
@@ -15,9 +17,9 @@ CreateOrderDialog::~CreateOrderDialog( ) {
 }
 
 void CreateOrderDialog::accept( ) {
-  //**** договор
+
+  //**** ЧАСТЬ ОРДЕР
   QDate date = ui->dateEdit->date( );
-  qDebug( ) << date;
   QString numberContract = ui->lineEditnumberContract->text( );
   if ( numberContract.isEmpty( ) ) {
     QMessageBox::warning( this, tr( "Пустое поле" ), tr( "ПОЛЕ \"ДОГОВОР\": НЕ МОЖЕТ БЫТЬ ПУСТЫМ" ) );
@@ -26,19 +28,31 @@ void CreateOrderDialog::accept( ) {
   int idShippers = ui->comboBoxShippers->currentData( ).toInt( );
   int idDriver = ui->comboBoxDriver->currentData( ).toInt( );
   qDebug( ) << "договор = " << date << " " << numberContract << " " << idShippers << " " << idDriver;
+  //**** заметки
+  QString text = ui->plainTextEditNote->toPlainText( );
+  qDebug( ) << "notes = " << text;
 
-  //**** оплата
+  //**** ЧАСТЬ ОПЛАТА
   double cost = ui->doubleSpinBoxCost->value( );
   QString paymentPeriod = ui->comboBoxPaymentPeriod->currentText( );
   QString currency = ui->comboBoxCurrency->currentText( );
   qDebug( ) << "данные маршрута = " << cost << " " << paymentPeriod << " " << currency;
 
-  //**** маршрут
+  //**** ЧАСТЬ МАРШРУТ
   int arrival = ui->spinBoxArrival->value( );
   int route = ui->spinBoxRoute->value( );
   double ante = ui->doubleSpinBoxAnte->value( );
+  qDebug( ) << "route option = " << arrival << " " << route << " " << ante;
 
-  //****
+  //**** ЧАСТЬ ДОКУМЕНТЫ
+  QString postPeriod = ui->comboBoxPostPeriad->currentText( );
+  Qt::CheckState twoCopyCMR = ui->checkBox2CopyCMR->checkState( );
+  Qt::CheckState originalContract = ui->checkBoxOriginalContract->checkState( );
+  qDebug( ) << "doc options = " << postPeriod << " " << twoCopyCMR << " " << originalContract;
+
+  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
+  QString qs = QString { "" };
+
   // QDialog::accept( );
 }
 

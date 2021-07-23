@@ -115,6 +115,7 @@ DISTFILES += \
     DBTables/Cars.sql \
     DBTables/Contracts.sql \
     DBTables/CreateDb.sql \
+	DBTables/Documents.sql \
     DBTables/Emploee.sql \
     DBTables/Orders.sql \
     DBTables/Payment.sql \
