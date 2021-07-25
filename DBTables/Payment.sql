@@ -7,8 +7,8 @@ CREATE SCHEMA IF NOT EXISTS payment;
 CREATE TABLE payment.payments (
         payment_id SERIAL UNIQUE,       -- PK
 	payment_cost MONEY,             -- ОПЛАТА ( деньги )
-	payment_period VARCHAR(10),     -- ПЕРИОД ОПЛАТЫ ( поле под замену на FK ( пока для теста ) )
-	payment_currency VARCHAR(10),   -- ВАЛЮТА ОПЛАТЫ ( поле под замену на FK ( пока для теста ) )
+        payment_period VARCHAR( 64 ),     -- ПЕРИОД ОПЛАТЫ ( поле под замену на FK ( пока для теста ) )
+        payment_currency VARCHAR( 64 ),   -- ВАЛЮТА ОПЛАТЫ ( поле под замену на FK ( пока для теста ) )
 	PRIMARY KEY( payment_id )
 );
 

@@ -4,6 +4,7 @@
 
 #include "Constants.h"
 #include <QMessageBox>
+#include <QSqlError>
 #include <QSqlQuery>
 
 CreateOrderDialog::CreateOrderDialog( QWidget *parent ) : QDialog( parent ), ui( new Ui::CreateOrderDialog ) {
@@ -19,15 +20,15 @@ CreateOrderDialog::~CreateOrderDialog( ) {
 void CreateOrderDialog::accept( ) {
 
   //**** ЧАСТЬ ОРДЕР
-  QDate date = ui->dateEdit->date( );
+  QDate data = ui->dateEdit->date( );
   QString numberContract = ui->lineEditnumberContract->text( );
   if ( numberContract.isEmpty( ) ) {
     QMessageBox::warning( this, tr( "Пустое поле" ), tr( "ПОЛЕ \"ДОГОВОР\": НЕ МОЖЕТ БЫТЬ ПУСТЫМ" ) );
     return;
   }
-  int idShippers = ui->comboBoxShippers->currentData( ).toInt( );
+  int idShipper = ui->comboBoxShippers->currentData( ).toInt( );
   int idDriver = ui->comboBoxDriver->currentData( ).toInt( );
-  qDebug( ) << "договор = " << date << " " << numberContract << " " << idShippers << " " << idDriver;
+  qDebug( ) << "договор = " << data << " " << numberContract << " " << idShipper << " " << idDriver;
   //**** заметки
   QString text = ui->plainTextEditNote->toPlainText( );
   qDebug( ) << "notes = " << text;
@@ -50,9 +51,48 @@ void CreateOrderDialog::accept( ) {
   Qt::CheckState originalContract = ui->checkBoxOriginalContract->checkState( );
   qDebug( ) << "doc options = " << postPeriod << " " << twoCopyCMR << " " << originalContract;
 
-  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
-  QString qs = QString { "" };
+  //  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
+  //  QString qs = QString { "" };
 
+  QSqlDatabase db = QSqlDatabase::database( NAME_DB_ALL );
+  QSqlQuery query( db );
+  QString qsToPayment =
+      QString( "SELECT payment.getPayment_id(%1, '%2', '%3') AS idpayment;" ).arg( cost ).arg( paymentPeriod, currency );
+  QString qsToRoute = QString( "SELECT route.getRouteId(%1, %2, %3) AS idroute;" ).arg( arrival ).arg( route ).arg( ante );
+  QString qsDocuments = QString( "SELECT document.getDocumentId ('%1', %2, %3) AS iddocument" )
+                            .arg( postPeriod )
+                            .arg( twoCopyCMR )
+                            .arg( originalContract );
+
+  db.transaction( );
+
+  query.exec( qsToPayment );
+  query.next( );
+  int idPayment = query.value( "idpayment" ).toInt( );
+  qDebug( ) << "idPayment  = " << idPayment;
+  query.exec( qsToRoute );
+  query.next( );
+  int idRoute = query.value( "idroute" ).toInt( );
+  qDebug( ) << "idRoute  = " << idRoute;
+  query.exec( qsDocuments );
+  query.next( );
+  int idDocument = query.value( "iddocument" ).toInt( );
+  qDebug( ) << "idDocument  = " << idDocument;
+  QString qsInsertOrder = QString( "CALL orders.addOrder(%1, %2, %3, %4, %5, '%6', '%7', '%8')" )
+                              .arg( idShipper )
+                              .arg( idDriver )
+                              .arg( idPayment )
+                              .arg( idRoute )
+                              .arg( idDocument )
+                              .arg( data.toString( ) )
+                              .arg( numberContract )
+                              .arg( text );
+  qDebug( ) << qsInsertOrder;
+  if( !query.exec( qsInsertOrder ) ) {
+    qDebug( ) << query.lastError( ).text( );
+    db.rollback( );
+  }
+  db.commit( );
   // QDialog::accept( );
 }
 
