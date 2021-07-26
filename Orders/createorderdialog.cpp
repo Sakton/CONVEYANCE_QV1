@@ -64,8 +64,7 @@ void CreateOrderDialog::accept( ) {
                             .arg( twoCopyCMR )
                             .arg( originalContract );
 
-  db.transaction( );
-
+  db.transaction( ); //ТРАНЗАКЦИЯ
   query.exec( qsToPayment );
   query.next( );
   int idPayment = query.value( "idpayment" ).toInt( );
@@ -79,21 +78,20 @@ void CreateOrderDialog::accept( ) {
   int idDocument = query.value( "iddocument" ).toInt( );
   qDebug( ) << "idDocument  = " << idDocument;
   QString qsInsertOrder = QString( "CALL orders.addOrder(%1, %2, %3, %4, %5, '%6', '%7', '%8')" )
-                              .arg( idShipper )
-                              .arg( idDriver )
-                              .arg( idPayment )
-                              .arg( idRoute )
-                              .arg( idDocument )
-                              .arg( data.toString( ) )
-                              .arg( numberContract )
-                              .arg( text );
+			      .arg( idShipper )
+			      .arg( idDriver )
+			      .arg( idPayment )
+			      .arg( idRoute )
+			      .arg( idDocument )
+			      .arg( data.toString( ), numberContract, text );
   qDebug( ) << qsInsertOrder;
   if( !query.exec( qsInsertOrder ) ) {
     qDebug( ) << query.lastError( ).text( );
-    db.rollback( );
+    db.rollback( ); //ОТМЕНИТЬ ТРАНЗАКЦИЮ
   }
-  db.commit( );
-  // QDialog::accept( );
+  db.commit( ); //ПРИНЯТЬ ТРАНЗАКЦИЮ (функции получения id автоматически вставляют в базу, то есть эта транзакция частично вносит измемнения )
+  // TODO тут возможно изменение поведения
+  QDialog::accept( );
 }
 
 void CreateOrderDialog::slotAddShipper( ) {
