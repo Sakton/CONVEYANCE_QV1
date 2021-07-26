@@ -42,6 +42,7 @@ SOURCES += \
     MainWindow/mainwindow.cpp \
     MyTests/testqsqltableformform.cpp \
     Orders/createorderdialog.cpp \
+    Orders/testform.cpp \
     Shippers/addshipperdialog.cpp \
     main.cpp
 
@@ -80,6 +81,7 @@ HEADERS += \
 	MainWindow/mainwindow.h \
 	MyTests/testqsqltableformform.h \
 	Orders/createorderdialog.h \
+	Orders/testform.h \
 	Shippers/addshipperdialog.h
 
 FORMS += \
@@ -99,6 +101,7 @@ FORMS += \
 	MainWindow/mainwindow.ui \
 	MyTests/testqsqltableformform.ui \
 	Orders/createorderdialog.ui \
+	Orders/testform.ui \
 	Shippers/addshipperdialog.ui
 
 TRANSLATIONS += \
@@ -172,4 +175,5 @@ DISTFILES += \
 RESOURCES += \
 	source.qrc
 
-INCLUDEPATH += $$PWD\ElementsWidgets
+INCLUDEPATH += $$PWD/ElementsWidgets
+INCLUDEPATH += $$PWD/Adress
