@@ -1,28 +1,17 @@
 #ifndef ORDERTABLEVIEW_H
 #define ORDERTABLEVIEW_H
 
-#include <QWidget>
+#include <QTableView>
 
-class OrderSqlQueryModel;
-
-namespace Ui {
-class OrderTableView;
-}
-
-class OrderTableView : public QWidget
+class OrderTableView : public QTableView
 {
   Q_OBJECT
-
 public:
-  explicit OrderTableView(QWidget *parent = nullptr);
-  ~OrderTableView();
+  explicit OrderTableView( QWidget * parent = nullptr );
 
-private:
-  void initModel( );
-
-private:
-  Ui::OrderTableView * ui;
-  OrderSqlQueryModel * model;
+  // QWidget interface
+protected:
+  void contextMenuEvent( QContextMenuEvent * event ) override;
 };
 
 #endif // ORDERTABLEVIEW_H

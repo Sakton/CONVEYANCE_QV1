@@ -1,7 +1,7 @@
 #include "adressdialog.h"
 #include "Constants.h"
+#include "ElementsWidgets/comboboxtypeadress.h"
 #include "citydialog.h"
-#include "comboboxtypeadress.h"
 #include "ui_adressdialog.h"
 
 #include <QMessageBox>
@@ -50,7 +50,7 @@ void AdressDialog::reject( ) {
 }
 
 void AdressDialog::addRecord( ) {
-  QString country = ui->comboBoxCountry->currentText( );
+  // QString country = ui->comboBoxCountry->currentText( );
   QString city = ui->comboBoxCity->currentText( );
   QString adress = ui->lineEditAdress->text( ).simplified( );
   QString index = ui->lineEditIndex->text( ).simplified( );

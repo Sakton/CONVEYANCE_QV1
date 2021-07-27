@@ -18,7 +18,6 @@ CreateOrderDialog::~CreateOrderDialog( ) {
 }
 
 void CreateOrderDialog::accept( ) {
-
   //**** ЧАСТЬ ОРДЕР
   QDate data = ui->dateEdit->date( );
   QString numberContract = ui->lineEditnumberContract->text( );
@@ -28,31 +27,23 @@ void CreateOrderDialog::accept( ) {
   }
   int idShipper = ui->comboBoxShippers->currentData( ).toInt( );
   int idDriver = ui->comboBoxDriver->currentData( ).toInt( );
-  qDebug( ) << "договор = " << data << " " << numberContract << " " << idShipper << " " << idDriver;
   //**** заметки
   QString text = ui->plainTextEditNote->toPlainText( );
-  qDebug( ) << "notes = " << text;
 
   //**** ЧАСТЬ ОПЛАТА
   double cost = ui->doubleSpinBoxCost->value( );
   QString paymentPeriod = ui->comboBoxPaymentPeriod->currentText( );
   QString currency = ui->comboBoxCurrency->currentText( );
-  qDebug( ) << "данные маршрута = " << cost << " " << paymentPeriod << " " << currency;
 
   //**** ЧАСТЬ МАРШРУТ
   int arrival = ui->spinBoxArrival->value( );
   int route = ui->spinBoxRoute->value( );
   double ante = ui->doubleSpinBoxAnte->value( );
-  qDebug( ) << "route option = " << arrival << " " << route << " " << ante;
 
   //**** ЧАСТЬ ДОКУМЕНТЫ
   QString postPeriod = ui->comboBoxPostPeriad->currentText( );
   Qt::CheckState twoCopyCMR = ui->checkBox2CopyCMR->checkState( );
   Qt::CheckState originalContract = ui->checkBoxOriginalContract->checkState( );
-  qDebug( ) << "doc options = " << postPeriod << " " << twoCopyCMR << " " << originalContract;
-
-  //  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
-  //  QString qs = QString { "" };
 
   QSqlDatabase db = QSqlDatabase::database( NAME_DB_ALL );
   QSqlQuery query( db );
@@ -68,15 +59,12 @@ void CreateOrderDialog::accept( ) {
   query.exec( qsToPayment );
   query.next( );
   int idPayment = query.value( "idpayment" ).toInt( );
-  qDebug( ) << "idPayment  = " << idPayment;
   query.exec( qsToRoute );
   query.next( );
   int idRoute = query.value( "idroute" ).toInt( );
-  qDebug( ) << "idRoute  = " << idRoute;
   query.exec( qsDocuments );
   query.next( );
   int idDocument = query.value( "iddocument" ).toInt( );
-  qDebug( ) << "idDocument  = " << idDocument;
   QString qsInsertOrder = QString( "CALL orders.addOrder(%1, %2, %3, %4, %5, '%6', '%7', '%8')" )
 			      .arg( idShipper )
 			      .arg( idDriver )
@@ -84,7 +72,6 @@ void CreateOrderDialog::accept( ) {
 			      .arg( idRoute )
 			      .arg( idDocument )
 			      .arg( data.toString( ), numberContract, text );
-  qDebug( ) << qsInsertOrder;
   if( !query.exec( qsInsertOrder ) ) {
     qDebug( ) << query.lastError( ).text( );
     db.rollback( ); //ОТМЕНИТЬ ТРАНЗАКЦИЮ
@@ -96,7 +83,8 @@ void CreateOrderDialog::accept( ) {
 
 void CreateOrderDialog::slotAddShipper( ) {
   AddShipperDialog dialogAddShipper;
-  dialogAddShipper.exec( );
+  if ( dialogAddShipper.exec( ) )
+    ui->comboBoxShippers->init( );
 }
 
 void CreateOrderDialog::connects( ) {

@@ -44,6 +44,7 @@ SOURCES += \
     Orders/createorderdialog.cpp \
     Orders/ordersqlquerymodel.cpp \
     Orders/ordertableview.cpp \
+    Orders/orderwidget.cpp \
     Orders/testform.cpp \
     Shippers/addshipperdialog.cpp \
     main.cpp
@@ -85,6 +86,7 @@ HEADERS += \
 	Orders/createorderdialog.h \
 	Orders/ordersqlquerymodel.h \
 	Orders/ordertableview.h \
+	Orders/orderwidget.h \
 	Orders/testform.h \
 	Shippers/addshipperdialog.h
 
@@ -105,7 +107,7 @@ FORMS += \
 	MainWindow/mainwindow.ui \
 	MyTests/testqsqltableformform.ui \
 	Orders/createorderdialog.ui \
-	Orders/ordertableview.ui \
+	Orders/orderwidget.ui \
 	Orders/testform.ui \
 	Shippers/addshipperdialog.ui
 
@@ -180,5 +182,6 @@ DISTFILES += \
 RESOURCES += \
 	source.qrc
 
-INCLUDEPATH += $$(PWD)/ElementsWidgets
-INCLUDEPATH += $$(PWD)/Adress
+INCLUDEPATH += $$PWD/ElementsWidgets
+INCLUDEPATH += $$PWD/Adress
+INCLUDEPATH += $$PWD/Orders

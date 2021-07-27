@@ -43,7 +43,7 @@ $$
 $$;
 
 -- ПРЕДСТАВЛЕНИЕ ОРДЕРА 1
-CREATE VIEW orders.ordersView AS
+CREATE OR REPLACE VIEW orders.ordersView AS
     SELECT ord.order_data, ord.order_contractNumber, -- ord.order_note,
 	   shp.shipper_name,
 	   pay.payment_cost, pay.payment_currency, pay.payment_period,

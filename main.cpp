@@ -5,7 +5,7 @@
 #include "Emploee/emploeetableview.h"
 #include "MainWindow/mainwindow.h"
 #include "Orders/createorderdialog.h"
-#include "Orders/ordertableview.h"
+#include "Orders/orderwidget.h"
 #include "Orders/testform.h"
 
 #include "Shippers/addshipperdialog.h"
@@ -38,7 +38,7 @@ int main( int argc, char *argv[] ) {
   // AddShipperDialog w;
   // CreateOrderDialog w;
   // TestForm w;
-  OrderTableView w;
+  OrderWidget w;
   w.show( );
 
   splash.finish( &w );
