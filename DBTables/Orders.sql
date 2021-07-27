@@ -41,3 +41,16 @@ $$
     INSERT INTO orders.orders( shipper_id, emploee_id, payment_id, route_id, document_id, order_data, order_contractNumber, order_note )
         VALUES ( idShipper, idEmploee, idPayment, idRoute, idDocuments, dataOrder, contractNumber, noteOrder );
 $$;
+
+-- ПРЕДСТАВЛЕНИЕ ОРДЕРА 1
+CREATE VIEW orders.ordersView AS
+    SELECT ord.order_data, ord.order_contractNumber, -- ord.order_note,
+	   shp.shipper_name,
+	   pay.payment_cost, pay.payment_currency, pay.payment_period,
+	   emp.emploee_name,
+	   doc.document_postperiod
+    FROM orders.orders AS ord
+	INNER JOIN shipper.shippers   AS shp ON ord.shipper_id  = shp.shipper_id
+	INNER JOIN payment.payments   AS pay ON ord.payment_id  = pay.payment_id
+	INNER JOIN emploee.emploees   AS emp ON ord.emploee_id  = emp.emploee_id
+	INNER JOIN document.documents AS doc ON ord.document_id = doc.document_id;
