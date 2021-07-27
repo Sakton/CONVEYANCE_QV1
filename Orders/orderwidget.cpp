@@ -2,7 +2,7 @@
 #include "Constants.h"
 #include "createorderdialog.h"
 #include "ordersqlquerymodel.h"
-#include "ui_ordertableview.h"
+#include "ui_orderwidget.h"
 
 #include <QSortFilterProxyModel>
 
