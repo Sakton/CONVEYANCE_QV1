@@ -20,8 +20,8 @@ OrderWidget::~OrderWidget( ) { delete ui; }
 
 void OrderWidget::slotAddOrder( ) {
   CreateOrderDialog addorder( this );
-  if ( addorder.exec( ) )
-    refresh( );
+  /*if ( */ addorder.open( ); /* ) )*/
+  refresh( );
 }
 
 void OrderWidget::initModel( ) {

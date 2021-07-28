@@ -9,5 +9,5 @@ void OrderTableView::contextMenuEvent( QContextMenuEvent * event ) {
   QMenu menu;
   menu.addAction( "Update" );
   menu.addAction( "Delete" );
-  menu.popup( event->globalPos( ) );
+  menu.exec( event->globalPos( ) );
 }
