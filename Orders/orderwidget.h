@@ -19,10 +19,11 @@ public:
 
 public slots:
   void slotAddOrder( );
+  // void
 
 private:
   void initModel( );
-  void connects( );
+  void createConnects( );
   void refresh( );
 
 private:

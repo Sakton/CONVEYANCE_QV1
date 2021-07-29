@@ -23,6 +23,7 @@ protected:
   void contextMenuEvent( QContextMenuEvent *event ) override;
 
 public slots:
+  void slotOrderWindow( );
 
 private:
   void writeSettings( );
@@ -32,9 +33,11 @@ private:
 
   void createDatabaseConnection( );
 
+  void createConnections( );
+
 private:
   Ui::MainWindow *ui;
-  QToolBar *tool;
+  // QToolBar *tool;
 };
 
 #endif // MAINWINDOW_H

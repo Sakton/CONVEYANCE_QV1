@@ -13,14 +13,16 @@ OrderWidget::OrderWidget( QWidget * parent ) : QWidget( parent ), ui( new Ui::Or
   proxy = new QSortFilterProxyModel( this );
   proxy->setSourceModel( model );
   ui->tableViewOrder->setModel( proxy );
-  connects( );
+  createConnects( );
+  ui->tableViewOrder->horizontalHeader( )->resizeSections( QHeaderView::ResizeMode::ResizeToContents );
+  ui->tableViewOrder->hideColumn( 8 );
 }
 
 OrderWidget::~OrderWidget( ) { delete ui; }
 
 void OrderWidget::slotAddOrder( ) {
   CreateOrderDialog addorder( this );
-  /*if ( */ addorder.open( ); /* ) )*/
+  addorder.exec( );
   refresh( );
 }
 
@@ -31,14 +33,15 @@ void OrderWidget::initModel( ) {
   model->setHeaderData( 2, Qt::Orientation::Horizontal, tr( "ЗАКАЗЧИК" ) );
   model->setHeaderData( 3, Qt::Orientation::Horizontal, tr( "ЦЕНА" ) );
   model->setHeaderData( 4, Qt::Orientation::Horizontal, tr( "ВАЛЮТА" ) );
-  model->setHeaderData( 5, Qt::Orientation::Horizontal, tr( "СРОК ОПЛАТЫ" ) );
+  model->setHeaderData( 5, Qt::Orientation::Horizontal, tr( "ПЕРИОД ОПЛАТЫ" ) );
   model->setHeaderData( 6, Qt::Orientation::Horizontal, tr( "ВОДИТЕЛЬ" ) );
-  model->setHeaderData( 7, Qt::Orientation::Horizontal, tr( "СРОК ПОЧТЫ" ) );
+  model->setHeaderData( 7, Qt::Orientation::Horizontal, tr( "ПЕРИОД ПОЧТЫ" ) );
   ui->tableViewOrder->horizontalHeader( )->resizeSections( QHeaderView::ResizeToContents );
 }
 
-void OrderWidget::connects( ) {
+void OrderWidget::createConnects( ) {
   connect( ui->pushButtonAddNewOrder, QOverload< bool >::of( &QPushButton::clicked ), this, QOverload<>::of( &OrderWidget::slotAddOrder ) );
+  connect( ui->tableViewOrder, QOverload< QModelIndex >::of( &QTableView::pressed ), this, QOverload< QModelIndex >::of( ) );
 }
 
 void OrderWidget::refresh( ) {

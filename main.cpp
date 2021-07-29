@@ -31,14 +31,15 @@ int main( int argc, char *argv[] ) {
   QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
   splash.show( );
 
-  createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
+  // createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
 
   // AddEmploeeDialog w;
   // EmploeeTableView w;
   // AddShipperDialog w;
   // CreateOrderDialog w;
   // TestForm w;
-  OrderWidget w;
+  // OrderWidget w;
+  MainWindow w;
   w.show( );
 
   splash.finish( &w );
@@ -53,13 +54,13 @@ void setsApp( QApplication &app ) {
   app.setWindowIcon( QIcon( ":/img/icon24.png" ) );
 }
 
-void createDbConnection( ) {
-  QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", "DB" );
-  db.setHostName( "localhost" );
-  db.setPort( 5432 );
-  db.setDatabaseName( "demo_coveyance_db" );
-  db.setUserName( "postgres" );
-  db.setPassword( "postgres" );
-  bool ok = db.open( );
-  qDebug( ) << "database status = " << ok;
-}
+// void createDbConnection( ) {
+//  QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", "DB" );
+//  db.setHostName( "localhost" );
+//  db.setPort( 5432 );
+//  db.setDatabaseName( "demo_coveyance_db" );
+//  db.setUserName( "postgres" );
+//  db.setPassword( "postgres" );
+//  bool ok = db.open( );
+//  qDebug( ) << "database status = " << ok;
+//}

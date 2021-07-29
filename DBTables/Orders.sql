@@ -44,11 +44,12 @@ $$;
 
 -- ПРЕДСТАВЛЕНИЕ ОРДЕРА 1
 CREATE OR REPLACE VIEW orders.ordersView AS
-    SELECT ord.order_data, ord.order_contractNumber, -- ord.order_note,
+    SELECT ord.order_data, ord.order_contractNumber,
 	   shp.shipper_name,
 	   pay.payment_cost, pay.payment_currency, pay.payment_period,
 	   emp.emploee_name,
-	   doc.document_postperiod
+	   doc.document_postperiod,
+	   ord.order_note
     FROM orders.orders AS ord
 	INNER JOIN shipper.shippers   AS shp ON ord.shipper_id  = shp.shipper_id
 	INNER JOIN payment.payments   AS pay ON ord.payment_id  = pay.payment_id

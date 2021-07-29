@@ -40,6 +40,7 @@ SOURCES += \
     Emploee/emploeesqltablemodel.cpp \
     Emploee/emploeetableview.cpp \
     MainWindow/mainwindow.cpp \
+    MainWindow/mainwindowtabwidget.cpp \
     MyTests/testqsqltableformform.cpp \
     Orders/createorderdialog.cpp \
     Orders/ordersqlquerymodel.cpp \
@@ -82,6 +83,7 @@ HEADERS += \
 	Emploee/emploeesqltablemodel.h \
 	Emploee/emploeetableview.h \
 	MainWindow/mainwindow.h \
+	MainWindow/mainwindowtabwidget.h \
 	MyTests/testqsqltableformform.h \
 	Orders/createorderdialog.h \
 	Orders/ordersqlquerymodel.h \
@@ -185,3 +187,4 @@ RESOURCES += \
 INCLUDEPATH += $$PWD/ElementsWidgets
 INCLUDEPATH += $$PWD/Adress
 INCLUDEPATH += $$PWD/Orders
+INCLUDEPATH += $$PWD/MainWindow
