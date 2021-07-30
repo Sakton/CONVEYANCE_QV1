@@ -40,8 +40,8 @@ int main( int argc, char *argv[] ) {
   // CreateOrderDialog w;
   // TestForm w;
   // OrderWidget w;
-  MainWindow w;
-  // AddEmploeeDialog w;
+  // MainWindow w;
+  AddEmploeeDialog w;
   w.show( );
 
   splash.finish( &w );
