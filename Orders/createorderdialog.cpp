@@ -50,10 +50,8 @@ void CreateOrderDialog::accept( ) {
   QString qsToPayment =
       QString( "SELECT payment.getPayment_id(%1, '%2', '%3') AS idpayment;" ).arg( cost ).arg( paymentPeriod, currency );
   QString qsToRoute = QString( "SELECT route.getRouteId(%1, %2, %3) AS idroute;" ).arg( arrival ).arg( route ).arg( ante );
-  QString qsDocuments = QString( "SELECT document.getDocumentId ('%1', %2, %3) AS iddocument" )
-                            .arg( postPeriod )
-                            .arg( twoCopyCMR )
-                            .arg( originalContract );
+  QString qsDocuments =
+      QString( "SELECT document.getDocumentId ('%1', %2, %3) AS iddocument;" ).arg( postPeriod ).arg( twoCopyCMR ).arg( originalContract );
 
   db.transaction( ); //ТРАНЗАКЦИЯ
   query.exec( qsToPayment );
@@ -65,7 +63,7 @@ void CreateOrderDialog::accept( ) {
   query.exec( qsDocuments );
   query.next( );
   int idDocument = query.value( "iddocument" ).toInt( );
-  QString qsInsertOrder = QString( "CALL orders.addOrder(%1, %2, %3, %4, %5, '%6', '%7', '%8')" )
+  QString qsInsertOrder = QString( "CALL orders.addOrder(%1, %2, %3, %4, %5, '%6', '%7', '%8');" )
 			      .arg( idShipper )
 			      .arg( idDriver )
 			      .arg( idPayment )

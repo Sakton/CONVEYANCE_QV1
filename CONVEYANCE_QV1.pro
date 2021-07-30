@@ -35,6 +35,7 @@ SOURCES += \
     ElementsWidgets/comboboxperiodsendmail.cpp \
     ElementsWidgets/comboboxshippers.cpp \
     ElementsWidgets/comboboxtypeadress.cpp \
+    Emploee/adddriverdialog.cpp \
     Emploee/addemploeedialog.cpp \
     Emploee/addfunctionemploeedialog.cpp \
     Emploee/emploeesqltablemodel.cpp \
@@ -78,6 +79,7 @@ HEADERS += \
 	ElementsWidgets/comboboxperiodsendmail.h \
 	ElementsWidgets/comboboxshippers.h \
 	ElementsWidgets/comboboxtypeadress.h \
+	Emploee/adddriverdialog.h \
 	Emploee/addemploeedialog.h \
 	Emploee/addfunctionemploeedialog.h \
 	Emploee/emploeesqltablemodel.h \
@@ -136,6 +138,7 @@ DISTFILES += \
     DBTables/VATs.sql \
 	Dump/dump.sql \
 	Dump/dump1.sql \
+	ErrorsFound \
 	IshodnyDanny/Adresses.ods \
 	IshodnyDanny/Adresses.xls \
 	doc/BaseTable.txt \

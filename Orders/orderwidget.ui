@@ -99,9 +99,15 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="labelNote">
        <property name="text">
-        <string>ЗАМЕТКИ: </string>
+        <string>ЗАМЕТКИ:</string>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
        </property>
       </widget>
      </item>

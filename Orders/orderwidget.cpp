@@ -5,6 +5,7 @@
 #include "ui_orderwidget.h"
 
 #include <QSortFilterProxyModel>
+#include <QSqlRecord>
 
 OrderWidget::OrderWidget( QWidget * parent ) : QWidget( parent ), ui( new Ui::OrderWidget ) {
   ui->setupUi( this );
@@ -14,8 +15,8 @@ OrderWidget::OrderWidget( QWidget * parent ) : QWidget( parent ), ui( new Ui::Or
   proxy->setSourceModel( model );
   ui->tableViewOrder->setModel( proxy );
   createConnects( );
-  ui->tableViewOrder->horizontalHeader( )->resizeSections( QHeaderView::ResizeMode::ResizeToContents );
   ui->tableViewOrder->hideColumn( 8 );
+  ui->tableViewOrder->horizontalHeader( )->resizeSections( QHeaderView::ResizeToContents );
 }
 
 OrderWidget::~OrderWidget( ) { delete ui; }
@@ -24,6 +25,12 @@ void OrderWidget::slotAddOrder( ) {
   CreateOrderDialog addorder( this );
   addorder.exec( );
   refresh( );
+}
+
+void OrderWidget::slotSelectRow( const QModelIndex & idx ) {
+  QSqlRecord rec = model->record( idx.row( ) );
+  QString note = rec.value( 8 ).toString( );
+  ui->labelNote->setText( note );
 }
 
 void OrderWidget::initModel( ) {
@@ -37,11 +44,13 @@ void OrderWidget::initModel( ) {
   model->setHeaderData( 6, Qt::Orientation::Horizontal, tr( "ВОДИТЕЛЬ" ) );
   model->setHeaderData( 7, Qt::Orientation::Horizontal, tr( "ПЕРИОД ПОЧТЫ" ) );
   ui->tableViewOrder->horizontalHeader( )->resizeSections( QHeaderView::ResizeToContents );
+  ui->tableViewOrder->hideColumn( 8 );
 }
 
 void OrderWidget::createConnects( ) {
   connect( ui->pushButtonAddNewOrder, QOverload< bool >::of( &QPushButton::clicked ), this, QOverload<>::of( &OrderWidget::slotAddOrder ) );
-  connect( ui->tableViewOrder, QOverload< QModelIndex >::of( &QTableView::pressed ), this, QOverload< QModelIndex >::of( ) );
+  connect( ui->tableViewOrder, QOverload< const QModelIndex & >::of( &QTableView::pressed ), this,
+	   QOverload< const QModelIndex & >::of( &OrderWidget::slotSelectRow ) );
 }
 
 void OrderWidget::refresh( ) {

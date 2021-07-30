@@ -5,6 +5,7 @@
 
 class OrderSqlQueryModel;
 class QSortFilterProxyModel;
+class QModelIndex;
 
 namespace Ui {
 class OrderWidget;
@@ -19,7 +20,7 @@ public:
 
 public slots:
   void slotAddOrder( );
-  // void
+  void slotSelectRow( const QModelIndex & idx );
 
 private:
   void initModel( );

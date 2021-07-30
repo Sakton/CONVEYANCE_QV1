@@ -1,6 +1,7 @@
 #include "Adress/adressdialog.h"
 #include "Adress/adressview.h"
 #include "ElementsWidgets/comboboxdrivers.h"
+#include "Emploee/adddriverdialog.h"
 #include "Emploee/addemploeedialog.h"
 #include "Emploee/emploeetableview.h"
 #include "MainWindow/mainwindow.h"
@@ -40,6 +41,7 @@ int main( int argc, char *argv[] ) {
   // TestForm w;
   // OrderWidget w;
   MainWindow w;
+  // AddEmploeeDialog w;
   w.show( );
 
   splash.finish( &w );
