@@ -11,17 +11,8 @@ class OrderTableView : public QTableView {
 public:
   explicit OrderTableView( QWidget * parent = nullptr );
 
-  void initModel( );
-  // QWidget interface
-public slots:
-  void updateData( );
-
 protected:
   void contextMenuEvent( QContextMenuEvent * event ) override;
-
-private:
-  OrderSqlTableModel * model;
-  QSortFilterProxyModel * filterModel;
 };
 
 #endif // ORDERTABLEVIEW_H

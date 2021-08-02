@@ -1,4 +1,5 @@
 
+#include "MainWindow/mainwindow.h"
 #include "Orders/ordertableview.h"
 #include "Orders/orderwidget.h"
 
@@ -25,7 +26,8 @@ int main( int argc, char *argv[] ) {
 
   // OrderTableView w;
   // AddEmploeeDialog w;
-  OrderWidget w;
+  // OrderWidget w;
+  MainWindow w;
   w.show( );
 
   splash.finish( &w );

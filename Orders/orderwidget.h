@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-class OrderSqlQueryModel;
+class OrderSqlTableModel;
 class QSortFilterProxyModel;
 class QModelIndex;
 
@@ -21,13 +21,16 @@ public:
 public slots:
   void slotAddOrder( );
   void slotSelectRow( const QModelIndex & idx );
+  void updateOrderWidget( );
 
 private:
   void createConnects( );
+  void initModels( );
+  void setupView( );
 
 private:
   Ui::OrderWidget * ui;
-  OrderSqlQueryModel * model;
+  OrderSqlTableModel * model;
   QSortFilterProxyModel * proxy;
 };
 
