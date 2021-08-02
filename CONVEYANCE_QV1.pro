@@ -23,6 +23,7 @@ SOURCES += \
     Cars/addbrandcardialog.cpp \
     Cars/addcarmodeldialog.cpp \
     Contract/createcontractdialog.cpp \
+    ElementsWidgets/actionpushbutton.cpp \
     ElementsWidgets/comboboxcarbrand.cpp \
     ElementsWidgets/comboboxcarcategories.cpp \
     ElementsWidgets/comboboxcarmodel.cpp \
@@ -68,6 +69,7 @@ HEADERS += \
 	Cars/addcarmodeldialog.h \
 	Constants.h \
 	Contract/createcontractdialog.h \
+	ElementsWidgets/actionpushbutton.h \
 	ElementsWidgets/comboboxcarbrand.h \
 	ElementsWidgets/comboboxcarcategories.h \
 	ElementsWidgets/comboboxcarmodel.h \

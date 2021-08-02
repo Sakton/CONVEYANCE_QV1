@@ -6,6 +6,7 @@
 class OrderSqlTableModel;
 class QSortFilterProxyModel;
 class QModelIndex;
+class QAction;
 
 namespace Ui {
 class OrderWidget;
@@ -27,11 +28,15 @@ private:
   void createConnects( );
   void initModels( );
   void setupView( );
+  void createActions( );
 
 private:
   Ui::OrderWidget * ui;
   OrderSqlTableModel * model;
   QSortFilterProxyModel * proxy;
+  QAction * addingOrderAction;
+  QAction * updateOrderAction;
+  QAction * deleteOrderAction;
 };
 
 #endif // ORDERWIDGET_H

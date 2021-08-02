@@ -19,30 +19,30 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QPushButton" name="pushButtonAddNewOrder">
+        <widget class="QToolButton" name="toolButtonAddNewOrder">
          <property name="text">
           <string>Добавить ордер</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QToolButton" name="toolButtonUpdateOrder">
          <property name="text">
-          <string>Обновить запись</string>
+          <string>Изменить ордер</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QToolButton" name="toolButtonDeleteOrder">
          <property name="text">
-          <string>Удалить запись</string>
+          <string>Удалить ордер</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QToolButton" name="toolButtonUpdateTable">
          <property name="text">
-          <string>Обновить все</string>
+          <string>Обновить данные ???</string>
          </property>
         </widget>
        </item>
@@ -69,6 +69,9 @@
        <property name="editTriggers">
         <set>QAbstractItemView::NoEditTriggers</set>
        </property>
+       <property name="dragDropMode">
+        <enum>QAbstractItemView::NoDragDrop</enum>
+       </property>
        <property name="alternatingRowColors">
         <bool>true</bool>
        </property>
@@ -81,6 +84,9 @@
        <property name="textElideMode">
         <enum>Qt::ElideNone</enum>
        </property>
+       <property name="gridStyle">
+        <enum>Qt::DotLine</enum>
+       </property>
        <property name="sortingEnabled">
         <bool>true</bool>
        </property>
@@ -91,7 +97,7 @@
         <number>400</number>
        </attribute>
        <attribute name="horizontalHeaderStretchLastSection">
-        <bool>false</bool>
+        <bool>true</bool>
        </attribute>
        <attribute name="verticalHeaderCascadingSectionResizes">
         <bool>true</bool>

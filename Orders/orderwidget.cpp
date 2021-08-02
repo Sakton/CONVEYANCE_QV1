@@ -4,6 +4,7 @@
 #include "ordersqltablemodel.h"
 #include "ui_orderwidget.h"
 
+#include <QAction>
 #include <QSortFilterProxyModel>
 #include <QSqlRecord>
 
@@ -15,6 +16,7 @@ OrderWidget::OrderWidget( QWidget * parent )
   createConnects( );
   initModels( );
   setupView( );
+  createActions( );
 }
 
 OrderWidget::~OrderWidget( ) { delete ui; }
@@ -38,7 +40,7 @@ void OrderWidget::updateOrderWidget( ) {
 }
 
 void OrderWidget::createConnects( ) {
-  connect( ui->pushButtonAddNewOrder, QOverload< bool >::of( &QPushButton::clicked ), this, QOverload<>::of( &OrderWidget::slotAddOrder ) );
+  // connect( ui->pushButtonAddNewOrder, QOverload< bool >::of( &QPushButton::clicked ), this, QOverload<>::of( &OrderWidget::slotAddOrder ) );
   connect( ui->tableViewOrder, QOverload< const QModelIndex & >::of( &QTableView::pressed ), this,
 	   QOverload< const QModelIndex & >::of( &OrderWidget::slotSelectRow ) );
 }
@@ -65,3 +67,5 @@ void OrderWidget::setupView( ) {
   hw->setDefaultAlignment( Qt::AlignCenter );
   hw->setSectionResizeMode( QHeaderView::ResizeMode::ResizeToContents );
 }
+
+void OrderWidget::createActions( ) {}
