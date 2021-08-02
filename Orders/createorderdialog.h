@@ -17,6 +17,7 @@ public:
 public slots:
   void accept( ) override;
   void slotAddShipper( );
+  void slotAddDriver( );
 
 private:
   void connects( );

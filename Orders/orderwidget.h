@@ -23,9 +23,7 @@ public slots:
   void slotSelectRow( const QModelIndex & idx );
 
 private:
-  void initModel( );
   void createConnects( );
-  void refresh( );
 
 private:
   Ui::OrderWidget * ui;

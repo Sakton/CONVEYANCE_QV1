@@ -1,22 +1,11 @@
-#include "Adress/adressdialog.h"
-#include "Adress/adressview.h"
-#include "ElementsWidgets/comboboxdrivers.h"
-#include "Emploee/adddriverdialog.h"
-#include "Emploee/addemploeedialog.h"
-#include "Emploee/emploeetableview.h"
-#include "MainWindow/mainwindow.h"
-#include "Orders/createorderdialog.h"
-#include "Orders/orderwidget.h"
-#include "Orders/testform.h"
 
-#include "Shippers/addshipperdialog.h"
+#include "Orders/ordertableview.h"
+#include "Orders/orderwidget.h"
 
 #include <QApplication>
 #include <QLabel>
 #include <QSplashScreen>
 #include <QSqlDatabase>
-
-#include "MyTests/testqsqltableformform.h"
 
 // global
 void setsApp( QApplication &app );
@@ -32,16 +21,11 @@ int main( int argc, char *argv[] ) {
   QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
   splash.show( );
 
-  // createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
+  createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
 
+  // OrderTableView w;
   // AddEmploeeDialog w;
-  // EmploeeTableView w;
-  // AddShipperDialog w;
-  // CreateOrderDialog w;
-  // TestForm w;
-  // OrderWidget w;
-  // MainWindow w;
-  AddEmploeeDialog w;
+  OrderWidget w;
   w.show( );
 
   splash.finish( &w );
@@ -56,13 +40,13 @@ void setsApp( QApplication &app ) {
   app.setWindowIcon( QIcon( ":/img/icon24.png" ) );
 }
 
-// void createDbConnection( ) {
-//  QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", "DB" );
-//  db.setHostName( "localhost" );
-//  db.setPort( 5432 );
-//  db.setDatabaseName( "demo_coveyance_db" );
-//  db.setUserName( "postgres" );
-//  db.setPassword( "postgres" );
-//  bool ok = db.open( );
-//  qDebug( ) << "database status = " << ok;
-//}
+void createDbConnection( ) {
+  QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", "DB" );
+  db.setHostName( "localhost" );
+  db.setPort( 5432 );
+  db.setDatabaseName( "demo_coveyance_db" );
+  db.setUserName( "postgres" );
+  db.setPassword( "postgres" );
+  bool ok = db.open( );
+  qDebug( ) << "database status = " << ok;
+}

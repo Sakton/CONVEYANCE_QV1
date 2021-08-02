@@ -45,6 +45,7 @@ SOURCES += \
     MyTests/testqsqltableformform.cpp \
     Orders/createorderdialog.cpp \
     Orders/ordersqlquerymodel.cpp \
+    Orders/ordersqltablemodel.cpp \
     Orders/ordertableview.cpp \
     Orders/orderwidget.cpp \
     Orders/testform.cpp \
@@ -89,6 +90,7 @@ HEADERS += \
 	MyTests/testqsqltableformform.h \
 	Orders/createorderdialog.h \
 	Orders/ordersqlquerymodel.h \
+	Orders/ordersqltablemodel.h \
 	Orders/ordertableview.h \
 	Orders/orderwidget.h \
 	Orders/testform.h \

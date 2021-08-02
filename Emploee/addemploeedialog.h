@@ -22,7 +22,7 @@ public slots:
 private:
   void connects( ) const;
 
-private:
+protected:
   Ui::AddEmploeeDialog * ui;
 };
 

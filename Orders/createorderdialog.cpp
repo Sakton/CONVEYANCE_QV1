@@ -1,4 +1,5 @@
 #include "createorderdialog.h"
+#include "Emploee/adddriverdialog.h"
 #include "Shippers/addshipperdialog.h"
 #include "ui_createorderdialog.h"
 
@@ -85,6 +86,14 @@ void CreateOrderDialog::slotAddShipper( ) {
     ui->comboBoxShippers->init( );
 }
 
+void CreateOrderDialog::slotAddDriver( ) {
+  AddDriverDialog dd;
+  if ( dd.exec( ) == QDialog::Accepted ) {
+    ui->comboBoxDriver->init( );
+  }
+}
+
 void CreateOrderDialog::connects( ) {
   connect( ui->pushButtonAddShipper, QOverload< bool >::of( &QPushButton::clicked ), this, QOverload<>::of( &CreateOrderDialog::slotAddShipper ) );
+  connect( ui->pushButtonAddDriver, QOverload< bool >::of( &QPushButton::clicked ), this, QOverload<>::of( &CreateOrderDialog::slotAddDriver ) );
 }

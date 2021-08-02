@@ -7,7 +7,7 @@ class AddDriverDialog : public AddEmploeeDialog
 {
   Q_OBJECT
 public:
-  AddDriverDialog( QWidget * parent = nullptr );
+  explicit AddDriverDialog( QWidget * parent = nullptr );
 };
 
 #endif // ADDDRIVERDIALOG_H

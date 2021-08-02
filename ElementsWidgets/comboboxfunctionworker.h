@@ -7,7 +7,7 @@ class ComboBoxFunctionWorker : public QComboBox {
   Q_OBJECT
 public:
   ComboBoxFunctionWorker( QWidget * parent = 0 );
-  void reCreate( );
+  void updateData( );
 
 private:
   void init( );

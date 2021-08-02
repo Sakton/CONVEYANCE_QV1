@@ -32,7 +32,7 @@ void AddEmploeeDialog::accept( ) {
 void AddEmploeeDialog::slotCallAddFunctionWorkDialog( ) {
   AddFunctionEmploeeDialog addFun;
   if ( addFun.exec( ) )
-    ui->comboBoxFunctionWork->reCreate( );
+    ui->comboBoxFunctionWork->updateData( );
 }
 
 void AddEmploeeDialog::connects( ) const {

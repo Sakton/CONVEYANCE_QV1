@@ -6,7 +6,7 @@
 
 ComboBoxFunctionWorker::ComboBoxFunctionWorker( QWidget * parent ) : QComboBox( parent ) { init( ); }
 
-void ComboBoxFunctionWorker::reCreate( ) { init( ); }
+void ComboBoxFunctionWorker::updateData( ) { init( ); }
 
 void ComboBoxFunctionWorker::init( ) {
   clear( );
