@@ -22,11 +22,15 @@ public:
 
 public slots:
   void slotAddOrder( );
+  void slotUpdOrder( );
+  void slotDelOrder( );
+
   void slotSelectRow( const QModelIndex & idx );
   void updateOrderWidget( );
 
 private:
   void createConnects( );
+
   void initModels( );
   void setupView( );
   void createActions( );

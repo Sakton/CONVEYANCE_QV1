@@ -113,7 +113,6 @@
     <property name="toolTipsVisible">
      <bool>false</bool>
     </property>
-    <addaction name="actionCreateOrder"/>
     <addaction name="actionShowAllOrder"/>
    </widget>
    <widget class="QMenu" name="menuFactura">

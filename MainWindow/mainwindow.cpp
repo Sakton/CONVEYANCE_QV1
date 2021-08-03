@@ -26,21 +26,23 @@ void MainWindow::closeEvent( QCloseEvent * event ) {
 
 void MainWindow::contextMenuEvent( QContextMenuEvent * event ) {
   if ( event->reason( ) == QContextMenuEvent::Reason::Mouse ) {
-    qDebug( ) << event->x( ) << " : " << event->y( );
+    // TODO тут?
   }
 }
 
 void MainWindow::slotOrderWindow( ) { ui->tabWidget->addTab( new OrderWidget( ui->tabWidget ), "ОРДЕРА" ); }
 
+void MainWindow::slotCloseTab( int idx ) { ui->tabWidget->removeTab( idx ); }
+
 void MainWindow::writeSettings( ) { qDebug( ) << "work MainWindow::writeSettings( )"; }
 
 void MainWindow::readSettings( ) { qDebug( ) << "work MainWindow::readSettings( )"; }
 
-void MainWindow::createToolBar( ) {
-  QToolBar * tool = addToolBar( "123" );
-  tool->addAction( "Tab1" );
-  tool->addAction( "Tab2" );
-}
+// void MainWindow::createToolBar( ) {
+//  QToolBar * tool = addToolBar( "123" );
+//  tool->addAction( "Tab1" );
+//  tool->addAction( "Tab2" );
+//}
 
 void MainWindow::createDatabaseConnection( ) {
   QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", "DB" );
@@ -54,5 +56,6 @@ void MainWindow::createDatabaseConnection( ) {
 }
 
 void MainWindow::createConnections( ) {
-  connect( ui->actionCreateOrder, QOverload< bool >::of( &QAction::triggered ), this, QOverload<>::of( &MainWindow::slotOrderWindow ) );
+  connect( ui->actionShowAllOrder, QOverload< bool >::of( &QAction::triggered ), this, QOverload<>::of( &MainWindow::slotOrderWindow ) );
+  connect( ui->tabWidget, QOverload< int >::of( &QTabWidget::tabCloseRequested ), this, QOverload< int >::of( &MainWindow::slotCloseTab ) );
 }

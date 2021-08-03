@@ -7,6 +7,7 @@
 #include <QAction>
 #include <QContextMenuEvent>
 #include <QMenu>
+#include <QMessageBox>
 #include <QSortFilterProxyModel>
 #include <QSqlRecord>
 
@@ -31,6 +32,12 @@ void OrderWidget::slotAddOrder( ) {
   }
 }
 
+void OrderWidget::slotUpdOrder( ) { QMessageBox::information( this, tr( "ПРАВКА ОРДЕРА" ), tr( "ХОПА, ВЫСКОЧИТ ОКНО ПРАВКИ, ПОТОМ" ) ); }
+
+void OrderWidget::slotDelOrder( ) {
+  QMessageBox::information( this, tr( "УДАЛЕНИЕ ОРДЕРА" ), tr( "ХОПА, УДАЛИТСЯ ЗАПИТЬ, СТРАТЕГИЯ УДАЛЕНИЯ НЕ ПОНЯТНА ПОКА" ) );
+}
+
 void OrderWidget::slotSelectRow( const QModelIndex & idx ) {
   QSqlRecord rec = model->record( idx.row( ) );
   QString note = rec.value( 8 ).toString( );
@@ -46,6 +53,8 @@ void OrderWidget::createConnects( ) {
   connect( ui->tableViewOrder, QOverload< const QModelIndex & >::of( &QTableView::pressed ), this,
 	   QOverload< const QModelIndex & >::of( &OrderWidget::slotSelectRow ) );
   connect( addingOrderAction, QOverload< bool >::of( &QAction::triggered ), this, QOverload<>::of( &OrderWidget::slotAddOrder ) );
+  connect( updateOrderAction, QOverload< bool >::of( &QAction::triggered ), this, QOverload<>::of( &OrderWidget::slotUpdOrder ) );
+  connect( deleteOrderAction, QOverload< bool >::of( &QAction::triggered ), this, QOverload<>::of( &OrderWidget::slotDelOrder ) );
 }
 
 void OrderWidget::initModels( ) {

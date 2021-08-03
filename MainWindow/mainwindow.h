@@ -24,11 +24,12 @@ protected:
 
 public slots:
   void slotOrderWindow( );
+  void slotCloseTab( int idx );
 
 private:
   void writeSettings( );
   void readSettings( );
-  void createToolBar( );
+  // void createToolBar( );
   void createStatusBar( );
 
   void createDatabaseConnection( );
