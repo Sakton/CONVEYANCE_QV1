@@ -6,11 +6,16 @@
 #include <QMenu>
 #include <QSortFilterProxyModel>
 
-OrderTableView::OrderTableView( QWidget * parent ) : QTableView( parent ) {}
+OrderTableView::OrderTableView( QWidget * parent ) : QTableView( parent ), contextMenu { nullptr } {}
+
+void OrderTableView::setContextMenu( QMenu * m ) {
+  if ( !m )
+    return;
+  contextMenu = m;
+}
 
 void OrderTableView::contextMenuEvent( QContextMenuEvent * event ) {
-  QMenu menu;
-  menu.addAction( "Update" );
-  menu.addAction( "Delete" );
-  menu.exec( event->globalPos( ) );
+  if ( contextMenu )
+    contextMenu->exec( event->globalPos( ) );
+  QWidget::contextMenuEvent( event );
 }

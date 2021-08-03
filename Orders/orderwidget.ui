@@ -19,28 +19,28 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QToolButton" name="toolButtonAddNewOrder">
+        <widget class="ActionPushButton" name="toolButtonAddNewOrder">
          <property name="text">
           <string>Добавить ордер</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="toolButtonUpdateOrder">
+        <widget class="ActionPushButton" name="toolButtonUpdateOrder">
          <property name="text">
           <string>Изменить ордер</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="toolButtonDeleteOrder">
+        <widget class="ActionPushButton" name="toolButtonDeleteOrder">
          <property name="text">
           <string>Удалить ордер</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="toolButtonUpdateTable">
+        <widget class="ActionPushButton" name="toolButtonUpdateTable">
          <property name="text">
           <string>Обновить данные ???</string>
          </property>
@@ -126,6 +126,11 @@
    <class>OrderTableView</class>
    <extends>QTableView</extends>
    <header>ordertableview.h</header>
+  </customwidget>
+  <customwidget>
+   <class>ActionPushButton</class>
+   <extends>QToolButton</extends>
+   <header>actionpushbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

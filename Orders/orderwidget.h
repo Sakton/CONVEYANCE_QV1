@@ -7,6 +7,7 @@ class OrderSqlTableModel;
 class QSortFilterProxyModel;
 class QModelIndex;
 class QAction;
+class QMenu;
 
 namespace Ui {
 class OrderWidget;
@@ -29,6 +30,7 @@ private:
   void initModels( );
   void setupView( );
   void createActions( );
+  void setupsAction( );
 
 private:
   Ui::OrderWidget * ui;
@@ -37,6 +39,8 @@ private:
   QAction * addingOrderAction;
   QAction * updateOrderAction;
   QAction * deleteOrderAction;
+
+  QMenu * menuForTable;
 };
 
 #endif // ORDERWIDGET_H

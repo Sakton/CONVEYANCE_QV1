@@ -5,8 +5,7 @@
 ActionPushButton::ActionPushButton( QWidget * parent ) : QPushButton( parent ), action { nullptr } {}
 
 void ActionPushButton::setAction( QAction * act ) {
-
-  if ( action )
+  if ( !act )
     return;
   action = act;
   setIcon( act->icon( ) );

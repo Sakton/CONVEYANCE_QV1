@@ -11,8 +11,13 @@ class OrderTableView : public QTableView {
 public:
   explicit OrderTableView( QWidget * parent = nullptr );
 
+  void setContextMenu( QMenu * m );
+
 protected:
   void contextMenuEvent( QContextMenuEvent * event ) override;
+
+private:
+  QMenu * contextMenu;
 };
 
 #endif // ORDERTABLEVIEW_H

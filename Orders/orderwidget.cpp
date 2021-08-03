@@ -5,6 +5,8 @@
 #include "ui_orderwidget.h"
 
 #include <QAction>
+#include <QContextMenuEvent>
+#include <QMenu>
 #include <QSortFilterProxyModel>
 #include <QSqlRecord>
 
@@ -13,10 +15,11 @@ OrderWidget::OrderWidget( QWidget * parent )
       ui( new Ui::OrderWidget ), model { new OrderSqlTableModel { this, QSqlDatabase::database( NAME_DB_ALL ) } }, proxy { new QSortFilterProxyModel {
 														       this } } {
   ui->setupUi( this );
-  createConnects( );
-  initModels( );
-  setupView( );
   createActions( );
+  setupsAction( );
+  initModels( );
+  createConnects( );
+  setupView( );
 }
 
 OrderWidget::~OrderWidget( ) { delete ui; }
@@ -40,9 +43,9 @@ void OrderWidget::updateOrderWidget( ) {
 }
 
 void OrderWidget::createConnects( ) {
-  // connect( ui->pushButtonAddNewOrder, QOverload< bool >::of( &QPushButton::clicked ), this, QOverload<>::of( &OrderWidget::slotAddOrder ) );
   connect( ui->tableViewOrder, QOverload< const QModelIndex & >::of( &QTableView::pressed ), this,
 	   QOverload< const QModelIndex & >::of( &OrderWidget::slotSelectRow ) );
+  connect( addingOrderAction, QOverload< bool >::of( &QAction::triggered ), this, QOverload<>::of( &OrderWidget::slotAddOrder ) );
 }
 
 void OrderWidget::initModels( ) {
@@ -66,6 +69,22 @@ void OrderWidget::setupView( ) {
   ui->tableViewOrder->hideColumn( 8 );
   hw->setDefaultAlignment( Qt::AlignCenter );
   hw->setSectionResizeMode( QHeaderView::ResizeMode::ResizeToContents );
+
+  menuForTable = new QMenu( this );
+  menuForTable->addAction( addingOrderAction );
+  menuForTable->addAction( updateOrderAction );
+  menuForTable->addAction( deleteOrderAction );
+  ui->tableViewOrder->setContextMenu( menuForTable );
 }
 
-void OrderWidget::createActions( ) {}
+void OrderWidget::createActions( ) {
+  addingOrderAction = new QAction( tr( "Создать ордер 123" ), this );
+  updateOrderAction = new QAction( tr( "Правка ордера 123" ), this );
+  deleteOrderAction = new QAction( tr( "Удалить ордер 123" ), this );
+}
+
+void OrderWidget::setupsAction( ) {
+  ui->toolButtonAddNewOrder->setAction( addingOrderAction );
+  ui->toolButtonUpdateOrder->setAction( updateOrderAction );
+  ui->toolButtonDeleteOrder->setAction( deleteOrderAction );
+}

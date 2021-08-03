@@ -1,8 +1,10 @@
 
+#include "ElementsWidgets/actionpushbutton.h"
 #include "MainWindow/mainwindow.h"
 #include "Orders/ordertableview.h"
 #include "Orders/orderwidget.h"
 
+#include <QAction>
 #include <QApplication>
 #include <QLabel>
 #include <QSplashScreen>
@@ -22,11 +24,16 @@ int main( int argc, char *argv[] ) {
   QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
   splash.show( );
 
-  createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
+  // createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
 
   // OrderTableView w;
   // AddEmploeeDialog w;
   // OrderWidget w;
+
+  //  ActionPushButton w;
+  //  QAction act( QIcon( ":/img/filenew.png" ), "Test" );
+  //  w.setAction( &act );
+
   MainWindow w;
   w.show( );
 
