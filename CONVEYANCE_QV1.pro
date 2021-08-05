@@ -145,6 +145,61 @@ DISTFILES += \
 	ErrorsFound \
 	IshodnyDanny/Adresses.ods \
 	IshodnyDanny/Adresses.xls \
+	MyBin/CONVEYANCE_QV1.exe \
+	MyBin/PostgreSQL_13.1_64bit_Setup.exe \
+	MyBin/Qt6Core.dll \
+	MyBin/Qt6Gui.dll \
+	MyBin/Qt6Sql.dll \
+	MyBin/Qt6Svg.dll \
+	MyBin/Qt6Widgets.dll \
+	MyBin/d3dcompiler_47.dll \
+	MyBin/iconengines/qsvgicon.dll \
+	MyBin/imageformats/qgif.dll \
+	MyBin/imageformats/qicns.dll \
+	MyBin/imageformats/qico.dll \
+	MyBin/imageformats/qjpeg.dll \
+	MyBin/imageformats/qsvg.dll \
+	MyBin/imageformats/qtga.dll \
+	MyBin/imageformats/qtiff.dll \
+	MyBin/imageformats/qwbmp.dll \
+	MyBin/imageformats/qwebp.dll \
+	MyBin/opengl32sw.dll \
+	MyBin/platforms/qwindows.dll \
+	MyBin/scriptPacckage1.iss \
+	MyBin/sqldrivers/qsqlite.dll \
+	MyBin/sqldrivers/qsqlodbc.dll \
+	MyBin/sqldrivers/qsqlpsql.dll \
+	MyBin/styles/qwindowsvistastyle.dll \
+	MyBin/translations/qt_ar.qm \
+	MyBin/translations/qt_bg.qm \
+	MyBin/translations/qt_ca.qm \
+	MyBin/translations/qt_cs.qm \
+	MyBin/translations/qt_da.qm \
+	MyBin/translations/qt_de.qm \
+	MyBin/translations/qt_en.qm \
+	MyBin/translations/qt_es.qm \
+	MyBin/translations/qt_fa.qm \
+	MyBin/translations/qt_fi.qm \
+	MyBin/translations/qt_fr.qm \
+	MyBin/translations/qt_gd.qm \
+	MyBin/translations/qt_he.qm \
+	MyBin/translations/qt_hr.qm \
+	MyBin/translations/qt_hu.qm \
+	MyBin/translations/qt_it.qm \
+	MyBin/translations/qt_ja.qm \
+	MyBin/translations/qt_ko.qm \
+	MyBin/translations/qt_lv.qm \
+	MyBin/translations/qt_nl.qm \
+	MyBin/translations/qt_nn.qm \
+	MyBin/translations/qt_pl.qm \
+	MyBin/translations/qt_pt_BR.qm \
+	MyBin/translations/qt_ru.qm \
+	MyBin/translations/qt_sk.qm \
+	MyBin/translations/qt_tr.qm \
+	MyBin/translations/qt_uk.qm \
+	MyBin/translations/qt_zh_CN.qm \
+	MyBin/translations/qt_zh_TW.qm \
+	MyBin/vc_redist.x64.exe \
 	doc/BaseTable.txt \
 	doc/Contracts.txt \
     doc/DB.sql \
