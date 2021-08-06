@@ -9,6 +9,7 @@
 #include <QLabel>
 #include <QSplashScreen>
 #include <QSqlDatabase>
+#include "Constants.h"
 
 // global
 void setsApp( QApplication &app );
@@ -50,7 +51,7 @@ void setsApp( QApplication &app ) {
 }
 
 void createDbConnection( ) {
-  QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", "DB" );
+  QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", NAME_DB_ALL );
   db.setHostName( "localhost" );
   db.setPort( 5432 );
   db.setDatabaseName( "demo_coveyance_db" );

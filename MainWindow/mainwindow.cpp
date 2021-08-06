@@ -6,6 +6,7 @@
 #include <QMenuBar>
 #include <QSqlDatabase>
 #include <QToolBar>
+#include "Constants.h"
 
 MainWindow::MainWindow( QWidget * parent ) : QMainWindow( parent ), ui( new Ui::MainWindow ) {
   ui->setupUi( this );
@@ -45,7 +46,7 @@ void MainWindow::readSettings( ) { qDebug( ) << "work MainWindow::readSettings( 
 //}
 
 void MainWindow::createDatabaseConnection( ) {
-  QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", "DB" );
+  QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", NAME_DB_ALL );
   db.setHostName( "localhost" );
   db.setPort( 5432 );
   db.setDatabaseName( "demo_coveyance_db" );

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>421</width>
-    <height>614</height>
+    <height>667</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -241,18 +241,15 @@
            </widget>
           </item>
           <item row="1" column="2">
-           <widget class="QDoubleSpinBox" name="doubleSpinBoxAnte">
+           <widget class="QLabel" name="labelAnte">
+            <property name="text">
+             <string>0,00</string>
+            </property>
+            <property name="scaledContents">
+             <bool>true</bool>
+            </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
-            </property>
-            <property name="decimals">
-             <number>2</number>
-            </property>
-            <property name="maximum">
-             <double>1000.000000000000000</double>
-            </property>
-            <property name="singleStep">
-             <double>0.010000000000000</double>
             </property>
            </widget>
           </item>

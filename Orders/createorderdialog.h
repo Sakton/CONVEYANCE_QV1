@@ -18,11 +18,15 @@ public slots:
   void accept( ) override;
   void slotAddShipper( );
   void slotAddDriver( );
+  void slotCostChanged( double cost );
+  void slotArrivalChanged( int arrival );
+  void slotRouteChanged( int arrival );
 
-private:
+  private:
   void connects( );
+  double ante( double cost, int path );
 
-private:
+  private:
   Ui::CreateOrderDialog *ui;
 };
 
