@@ -19,6 +19,7 @@ CreateOrderDialog::CreateOrderDialog( QWidget* parent )
 }
 
 CreateOrderDialog::~CreateOrderDialog( )
+
 {
     delete ui;
 }
@@ -104,15 +105,21 @@ void CreateOrderDialog::slotCostChanged( double cost )
 {
     double arrival = ui->spinBoxArrival->value( );
     double route = ui->spinBoxRoute->value( );
-    ui->label->setText( QString::number( ante( cost, arrival + route ) ) );
+    ui->labelAnte->setText( QString::number( ante( cost, arrival + route ), 'f', 2 ) );
 }
 
 void CreateOrderDialog::slotArrivalChanged( int arrival )
 {
+    double cost = ui->doubleSpinBoxCost->value( );
+    double route = ui->spinBoxRoute->value( );
+    ui->labelAnte->setText( QString::number( ante( cost, arrival + route ), 'f', 2 ) );
 }
 
 void CreateOrderDialog::slotRouteChanged( int arrival )
 {
+    double cost = ui->doubleSpinBoxCost->value( );
+    double route = ui->spinBoxRoute->value( );
+    ui->labelAnte->setText( QString::number( ante( cost, arrival + route ), 'f', 2 ) );
 }
 
 void CreateOrderDialog::connects( )
