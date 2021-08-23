@@ -27,7 +27,7 @@ CREATE SCHEMA IF NOT EXISTS adres;
 
 
 -- ТАБЛИЦА "СТРАНЫ"
-CREATE TABLE adres.countrys (
+CREATE TABLE IF NOT EXISTS adres.countrys (
     country_id SERIAL UNIQUE,                         -- PK
     vat_id INTEGER NOT NULL,                          -- FK на ID VAT(НДС)
     vatname_id INT NOT NULL,                          -- FK на ID абрревиатуры НДСов разных стран европы
@@ -86,7 +86,7 @@ VALUES
 
 
 -- ТАБЛИЦА "ГОРОДА"
-CREATE TABLE adres.сities (
+CREATE TABLE IF NOT EXISTS adres.сities (
     city_id SERIAL UNIQUE,                      -- РК
     city_name VARCHAR( 256 ) NOT NULL UNIQUE,   -- название города
     country_id INTEGER,                         -- FK на ID страны
@@ -96,7 +96,7 @@ CREATE TABLE adres.сities (
 
 
 -- ТАБЛИЦА "УЛИЦА"
-CREATE TABLE adres.streets (
+CREATE TABLE IF NOT EXISTS adres.streets (
     street_id SERIAL UNIQUE,                     -- PK
     street_name VARCHAR ( 256 ) NOT NULL UNIQUE, -- улица ( предполагается временно: улица, дом, номер дома и тд. )
     PRIMARY KEY ( street_id )
@@ -104,7 +104,7 @@ CREATE TABLE adres.streets (
 
 
 -- ТАБЛИЦА "АДРЕС"
-CREATE TABLE adres.adress (
+CREATE TABLE IF NOT EXISTS adres.adress (
     adres_id SERIAL UNIQUE,                                                                 -- PK
     -- country_id INTEGER,                                                                  -- FK на ID страны ( этот ключ не нужен, так как он есть в таблице "ГОРОДА" )
     city_id INTEGER NOT NULL,                                                               -- FK на ID "ГОРОД"
@@ -115,7 +115,7 @@ CREATE TABLE adres.adress (
     -- FOREIGN KEY ( country_id ) REFERENCES adres.countrys ( country_id ) ON DELETE SET NULL,
     FOREIGN KEY ( city_id ) REFERENCES adres.сities ( city_id ) ON DELETE SET NULL,
     FOREIGN KEY ( street_id ) REFERENCES adres.streets ( street_id ) ON DELETE SET NULL,
-    CHECK ( adres_type IN ( 'Фактический', 'Юридический') )                                  -- доменное ограничение по полю "тип адреса"
+    CHECK ( adres_type IN ( 'Фактический', 'Юридический') )                                 -- доменное ограничение по полю "тип адреса"
 );
 
 
@@ -170,7 +170,7 @@ $$ LANGUAGE SQL;
 -- ФУНКЦИЯ ПОЛУЧЕНИЯ ID УЛИЦЫ ( ПОДАДРЕСА ( УЛИЦА-ДОМ-ОФИС№ И Т.Д. ) ),
 -- ЕСЛИ ТАКОЙ УЛИЦЫ НЕТ ТО ВСТАВКА ЕЕ И ВОЗВРАТ ID
 -- ЕСЛИ ЕСТЬ ТО ПРОСТО ВОЗВРАТ ID
-CREATE OR REPLACE FUNCTION adres.getStreetId( st VARCHAR ) RETURNS INTEGER AS
+CREATE FUNCTION adres.getStreetId( st VARCHAR ) RETURNS INTEGER AS
 $$ 
 DECLARE id INTEGER DEFAULT NULL;
     BEGIN
@@ -188,7 +188,7 @@ $$ LANGUAGE plpgsql;
 
 -- ПРОЦЕДУРА ВСТАВКИ ВСЕГО АДРЕСА: ГОРОД, УЛИЦА, ИНДЕКС, ТИП
 -- СТРАНА ДОСТУПНА ИЗ ТАБЛИЦЫ "ГОРОДА"
-CREATE OR REPLACE PROCEDURE adres.insertAdress ( ct VARCHAR, strt VARCHAR, idx VARCHAR, type_adress VARCHAR ) LANGUAGE SQL AS
+CREATE PROCEDURE adres.insertAdress ( ct VARCHAR, strt VARCHAR, idx VARCHAR, type_adress VARCHAR ) LANGUAGE SQL AS
 $$
     INSERT INTO adres.adress ( city_id, street_id, adres_index, adres_type )
     VALUES (

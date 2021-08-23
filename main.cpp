@@ -4,6 +4,8 @@
 #include "Orders/ordertableview.h"
 #include "Orders/orderwidget.h"
 
+#include "DataBase/databasecreator.h"
+
 #include <QAction>
 #include <QApplication>
 #include <QLabel>
@@ -22,8 +24,8 @@ int main( int argc, char *argv[] ) {
   QApplication a( argc, argv );
   setsApp( a );
 
-  QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
-  splash.show( );
+  //  QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
+  //  splash.show( );
 
   // createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
 
@@ -35,10 +37,10 @@ int main( int argc, char *argv[] ) {
   //  QAction act( QIcon( ":/img/filenew.png" ), "Test" );
   //  w.setAction( &act );
 
-  MainWindow w;
-  w.show( );
+  //  MainWindow w;
+  //  w.show( );
 
-  splash.finish( &w );
+  //  splash.finish( &w );
   return a.exec( );
 }
 //***********************************************

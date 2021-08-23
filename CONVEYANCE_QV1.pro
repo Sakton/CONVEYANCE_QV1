@@ -23,6 +23,9 @@ SOURCES += \
     Cars/addbrandcardialog.cpp \
     Cars/addcarmodeldialog.cpp \
     Contract/createcontractdialog.cpp \
+    DataBase/adress_databaselogiccreator.cpp \
+    DataBase/databasecreator.cpp \
+    DataBase/databaselogiccreator.cpp \
     ElementsWidgets/actionpushbutton.cpp \
     ElementsWidgets/comboboxcarbrand.cpp \
     ElementsWidgets/comboboxcarcategories.cpp \
@@ -69,6 +72,9 @@ HEADERS += \
 	Cars/addcarmodeldialog.h \
 	Constants.h \
 	Contract/createcontractdialog.h \
+	DataBase/adress_databaselogiccreator.h \
+	DataBase/databasecreator.h \
+	DataBase/databaselogiccreator.h \
 	ElementsWidgets/actionpushbutton.h \
 	ElementsWidgets/comboboxcarbrand.h \
 	ElementsWidgets/comboboxcarcategories.h \
