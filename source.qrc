@@ -82,5 +82,7 @@
         <file>img/CategoriesAuto/DE.png</file>
         <file>img/CategoriesAuto/Tb.png</file>
         <file>img/CategoriesAuto/Tm.png</file>
+        <file>DumpStructureDatabase/currentDump.sql</file>
+        <file>DumpStructureDatabase/currentDumpSchema.sql</file>
     </qresource>
 </RCC>

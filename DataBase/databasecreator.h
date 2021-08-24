@@ -1,13 +1,17 @@
 #ifndef DATABASECREATOR_H
 #define DATABASECREATOR_H
-
-class QSqlDatabase;
+#include <QSqlDatabase>
 
 class DatabaseCreator
 {
 public:
-  DatabaseCreator( );
   bool createDatabase( );
+
+private:
+  bool createEmptyBase( );
+  bool createTablesAndUtilities( );
+  bool isCreateDataBase( const QSqlDatabase & db );
+  bool createDefaultConnectionDb( );
 };
 
 #endif // DATABASECREATOR_H

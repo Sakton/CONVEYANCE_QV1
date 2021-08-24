@@ -24,6 +24,12 @@ int main( int argc, char *argv[] ) {
   QApplication a( argc, argv );
   setsApp( a );
 
+  DatabaseCreator dbc;
+  if ( !dbc.createDatabase( ) )
+    qDebug( ) << "ERROR CREATE DB";
+  else
+    qDebug( ) << "CREATE DB";
+
   //  QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
   //  splash.show( );
 
