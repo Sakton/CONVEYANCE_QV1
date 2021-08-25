@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "CONVEYANCE"
-#define MyAppVersion "1.5"
+#define MyAppVersion "0.001"
 #define MyAppPublisher "My Company, Inc."
 #define MyAppURL "https://www.example.ru/"
 #define MyAppExeName "CONVEYANCE_QV1.exe"
@@ -10,7 +10,7 @@
 #define MyAppAssocExt ".myp"
 #define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
 #define DbFileExe "PostgreSQL_13.1_64bit_Setup.exe"
-#define MyRKK_Path "E:\CPP\MyProects\CONVEYANCE_QV1\CONVEYANCE_QV1\MyBin"
+#define MyRKK_Path "E:\CPP\MyProects\CONVEYANCE_QV1\deploy"
 #define MyHome_Path "";
 #define CurrentPath MyRKK_Path
 
@@ -52,7 +52,7 @@ Source: "{#CurrentPath}\Qt6Gui.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#CurrentPath}\Qt6Sql.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#CurrentPath}\Qt6Svg.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#CurrentPath}\Qt6Widgets.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "{#CurrentPath}\vc_redist.x64.exe"; DestDir: "{app}"; Flags: ignoreversion
+// Source: "{#CurrentPath}\vc_redist.x64.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "{#CurrentPath}\iconengines\*"; DestDir: "{app}\iconengines"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#CurrentPath}\imageformats\*"; DestDir: "{app}\imageformats"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#CurrentPath}\platforms\*"; DestDir: "{app}\platforms"; Flags: ignoreversion recursesubdirs createallsubdirs

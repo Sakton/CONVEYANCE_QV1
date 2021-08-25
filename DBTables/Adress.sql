@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS adres.countrys (
 );
 
 
--- ВТАВКА СПРАСОЧНЫХ ДАННЫХ В ТАБЛИЦУ "СТРАНЫ" -- это константы
+-- ВТАВКА СПРАВОЧНЫХ ДАННЫХ В ТАБЛИЦУ "СТРАНЫ" -- это константы
 INSERT INTO adres.countrys ( vat_id, vatname_id, country_name, country_abbreviated_2, country_abbreviated_3, country_icon )
 VALUES 
     ( ( SELECT vat.getVatId(  20::DECIMAL ) ), ( SELECT vat.getVatNames( 'USt'    ) ), 'Австрия', 'AT', 'AUT', 'austria.png' ), --1

@@ -14,10 +14,13 @@ bool DatabaseCreator::createEmptyBase( ) {
   if ( !isCreateDataBase( defaultDb ) ) {
     QSqlQuery query( defaultDb );
     if ( query.exec( QString( "CREATE DATABASE %1 WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'Russian_Russia.1251';" )
-			 .arg( NAME_DATABASE_IN_SUBD ) ) )
-      ok = createTablesAndUtilities( );
-  } else {
-    ok = true;
+			 .arg( NAME_DATABASE_IN_SUBD ) ) ) {
+      bool ok1 = createTablesAndUtilities( );
+      bool ok2 = addingConstantData( );
+      qDebug( ) << "ok1 = " << ok1 << "  ok2 = " << ok2;
+    } else {
+      ok = true;
+    }
   }
   return ok;
 }
@@ -66,4 +69,20 @@ bool DatabaseCreator::createConnectionToDb( ) {
   db.setPassword( "postgres" );
   db.setDatabaseName( NAME_DATABASE_IN_SUBD );
   return db.open( );
+}
+
+bool DatabaseCreator::addingConstantData( ) {
+  QFile file( ":/DumpStructureDatabase/InsertConstatsDataInTable.sql" );
+  if ( file.open( QFile::ReadOnly ) ) {
+    QString qs { file.readAll( ) };
+    //    qDebug( ) << "qs = " << qs;
+    if ( !createConnectionToDb( ) ) {
+      qDebug( ) << "ERROR OPEN DB in DatabaseCreator::createTablesAndUtilities";
+      return false;
+    }
+    QSqlDatabase db = QSqlDatabase::database( "DB" );
+    QSqlQuery query( db );
+    return query.exec( qs );
+  }
+  return false;
 }

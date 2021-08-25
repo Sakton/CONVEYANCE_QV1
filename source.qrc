@@ -84,5 +84,6 @@
         <file>img/CategoriesAuto/Tm.png</file>
         <file>DumpStructureDatabase/currentDump.sql</file>
         <file>DumpStructureDatabase/currentDumpSchema.sql</file>
+        <file>DumpStructureDatabase/InsertConstatsDataInTable.sql</file>
     </qresource>
 </RCC>

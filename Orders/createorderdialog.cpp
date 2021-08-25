@@ -101,25 +101,24 @@ void CreateOrderDialog::slotAddDriver( )
     }
 }
 
-void CreateOrderDialog::slotCostChanged( double cost )
-{
-    double arrival = ui->spinBoxArrival->value( );
-    double route = ui->spinBoxRoute->value( );
-    ui->labelAnte->setText( QString::number( ante( cost, arrival + route ), 'f', 2 ) );
+void CreateOrderDialog::slotCostChanged( double cost ) {
+
+  double arrival = ui->spinBoxArrival->value( );
+  double route = ui->spinBoxRoute->value( );
+  ui->labelAnte->setText( QString::number( ante( cost, arrival + route ), 'f', 2 ) );
 }
 
 void CreateOrderDialog::slotArrivalChanged( int arrival )
 {
-    double cost = ui->doubleSpinBoxCost->value( );
-    double route = ui->spinBoxRoute->value( );
-    ui->labelAnte->setText( QString::number( ante( cost, arrival + route ), 'f', 2 ) );
+  double cost = ui->doubleSpinBoxCost->value( );
+  double route = ui->spinBoxRoute->value( );
+  ui->labelAnte->setText( QString::number( ante( cost, arrival + route ), 'f', 2 ) );
 }
 
-void CreateOrderDialog::slotRouteChanged( int arrival )
-{
-    double cost = ui->doubleSpinBoxCost->value( );
-    double route = ui->spinBoxRoute->value( );
-    ui->labelAnte->setText( QString::number( ante( cost, arrival + route ), 'f', 2 ) );
+void CreateOrderDialog::slotRouteChanged( int route ) {
+  double cost = ui->doubleSpinBoxCost->value( );
+  double arrival = ui->spinBoxArrival->value( );
+  ui->labelAnte->setText( QString::number( ante( cost, arrival + route ), 'f', 2 ) );
 }
 
 void CreateOrderDialog::connects( )
@@ -133,5 +132,7 @@ void CreateOrderDialog::connects( )
 
 double CreateOrderDialog::ante( double cost, int path )
 {
-    return cost / path;
+  qDebug( ) << "cost = " << cost;
+  qDebug( ) << "path = " << path;
+  return cost / path;
 }

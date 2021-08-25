@@ -30,23 +30,15 @@ int main( int argc, char *argv[] ) {
   else
     qDebug( ) << "CREATE DB";
 
-  //  QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
-  //  splash.show( );
+  QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
+  splash.show( );
 
   // createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
 
-  // OrderTableView w;
-  // AddEmploeeDialog w;
-  // OrderWidget w;
+  MainWindow w;
+  w.show( );
 
-  //  ActionPushButton w;
-  //  QAction act( QIcon( ":/img/filenew.png" ), "Test" );
-  //  w.setAction( &act );
-
-  //  MainWindow w;
-  //  w.show( );
-
-  //  splash.finish( &w );
+  splash.finish( &w );
   return a.exec( );
 }
 //***********************************************
@@ -62,7 +54,7 @@ void createDbConnection( ) {
   QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", NAME_DB_ALL );
   db.setHostName( "localhost" );
   db.setPort( 5432 );
-  db.setDatabaseName( "demo_coveyance_db" );
+  db.setDatabaseName( NAME_DATABASE_IN_SUBD );
   db.setUserName( "postgres" );
   db.setPassword( "postgres" );
   bool ok = db.open( );
