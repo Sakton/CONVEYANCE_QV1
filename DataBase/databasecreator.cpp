@@ -5,42 +5,29 @@
 #include <QSqlError>
 #include <QSqlQuery>
 
-bool DatabaseCreator::createDatabase( ) {
-
-  if ( createEmptyBase( ) )
-    return createTablesAndUtilities( );
-  return false;
-}
-
-// TODO ШАМАНИТЬ ТУТ
+bool DatabaseCreator::createDatabase( ) { return createEmptyBase( ); }
 
 bool DatabaseCreator::createEmptyBase( ) {
   createDefaultConnectionDb( );
   QSqlDatabase defaultDb = QSqlDatabase::database( "POSTGRES" );
   bool ok = false;
   if ( !isCreateDataBase( defaultDb ) ) {
-    QSqlQuery query(
-	QString( "CREATE DATABASE %1 WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'Russian_Russia.1251';" ).arg( NAME_DATABASE_IN_SUBD ),
-	defaultDb );
-    ok = query.exec( );
-    qDebug( ) << "ok = " << ok;
+    QSqlQuery query( defaultDb );
+    if ( query.exec( QString( "CREATE DATABASE %1 WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'Russian_Russia.1251';" )
+			 .arg( NAME_DATABASE_IN_SUBD ) ) )
+      ok = createTablesAndUtilities( );
+  } else {
+    ok = true;
   }
   return ok;
 }
 
 bool DatabaseCreator::createTablesAndUtilities( ) {
-  QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", "NAME_DATABASE_IN_SUBD" );
-  db.setHostName( "localhost" );
-  db.setPort( 5432 );
-  db.setUserName( "postgres" );
-  db.setPassword( "postgres" );
-  db.setDatabaseName( NAME_DATABASE_IN_SUBD );
-  bool ok = db.open( );
-  if ( !ok ) {
+  if ( !createConnectionToDb( ) ) {
     qDebug( ) << "ERROR OPEN DB in DatabaseCreator::createTablesAndUtilities";
     return false;
   }
-
+  QSqlDatabase db = QSqlDatabase::database( "DB" );
   QFile file( ":/DumpStructureDatabase/currentDumpSchema.sql" );
   if ( !file.open( QFile::ReadOnly ) ) {
     qDebug( ) << "ERROR OPEN FILE DB";
@@ -69,4 +56,14 @@ bool DatabaseCreator::createDefaultConnectionDb( ) {
   defaultDb.setPassword( "postgres" );
   defaultDb.setDatabaseName( "postgres" );
   return defaultDb.open( );
+}
+
+bool DatabaseCreator::createConnectionToDb( ) {
+  QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", "DB" );
+  db.setHostName( "localhost" );
+  db.setPort( 5432 );
+  db.setUserName( "postgres" );
+  db.setPassword( "postgres" );
+  db.setDatabaseName( NAME_DATABASE_IN_SUBD );
+  return db.open( );
 }

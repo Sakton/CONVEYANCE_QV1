@@ -12,6 +12,7 @@ private:
   bool createTablesAndUtilities( );
   bool isCreateDataBase( const QSqlDatabase & db );
   bool createDefaultConnectionDb( );
+  bool createConnectionToDb( );
 };
 
 #endif // DATABASECREATOR_H
