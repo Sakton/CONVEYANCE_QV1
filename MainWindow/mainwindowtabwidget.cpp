@@ -11,8 +11,4 @@ void MainWindowTabWidget::createConnected( ) {
 
 //проблема с удалением закладок в конструкторе, их еще нет, поэтому и не удаляются,
 //при событии показа виджета ( когда он подготовлен их удаляем )
-void MainWindowTabWidget::showEvent( QShowEvent * event ) {
-  removeTab( 1 );
-  removeTab( 0 );
-  QTabWidget::showEvent( event );
-}
+void MainWindowTabWidget::showEvent( QShowEvent * event ) { QTabWidget::showEvent( event ); }

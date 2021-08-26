@@ -7,8 +7,17 @@
 
 bool DatabaseCreator::createDatabase( ) { return createEmptyBase( ); }
 
+DatabaseCreator::~DatabaseCreator( ) {
+  QSqlDatabase::removeDatabase( "POSTGRES" );
+  QSqlDatabase::removeDatabase( "CREATECONNECT" );
+}
+
 bool DatabaseCreator::createEmptyBase( ) {
-  createDefaultConnectionDb( );
+
+  bool createDb = createDefaultConnectionDb( );
+
+  Q_ASSERT_X( createDb, "createDefaultConnectionDb", "createDefaultConnectionDb" );
+
   QSqlDatabase defaultDb = QSqlDatabase::database( "POSTGRES" );
   bool ok = false;
   if ( !isCreateDataBase( defaultDb ) ) {
@@ -30,7 +39,7 @@ bool DatabaseCreator::createTablesAndUtilities( ) {
     qDebug( ) << "ERROR OPEN DB in DatabaseCreator::createTablesAndUtilities";
     return false;
   }
-  QSqlDatabase db = QSqlDatabase::database( "DB" );
+  QSqlDatabase db = QSqlDatabase::database( "CREATECONNECT" );
   QFile file( ":/DumpStructureDatabase/currentDumpSchema.sql" );
   if ( !file.open( QFile::ReadOnly ) ) {
     qDebug( ) << "ERROR OPEN FILE DB";
@@ -62,7 +71,7 @@ bool DatabaseCreator::createDefaultConnectionDb( ) {
 }
 
 bool DatabaseCreator::createConnectionToDb( ) {
-  QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", "DB" );
+  QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", "CREATECONNECT" );
   db.setHostName( "localhost" );
   db.setPort( 5432 );
   db.setUserName( "postgres" );
@@ -80,7 +89,7 @@ bool DatabaseCreator::addingConstantData( ) {
       qDebug( ) << "ERROR OPEN DB in DatabaseCreator::createTablesAndUtilities";
       return false;
     }
-    QSqlDatabase db = QSqlDatabase::database( "DB" );
+    QSqlDatabase db = QSqlDatabase::database( "CREATECONNECT" );
     QSqlQuery query( db );
     return query.exec( qs );
   }

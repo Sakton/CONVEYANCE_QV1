@@ -6,6 +6,7 @@ class DatabaseCreator
 {
 public:
   bool createDatabase( );
+  ~DatabaseCreator( );
 
 private:
   bool createEmptyBase( );

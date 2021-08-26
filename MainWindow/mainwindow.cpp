@@ -1,4 +1,6 @@
 #include "mainwindow.h"
+#include "Constants.h"
+#include "DataBase/databasecreator.h"
 #include "Orders/orderwidget.h"
 #include "ui_mainwindow.h"
 #include <QAction>
@@ -6,10 +8,12 @@
 #include <QMenuBar>
 #include <QSqlDatabase>
 #include <QToolBar>
-#include "Constants.h"
 
 MainWindow::MainWindow( QWidget * parent ) : QMainWindow( parent ), ui( new Ui::MainWindow ) {
   ui->setupUi( this );
+  ui->tabWidget->slotClosetab( 1 );
+  ui->tabWidget->slotClosetab( 0 );
+  createDatabase( );
   readSettings( );
   // createToolBar( );
   createDatabaseConnection( );
@@ -59,4 +63,12 @@ void MainWindow::createDatabaseConnection( ) {
 void MainWindow::createConnections( ) {
   connect( ui->actionShowAllOrder, QOverload< bool >::of( &QAction::triggered ), this, QOverload<>::of( &MainWindow::slotOrderWindow ) );
   connect( ui->tabWidget, QOverload< int >::of( &QTabWidget::tabCloseRequested ), this, QOverload< int >::of( &MainWindow::slotCloseTab ) );
+}
+
+void MainWindow::createDatabase( ) {
+  DatabaseCreator dbc;
+  if ( !dbc.createDatabase( ) )
+    qDebug( ) << "ERROR CREATE DB";
+  else
+    qDebug( ) << "CREATE DB";
 }

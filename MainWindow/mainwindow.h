@@ -31,10 +31,9 @@ private:
   void readSettings( );
   // void createToolBar( );
   void createStatusBar( );
-
   void createDatabaseConnection( );
-
   void createConnections( );
+  void createDatabase( );
 
 private:
   Ui::MainWindow *ui;
