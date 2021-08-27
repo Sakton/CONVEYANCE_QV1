@@ -32,7 +32,13 @@ void OrderWidget::slotAddOrder( ) {
   }
 }
 
-void OrderWidget::slotUpdOrder( ) { QMessageBox::information( this, tr( "ПРАВКА ОРДЕРА" ), tr( "ХОПА, ВЫСКОЧИТ ОКНО ПРАВКИ, ПОТОМ" ) ); }
+void OrderWidget::slotUpdOrder( ) {
+  QMessageBox::information( this, tr( "ПРАВКА ОРДЕРА" ), tr( "ХОПА, ЖДЕМ ОКНО ПРАВКИ" ) );
+  QModelIndex ind = ui->tableViewOrder->selectionModel( )->currentIndex( );
+  QSqlRecord rowData = model->record( ind.row( ) );
+  qDebug( ) << "rowData = " << rowData;
+  // TODO нет order_id добавить в представление
+}
 
 void OrderWidget::slotDelOrder( ) {
   QMessageBox::information( this, tr( "УДАЛЕНИЕ ОРДЕРА" ), tr( "ХОПА, УДАЛИТСЯ ЗАПИТЬ, СТРАТЕГИЯ УДАЛЕНИЯ НЕ ПОНЯТНА ПОКА" ) );
@@ -87,9 +93,9 @@ void OrderWidget::setupView( ) {
 }
 
 void OrderWidget::createActions( ) {
-  addingOrderAction = new QAction( tr( "Создать ордер 123" ), this );
-  updateOrderAction = new QAction( tr( "Правка ордера 123" ), this );
-  deleteOrderAction = new QAction( tr( "Удалить ордер 123" ), this );
+  addingOrderAction = new QAction( tr( "Создать" ), this );
+  updateOrderAction = new QAction( tr( "Изменить" ), this );
+  deleteOrderAction = new QAction( tr( "Удалить" ), this );
 }
 
 void OrderWidget::setupsAction( ) {

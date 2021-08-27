@@ -29,14 +29,15 @@ CREATE TABLE orders.orders (
 -- **** - возможно переедут в отдельную сущность
 
 -- ПРОЦЕДУРА ВСТАВКИ В ТАБЛИЦУ
-CREATE PROCEDURE orders.addOrder( idShipper INTEGER,
-                           idEmploee INTEGER,
-                           idPayment INTEGER,
-                           idRoute INTEGER,
-                           idDocuments INTEGER,
-                           dataOrder DATE,
-                           contractNumber VARCHAR,
-                           noteOrder TEXT) LANGUAGE SQL AS
+CREATE PROCEDURE orders.addOrder(
+			    idShipper INTEGER,
+			    idEmploee INTEGER,
+			    idPayment INTEGER,
+			    idRoute INTEGER,
+			    idDocuments INTEGER,
+			    dataOrder DATE,
+			    contractNumber VARCHAR,
+			    noteOrder TEXT) LANGUAGE SQL AS
 $$
     INSERT INTO orders.orders( shipper_id, emploee_id, payment_id, route_id, document_id, order_data, order_contractNumber, order_note )
         VALUES ( idShipper, idEmploee, idPayment, idRoute, idDocuments, dataOrder, contractNumber, noteOrder );
