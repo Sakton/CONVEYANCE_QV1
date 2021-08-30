@@ -5,6 +5,7 @@
 #include "Orders/orderwidget.h"
 
 #include "DataBase/databasecreator.h"
+#include "Orders/commomorderform.h"
 
 #include <QAction>
 #include <QApplication>
@@ -37,8 +38,11 @@ int main( int argc, char *argv[] ) {
 
   MainWindow w;
   w.show( );
+  //  CommomOrderForm of( CommomOrderForm::Regim::UPD );
+  //  of.show( );
 
   splash.finish( &w );
+  // splash.finish( &of );
   return a.exec( );
 }
 //***********************************************

@@ -72,11 +72,13 @@ void CreateOrderDialog::accept( ) {
 			      .arg( data.toString( ), numberContract, text );
   if ( !query.exec( qsInsertOrder ) ) {
     qDebug( ) << query.lastError( ).text( );
+    QMessageBox::warning( this, tr( "ОШИБКА" ), query.lastError( ).text( ) );
     db.rollback( ); //ОТМЕНИТЬ ТРАНЗАКЦИЮ
+  } else {
+    db.commit( ); //ПРИНЯТЬ ТРАНЗАКЦИЮ (функции получения id автоматически вставляют в базу, то есть эта транзакция частично вносит измемнения )
+    // TODO тут возможно изменение поведения
+    QDialog::accept( );
   }
-  db.commit( ); //ПРИНЯТЬ ТРАНЗАКЦИЮ (функции получения id автоматически вставляют в базу, то есть эта транзакция частично вносит измемнения )
-  // TODO тут возможно изменение поведения
-  QDialog::accept( );
 }
 
 void CreateOrderDialog::slotAddShipper( ) {

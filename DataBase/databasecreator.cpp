@@ -84,7 +84,6 @@ bool DatabaseCreator::addingConstantData( ) {
   QFile file( ":/DumpStructureDatabase/InsertConstatsDataInTable.sql" );
   if ( file.open( QFile::ReadOnly ) ) {
     QString qs { file.readAll( ) };
-    //    qDebug( ) << "qs = " << qs;
     if ( !createConnectionToDb( ) ) {
       qDebug( ) << "ERROR OPEN DB in DatabaseCreator::createTablesAndUtilities";
       return false;

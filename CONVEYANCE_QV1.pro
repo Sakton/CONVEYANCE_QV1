@@ -45,6 +45,8 @@ SOURCES += \
     MainWindow/mainwindow.cpp \
     MainWindow/mainwindowtabwidget.cpp \
     MyTests/testqsqltableformform.cpp \
+    Orders/TestOrd/testadd.cpp \
+    Orders/commomorderform.cpp \
     Orders/createorderdialog.cpp \
     Orders/ordersqlquerymodel.cpp \
     Orders/ordersqltablemodel.cpp \
@@ -92,6 +94,8 @@ HEADERS += \
 	MainWindow/mainwindow.h \
 	MainWindow/mainwindowtabwidget.h \
 	MyTests/testqsqltableformform.h \
+	Orders/TestOrd/testadd.h \
+	Orders/commomorderform.h \
 	Orders/createorderdialog.h \
 	Orders/ordersqlquerymodel.h \
 	Orders/ordersqltablemodel.h \
@@ -116,6 +120,7 @@ FORMS += \
 	Emploee/emploeetableview.ui \
 	MainWindow/mainwindow.ui \
 	MyTests/testqsqltableformform.ui \
+	Orders/commomorderform.ui \
 	Orders/createorderdialog.ui \
 	Orders/orderwidget.ui \
 	Orders/testform.ui \

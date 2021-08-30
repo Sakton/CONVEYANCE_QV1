@@ -11,7 +11,7 @@ class CreateOrderDialog : public QDialog {
   Q_OBJECT
 
 public:
-  explicit CreateOrderDialog( QWidget *parent = nullptr );
+  explicit CreateOrderDialog( QWidget * parent = nullptr );
   ~CreateOrderDialog( );
 
 public slots:
@@ -26,8 +26,8 @@ public slots:
   void connects( );
   double ante( double cost, int path );
 
-  private:
-  Ui::CreateOrderDialog *ui;
+private:
+  Ui::CreateOrderDialog * ui;
 };
 
 #endif // CREATEORDERDIALOG_H
