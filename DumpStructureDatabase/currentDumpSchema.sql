@@ -103,8 +103,8 @@ ALTER SCHEMA vat OWNER TO postgres;
 
 CREATE PROCEDURE adres.addcity(namecity character varying, idcountry integer)
     LANGUAGE sql
-    AS $$
-    INSERT INTO adres.сities ( city_name, country_id ) VALUES ( nameCity, idCountry );
+    AS $$
+    INSERT INTO adres.сities ( city_name, country_id ) VALUES ( nameCity, idCountry );
 $$;
 
 
@@ -116,8 +116,8 @@ ALTER PROCEDURE adres.addcity(namecity character varying, idcountry integer) OWN
 
 CREATE FUNCTION adres.getcityid(ct character varying) RETURNS integer
     LANGUAGE sql
-    AS $$ 
-    SELECT city_id FROM adres.сities WHERE city_name = ct;
+    AS $$ 
+    SELECT city_id FROM adres.сities WHERE city_name = ct;
 $$;
 
 
@@ -129,8 +129,8 @@ ALTER FUNCTION adres.getcityid(ct character varying) OWNER TO postgres;
 
 CREATE FUNCTION adres.getcountryid(cntr character varying) RETURNS integer
     LANGUAGE sql
-    AS $$
-    SELECT country_id FROM adres.countrys WHERE country_name = cntr;
+    AS $$
+    SELECT country_id FROM adres.countrys WHERE country_name = cntr;
 $$;
 
 
@@ -142,18 +142,18 @@ ALTER FUNCTION adres.getcountryid(cntr character varying) OWNER TO postgres;
 
 CREATE FUNCTION adres.getstreetid(st character varying) RETURNS integer
     LANGUAGE plpgsql
-    AS $$ 
-DECLARE id INTEGER DEFAULT NULL;
-    BEGIN
-        id = ( SELECT street_id FROM adres.streets WHERE street_name = st );
-        IF ( id IS NULL ) THEN
-            BEGIN
-                INSERT INTO adres.streets ( street_name ) VALUES ( st );
-                id = ( SELECT lastval() );
-            END;
-        END IF;
-    RETURN id;
-    END;
+    AS $$ 
+DECLARE id INTEGER DEFAULT NULL;
+    BEGIN
+        id = ( SELECT street_id FROM adres.streets WHERE street_name = st );
+        IF ( id IS NULL ) THEN
+            BEGIN
+                INSERT INTO adres.streets ( street_name ) VALUES ( st );
+                id = ( SELECT lastval() );
+            END;
+        END IF;
+    RETURN id;
+    END;
 $$;
 
 
@@ -165,14 +165,14 @@ ALTER FUNCTION adres.getstreetid(st character varying) OWNER TO postgres;
 
 CREATE PROCEDURE adres.insertadress(ct character varying, strt character varying, idx character varying, type_adress character varying)
     LANGUAGE sql
-    AS $$
-    INSERT INTO adres.adress ( city_id, street_id, adres_index, adres_type )
-    VALUES (
-        ( SELECT adres.getCityId( ct ) ),
-        ( SELECT adres.getStreetId( strt ) ),
-        idx,
-        type_adress
-    );
+    AS $$
+    INSERT INTO adres.adress ( city_id, street_id, adres_index, adres_type )
+    VALUES (
+        ( SELECT adres.getCityId( ct ) ),
+        ( SELECT adres.getStreetId( strt ) ),
+        idx,
+        type_adress
+    );
 $$;
 
 
@@ -184,9 +184,9 @@ ALTER PROCEDURE adres.insertadress(ct character varying, strt character varying,
 
 CREATE PROCEDURE cars.add_carmodel(namebrand character varying, symbolcategory character varying, carmodel character varying)
     LANGUAGE sql
-    AS $$
-	INSERT INTO cars.carsmodels ( autobrand_id, autocategory_id, carsmodel_name )
-	    VALUES ( ( SELECT cars.getAutobrand_id(nameBrand) ), ( SELECT cars.getAutocategory_id(symbolCategory) ), carModel );
+    AS $$
+	INSERT INTO cars.carsmodels ( autobrand_id, autocategory_id, carsmodel_name )
+	    VALUES ( ( SELECT cars.getAutobrand_id(nameBrand) ), ( SELECT cars.getAutocategory_id(symbolCategory) ), carModel );
 $$;
 
 
@@ -198,8 +198,8 @@ ALTER PROCEDURE cars.add_carmodel(namebrand character varying, symbolcategory ch
 
 CREATE FUNCTION cars.getautobrand_id(namebrand character varying) RETURNS integer
     LANGUAGE sql
-    AS $$
-	SELECT autobrand_id FROM cars.autobrands WHERE autobrand_name = nameBrand;
+    AS $$
+	SELECT autobrand_id FROM cars.autobrands WHERE autobrand_name = nameBrand;
 $$;
 
 
@@ -211,8 +211,8 @@ ALTER FUNCTION cars.getautobrand_id(namebrand character varying) OWNER TO postgr
 
 CREATE FUNCTION cars.getautocategory_id(symbolcategory character varying) RETURNS integer
     LANGUAGE sql
-    AS $$
-	SELECT autocategory_id FROM cars.autocategories WHERE autocategory_symbol = symbolCategory;
+    AS $$
+	SELECT autocategory_id FROM cars.autocategories WHERE autocategory_symbol = symbolCategory;
 $$;
 
 
@@ -224,20 +224,20 @@ ALTER FUNCTION cars.getautocategory_id(symbolcategory character varying) OWNER T
 
 CREATE FUNCTION document.getdocumentid(postperiod character varying, copycmr integer, originaldocuments integer) RETURNS integer
     LANGUAGE plpgsql
-    AS $$
-    DECLARE id INTEGER DEFAULT NULL;
-    BEGIN
-        id = ( SELECT document_id FROM document.documents WHERE document_postperiod = postPeriod
-                                                            AND document_2copycmr = copyCmr
-                                                            AND document_original = originalDocuments);
-        IF ( id IS NULL ) THEN
-            BEGIN
-                CALL document.insertDocuments( postPeriod, copyCmr, originalDocuments );
-                id = ( SELECT lastval() );
-            END;
-        END IF;
-        RETURN id;
-    END;
+    AS $$
+    DECLARE id INTEGER DEFAULT NULL;
+    BEGIN
+        id = ( SELECT document_id FROM document.documents WHERE document_postperiod = postPeriod
+                                                            AND document_2copycmr = copyCmr
+                                                            AND document_original = originalDocuments);
+        IF ( id IS NULL ) THEN
+            BEGIN
+                CALL document.insertDocuments( postPeriod, copyCmr, originalDocuments );
+                id = ( SELECT lastval() );
+            END;
+        END IF;
+        RETURN id;
+    END;
 $$;
 
 
@@ -249,9 +249,9 @@ ALTER FUNCTION document.getdocumentid(postperiod character varying, copycmr inte
 
 CREATE PROCEDURE document.insertdocuments(postperiod character varying, copycmr integer, originaldocuments integer)
     LANGUAGE sql
-    AS $$
-    INSERT INTO document.documents (document_postperiod, document_2copycmr, document_original)
-        VALUES ( postPeriod, copyCmr, originalDocuments );
+    AS $$
+    INSERT INTO document.documents (document_postperiod, document_2copycmr, document_original)
+        VALUES ( postPeriod, copyCmr, originalDocuments );
 $$;
 
 
@@ -263,9 +263,9 @@ ALTER PROCEDURE document.insertdocuments(postperiod character varying, copycmr i
 
 CREATE PROCEDURE emploee.addemploee(functionworkerid integer, autocategoryid integer, emploeename character varying)
     LANGUAGE sql
-    AS $$
-    INSERT INTO emploee.emploees ( functionWorker_id, autocategory_id, emploee_name )
-	VALUES ( functionWorkerId, autocategoryId, emploeeName );
+    AS $$
+    INSERT INTO emploee.emploees ( functionWorker_id, autocategory_id, emploee_name )
+	VALUES ( functionWorkerId, autocategoryId, emploeeName );
 $$;
 
 
@@ -277,9 +277,9 @@ ALTER PROCEDURE emploee.addemploee(functionworkerid integer, autocategoryid inte
 
 CREATE PROCEDURE emploee.addemploee(functionworkername character varying, autocategoryname character varying, emploeename character varying)
     LANGUAGE sql
-    AS $$
-    INSERT INTO emploee.emploees ( functionWorker_id, autocategory_id, emploee_name )
-	VALUES ( ( SELECT emploee.getFunctionWorkerId( functionWorkerName ) ), ( SELECT cars.getAutocategory_id( autocategoryName ) ), emploeeName );
+    AS $$
+    INSERT INTO emploee.emploees ( functionWorker_id, autocategory_id, emploee_name )
+	VALUES ( ( SELECT emploee.getFunctionWorkerId( functionWorkerName ) ), ( SELECT cars.getAutocategory_id( autocategoryName ) ), emploeeName );
 $$;
 
 
@@ -291,8 +291,8 @@ ALTER PROCEDURE emploee.addemploee(functionworkername character varying, autocat
 
 CREATE FUNCTION emploee.getfunctionworkerid(functionworkername character varying) RETURNS integer
     LANGUAGE sql
-    AS $$
-    SELECT functionWorker_id FROM emploee.functionWorker WHERE functionWorker_name = functionWorkerName;
+    AS $$
+    SELECT functionWorker_id FROM emploee.functionWorker WHERE functionWorker_name = functionWorkerName;
 $$;
 
 
@@ -304,9 +304,9 @@ ALTER FUNCTION emploee.getfunctionworkerid(functionworkername character varying)
 
 CREATE PROCEDURE orders.addorder(idshipper integer, idemploee integer, idpayment integer, idroute integer, iddocuments integer, dataorder date, contractnumber character varying, noteorder text)
     LANGUAGE sql
-    AS $$
-    INSERT INTO orders.orders( shipper_id, emploee_id, payment_id, route_id, document_id, order_data, order_contractNumber, order_note )
-        VALUES ( idShipper, idEmploee, idPayment, idRoute, idDocuments, dataOrder, contractNumber, noteOrder );
+    AS $$
+    INSERT INTO orders.orders( shipper_id, emploee_id, payment_id, route_id, document_id, order_data, order_contractNumber, order_note )
+        VALUES ( idShipper, idEmploee, idPayment, idRoute, idDocuments, dataOrder, contractNumber, noteOrder );
 $$;
 
 
@@ -318,20 +318,20 @@ ALTER PROCEDURE orders.addorder(idshipper integer, idemploee integer, idpayment 
 
 CREATE FUNCTION payment.getpayment_id(cost numeric, period character varying, currency character varying) RETURNS integer
     LANGUAGE plpgsql
-    AS $$
-    DECLARE id INTEGER DEFAULT NULL;
-	BEGIN
-	    id = ( SELECT payment_id FROM payment.payments WHERE payment_cost = cost
-							   AND payment_period = period
-							   AND payment_currency = currency );
-		IF ( id IS NULL ) THEN
-			BEGIN
-				CALL payment.insertPayment( cost, period, currency );
-				id = ( SELECT lastval() );
-			END;
-		END IF;
-	RETURN id;
-	END;
+    AS $$
+    DECLARE id INTEGER DEFAULT NULL;
+	BEGIN
+	    id = ( SELECT payment_id FROM payment.payments WHERE payment_cost = cost
+							   AND payment_period = period
+							   AND payment_currency = currency );
+		IF ( id IS NULL ) THEN
+			BEGIN
+				CALL payment.insertPayment( cost, period, currency );
+				id = ( SELECT lastval() );
+			END;
+		END IF;
+	RETURN id;
+	END;
 $$;
 
 
@@ -343,9 +343,9 @@ ALTER FUNCTION payment.getpayment_id(cost numeric, period character varying, cur
 
 CREATE PROCEDURE payment.insertpayment(cost numeric, period character varying, currency character varying)
     LANGUAGE sql
-    AS $$
-	INSERT INTO payment.payments ( payment_cost, payment_period, payment_currency )
-	VALUES ( cost, period, currency );
+    AS $$
+	INSERT INTO payment.payments ( payment_cost, payment_period, payment_currency )
+	VALUES ( cost, period, currency );
 $$;
 
 
@@ -357,20 +357,20 @@ ALTER PROCEDURE payment.insertpayment(cost numeric, period character varying, cu
 
 CREATE FUNCTION route.getrouteid(arrival integer, route integer, ante numeric) RETURNS integer
     LANGUAGE plpgsql
-    AS $$
-DECLARE id INTEGER DEFAULT NULL;
-    BEGIN
-	id = ( SELECT route_id FROM route.routes WHERE route_arrival = arrival
-						 AND route_route = route
-						 AND route_ante = ante::MONEY );
-	IF ( id IS NULL ) THEN
-	    BEGIN
-		CALL route.insertRoute( arrival, route, ante );
-		id = ( SELECT lastval() );
-	    END;
-	END IF;
-    RETURN id;
-    END;
+    AS $$
+DECLARE id INTEGER DEFAULT NULL;
+    BEGIN
+	id = ( SELECT route_id FROM route.routes WHERE route_arrival = arrival
+						 AND route_route = route
+						 AND route_ante = ante::MONEY );
+	IF ( id IS NULL ) THEN
+	    BEGIN
+		CALL route.insertRoute( arrival, route, ante );
+		id = ( SELECT lastval() );
+	    END;
+	END IF;
+    RETURN id;
+    END;
 $$;
 
 
@@ -382,8 +382,8 @@ ALTER FUNCTION route.getrouteid(arrival integer, route integer, ante numeric) OW
 
 CREATE PROCEDURE route.insertroute(arrival integer, rout integer, ante numeric)
     LANGUAGE sql
-    AS $$
-    INSERT INTO route.routes( route_arrival, route_route, route_ante ) VALUES ( arrival, rout, ante::MONEY );
+    AS $$
+    INSERT INTO route.routes( route_arrival, route_route, route_ante ) VALUES ( arrival, rout, ante::MONEY );
 $$;
 
 
@@ -395,8 +395,8 @@ ALTER PROCEDURE route.insertroute(arrival integer, rout integer, ante numeric) O
 
 CREATE PROCEDURE shipper.addshipper(nameshipper character varying)
     LANGUAGE sql
-    AS $$
-    INSERT INTO shipper.shippers ( shipper_name ) VALUES ( nameShipper );
+    AS $$
+    INSERT INTO shipper.shippers ( shipper_name ) VALUES ( nameShipper );
 $$;
 
 
@@ -408,8 +408,8 @@ ALTER PROCEDURE shipper.addshipper(nameshipper character varying) OWNER TO postg
 
 CREATE FUNCTION vat.getvatid(vat_st numeric) RETURNS integer
     LANGUAGE sql
-    AS $$
-    SELECT vat_id FROM vat.vats WHERE vat_stavka = vat_st;
+    AS $$
+    SELECT vat_id FROM vat.vats WHERE vat_stavka = vat_st;
 $$;
 
 
@@ -421,8 +421,8 @@ ALTER FUNCTION vat.getvatid(vat_st numeric) OWNER TO postgres;
 
 CREATE FUNCTION vat.getvatnames(nm character varying) RETURNS integer
     LANGUAGE sql
-    AS $$
-    SELECT vatname_id FROM vat.vatnames WHERE vatname_name = nm;
+    AS $$
+    SELECT vatname_id FROM vat.vatnames WHERE vatname_name = nm;
 $$;
 
 
@@ -883,7 +883,7 @@ CREATE TABLE orders.orders (
     route_id integer,
     document_id integer,
     order_data date,
-    order_contractnumber character varying(200),
+    order_contractnumber character varying(200) NOT NULL,
     order_note text
 );
 
@@ -943,7 +943,8 @@ ALTER TABLE shipper.shippers OWNER TO postgres;
 --
 
 CREATE VIEW orders.ordersview AS
- SELECT ord.order_data,
+ SELECT ord.order_id,
+    ord.order_data,
     ord.order_contractnumber,
     shp.shipper_name,
     pay.payment_cost,
@@ -1381,6 +1382,22 @@ ALTER TABLE ONLY emploee.functionworker
 
 ALTER TABLE ONLY emploee.functionworker
     ADD CONSTRAINT functionworker_pkey PRIMARY KEY (functionworker_id);
+
+
+--
+-- Name: orders orders_order_contractnumber_key; Type: CONSTRAINT; Schema: orders; Owner: postgres
+--
+
+ALTER TABLE ONLY orders.orders
+    ADD CONSTRAINT orders_order_contractnumber_key UNIQUE (order_contractnumber);
+
+
+--
+-- Name: orders orders_order_contractnumber_key1; Type: CONSTRAINT; Schema: orders; Owner: postgres
+--
+
+ALTER TABLE ONLY orders.orders
+    ADD CONSTRAINT orders_order_contractnumber_key1 UNIQUE (order_contractnumber);
 
 
 --

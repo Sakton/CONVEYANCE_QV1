@@ -11,7 +11,7 @@ CREATE TABLE orders.orders (
 	route_id INTEGER,                                                       -- FK маршрут ( их храним )
         document_id INTEGER,                                                    -- FK документы
         order_data DATE,                                                        -- дата создания ордера
-	order_contractNumber VARCHAR( 200 ),                                    -- номер договора - основания
+	order_contractNumber VARCHAR( 200 ) UNIQUE,                                    -- номер договора - основания
 	order_note TEXT,	                                                -- заметки по договору
 
 /*
@@ -45,7 +45,7 @@ $$;
 
 -- ПРЕДСТАВЛЕНИЕ ОРДЕРА 1
 CREATE OR REPLACE VIEW orders.ordersView AS
-    SELECT ord.order_data, ord.order_contractNumber,
+    SELECT ord.order_id, ord.order_data, ord.order_contractNumber,
 	   shp.shipper_name,
 	   pay.payment_cost, pay.payment_currency, pay.payment_period,
 	   emp.emploee_name,

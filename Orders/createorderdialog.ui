@@ -36,27 +36,8 @@
           </item>
           <item row="2" column="2">
            <widget class="QPushButton" name="pushButtonAddShipper">
-            <property name="maximumSize">
-             <size>
-              <width>40</width>
-              <height>16777215</height>
-             </size>
-            </property>
             <property name="text">
              <string>Add</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="3">
-           <widget class="QPushButton" name="pushButtonUpdateShipper">
-            <property name="maximumSize">
-             <size>
-              <width>40</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Upd</string>
             </property>
            </widget>
           </item>
@@ -83,19 +64,6 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="3">
-           <widget class="QPushButton" name="pushButton_5">
-            <property name="maximumSize">
-             <size>
-              <width>40</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Upd</string>
-            </property>
-           </widget>
-          </item>
           <item row="3" column="1">
            <widget class="ComboBoxDrivers" name="comboBoxDriver"/>
           </item>
@@ -113,13 +81,6 @@
             </property>
             <property name="alignment">
              <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="2" colspan="2">
-           <widget class="QPushButton" name="pushButton">
-            <property name="text">
-             <string>Создать из</string>
             </property>
            </widget>
           </item>
@@ -154,14 +115,15 @@
           </item>
           <item row="3" column="2">
            <widget class="QPushButton" name="pushButtonAddDriver">
-            <property name="maximumSize">
-             <size>
-              <width>40</width>
-              <height>16777215</height>
-             </size>
-            </property>
             <property name="text">
              <string>Add</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QPushButton" name="pushButton">
+            <property name="text">
+             <string>Создать из</string>
             </property>
            </widget>
           </item>
