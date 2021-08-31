@@ -1,34 +1,34 @@
-#ifndef COMMOMORDERFORM_H
-#define COMMOMORDERFORM_H
+#ifndef COMMONORDERFORM_H
+#define COMMONORDERFORM_H
 
 #include <QDialog>
 
 namespace Ui {
-class CommomOrderForm;
+class CommonOrderForm;
 }
 
-class CommomOrderForm : public QDialog {
+class CommonOrderForm : public QDialog {
   Q_OBJECT
 
 public:
   enum class Regim { ADD, UPD };
-  explicit CommomOrderForm( Regim regim = Regim::ADD, QWidget * parent = nullptr );
-  ~CommomOrderForm( );
+  explicit CommonOrderForm( Regim regim = Regim::ADD, QWidget * parent = nullptr );
+  ~CommonOrderForm( );
 
 public slots:
   void slotAddShipper( );
   void slotAddDriver( );
   void slotCostChanged( double cost );
   void slotArrivalChanged( int arrival );
-  void slotRouteChanged( int arrival );
+  void slotRouteChanged( int route );
 
 private:
   void connects( );
   double ante( double cost, int path );
 
 protected:
-  Ui::CommomOrderForm * ui;
+  Ui::CommonOrderForm * ui;
   Regim r;
 };
 
-#endif // COMMOMORDERFORM_H
+#endif // COMMONORDERFORM_H

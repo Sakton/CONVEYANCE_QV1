@@ -45,13 +45,14 @@ SOURCES += \
     MainWindow/mainwindow.cpp \
     MainWindow/mainwindowtabwidget.cpp \
     MyTests/testqsqltableformform.cpp \
-    Orders/commomorderform.cpp \
+    Orders/commonorderform.cpp \
     Orders/createorderdialog.cpp \
     Orders/ordersqlquerymodel.cpp \
     Orders/ordersqltablemodel.cpp \
     Orders/ordertableview.cpp \
     Orders/orderwidget.cpp \
     Orders/testform.cpp \
+    Orders/updateorderdialog.cpp \
     Shippers/addshipperdialog.cpp \
     main.cpp
 
@@ -93,13 +94,14 @@ HEADERS += \
 	MainWindow/mainwindow.h \
 	MainWindow/mainwindowtabwidget.h \
 	MyTests/testqsqltableformform.h \
-	Orders/commomorderform.h \
+	Orders/commonorderform.h \
 	Orders/createorderdialog.h \
 	Orders/ordersqlquerymodel.h \
 	Orders/ordersqltablemodel.h \
 	Orders/ordertableview.h \
 	Orders/orderwidget.h \
 	Orders/testform.h \
+	Orders/updateorderdialog.h \
 	Shippers/addshipperdialog.h
 
 FORMS += \
@@ -118,8 +120,7 @@ FORMS += \
 	Emploee/emploeetableview.ui \
 	MainWindow/mainwindow.ui \
 	MyTests/testqsqltableformform.ui \
-	Orders/commomorderform.ui \
-	Orders/createorderdialog.ui \
+	Orders/commonorderform.ui \
 	Orders/orderwidget.ui \
 	Orders/testform.ui \
 	Shippers/addshipperdialog.ui

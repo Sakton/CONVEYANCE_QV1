@@ -1,6 +1,6 @@
 #include "createorderdialog.h"
 // #include "ui_createorderdialog.h"
-#include "ui_commomorderform.h"
+#include "ui_commonorderform.h"
 
 #include "Constants.h"
 #include <QMessageBox>
@@ -8,7 +8,7 @@
 #include <QSqlError>
 #include <QSqlQuery>
 
-CreateOrderDialog::CreateOrderDialog( QWidget * parent ) : CommomOrderForm( CommomOrderForm::Regim::ADD, parent ) {
+CreateOrderDialog::CreateOrderDialog( QWidget * parent ) : CommonOrderForm( CommonOrderForm::Regim::ADD, parent ) {
   setWindowTitle( "Добавить ордер" );
   ui->dateEdit->setDate( QDate::currentDate( ) );
 }
@@ -73,7 +73,7 @@ void CreateOrderDialog::accept( ) {
   } else {
     db.commit( ); //ПРИНЯТЬ ТРАНЗАКЦИЮ (функции получения id автоматически вставляют в базу, то есть эта транзакция частично вносит измемнения )
     // TODO тут возможно изменение поведения
-    CommomOrderForm::accept( );
+    CommonOrderForm::accept( );
     // QDialog::accept( );
   }
 }

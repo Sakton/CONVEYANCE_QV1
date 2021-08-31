@@ -3,6 +3,7 @@
 #include "createorderdialog.h"
 #include "ordersqltablemodel.h"
 #include "ui_orderwidget.h"
+#include "updateorderdialog.h"
 
 #include <QAction>
 #include <QContextMenuEvent>
@@ -33,11 +34,13 @@ void OrderWidget::slotAddOrder( ) {
 }
 
 void OrderWidget::slotUpdOrder( ) {
-  QMessageBox::information( this, tr( "ПРАВКА ОРДЕРА" ), tr( "ХОПА, ЖДЕМ ОКНО ПРАВКИ" ) );
   QModelIndex ind = ui->tableViewOrder->selectionModel( )->currentIndex( );
   QSqlRecord rowData = model->record( ind.row( ) );
   qDebug( ) << "rowData = " << rowData;
-  // TODO нет order_id добавить в представление
+  UpdateOrderDialog dialog( rowData, this );
+  if ( dialog.exec( ) == QDialog::Accepted ) {
+    updateOrderWidget( );
+  }
 }
 
 void OrderWidget::slotDelOrder( ) {
@@ -46,7 +49,7 @@ void OrderWidget::slotDelOrder( ) {
 
 void OrderWidget::slotSelectRow( const QModelIndex & idx ) {
   QSqlRecord rec = model->record( idx.row( ) );
-  QString note = rec.value( 8 ).toString( );
+  QString note = rec.value( 9 ).toString( );
   ui->labelNote->setText( note );
 }
 
@@ -67,21 +70,23 @@ void OrderWidget::initModels( ) {
   model->clear( );
   model->setTable( "orders.ordersview" );
   model->select( );
-  model->setHeaderData( 0, Qt::Horizontal, tr( "Дата" ) );
-  model->setHeaderData( 1, Qt::Horizontal, tr( "Номер Договора" ) );
-  model->setHeaderData( 2, Qt::Horizontal, tr( "Грузотправитель" ) );
-  model->setHeaderData( 3, Qt::Horizontal, tr( "Стоимость" ) );
-  model->setHeaderData( 4, Qt::Horizontal, tr( "Валюта" ) );
-  model->setHeaderData( 5, Qt::Horizontal, tr( "Период оплаты" ) );
-  model->setHeaderData( 6, Qt::Horizontal, tr( "Испонитель" ) );
-  model->setHeaderData( 7, Qt::Horizontal, tr( "Срок почты" ) );
+  model->setHeaderData( 0, Qt::Horizontal, tr( "ID" ) );
+  model->setHeaderData( 1, Qt::Horizontal, tr( "Дата" ) );
+  model->setHeaderData( 2, Qt::Horizontal, tr( "Номер Договора" ) );
+  model->setHeaderData( 3, Qt::Horizontal, tr( "Грузотправитель" ) );
+  model->setHeaderData( 4, Qt::Horizontal, tr( "Стоимость" ) );
+  model->setHeaderData( 5, Qt::Horizontal, tr( "Валюта" ) );
+  model->setHeaderData( 6, Qt::Horizontal, tr( "Период оплаты" ) );
+  model->setHeaderData( 7, Qt::Horizontal, tr( "Испонитель" ) );
+  model->setHeaderData( 8, Qt::Horizontal, tr( "Срок почты" ) );
   proxy->setSourceModel( model );
 }
 
 void OrderWidget::setupView( ) {
   ui->tableViewOrder->setModel( proxy );
   QHeaderView * hw = ui->tableViewOrder->horizontalHeader( );
-  ui->tableViewOrder->hideColumn( 8 );
+  ui->tableViewOrder->hideColumn( 0 );
+  ui->tableViewOrder->hideColumn( 9 );
   hw->setDefaultAlignment( Qt::AlignCenter );
   hw->setSectionResizeMode( QHeaderView::ResizeMode::ResizeToContents );
 

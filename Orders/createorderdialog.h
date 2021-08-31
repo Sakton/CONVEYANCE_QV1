@@ -1,14 +1,9 @@
 #ifndef CREATEORDERDIALOG_H
 #define CREATEORDERDIALOG_H
 
-#include "commomorderform.h"
-// #include <QDialog>
+#include "commonorderform.h"
 
-// namespace Ui {
-// class CreateOrderDialog;
-//}
-
-class CreateOrderDialog : public CommomOrderForm {
+class CreateOrderDialog : public CommonOrderForm {
   Q_OBJECT
 
 public:

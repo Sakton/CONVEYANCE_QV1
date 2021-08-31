@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>CreateOrderDialog</class>
- <widget class="QDialog" name="CreateOrderDialog">
+ <class>CommonOrderForm</class>
+ <widget class="QDialog" name="CommonOrderForm">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Создать ордер</string>
+   <string>Общий шаблон ордер</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
@@ -42,7 +42,7 @@
            </widget>
           </item>
           <item row="0" column="2" colspan="2">
-           <widget class="QLabel" name="label_5">
+           <widget class="QLabel" name="labelDopolnit">
             <property name="text">
              <string>Дополнительно</string>
             </property>
@@ -121,7 +121,7 @@
            </widget>
           </item>
           <item row="1" column="2">
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="pushButtonCreateFrom">
             <property name="text">
              <string>Создать из</string>
             </property>
@@ -458,32 +458,32 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>CreateOrderDialog</receiver>
+   <receiver>CommonOrderForm</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
+     <x>211</x>
+     <y>592</y>
     </hint>
     <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
+     <x>211</x>
+     <y>306</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>CreateOrderDialog</receiver>
+   <receiver>CommonOrderForm</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>211</x>
+     <y>592</y>
     </hint>
     <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
+     <x>211</x>
+     <y>306</y>
     </hint>
    </hints>
   </connection>

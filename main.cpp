@@ -5,8 +5,7 @@
 #include "Orders/orderwidget.h"
 
 #include "DataBase/databasecreator.h"
-#include "Orders/TestOrd/testadd.h"
-#include "Orders/commomorderform.h"
+#include "Orders/commonorderform.h"
 
 #include <QAction>
 #include <QApplication>
@@ -40,15 +39,7 @@ int main( int argc, char *argv[] ) {
   MainWindow w;
   w.show( );
 
-  //  CommomOrderForm of( CommomOrderForm::Regim::UPD );
-  //  of.show( );
-
-  //  TestAdd ta;
-  //  ta.show( );
-
   splash.finish( &w );
-  // splash.finish( &of );
-  // splash.finish( &ta );
   return a.exec( );
 }
 //***********************************************
