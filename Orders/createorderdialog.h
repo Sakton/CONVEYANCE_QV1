@@ -1,33 +1,21 @@
 #ifndef CREATEORDERDIALOG_H
 #define CREATEORDERDIALOG_H
 
-#include <QDialog>
+#include "commomorderform.h"
+// #include <QDialog>
 
-namespace Ui {
-class CreateOrderDialog;
-}
+// namespace Ui {
+// class CreateOrderDialog;
+//}
 
-class CreateOrderDialog : public QDialog {
+class CreateOrderDialog : public CommomOrderForm {
   Q_OBJECT
 
 public:
   explicit CreateOrderDialog( QWidget * parent = nullptr );
-  ~CreateOrderDialog( );
 
 public slots:
   void accept( ) override;
-  void slotAddShipper( );
-  void slotAddDriver( );
-  void slotCostChanged( double cost );
-  void slotArrivalChanged( int arrival );
-  void slotRouteChanged( int arrival );
-
-  private:
-  void connects( );
-  double ante( double cost, int path );
-
-private:
-  Ui::CreateOrderDialog * ui;
 };
 
 #endif // CREATEORDERDIALOG_H

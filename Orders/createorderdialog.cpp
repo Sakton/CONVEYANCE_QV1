@@ -1,7 +1,6 @@
 #include "createorderdialog.h"
-#include "Emploee/adddriverdialog.h"
-#include "Shippers/addshipperdialog.h"
-#include "ui_createorderdialog.h"
+// #include "ui_createorderdialog.h"
+#include "ui_commomorderform.h"
 
 #include "Constants.h"
 #include <QMessageBox>
@@ -9,13 +8,10 @@
 #include <QSqlError>
 #include <QSqlQuery>
 
-CreateOrderDialog::CreateOrderDialog( QWidget * parent ) : QDialog( parent ), ui( new Ui::CreateOrderDialog ) {
-  ui->setupUi( this );
+CreateOrderDialog::CreateOrderDialog( QWidget * parent ) : CommomOrderForm( CommomOrderForm::Regim::ADD, parent ) {
+  setWindowTitle( "Добавить ордер" );
   ui->dateEdit->setDate( QDate::currentDate( ) );
-  connects( );
 }
-
-CreateOrderDialog::~CreateOrderDialog( ) { delete ui; }
 
 void CreateOrderDialog::accept( ) {
   //**** ЧАСТЬ ОРДЕР
@@ -77,50 +73,7 @@ void CreateOrderDialog::accept( ) {
   } else {
     db.commit( ); //ПРИНЯТЬ ТРАНЗАКЦИЮ (функции получения id автоматически вставляют в базу, то есть эта транзакция частично вносит измемнения )
     // TODO тут возможно изменение поведения
-    QDialog::accept( );
+    CommomOrderForm::accept( );
+    // QDialog::accept( );
   }
 }
-
-void CreateOrderDialog::slotAddShipper( ) {
-  AddShipperDialog dialogAddShipper;
-  if ( dialogAddShipper.exec( ) )
-    ui->comboBoxShippers->init( );
-}
-
-void CreateOrderDialog::slotAddDriver( ) {
-  AddDriverDialog dd;
-  if ( dd.exec( ) == QDialog::Accepted ) {
-    ui->comboBoxDriver->init( );
-  }
-}
-
-void CreateOrderDialog::slotCostChanged( double cost ) {
-
-  double arrival = ui->spinBoxArrival->value( );
-  double route = ui->spinBoxRoute->value( );
-  ui->labelAnte->setText( QString::number( ante( cost, arrival + route ), 'f', 2 ) );
-}
-
-void CreateOrderDialog::slotArrivalChanged( int arrival ) {
-  double cost = ui->doubleSpinBoxCost->value( );
-  double route = ui->spinBoxRoute->value( );
-  ui->labelAnte->setText( QString::number( ante( cost, arrival + route ), 'f', 2 ) );
-}
-
-void CreateOrderDialog::slotRouteChanged( int route ) {
-  double cost = ui->doubleSpinBoxCost->value( );
-  double arrival = ui->spinBoxArrival->value( );
-  ui->labelAnte->setText( QString::number( ante( cost, arrival + route ), 'f', 2 ) );
-}
-
-void CreateOrderDialog::connects( ) {
-  connect( ui->pushButtonAddShipper, QOverload< bool >::of( &QPushButton::clicked ), this, QOverload<>::of( &CreateOrderDialog::slotAddShipper ) );
-  connect( ui->pushButtonAddDriver, QOverload< bool >::of( &QPushButton::clicked ), this, QOverload<>::of( &CreateOrderDialog::slotAddDriver ) );
-  connect( ui->doubleSpinBoxCost, QOverload< double >::of( &QDoubleSpinBox::valueChanged ), this,
-	   QOverload< double >::of( &CreateOrderDialog::slotCostChanged ) );
-  connect( ui->spinBoxArrival, QOverload< int >::of( &QSpinBox::valueChanged ), this,
-	   QOverload< int >::of( &CreateOrderDialog::slotArrivalChanged ) );
-  connect( ui->spinBoxRoute, QOverload< int >::of( &QSpinBox::valueChanged ), this, QOverload< int >::of( &CreateOrderDialog::slotRouteChanged ) );
-}
-
-double CreateOrderDialog::ante( double cost, int path ) { return cost / path; }

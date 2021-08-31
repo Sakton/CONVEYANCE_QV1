@@ -15,6 +15,17 @@ public:
   explicit CommomOrderForm( Regim regim = Regim::ADD, QWidget * parent = nullptr );
   ~CommomOrderForm( );
 
+public slots:
+  void slotAddShipper( );
+  void slotAddDriver( );
+  void slotCostChanged( double cost );
+  void slotArrivalChanged( int arrival );
+  void slotRouteChanged( int arrival );
+
+private:
+  void connects( );
+  double ante( double cost, int path );
+
 protected:
   Ui::CommomOrderForm * ui;
   Regim r;
