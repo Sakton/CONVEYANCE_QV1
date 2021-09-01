@@ -16,7 +16,7 @@ CreateOrderDialog::CreateOrderDialog( QWidget * parent ) : CommonOrderForm( Comm
 void CreateOrderDialog::accept( ) {
   //**** ЧАСТЬ ОРДЕР
   QDate data = ui->dateEdit->date( );				// ДАТА
-  QString numberContract = ui->lineEditnumberContract->text( ); //НОМЕР ДОГОВРА
+  QString numberContract = ui->lineEditnumberContract->text( ); // НОМЕР ДОГОВРА
   if ( numberContract.isEmpty( ) ) {
     QMessageBox::warning( this, tr( "Пустое поле" ), tr( "ПОЛЕ \"ДОГОВОР\": НЕ МОЖЕТ БЫТЬ ПУСТЫМ" ) );
     return;
