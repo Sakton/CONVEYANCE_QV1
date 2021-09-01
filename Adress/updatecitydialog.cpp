@@ -20,7 +20,7 @@ UpdateCityDialog::~UpdateCityDialog( ) {
 void UpdateCityDialog::accept( ) {
   qDebug( ) << "ACCEPT";
   QString city = ui->lineEditCity->text( ).simplified( );
-  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
+  QSqlQuery query( QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
   QString qs = QString( "UPDATE cities SET city_name = '%1' WHERE city_name = '%2';" ).arg( city ).arg( curCity );
   if ( !query.exec( qs ) ) {
     qDebug( ) << "ERROR: " << query.lastError( ).text( );

@@ -14,5 +14,6 @@ void UpdateOrderDialog::initForm( ) {
   ui->doubleSpinBoxCost->setValue( rec.value( "payment_cost" ).toDouble( ) );
   ui->comboBoxPaymentPeriod->setCurrentIndex( ui->comboBoxPaymentPeriod->findText( rec.value( "payment_period" ).toString( ) ) );
   ui->comboBoxCurrency->setCurrentIndex( ui->comboBoxCurrency->findText( rec.value( "payment_currency" ).toString( ) ) );
+  // ui->spinBoxArrival->setValue( rec.value("") );
   // TODO тут
 }

@@ -148,6 +148,7 @@ DISTFILES += \
     DBTables/VATs.sql \
 	Dump/dump.sql \
 	Dump/dump1.sql \
+	Dump/dump_conveyance_db.sql \
 	DumpStructureDatabase/currentDump.sql \
 	DumpStructureDatabase/testDump.sql \
 	ErrorsFound \

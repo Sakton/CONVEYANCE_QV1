@@ -41,7 +41,6 @@ void CommonOrderForm::slotAddDriver( ) {
 }
 
 void CommonOrderForm::slotCostChanged( double cost ) {
-
   double arrival = ui->spinBoxArrival->value( );
   double route = ui->spinBoxRoute->value( );
   ui->labelAnte->setText( QString::number( ante( cost, arrival + route ), 'f', 2 ) );

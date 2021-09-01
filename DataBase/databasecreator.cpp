@@ -23,7 +23,7 @@ bool DatabaseCreator::createEmptyBase( ) {
   if ( !isCreateDataBase( defaultDb ) ) {
     QSqlQuery query( defaultDb );
     if ( query.exec( QString( "CREATE DATABASE %1 WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'Russian_Russia.1251';" )
-			 .arg( NAME_DATABASE_IN_SUBD ) ) ) {
+			 .arg( ConveyanceConstats::NAME_DATABASE_IN_SUBD ) ) ) {
       bool ok1 = createTablesAndUtilities( );
       bool ok2 = addingConstantData( );
       qDebug( ) << "ok1 = " << ok1 << "  ok2 = " << ok2;
@@ -40,7 +40,7 @@ bool DatabaseCreator::createTablesAndUtilities( ) {
     return false;
   }
   QSqlDatabase db = QSqlDatabase::database( "CREATECONNECT" );
-  QFile file( ":/DumpStructureDatabase/currentDumpSchema.sql" );
+  QFile file( ConveyanceConstats::PATH_NAME_DUMP_SCHEMA_TO_FIRST_LOAD );
   if ( !file.open( QFile::ReadOnly ) ) {
     qDebug( ) << "ERROR OPEN FILE DB";
   } else {
@@ -55,7 +55,8 @@ bool DatabaseCreator::createTablesAndUtilities( ) {
 }
 
 bool DatabaseCreator::isCreateDataBase( const QSqlDatabase & db ) {
-  QSqlQuery query( QString( "SELECT EXISTS ( SELECT 1 FROM pg_database WHERE datname = '%1' ) AS res;" ).arg( NAME_DATABASE_IN_SUBD ), db );
+  QSqlQuery query(
+      QString( "SELECT EXISTS ( SELECT 1 FROM pg_database WHERE datname = '%1' ) AS res;" ).arg( ConveyanceConstats::NAME_DATABASE_IN_SUBD ), db );
   query.next( );
   return query.value( "res" ).toBool( );
 }
@@ -76,12 +77,12 @@ bool DatabaseCreator::createConnectionToDb( ) {
   db.setPort( 5432 );
   db.setUserName( "postgres" );
   db.setPassword( "postgres" );
-  db.setDatabaseName( NAME_DATABASE_IN_SUBD );
+  db.setDatabaseName( ConveyanceConstats::NAME_DATABASE_IN_SUBD );
   return db.open( );
 }
 
 bool DatabaseCreator::addingConstantData( ) {
-  QFile file( ":/DumpStructureDatabase/InsertConstatsDataInTable.sql" );
+  QFile file( ConveyanceConstats::PATH_NAME_DUMP_CONSTATNTS_DATA_INSERT );
   if ( file.open( QFile::ReadOnly ) ) {
     QString qs { file.readAll( ) };
     if ( !createConnectionToDb( ) ) {

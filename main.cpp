@@ -52,10 +52,10 @@ void setsApp( QApplication &app ) {
 }
 
 void createDbConnection( ) {
-  QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", NAME_DB_ALL );
+  QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", ConveyanceConstats::NAME_DB_ALL );
   db.setHostName( "localhost" );
   db.setPort( 5432 );
-  db.setDatabaseName( NAME_DATABASE_IN_SUBD );
+  db.setDatabaseName( ConveyanceConstats::NAME_DATABASE_IN_SUBD );
   db.setUserName( "postgres" );
   db.setPassword( "postgres" );
   bool ok = db.open( );

@@ -56,7 +56,7 @@ void AdressDialog::addRecord( ) {
   QString index = ui->lineEditIndex->text( ).simplified( );
   QString type = ui->comboBoxType->currentText( );
 
-  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
+  QSqlQuery query( QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
   QString qs = QString { "CALL adres.insertAdress('%1', '%2', '%3', '%4');" }.arg( city, adress, index, type );
   qDebug( ) << qs;
   if ( !query.exec( qs ) )

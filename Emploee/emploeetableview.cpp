@@ -8,7 +8,7 @@
 
 EmploeeTableView::EmploeeTableView( QWidget * parent ) : QWidget( parent ), ui( new Ui::EmploeeTableView ) {
   ui->setupUi( this );
-  model = new EmploeeSqlTableModel( this, QSqlDatabase::database( NAME_DB_ALL ) );
+  model = new EmploeeSqlTableModel( this, QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
   ui->tableView->setModel( model );
   ui->tableView->setColumnHidden( 0, true );
   ui->tableView->setColumnHidden( 4, true );

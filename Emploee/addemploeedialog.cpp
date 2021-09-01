@@ -23,7 +23,7 @@ void AddEmploeeDialog::accept( ) {
   int idFunc = ui->comboBoxFunctionWork->currentData( ).toInt( );
   int idDriveLic = ui->comboBoxDriveLicense->currentData( ).toInt( );
   QString qs = QString { "CALL emploee.addemploee (%1, %2, '%3');" }.arg( idFunc ).arg( idDriveLic ).arg( name );
-  QSqlQuery query { QSqlDatabase::database( NAME_DB_ALL ) };
+  QSqlQuery query { QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) };
   if ( !query.exec( qs ) )
     qDebug( ) << query.lastError( ).text( );
   QDialog::accept( );

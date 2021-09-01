@@ -18,7 +18,7 @@ void AddShipperDialog::accept( ) {
     QMessageBox::warning( this, tr( "ПУСТОЕ ПОЛЕ" ), tr( "ПОЛЕ МЕ МОЖЕТ БЫТЬ ПУСТЫМ" ) );
     return;
   }
-  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
+  QSqlQuery query( QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
   QString qs = QString { "CALL shipper.addShipper( '%1' )" }.arg( name );
   if ( !query.exec( qs ) )
     qDebug( ) << query.lastError( ).text( );

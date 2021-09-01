@@ -9,7 +9,7 @@ ComboBoxShippers::ComboBoxShippers( QWidget * parent ) : QComboBox( parent ) { i
 void ComboBoxShippers::init( ) {
   clear( );
   QString qs { "SELECT shipper_id, shipper_name FROM shipper.shippers" };
-  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
+  QSqlQuery query( QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
   if ( !query.exec( qs ) )
     qDebug( ) << query.lastError( ).text( );
   else

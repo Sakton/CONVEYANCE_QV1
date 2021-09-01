@@ -51,7 +51,7 @@ void AdressView::slotDelActionContextMenu( bool ) {
   QModelIndex selected = ui->tableView->selectionModel( )->currentIndex( );
   QString curIdTableAdress = model->record( selected.row( ) ).value( "adres_id" ).toString( );
   // TODO нужно ли оставлять тут ???
-  QSqlQuery query { QSqlDatabase::database( NAME_DB_ALL ) };
+  QSqlQuery query { QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) };
   if ( !query.exec( "DELETE FROM adress WHERE adres_id = " + curIdTableAdress ) ) {
     qDebug( ) << "ERROR DELETE QUERY: " << query.lastError( ).text( );
   }
@@ -67,7 +67,7 @@ void AdressView::updateModel( ) {
 }
 
 void AdressView::createModel( ) {
-  model = new AdressSqlTableModel { this, QSqlDatabase::database( NAME_DB_ALL ) };
+  model = new AdressSqlTableModel { this, QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) };
   model->setTable( "adres.adressview" );
   model->setHeaderData( 2, Qt::Orientation::Horizontal, tr( "СТРАНА" ) );
   model->setHeaderData( 3, Qt::Orientation::Horizontal, tr( "ИНДЕКС" ) );

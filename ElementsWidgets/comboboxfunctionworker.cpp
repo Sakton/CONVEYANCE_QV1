@@ -11,7 +11,7 @@ void ComboBoxFunctionWorker::updateData( ) { init( ); }
 void ComboBoxFunctionWorker::init( ) {
   clear( );
   QString qs { "SELECT functionworker_id, functionworker_name FROM  emploee.functionworker;" };
-  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
+  QSqlQuery query( QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
   if ( !query.exec( qs ) )
     qDebug( ) << query.lastError( ).text( );
   else

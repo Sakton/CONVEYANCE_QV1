@@ -10,7 +10,7 @@ TestQSqlTableFormForm::TestQSqlTableFormForm( QWidget *parent ) : QWidget( paren
   //  QString qs { "SELECT * FROM adres.TestAdressView" };
   //  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
   //  query.exec( qs );
-  QSqlTableModel *tmodel = new QSqlTableModel( this, QSqlDatabase::database( NAME_DB_ALL ) );
+  QSqlTableModel * tmodel = new QSqlTableModel( this, QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
   tmodel->setTable( "adres.testadressview" ); //наименования таблиц должны быть в нижнем регистре, как они записаны в базе
   tmodel->select( );
   ui->tableView->setModel( tmodel );

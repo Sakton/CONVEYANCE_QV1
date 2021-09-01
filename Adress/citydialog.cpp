@@ -21,7 +21,7 @@ void CityDialog::accept( ) {
   QString city = ui->lineEditEnterCity->text( ).simplified( );
   podgotovkaNameCity( city );
   int idCountry = ui->comboBoxCountrys->itemData( ui->comboBoxCountrys->currentIndex( ) ).toInt( );
-  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
+  QSqlQuery query( QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
   QString qs = QString( "CALL adres.addCity('%1', %2);" ).arg( city ).arg( idCountry );
   if( !query.exec( qs ) ) {
     QMessageBox::warning( this, "ERROR INSERT", query.lastError( ).text( ), QMessageBox::StandardButton::Ok );

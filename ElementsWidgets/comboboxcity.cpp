@@ -9,7 +9,7 @@ ComboBoxCity::ComboBoxCity( QWidget *parent ) : QComboBox( parent ), currentIdCo
 
 void ComboBoxCity::getCity( int idCountry ) {
   currentIdCountry = idCountry;
-  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
+  QSqlQuery query( QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
   QString qs =
       QString( "SELECT city_id, city_name FROM adres.сities WHERE country_id = %1 ORDER BY city_name;" ).arg( idCountry );
   query.exec( qs );

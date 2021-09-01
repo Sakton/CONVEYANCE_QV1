@@ -20,7 +20,7 @@ void AddFunctionEmploeeDialog::accept( ) {
   }
   QString qs = QString { "INSERT INTO emploee.functionworker ( functionWorker_name ) VALUES ('%1') " }.arg( nameFunctions );
   qDebug( ) << qs;
-  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
+  QSqlQuery query( QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
   if ( !query.exec( qs ) )
     qDebug( ) << query.lastError( ).text( );
   QDialog::accept( );

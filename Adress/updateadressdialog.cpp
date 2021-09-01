@@ -35,7 +35,7 @@ void UpdateAdressDialog::accept( ) {
                    .arg( index )
                    .arg( type );
 
-  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
+  QSqlQuery query( QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
   if ( !query.exec( qs ) ) {
     qDebug( ) << query.lastError( ).text( );
   }
@@ -49,7 +49,7 @@ void UpdateAdressDialog::slotEditCity( ) {
 }
 
 void UpdateAdressDialog::init( ) {
-  QSqlQuery query( QSqlDatabase::database( NAME_DB_ALL ) );
+  QSqlQuery query( QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
   QString qs = QString { "SELECT * FROM adress_view WHERE adres_id = %1;" }.arg( curId );
   if ( !query.exec( qs ) ) {
     qDebug( ) << "ERROR QUERY ON UNIT UPDATE FORM ADRESS";

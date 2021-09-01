@@ -88,4 +88,4 @@ SELECT emploee_id, emploee_name FROM emploee.emploees WHERE functionWorker_id = 
 SELECT emploee.getEmploee_id ( 'Васька Пупочек' );
 SELECT emploee.getEmploee_id ( 'Васька Пупочек Пупочек' );
 
-INSERT INTO emploee.functionWorker( functionWorker_name ) VALUES ('Водитель');
+INSERT INTO emploee.functionWorker( functionWorker_name ) VALUES ( 'Водитель' );
