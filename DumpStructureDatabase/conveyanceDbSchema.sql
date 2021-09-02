@@ -1030,7 +1030,7 @@ CREATE VIEW orders.ordersview AS
     rou.route_route,
         CASE
             WHEN ((rou.route_arrival + rou.route_route) = 0) THEN (0)::numeric
-            ELSE (pay.payment_cost / ((rou.route_arrival + rou.route_route))::numeric)
+            ELSE trunc((pay.payment_cost / ((rou.route_arrival + rou.route_route))::numeric), 2)
         END AS stavka,
     doc.document_original,
     doc.document_2copycmr,

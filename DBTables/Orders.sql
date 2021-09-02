@@ -52,7 +52,7 @@ CREATE OR REPLACE VIEW orders.ordersView AS
 	   rou.route_arrival, rou.route_route,
 			CASE
 			    WHEN (rou.route_arrival + rou.route_route) = 0 THEN 0
-			    ELSE ( pay.payment_cost / ( rou.route_arrival + rou.route_route ) )
+			    ELSE trunc( pay.payment_cost / ( rou.route_arrival + rou.route_route ), 2 )
 			END
 			    AS stavka,
 	   doc.document_original, doc.document_2copycmr, doc.document_postperiod,
