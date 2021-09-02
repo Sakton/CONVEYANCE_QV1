@@ -59,7 +59,7 @@ void OrderWidget::slotDelOrder( ) {
 
 void OrderWidget::slotSelectRow( const QModelIndex & idx ) {
   QSqlRecord rec = model->record( idx.row( ) );
-  QString note = rec.value( 9 ).toString( );
+  QString note = rec.value( "order_note" ).toString( );
   ui->labelNote->setText( note );
 }
 
