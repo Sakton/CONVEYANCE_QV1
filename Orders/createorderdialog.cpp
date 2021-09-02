@@ -13,6 +13,7 @@ CreateOrderDialog::CreateOrderDialog( QWidget * parent ) : CommonOrderForm( Comm
   ui->dateEdit->setDate( QDate::currentDate( ) );
 }
 
+// TODO почти одинаковые методы UpdateOrderDialog::accept( ) вынести в базовый класс
 void CreateOrderDialog::accept( ) {
   //**** ЧАСТЬ ОРДЕР
   QDate data = ui->dateEdit->date( );				// ДАТА
@@ -34,7 +35,6 @@ void CreateOrderDialog::accept( ) {
   //**** ЧАСТЬ МАРШРУТ
   int arrival = ui->spinBoxArrival->value( );
   int route = ui->spinBoxRoute->value( );
-  // double ante = ui->labelAnte->text( ).toDouble( );
 
   //**** ЧАСТЬ ДОКУМЕНТЫ
   QString postPeriod = ui->comboBoxPostPeriad->currentText( );
@@ -49,7 +49,6 @@ void CreateOrderDialog::accept( ) {
   //  QString qsToRoute = QString( "SELECT route.getRouteId(%1, %2, %3) AS idroute;" ).arg( arrival ).arg( route ).arg( ante );
   //  QString qsDocuments =
   //      QString( "SELECT document.getDocumentId ('%1', %2, %3) AS iddocument;" ).arg( postPeriod ).arg( twoCopyCMR ).arg( originalContract );
-
   //  db.transaction( ); //ТРАНЗАКЦИЯ
   //  query.exec( qsToPayment );
   //  query.next( );
@@ -82,7 +81,7 @@ void CreateOrderDialog::accept( ) {
   */
   QSqlQuery query( QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
   QString qs = QString( "CALL orders.addToOrder('%1', '%2', %3, %4, %5, '%6', '%7', %8, %9, '%10', %11, %12, '%13')" )
-		   .arg( data.toString( "ddMMyyyy" ) )
+		   .arg( data.toString( ) )
 		   .arg( numberContract )
 		   .arg( idShipper )
 		   .arg( idDriver )
@@ -95,6 +94,9 @@ void CreateOrderDialog::accept( ) {
 		   .arg( twoCopyCMR )
 		   .arg( originalContract )
 		   .arg( text );
-  if ( !query.exec( qs ) )
+  if ( !query.exec( qs ) ) {
     qDebug( ) << query.lastError( ).text( );
+  } else {
+    QDialog::accept( );
+  }
 }

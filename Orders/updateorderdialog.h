@@ -11,6 +11,10 @@ public:
 
   void initForm( );
 
+  // QDialog interface
+public slots:
+  void accept( ) override;
+
 private:
   QSqlRecord rec;
 };

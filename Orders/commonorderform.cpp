@@ -11,16 +11,16 @@ CommonOrderForm::CommonOrderForm( Regim regim, QWidget * parent ) : QDialog( par
     ui->pushButtonCreateFrom->setVisible( false );
     ui->labelDopolnit->setVisible( false );
   }
-  if ( regim == Regim::ADD ) {
-    connects( );
-  }
+  connects( );
 }
 
 CommonOrderForm::~CommonOrderForm( ) { delete ui; }
 
 void CommonOrderForm::connects( ) {
-  connect( ui->pushButtonAddShipper, QOverload< bool >::of( &QPushButton::clicked ), this, QOverload<>::of( &CommonOrderForm::slotAddShipper ) );
-  connect( ui->pushButtonAddDriver, QOverload< bool >::of( &QPushButton::clicked ), this, QOverload<>::of( &CommonOrderForm::slotAddDriver ) );
+  if ( r == Regim::ADD ) {
+    connect( ui->pushButtonAddShipper, QOverload< bool >::of( &QPushButton::clicked ), this, QOverload<>::of( &CommonOrderForm::slotAddShipper ) );
+    connect( ui->pushButtonAddDriver, QOverload< bool >::of( &QPushButton::clicked ), this, QOverload<>::of( &CommonOrderForm::slotAddDriver ) );
+  }
   connect( ui->doubleSpinBoxCost, QOverload< double >::of( &QDoubleSpinBox::valueChanged ), this,
 	   QOverload< double >::of( &CommonOrderForm::slotCostChanged ) );
   connect( ui->spinBoxArrival, QOverload< int >::of( &QSpinBox::valueChanged ), this, QOverload< int >::of( &CommonOrderForm::slotArrivalChanged ) );

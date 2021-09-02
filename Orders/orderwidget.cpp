@@ -11,6 +11,7 @@
 #include <QMessageBox>
 #include <QSortFilterProxyModel>
 #include <QSqlError>
+#include <QSqlQuery>
 #include <QSqlRecord>
 
 OrderWidget::OrderWidget( QWidget * parent )
@@ -20,9 +21,8 @@ OrderWidget::OrderWidget( QWidget * parent )
   ui->setupUi( this );
   createActions( );
   setupsAction( );
-  initModels( );
   createConnects( );
-  setupView( );
+  updateOrderWidget( );
 }
 
 OrderWidget::~OrderWidget( ) { delete ui; }
@@ -44,7 +44,17 @@ void OrderWidget::slotUpdOrder( ) {
 }
 
 void OrderWidget::slotDelOrder( ) {
-  QMessageBox::information( this, tr( "УДАЛЕНИЕ ОРДЕРА" ), tr( "ХОПА, УДАЛИТСЯ ЗАПИТЬ, СТРАТЕГИЯ УДАЛЕНИЯ НЕ ПОНЯТНА ПОКА" ) );
+  QMessageBox::information( this, tr( "УДАЛЕНИЕ ОРДЕРА" ), tr( "УДАЛИТСЯ ЗАПИСЬ, СТРАТЕГИЯ УДАЛЕНИЯ НЕ ПОНЯТНА ПОКА" ) );
+  QModelIndex ind = ui->tableViewOrder->selectionModel( )->currentIndex( );
+  QSqlRecord rowData = model->record( ind.row( ) );
+  QString qs = QString( "DELETE FROM orders.orders WHERE order_id = %1" ).arg( rowData.value( "order_id" ).toInt( ) );
+  QSqlQuery query( QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
+  if ( !query.exec( qs ) ) {
+    qDebug( ) << query.lastError( ).text( );
+  } else {
+    QMessageBox::information( this, tr( "УДАЛЕНО" ), tr( "ЗАПИСЬ УДАЛЕНА" ) );
+    updateOrderWidget( );
+  }
 }
 
 void OrderWidget::slotSelectRow( const QModelIndex & idx ) {
@@ -92,8 +102,6 @@ void OrderWidget::initModels( ) {
 void OrderWidget::setupView( ) {
   ui->tableViewOrder->setModel( proxy );
   QHeaderView * hw = ui->tableViewOrder->horizontalHeader( );
-  //  ui->tableViewOrder->hideColumn( 11 );
-  //  ui->tableViewOrder->hideColumn( 12 );
   ui->tableViewOrder->hideColumn( 13 );
   ui->tableViewOrder->hideColumn( 14 );
   ui->tableViewOrder->hideColumn( 15 );

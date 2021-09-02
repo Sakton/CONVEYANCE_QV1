@@ -15,7 +15,7 @@ CREATE TABLE route.routes (
 
 
 -- ВРЕМЕННАЯ ПРОЦЕДУРА ВСТВКИ МАРШРУТА
-CREATE OR REPLACE PROCEDURE route.insertRoute( arrival INTEGER, rout INTEGER, ante NUMERIC ) LANGUAGE SQL AS
+CREATE OR REPLACE PROCEDURE route.insertRoute( arrival INTEGER, rout INTEGER ) LANGUAGE SQL AS
 $$
     INSERT INTO route.routes( route_arrival, route_route ) VALUES ( arrival, rout );
 $$;

@@ -37,7 +37,7 @@ CREATE PROCEDURE orders.addOrder(
 			    idDocuments INTEGER,
 			    dataOrder DATE,
 			    contractNumber VARCHAR,
-			    noteOrder TEXT ) LANGUAGE SQL AS
+			    noteOrder TEXT) LANGUAGE SQL AS
 $$
     INSERT INTO orders.orders( shipper_id, emploee_id, payment_id, route_id, document_id, order_data, order_contractNumber, order_note )
         VALUES ( idShipper, idEmploee, idPayment, idRoute, idDocuments, dataOrder, contractNumber, noteOrder );
@@ -67,7 +67,8 @@ CREATE OR REPLACE VIEW orders.ordersView AS
 	INNER JOIN document.documents AS doc ON ord.document_id = doc.document_id;
 
 
-CREATE PROCEDURE orders.addToOrder( orderDate VARCHAR,
+CREATE PROCEDURE orders.addToOrder(
+			     orderDate VARCHAR,
 			     orderNumber VARCHAR,
 			     shipperId INTEGER,
 			     emploeeId INTEGER, -- 1
@@ -79,8 +80,7 @@ CREATE PROCEDURE orders.addToOrder( orderDate VARCHAR,
 			     documentPostPeriod VARCHAR,
 			     document2CopyCmr INTEGER,
 			     documentOriginal INTEGER, --4
-			     oderNote VARCHAR
-			     ) LANGUAGE SQL AS
+			     oderNote VARCHAR) LANGUAGE SQL AS
 $$
     INSERT INTO orders.orders ( shipper_id, emploee_id, payment_id, route_id, document_id, order_data, order_contractNumber, order_note )
     VALUES ( shipperId, emploeeId,
@@ -89,3 +89,32 @@ $$
 				    ( SELECT document.getDocumentId( documentPostPeriod, document2CopyCmr, documentOriginal ) ),
 	    orderDate::date, orderNumber, oderNote );
 $$;
+
+CREATE PROCEDURE orders.updateOrder(
+			    orderId INTEGER,
+			    orderDate VARCHAR,
+			    orderNumber VARCHAR,
+			    shipperId INTEGER,
+			    emploeeId INTEGER, -- 1
+			    paymentCost NUMERIC,
+			    paymentPeriod VARCHAR,
+			    paymentCurrency VARCHAR, --2
+			    routesArrival INTEGER,
+			    routesRoute INTEGER, --3
+			    documentPostPeriod VARCHAR,
+			    document2CopyCmr INTEGER,
+			    documentOriginal INTEGER, --4
+			    oderNote VARCHAR) LANGUAGE SQL AS
+$$
+    UPDATE orders.orders
+    SET shipper_id  = shipperId,
+	emploee_id  = emploeeId,
+	payment_id  = ( SELECT payment.getPayment_id( paymentCost, paymentPeriod, paymentCurrency ) ),
+	route_id    = ( SELECT route.getRouteId( routesArrival, routesRoute ) ),
+	document_id = ( SELECT document.getDocumentId( documentPostPeriod, document2CopyCmr, documentOriginal ) ),
+	order_data  = orderDate::date,
+	order_contractNumber = orderNumber,
+	order_note  = oderNote
+    WHERE order_id  = orderId;
+$$;
+
