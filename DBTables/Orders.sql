@@ -51,11 +51,11 @@ CREATE OR REPLACE VIEW orders.ordersView AS
 	   pay.payment_cost, pay.payment_currency, pay.payment_period,
 	   rou.route_arrival, rou.route_route,
 			CASE
-			    WHEN (rou.route_arrival + rou.route_route) = 0 THEN 0
+			    WHEN ( rou.route_arrival + rou.route_route ) = 0 THEN 0
 			    ELSE trunc( pay.payment_cost / ( rou.route_arrival + rou.route_route ), 2 )
 			END
 			    AS stavka,
-	   doc.document_original, doc.document_2copycmr, doc.document_postperiod,
+	   doc.document_2copycmr, doc.document_original, doc.document_postperiod,
 	   ord.order_note,
 	   -- iDys
 	   ord.order_id, ord.shipper_id, ord.emploee_id, ord.payment_id, ord.route_id, ord.document_id

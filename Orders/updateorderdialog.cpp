@@ -55,6 +55,7 @@ void UpdateOrderDialog::accept( ) {
   //**** ЧАСТЬ ДОКУМЕНТЫ
   QString postPeriod = ui->comboBoxPostPeriad->currentText( );
   Qt::CheckState twoCopyCMR = ui->checkBox2CopyCMR->checkState( );
+  // qDebug() << "twoCopyCMR" <<
   Qt::CheckState originalContract = ui->checkBoxOriginalContract->checkState( );
 
   QSqlQuery query( QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
