@@ -38,7 +38,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <property name="elideMode">
        <enum>Qt::ElideLeft</enum>
@@ -141,7 +141,7 @@
     <property name="title">
      <string>Справочники</string>
     </property>
-    <addaction name="action_7"/>
+    <addaction name="actionCoursCountry"/>
     <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuAuto">
@@ -156,6 +156,7 @@
     <property name="title">
      <string>Автопарк</string>
     </property>
+    <addaction name="actionViewAllAuto"/>
    </widget>
    <widget class="QMenu" name="menuReport">
     <property name="font">
@@ -211,6 +212,7 @@
      <string>Персонал</string>
     </property>
     <addaction name="separator"/>
+    <addaction name="actionViewAllEmploee"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuOrder"/>
@@ -280,7 +282,7 @@
     </font>
    </property>
   </action>
-  <action name="action_7">
+  <action name="actionCoursCountry">
    <property name="text">
     <string>Курсы валют</string>
    </property>
@@ -291,6 +293,19 @@
      <weight>75</weight>
      <bold>true</bold>
     </font>
+   </property>
+  </action>
+  <action name="actionViewAllAuto">
+   <property name="text">
+    <string>Показать все авто</string>
+   </property>
+  </action>
+  <action name="actionViewAllEmploee">
+   <property name="text">
+    <string>Показать всех сотрудников</string>
+   </property>
+   <property name="toolTip">
+    <string>Показать всех сотрудников</string>
    </property>
   </action>
  </widget>
