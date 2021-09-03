@@ -114,8 +114,10 @@ void OrderWidget::setupView( ) {
 
   menuForTable = new QMenu( this );
   menuForTable->addAction( addingOrderAction );
+  menuForTable->addAction( createOnBaseOrder );
   menuForTable->addAction( updateOrderAction );
   menuForTable->addAction( deleteOrderAction );
+
   ui->tableViewOrder->setContextMenu( menuForTable );
 }
 
@@ -123,6 +125,12 @@ void OrderWidget::createActions( ) {
   addingOrderAction = new QAction( tr( "Создать" ), this );
   updateOrderAction = new QAction( tr( "Изменить" ), this );
   deleteOrderAction = new QAction( tr( "Удалить" ), this );
+  createOnBaseOrder = new QAction( tr( "Создать на основе" ), this );
+}
+
+void OrderWidget::createOnBaseAction( ) {
+  QModelIndex index = ui->tableViewOrder->selectionModel( )->currentIndex( );
+  QSqlRecord selectedRecord = model->record( index.row( ) );
 }
 
 void OrderWidget::setupsAction( ) {

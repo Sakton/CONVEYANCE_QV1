@@ -34,6 +34,7 @@ private:
   void initModels( );
   void setupView( );
   void createActions( );
+  void createOnBaseAction( );
   void setupsAction( );
 
 private:
@@ -43,6 +44,7 @@ private:
   QAction * addingOrderAction;
   QAction * updateOrderAction;
   QAction * deleteOrderAction;
+  QAction * createOnBaseOrder;
 
   QMenu * menuForTable;
 };
