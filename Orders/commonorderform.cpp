@@ -21,10 +21,6 @@ void CommonOrderForm::connects( ) {
     connect( ui->pushButtonAddShipper, QOverload< bool >::of( &QPushButton::clicked ), this, QOverload<>::of( &CommonOrderForm::slotAddShipper ) );
     connect( ui->pushButtonAddDriver, QOverload< bool >::of( &QPushButton::clicked ), this, QOverload<>::of( &CommonOrderForm::slotAddDriver ) );
   }
-  connect( ui->doubleSpinBoxCost, QOverload< double >::of( &QDoubleSpinBox::valueChanged ), this,
-	   QOverload< double >::of( &CommonOrderForm::slotCostChanged ) );
-  connect( ui->spinBoxArrival, QOverload< int >::of( &QSpinBox::valueChanged ), this, QOverload< int >::of( &CommonOrderForm::slotArrivalChanged ) );
-  connect( ui->spinBoxRoute, QOverload< int >::of( &QSpinBox::valueChanged ), this, QOverload< int >::of( &CommonOrderForm::slotRouteChanged ) );
 }
 
 void CommonOrderForm::slotAddShipper( ) {
@@ -56,6 +52,24 @@ void CommonOrderForm::slotRouteChanged( int route ) {
   double cost = ui->doubleSpinBoxCost->value( );
   double arrival = ui->spinBoxArrival->value( );
   ui->labelAnte->setText( QString::number( ante( cost, arrival + route ), 'f', 2 ) );
+}
+
+void CommonOrderForm::readRecord( const QSqlRecord & rec ) {
+  ui->dateEdit->setDate( rec.value( "order_data" ).toDate( ) );
+  ui->lineEditnumberContract->setText( rec.value( "order_contractnumber" ).toString( ) );
+  ui->comboBoxShippers->setCurrentIndex( ui->comboBoxShippers->findText( rec.value( "shipper_name" ).toString( ) ) );
+  ui->comboBoxDriver->setCurrentIndex( ui->comboBoxDriver->findText( rec.value( "emploee_name" ).toString( ) ) );
+  ui->doubleSpinBoxCost->setValue( rec.value( "payment_cost" ).toDouble( ) );
+  ui->comboBoxPaymentPeriod->setCurrentIndex( ui->comboBoxPaymentPeriod->findText( rec.value( "payment_period" ).toString( ) ) );
+  ui->comboBoxCurrency->setCurrentIndex( ui->comboBoxCurrency->findText( rec.value( "payment_currency" ).toString( ) ) );
+  ui->spinBoxArrival->setValue( rec.value( "route_arrival" ).toInt( ) );
+  ui->spinBoxRoute->setValue( rec.value( "route_route" ).toInt( ) );
+  ui->labelAnte->setText( QString::number( rec.value( "payment_cost" ).toDouble( ) /
+                                               ( rec.value( "route_arrival" ).toInt( ) + rec.value( "route_route" ).toInt( ) ),
+                                           'f', 2 ) );
+  ui->comboBoxPostPeriad->setCurrentIndex( ui->comboBoxPostPeriad->findText( rec.value( "document_postperiod" ).toString( ) ) );
+  ui->checkBox2CopyCMR->setCheckState( static_cast< Qt::CheckState >( rec.value( "document_2copycmr" ).toInt( ) ) );
+  ui->checkBoxOriginalContract->setCheckState( static_cast< Qt::CheckState >( rec.value( "document_original" ).toInt( ) ) );
 }
 
 double CommonOrderForm::ante( double cost, int path ) { return cost / path; }

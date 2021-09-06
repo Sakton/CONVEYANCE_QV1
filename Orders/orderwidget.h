@@ -22,6 +22,7 @@ public:
 
 public slots:
   void slotAddOrder( );
+  void slotAddOrderFrom( );
   void slotUpdOrder( );
   void slotDelOrder( );
 
@@ -34,8 +35,8 @@ private:
   void initModels( );
   void setupView( );
   void createActions( );
-  void createOnBaseAction( );
   void setupsAction( );
+  void noSelectMessage( );
 
 private:
   Ui::OrderWidget * ui;

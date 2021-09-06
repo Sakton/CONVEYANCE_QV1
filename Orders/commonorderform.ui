@@ -487,5 +487,58 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>spinBoxArrival</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>CommonOrderForm</receiver>
+   <slot>slotArrivalChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>83</x>
+     <y>305</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>211</x>
+     <y>306</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>doubleSpinBoxCost</sender>
+   <signal>valueChanged(double)</signal>
+   <receiver>CommonOrderForm</receiver>
+   <slot>slotCostChanged(double)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>83</x>
+     <y>215</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>211</x>
+     <y>306</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spinBoxRoute</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>CommonOrderForm</receiver>
+   <slot>slotRouteChanged(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>211</x>
+     <y>305</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>211</x>
+     <y>306</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
+ <slots>
+  <slot>slotArrivalChanged(int)</slot>
+  <slot>slotCostChanged(double)</slot>
+  <slot>slotRouteChanged(int)</slot>
+ </slots>
 </ui>

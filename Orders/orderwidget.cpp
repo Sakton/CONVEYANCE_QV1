@@ -34,26 +34,46 @@ void OrderWidget::slotAddOrder( ) {
   }
 }
 
+void OrderWidget::slotAddOrderFrom( ) {
+  QModelIndex ind = ui->tableViewOrder->selectionModel( )->currentIndex( );
+  if( ind.isValid( ) ) {
+    CreateOrderDialog addOrderFrom( model->record( ind.row( ) ), this );
+    if( addOrderFrom.exec( ) == QDialog::Accepted ) {
+      updateOrderWidget( );
+    }
+  } else {
+    noSelectMessage( );
+  }
+}
+
 void OrderWidget::slotUpdOrder( ) {
   QModelIndex ind = ui->tableViewOrder->selectionModel( )->currentIndex( );
-  QSqlRecord rowData = model->record( ind.row( ) );
-  UpdateOrderDialog dialog( rowData, this );
-  if ( dialog.exec( ) == QDialog::Accepted ) {
-    updateOrderWidget( );
+  if( ind.isValid( ) ) {
+    QSqlRecord rowData = model->record( ind.row( ) );
+    UpdateOrderDialog dialog( rowData, this );
+    if( dialog.exec( ) == QDialog::Accepted ) {
+      updateOrderWidget( );
+    }
+  } else {
+    noSelectMessage( );
   }
 }
 
 void OrderWidget::slotDelOrder( ) {
   QMessageBox::information( this, tr( "УДАЛЕНИЕ ОРДЕРА" ), tr( "УДАЛИТСЯ ЗАПИСЬ, СТРАТЕГИЯ УДАЛЕНИЯ НЕ ПОНЯТНА ПОКА" ) );
   QModelIndex ind = ui->tableViewOrder->selectionModel( )->currentIndex( );
-  QSqlRecord rowData = model->record( ind.row( ) );
-  QString qs = QString( "DELETE FROM orders.orders WHERE order_id = %1" ).arg( rowData.value( "order_id" ).toInt( ) );
-  QSqlQuery query( QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
-  if ( !query.exec( qs ) ) {
-    qDebug( ) << query.lastError( ).text( );
+  if( ind.isValid( ) ) {
+    QSqlRecord rowData = model->record( ind.row( ) );
+    QString qs = QString( "DELETE FROM orders.orders WHERE order_id = %1" ).arg( rowData.value( "order_id" ).toInt( ) );
+    QSqlQuery query( QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
+    if( !query.exec( qs ) ) {
+      qDebug( ) << query.lastError( ).text( );
+    } else {
+      QMessageBox::information( this, tr( "УДАЛЕНО" ), tr( "ЗАПИСЬ УДАЛЕНА" ) );
+      updateOrderWidget( );
+    }
   } else {
-    QMessageBox::information( this, tr( "УДАЛЕНО" ), tr( "ЗАПИСЬ УДАЛЕНА" ) );
-    updateOrderWidget( );
+    noSelectMessage( );
   }
 }
 
@@ -72,6 +92,8 @@ void OrderWidget::createConnects( ) {
   connect( ui->tableViewOrder, QOverload< const QModelIndex & >::of( &QTableView::pressed ), this,
 	   QOverload< const QModelIndex & >::of( &OrderWidget::slotSelectRow ) );
   connect( addingOrderAction, QOverload< bool >::of( &QAction::triggered ), this, QOverload<>::of( &OrderWidget::slotAddOrder ) );
+  connect( createOnBaseOrder, QOverload< bool >::of( &QAction::triggered ), this,
+           QOverload<>::of( &OrderWidget::slotAddOrderFrom ) );
   connect( updateOrderAction, QOverload< bool >::of( &QAction::triggered ), this, QOverload<>::of( &OrderWidget::slotUpdOrder ) );
   connect( deleteOrderAction, QOverload< bool >::of( &QAction::triggered ), this, QOverload<>::of( &OrderWidget::slotDelOrder ) );
 }
@@ -128,13 +150,10 @@ void OrderWidget::createActions( ) {
   createOnBaseOrder = new QAction( tr( "Создать на основе" ), this );
 }
 
-void OrderWidget::createOnBaseAction( ) {
-  QModelIndex index = ui->tableViewOrder->selectionModel( )->currentIndex( );
-  QSqlRecord selectedRecord = model->record( index.row( ) );
-}
-
 void OrderWidget::setupsAction( ) {
   ui->toolButtonAddNewOrder->setAction( addingOrderAction );
   ui->toolButtonUpdateOrder->setAction( updateOrderAction );
   ui->toolButtonDeleteOrder->setAction( deleteOrderAction );
 }
+
+void OrderWidget::noSelectMessage( ) { QMessageBox::information( this, tr( "ПОДСКАЗКА" ), tr( "Ничего не выбрано" ) ); }

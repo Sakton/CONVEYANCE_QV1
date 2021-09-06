@@ -13,6 +13,12 @@ CreateOrderDialog::CreateOrderDialog( QWidget * parent ) : CommonOrderForm( Comm
   ui->dateEdit->setDate( QDate::currentDate( ) );
 }
 
+CreateOrderDialog::CreateOrderDialog( const QSqlRecord & rec, QWidget * parent ) {
+  readRecord( rec );
+  ui->lineEditnumberContract->clear( );
+  ui->dateEdit->setDate( QDate::currentDate( ) );
+}
+
 // TODO почти одинаковые методы UpdateOrderDialog::accept( ) вынести в базовый класс
 void CreateOrderDialog::accept( ) {
   //**** ЧАСТЬ ОРДЕР
@@ -40,15 +46,19 @@ void CreateOrderDialog::accept( ) {
   QString postPeriod = ui->comboBoxPostPeriad->currentText( );
   Qt::CheckState twoCopyCMR = ui->checkBox2CopyCMR->checkState( );
   Qt::CheckState originalContract = ui->checkBoxOriginalContract->checkState( );
+
   /*
-  //***************************************************************************************************************************************************
+  //
+  ***************************************************************************************************************************************************
 
   //  QSqlDatabase db = QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL );
   //  QSqlQuery query( db );
-  //  QString qsToPayment = QString( "SELECT payment.getPayment_id(%1, '%2', '%3') AS idpayment;" ).arg( cost ).arg( paymentPeriod, currency );
+  //  QString qsToPayment = QString( "SELECT payment.getPayment_id(%1, '%2', '%3') AS idpayment;" ).arg( cost ).arg(
+  paymentPeriod, currency );
   //  QString qsToRoute = QString( "SELECT route.getRouteId(%1, %2, %3) AS idroute;" ).arg( arrival ).arg( route ).arg( ante );
   //  QString qsDocuments =
-  //      QString( "SELECT document.getDocumentId ('%1', %2, %3) AS iddocument;" ).arg( postPeriod ).arg( twoCopyCMR ).arg( originalContract );
+  //      QString( "SELECT document.getDocumentId ('%1', %2, %3) AS iddocument;" ).arg( postPeriod ).arg( twoCopyCMR ).arg(
+  originalContract );
   //  db.transaction( ); //ТРАНЗАКЦИЯ
   //  query.exec( qsToPayment );
   //  query.next( );
@@ -71,14 +81,17 @@ void CreateOrderDialog::accept( ) {
   //    QMessageBox::warning( this, tr( "ОШИБКА" ), query.lastError( ).text( ) );
   //    db.rollback( ); //ОТМЕНИТЬ ТРАНЗАКЦИЮ
   //  } else {
-  //    db.commit( ); //ПРИНЯТЬ ТРАНЗАКЦИЮ (функции получения id автоматически вставляют в базу, то есть эта транзакция частично вносит измемнения )
+  //    db.commit( ); //ПРИНЯТЬ ТРАНЗАКЦИЮ (функции получения id автоматически вставляют в базу, то есть эта транзакция частично
+  вносит измемнения )
   //    // TODO тут возможно изменение поведения
   //    CommonOrderForm::accept( );
   //    // QDialog::accept( );
   //  }
 
-  //***************************************************************************************************************************************************
+  //
+  ***************************************************************************************************************************************************
   */
+
   QSqlQuery query( QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
   QString qs = QString( "CALL orders.addToOrder('%1', '%2', %3, %4, %5, '%6', '%7', %8, %9, '%10', %11, %12, '%13')" )
 		   .arg( data.toString( ) )

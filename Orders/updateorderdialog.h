@@ -9,8 +9,6 @@ class UpdateOrderDialog : public CommonOrderForm {
 public:
   UpdateOrderDialog( const QSqlRecord & rec, QWidget * parent = nullptr );
 
-  void initForm( );
-
   // QDialog interface
 public slots:
   void accept( ) override;

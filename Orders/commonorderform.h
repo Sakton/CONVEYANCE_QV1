@@ -2,6 +2,7 @@
 #define COMMONORDERFORM_H
 
 #include <QDialog>
+#include <QSqlRecord>
 
 namespace Ui {
 class CommonOrderForm;
@@ -18,9 +19,10 @@ public:
 public slots:
   void slotAddShipper( );
   void slotAddDriver( );
-  void slotCostChanged( double cost );
-  void slotArrivalChanged( int arrival );
-  void slotRouteChanged( int route );
+  void slotCostChanged( double cost );    //соединение в форме
+  void slotArrivalChanged( int arrival ); //соединение в форме
+  void slotRouteChanged( int route );     //соединение в форме
+  void readRecord( const QSqlRecord & rec );
 
 private:
   void connects( );

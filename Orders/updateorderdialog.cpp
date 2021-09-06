@@ -8,24 +8,7 @@
 UpdateOrderDialog::UpdateOrderDialog( const QSqlRecord & rec, QWidget * parent )
     : CommonOrderForm( CommonOrderForm::Regim::UPD, parent ), rec { rec } {
   setWindowTitle( "Правка ордера" );
-  initForm( );
-}
-
-void UpdateOrderDialog::initForm( ) {
-  ui->dateEdit->setDate( rec.value( "order_data" ).toDate( ) );
-  ui->lineEditnumberContract->setText( rec.value( "order_contractnumber" ).toString( ) );
-  ui->comboBoxShippers->setCurrentIndex( ui->comboBoxShippers->findText( rec.value( "shipper_name" ).toString( ) ) );
-  ui->comboBoxDriver->setCurrentIndex( ui->comboBoxDriver->findText( rec.value( "emploee_name" ).toString( ) ) );
-  ui->doubleSpinBoxCost->setValue( rec.value( "payment_cost" ).toDouble( ) );
-  ui->comboBoxPaymentPeriod->setCurrentIndex( ui->comboBoxPaymentPeriod->findText( rec.value( "payment_period" ).toString( ) ) );
-  ui->comboBoxCurrency->setCurrentIndex( ui->comboBoxCurrency->findText( rec.value( "payment_currency" ).toString( ) ) );
-  ui->spinBoxArrival->setValue( rec.value( "route_arrival" ).toInt( ) );
-  ui->spinBoxRoute->setValue( rec.value( "route_route" ).toInt( ) );
-  ui->labelAnte->setText( QString::number(
-      rec.value( "payment_cost" ).toDouble( ) / ( rec.value( "route_arrival" ).toInt( ) + rec.value( "route_route" ).toInt( ) ), 'f', 2 ) );
-  ui->comboBoxPostPeriad->setCurrentIndex( ui->comboBoxPostPeriad->findText( rec.value( "document_postperiod" ).toString( ) ) );
-  ui->checkBox2CopyCMR->setCheckState( static_cast< Qt::CheckState >( rec.value( "document_2copycmr" ).toInt( ) ) );
-  ui->checkBoxOriginalContract->setCheckState( static_cast< Qt::CheckState >( rec.value( "document_original" ).toInt( ) ) );
+  readRecord( rec );
 }
 
 // TODO почти одинаковые методы с void CreateOrderDialog::accept( ) вынести в базовый класс
