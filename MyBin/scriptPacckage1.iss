@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "CONVEYANCE"
-#define MyAppVersion "0.001"
+#define MyAppVersion "0.002"
 #define MyAppPublisher "My Company, Inc."
 #define MyAppURL "https://www.example.ru/"
 #define MyAppExeName "CONVEYANCE_QV1.exe"
@@ -10,9 +10,12 @@
 #define MyAppAssocExt ".myp"
 #define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
 #define DbFileExe "PostgreSQL_13.1_64bit_Setup.exe"
-#define MyRKK_Path "E:\CPP\MyProects\CONVEYANCE_QV1\deploy"
-#define MyHome_Path "";
-#define CurrentPath MyRKK_Path
+// #define MyRKK_Path "E:\CPP\MyProects\CONVEYANCE_QV1\deploy"
+#define MyHome_Path "E:\Project_CPP_QT\CONVEYANCE_QV1\deploy"
+// #define CurrentPath MyRKK_Path
+#define CurrentPath MyHome_Path
+
+
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -25,13 +28,15 @@ AppPublisher={#MyAppPublisher}
 AppPublisherURL={#MyAppURL}
 AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
-DefaultDirName=E:\CPP\MyProects\CONVEYANCE_QV1\InnoSetup\CONVEYANCE
+// DefaultDirName=E:\CPP\MyProects\CONVEYANCE_QV1\InnoSetup\CONVEYANCE
+DefaultDirName=C:/{#MyAppName}{#MyAppVersion}
 ChangesAssociations=yes
 DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-OutputDir=E:\CPP\MyProects\CONVEYANCE_QV1\Inno
-OutputBaseFilename=mysetup
+// OutputDir=E:\CPP\MyProects\CONVEYANCE_QV1\Inno
+OutputDir=E:\Project_CPP_QT\CONVEYANCE_QV1\SepupFolder
+OutputBaseFilename={#MyAppName}
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -63,13 +68,13 @@ Source: "{#CurrentPath}\PostgreSQL_13.1_64bit_Setup.exe"; DestDir: "{app}"; Flag
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Types]
-Name: "Setup_DB"; Description: "Установить БД"; Flags: iscustom
+// Name: "Setup_DB"; Description: "Установить БД"; Flags: iscustom
 
 [Components]
-Name: "DataBase"; Description: "Установка базы данных"; Types: Setup_DB
+// Name: "DataBase"; Description: "Установка базы данных"; Types: Setup_DB
 
 [Files]
-Source: "{#CurrentPath}\PostgreSQL_13.1_64bit_Setup.exe"; DestDir:{app}; Components: DataBase;
+// Source: "{#CurrentPath}\PostgreSQL_13.1_64bit_Setup.exe"; DestDir:{app}; Components: DataBase;
 
 [Registry]
 Root: HKA; Subkey: "Software\Classes\{#MyAppAssocExt}\OpenWithProgids"; ValueType: string; ValueName: "{#MyAppAssocKey}"; ValueData: ""; Flags: uninsdeletevalue

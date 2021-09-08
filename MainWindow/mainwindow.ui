@@ -63,7 +63,7 @@
         <string>0</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="widget">
+      <widget class="QWidget" name="widget1">
        <attribute name="title">
         <string>1</string>
        </attribute>

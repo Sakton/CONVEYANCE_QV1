@@ -13,7 +13,8 @@ CreateOrderDialog::CreateOrderDialog( QWidget * parent ) : CommonOrderForm( Comm
   ui->dateEdit->setDate( QDate::currentDate( ) );
 }
 
-CreateOrderDialog::CreateOrderDialog( const QSqlRecord & rec, QWidget * parent ) {
+CreateOrderDialog::CreateOrderDialog( const QSqlRecord & rec, QWidget * parent )
+    : CommonOrderForm( CommonOrderForm::Regim::ADD, parent ) {
   readRecord( rec );
   ui->lineEditnumberContract->clear( );
   ui->dateEdit->setDate( QDate::currentDate( ) );
