@@ -86,5 +86,11 @@
         <file>DumpStructureDatabase/currentDumpSchema.sql</file>
         <file>DumpStructureDatabase/InsertConstatsDataInTable.sql</file>
         <file>DumpStructureDatabase/conveyanceDbSchema.sql</file>
+        <file>img/Eurofura/eurofura-82-kuba.png</file>
+        <file>img/Eurofura/eurofura-86-kubov.png</file>
+        <file>img/Eurofura/eurofura-90-kubov.png</file>
+        <file>img/Eurofura/jumbo-fura-96-kubov.png</file>
+        <file>img/Eurofura/mega-fura-100-kubov.png</file>
+        <file>img/Eurofura/scepka-mega-120-kubov.png</file>
     </qresource>
 </RCC>
