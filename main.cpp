@@ -7,6 +7,9 @@
 #include "DataBase/databasecreator.h"
 #include "Orders/commonorderform.h"
 
+#include "Cars/addbrandcardialog.h"
+#include "Cars/addcarmodeldialog.h"
+
 #include <QAction>
 #include <QApplication>
 #include <QLabel>
@@ -21,8 +24,11 @@ void setsApp( QApplication &app );
 void createDbConnection( );
 
 //***********************************************
-int main( int argc, char *argv[] ) {
+int main( int argc, char * argv[] ) {
+
   QApplication a( argc, argv );
+
+  /* *************************
   setsApp( a );
 
   //  DatabaseCreator dbc;
@@ -33,13 +39,21 @@ int main( int argc, char *argv[] ) {
 
   QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
   splash.show( );
-
-  // createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
+  createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
 
   MainWindow w;
   w.show( );
-
   splash.finish( &w );
+*/
+
+  createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
+
+  //  AddBrandCarDialog bc;
+  //  bc.show( );
+
+  AddCarModelDialog md;
+  md.show( );
+
   return a.exec( );
 }
 //***********************************************

@@ -40,29 +40,47 @@ CREATE TABLE cars.autocategories (
     autocategory_symbol VARCHAR(5) NOT NULL,		    -- ОБОЗНАЧЕНИЕ КАТЕГОРИИ
     autocategory_icon VARCHAR(64),			    -- ИМЯ ФАЙЛА ПИКТОГРАММЫ КАТЕГОРИИ
     autocategory_description TEXT,			    -- КРАТКОЕ ОПИСАНИЕ КАТЕГОРИИ ( справочная информация для оператора не знакомого с этим )
-    autocategory_img VARCHAR(),
     PRIMARY KEY ( autocategory_id )
 );
 
+/*
 -- СПРАВОЧНАЯ ТАБЛИЦА ГАБАРИТОВ
 CREATE TABLE cars.gabarites (
     gabarit_id SERIAL UNIQUE,
-    gabarit_lenth NUMERIC(4, 2),
-    gabarit_width NUMERIC(4, 2),
+    gabarit_lenth  NUMERIC(4, 2),
+    gabarit_width  NUMERIC(4, 2),
     gabarit_height NUMERIC(4, 2)
 	-- semitrailer_volume NUMERIC(4,2),		    -- обьем ( вычисляемое )
 	-- semitrailer_count_europalett INTEGER,	    -- количество палет ( вычисляемое )
+);
+*/
+
+CREATE TABLE cars.paletypes (
+    paletype_id SERIAL UNIQUE,
+    paletype_name  VARCHAR( 96 ),			    --ТИП ПАЛЕТ
+    paletype_lenth NUMERIC(4, 2),			    --длина
+    paletype_width NUMERIC(4, 2),			    --ширина
+    PRIMARY KEY(paletype_id)
+);
+
+CREATE TABLE cars.description_semitrailers (
+    description_semitrailer_id SERIAL UNIQUE,
+    description_semitrailer_description TEXT,
+    PRIMARY KEY(description_semitrailer_id)
 );
 
 -- ТАБЛИЦА ТИПОВ ПОЛУПРИЦЕПОВ
 CREATE TABLE cars.semitrailers (
     semitrailer_id SERIAL UNIQUE,			    -- PK
     semitrailer_name VARCHAR(64),			    -- имя типа
-    semitrailer_descriptin TEXT,			    -- описание типа
-    semitrailer_carrying NUMERIC(),			    -- грузоподьемность
-    gabarit_id INTEGER,					    -- FK на набариты
+    semitrailer_carrying NUMERIC(4, 2),			    -- грузоподьемность
+    gabarit_lenth  NUMERIC(4, 2),
+    gabarit_width  NUMERIC(4, 2),
+    gabarit_height NUMERIC(4, 2),
+    description_semitrailer_id INTEGER,			    -- описание типа
     PRIMARY KEY( semitrailer_id ),
-    FOREIGN KEY( gabarit_id ) REFERENCES cars.gabarites ( gabarit_id )
+    FOREIGN KEY( description_semitrailer_id ) REFERENCES cars.description_semitrailers ( description_semitrailer_id )
+	ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 /*
@@ -70,6 +88,19 @@ https://profi-prim.ru/article/kategorii-prav#:~:text=%D0%B2%20%D1%81%D0%B5%D0%B3
 */
 
 -- ВСТАВКА СПРАВОЧНЫХ ДАННЫХ
+INSERT INTO cars.paletypes ( paletype_name, paletype_lenth, paletype_width )
+VALUES ('Финский', 1.2, 1),
+       ('Американский', 1.2, 1.2),
+       ('Европейский', 1.2, 0.8);
+
+INSERT INTO cars.description_semitrailers( description_semitrailer_description )
+VALUES ('Стандартный полуприцеп с ровным полом.'),
+       ('Конструкция полуприцепа с ломаным полом, уменьшенный диаметр колёс.'),
+       ('Стандартный полуприцеп увеличенной высоты с ровным полом.'),
+       ('Автопоезд - грузовик с прицепом увеличенной высоты и уменьшенным диаметром колёс.'),
+       ('Автопоезд - грузовик с прицепом.');
+
+
 INSERT INTO cars.autocategories ( autocategory_name, autocategory_symbol, autocategory_icon, autocategory_description )
 VALUES ( 'Мопеды и Легкие квадрициклы','M','M.png','Категория М дает право водить мопеды и легкие квадрициклы.
 Особенность управления этими ТС в том, что ими можно управлять

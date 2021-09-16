@@ -11,7 +11,7 @@ ComboBoxCarBrand::ComboBoxCarBrand( QWidget *parent ) : QComboBox( parent ) {
 }
 
 void ComboBoxCarBrand::init( ) {
-  QSqlQuery query( "SELECT autobrand_id, autobrand_name, autobrand_icon FROM auto.autobrands;",
+  QSqlQuery query( "SELECT autobrand_id, autobrand_name, autobrand_icon FROM cars.autobrands;",
 		   QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
   while ( query.next( ) ) {
     QString fileName = query.value( "autobrand_icon" ).toString( );

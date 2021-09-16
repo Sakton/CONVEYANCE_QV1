@@ -22,6 +22,7 @@ SOURCES += \
     Adress/updatecitydialog.cpp \
     Cars/addbrandcardialog.cpp \
     Cars/addcarmodeldialog.cpp \
+    Cars/commoncardialog.cpp \
     Contract/createcontractdialog.cpp \
     DataBase/databasecreator.cpp \
     ElementsWidgets/actionpushbutton.cpp \
@@ -70,6 +71,7 @@ HEADERS += \
 	Adress/updatecitydialog.h \
 	Cars/addbrandcardialog.h \
 	Cars/addcarmodeldialog.h \
+	Cars/commoncardialog.h \
 	Constants.h \
 	Contract/createcontractdialog.h \
 	DataBase/databasecreator.h \
@@ -114,6 +116,7 @@ FORMS += \
 	Adress/updatecitydialog.ui \
 	Cars/addbrandcardialog.ui \
 	Cars/addcarmodeldialog.ui \
+	Cars/commoncardialog.ui \
 	Contract/createcontractdialog.ui \
 	Emploee/addemploeedialog.ui \
 	Emploee/addfunctionemploeedialog.ui \
@@ -149,6 +152,7 @@ DISTFILES += \
 	Dump/dump.sql \
 	Dump/dump1.sql \
 	Dump/dump_conveyance_db.sql \
+	DumpStructureDatabase/InsertConstatsDataInTable.sql \
 	DumpStructureDatabase/currentDump.sql \
 	DumpStructureDatabase/testDump.sql \
 	ErrorsFound \

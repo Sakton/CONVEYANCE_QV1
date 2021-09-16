@@ -313,6 +313,46 @@ $$;
 ALTER PROCEDURE orders.addorder(idshipper integer, idemploee integer, idpayment integer, idroute integer, iddocuments integer, dataorder date, contractnumber character varying, noteorder text) OWNER TO postgres;
 
 --
+-- Name: addtoorder(character varying, character varying, integer, integer, numeric, character varying, character varying, integer, integer, character varying, integer, integer, character varying); Type: PROCEDURE; Schema: orders; Owner: postgres
+--
+
+CREATE PROCEDURE orders.addtoorder(orderdate character varying, ordernumber character varying, shipperid integer, emploeeid integer, paymentcost numeric, paymentperiod character varying, paymentcurrency character varying, routesarrival integer, routesroute integer, documentpostperiod character varying, document2copycmr integer, documentoriginal integer, odernote character varying)
+    LANGUAGE sql
+    AS $$
+    INSERT INTO orders.orders ( shipper_id, emploee_id, payment_id, route_id, document_id, order_data, order_contractNumber, order_note )
+    VALUES ( shipperId, emploeeId,
+				    ( SELECT payment.getPayment_id( paymentCost, paymentPeriod, paymentCurrency ) ),
+				    ( SELECT route.getRouteId( routesArrival, routesRoute ) ),
+				    ( SELECT document.getDocumentId( documentPostPeriod, document2CopyCmr, documentOriginal ) ),
+	    orderDate::date, orderNumber, oderNote );
+$$;
+
+
+ALTER PROCEDURE orders.addtoorder(orderdate character varying, ordernumber character varying, shipperid integer, emploeeid integer, paymentcost numeric, paymentperiod character varying, paymentcurrency character varying, routesarrival integer, routesroute integer, documentpostperiod character varying, document2copycmr integer, documentoriginal integer, odernote character varying) OWNER TO postgres;
+
+--
+-- Name: updateorder(integer, character varying, character varying, integer, integer, numeric, character varying, character varying, integer, integer, character varying, integer, integer, character varying); Type: PROCEDURE; Schema: orders; Owner: postgres
+--
+
+CREATE PROCEDURE orders.updateorder(orderid integer, orderdate character varying, ordernumber character varying, shipperid integer, emploeeid integer, paymentcost numeric, paymentperiod character varying, paymentcurrency character varying, routesarrival integer, routesroute integer, documentpostperiod character varying, document2copycmr integer, documentoriginal integer, odernote character varying)
+    LANGUAGE sql
+    AS $$
+    UPDATE orders.orders
+    SET shipper_id  = shipperId,
+	emploee_id  = emploeeId,
+	payment_id  = ( SELECT payment.getPayment_id( paymentCost, paymentPeriod, paymentCurrency ) ),
+	route_id    = ( SELECT route.getRouteId( routesArrival, routesRoute ) ),
+	document_id = ( SELECT document.getDocumentId( documentPostPeriod, document2CopyCmr, documentOriginal ) ),
+	order_data  = orderDate::date,
+	order_contractNumber = orderNumber,
+	order_note  = oderNote
+    WHERE order_id  = orderId;
+$$;
+
+
+ALTER PROCEDURE orders.updateorder(orderid integer, orderdate character varying, ordernumber character varying, shipperid integer, emploeeid integer, paymentcost numeric, paymentperiod character varying, paymentcurrency character varying, routesarrival integer, routesroute integer, documentpostperiod character varying, document2copycmr integer, documentoriginal integer, odernote character varying) OWNER TO postgres;
+
+--
 -- Name: getpayment_id(numeric, character varying, character varying); Type: FUNCTION; Schema: payment; Owner: postgres
 --
 
@@ -352,42 +392,65 @@ $$;
 ALTER PROCEDURE payment.insertpayment(cost numeric, period character varying, currency character varying) OWNER TO postgres;
 
 --
+-- Name: getrouteid(integer, integer); Type: FUNCTION; Schema: route; Owner: postgres
+--
+
+CREATE FUNCTION route.getrouteid(arrival integer, route integer) RETURNS integer
+    LANGUAGE plpgsql
+    AS $$
+DECLARE id INTEGER DEFAULT NULL;
+    BEGIN
+	id = ( SELECT route_id FROM route.routes WHERE route_arrival = arrival
+						 AND route_route = route );
+	IF ( id IS NULL ) THEN
+	    BEGIN
+		CALL route.insertRoute( arrival, route );
+		id = ( SELECT lastval() );
+	    END;
+	END IF;
+    RETURN id;
+    END;
+$$;
+
+
+ALTER FUNCTION route.getrouteid(arrival integer, route integer) OWNER TO postgres;
+
+--
 -- Name: getrouteid(integer, integer, numeric); Type: FUNCTION; Schema: route; Owner: postgres
 --
 
 CREATE FUNCTION route.getrouteid(arrival integer, route integer, ante numeric) RETURNS integer
     LANGUAGE plpgsql
-    AS $$
-DECLARE id INTEGER DEFAULT NULL;
-    BEGIN
-	id = ( SELECT route_id FROM route.routes WHERE route_arrival = arrival
-						 AND route_route = route
-						 AND route_ante = ante::MONEY );
-	IF ( id IS NULL ) THEN
-	    BEGIN
-		CALL route.insertRoute( arrival, route, ante );
-		id = ( SELECT lastval() );
-	    END;
-	END IF;
-    RETURN id;
-    END;
+    AS $$
+DECLARE id INTEGER DEFAULT NULL;
+    BEGIN
+	id = ( SELECT route_id FROM route.routes WHERE route_arrival = arrival
+						 AND route_route = route );
+	IF ( id IS NULL ) THEN
+	    BEGIN
+		CALL route.insertRoute( arrival, route, ante );
+		id = ( SELECT lastval() );
+	    END;
+	END IF;
+    RETURN id;
+    END;
 $$;
 
 
 ALTER FUNCTION route.getrouteid(arrival integer, route integer, ante numeric) OWNER TO postgres;
 
 --
--- Name: insertroute(integer, integer, numeric); Type: PROCEDURE; Schema: route; Owner: postgres
+-- Name: insertroute(integer, integer); Type: PROCEDURE; Schema: route; Owner: postgres
 --
 
-CREATE PROCEDURE route.insertroute(arrival integer, rout integer, ante numeric)
+CREATE PROCEDURE route.insertroute(arrival integer, rout integer)
     LANGUAGE sql
-    AS $$
-    INSERT INTO route.routes( route_arrival, route_route, route_ante ) VALUES ( arrival, rout, ante::MONEY );
+    AS $$
+    INSERT INTO route.routes( route_arrival, route_route ) VALUES ( arrival, rout );
 $$;
 
 
-ALTER PROCEDURE route.insertroute(arrival integer, rout integer, ante numeric) OWNER TO postgres;
+ALTER PROCEDURE route.insertroute(arrival integer, rout integer) OWNER TO postgres;
 
 --
 -- Name: addshipper(character varying); Type: PROCEDURE; Schema: shipper; Owner: postgres
@@ -736,6 +799,115 @@ ALTER SEQUENCE cars.carsmodels_carsmodel_id_seq OWNED BY cars.carsmodels.carsmod
 
 
 --
+-- Name: description_semitrailers; Type: TABLE; Schema: cars; Owner: postgres
+--
+
+CREATE TABLE cars.description_semitrailers (
+    description_semitrailer_id integer NOT NULL,
+    description_semitrailer_description text
+);
+
+
+ALTER TABLE cars.description_semitrailers OWNER TO postgres;
+
+--
+-- Name: description_semitrailers_description_semitrailer_id_seq; Type: SEQUENCE; Schema: cars; Owner: postgres
+--
+
+CREATE SEQUENCE cars.description_semitrailers_description_semitrailer_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cars.description_semitrailers_description_semitrailer_id_seq OWNER TO postgres;
+
+--
+-- Name: description_semitrailers_description_semitrailer_id_seq; Type: SEQUENCE OWNED BY; Schema: cars; Owner: postgres
+--
+
+ALTER SEQUENCE cars.description_semitrailers_description_semitrailer_id_seq OWNED BY cars.description_semitrailers.description_semitrailer_id;
+
+
+--
+-- Name: paletypes; Type: TABLE; Schema: cars; Owner: postgres
+--
+
+CREATE TABLE cars.paletypes (
+    paletype_id integer NOT NULL,
+    paletype_name character varying(96),
+    paletype_lenth numeric(4,2),
+    paletype_width numeric(4,2)
+);
+
+
+ALTER TABLE cars.paletypes OWNER TO postgres;
+
+--
+-- Name: paletypes_paletype_id_seq; Type: SEQUENCE; Schema: cars; Owner: postgres
+--
+
+CREATE SEQUENCE cars.paletypes_paletype_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cars.paletypes_paletype_id_seq OWNER TO postgres;
+
+--
+-- Name: paletypes_paletype_id_seq; Type: SEQUENCE OWNED BY; Schema: cars; Owner: postgres
+--
+
+ALTER SEQUENCE cars.paletypes_paletype_id_seq OWNED BY cars.paletypes.paletype_id;
+
+
+--
+-- Name: semitrailers; Type: TABLE; Schema: cars; Owner: postgres
+--
+
+CREATE TABLE cars.semitrailers (
+    semitrailer_id integer NOT NULL,
+    semitrailer_name character varying(64),
+    semitrailer_carrying numeric(4,2),
+    gabarit_lenth numeric(4,2),
+    gabarit_width numeric(4,2),
+    gabarit_height numeric(4,2),
+    description_semitrailer_id integer
+);
+
+
+ALTER TABLE cars.semitrailers OWNER TO postgres;
+
+--
+-- Name: semitrailers_semitrailer_id_seq; Type: SEQUENCE; Schema: cars; Owner: postgres
+--
+
+CREATE SEQUENCE cars.semitrailers_semitrailer_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cars.semitrailers_semitrailer_id_seq OWNER TO postgres;
+
+--
+-- Name: semitrailers_semitrailer_id_seq; Type: SEQUENCE OWNED BY; Schema: cars; Owner: postgres
+--
+
+ALTER SEQUENCE cars.semitrailers_semitrailer_id_seq OWNED BY cars.semitrailers.semitrailer_id;
+
+
+--
 -- Name: documents; Type: TABLE; Schema: document; Owner: postgres
 --
 
@@ -927,6 +1099,19 @@ CREATE TABLE payment.payments (
 ALTER TABLE payment.payments OWNER TO postgres;
 
 --
+-- Name: routes; Type: TABLE; Schema: route; Owner: postgres
+--
+
+CREATE TABLE route.routes (
+    route_id integer NOT NULL,
+    route_arrival integer,
+    route_route integer
+);
+
+
+ALTER TABLE route.routes OWNER TO postgres;
+
+--
 -- Name: shippers; Type: TABLE; Schema: shipper; Owner: postgres
 --
 
@@ -943,20 +1128,34 @@ ALTER TABLE shipper.shippers OWNER TO postgres;
 --
 
 CREATE VIEW orders.ordersview AS
- SELECT ord.order_id,
-    ord.order_data,
+ SELECT ord.order_data,
     ord.order_contractnumber,
     shp.shipper_name,
+    emp.emploee_name,
     pay.payment_cost,
     pay.payment_currency,
     pay.payment_period,
-    emp.emploee_name,
+    rou.route_arrival,
+    rou.route_route,
+        CASE
+            WHEN ((rou.route_arrival + rou.route_route) = 0) THEN (0)::numeric
+            ELSE trunc((pay.payment_cost / ((rou.route_arrival + rou.route_route))::numeric), 2)
+        END AS stavka,
+    doc.document_2copycmr,
+    doc.document_original,
     doc.document_postperiod,
-    ord.order_note
-   FROM ((((orders.orders ord
+    ord.order_note,
+    ord.order_id,
+    ord.shipper_id,
+    ord.emploee_id,
+    ord.payment_id,
+    ord.route_id,
+    ord.document_id
+   FROM (((((orders.orders ord
      JOIN shipper.shippers shp ON ((ord.shipper_id = shp.shipper_id)))
-     JOIN payment.payments pay ON ((ord.payment_id = pay.payment_id)))
      JOIN emploee.emploees emp ON ((ord.emploee_id = emp.emploee_id)))
+     JOIN payment.payments pay ON ((ord.payment_id = pay.payment_id)))
+     JOIN route.routes rou ON ((ord.route_id = rou.route_id)))
      JOIN document.documents doc ON ((ord.document_id = doc.document_id)));
 
 
@@ -1008,20 +1207,6 @@ CREATE MATERIALIZED VIEW public.testadressview AS
 
 
 ALTER TABLE public.testadressview OWNER TO postgres;
-
---
--- Name: routes; Type: TABLE; Schema: route; Owner: postgres
---
-
-CREATE TABLE route.routes (
-    route_id integer NOT NULL,
-    route_arrival integer,
-    route_route integer,
-    route_ante money
-);
-
-
-ALTER TABLE route.routes OWNER TO postgres;
 
 --
 -- Name: routes_route_id_seq; Type: SEQUENCE; Schema: route; Owner: postgres
@@ -1183,6 +1368,27 @@ ALTER TABLE ONLY cars.autocategories ALTER COLUMN autocategory_id SET DEFAULT ne
 --
 
 ALTER TABLE ONLY cars.carsmodels ALTER COLUMN carsmodel_id SET DEFAULT nextval('cars.carsmodels_carsmodel_id_seq'::regclass);
+
+
+--
+-- Name: description_semitrailers description_semitrailer_id; Type: DEFAULT; Schema: cars; Owner: postgres
+--
+
+ALTER TABLE ONLY cars.description_semitrailers ALTER COLUMN description_semitrailer_id SET DEFAULT nextval('cars.description_semitrailers_description_semitrailer_id_seq'::regclass);
+
+
+--
+-- Name: paletypes paletype_id; Type: DEFAULT; Schema: cars; Owner: postgres
+--
+
+ALTER TABLE ONLY cars.paletypes ALTER COLUMN paletype_id SET DEFAULT nextval('cars.paletypes_paletype_id_seq'::regclass);
+
+
+--
+-- Name: semitrailers semitrailer_id; Type: DEFAULT; Schema: cars; Owner: postgres
+--
+
+ALTER TABLE ONLY cars.semitrailers ALTER COLUMN semitrailer_id SET DEFAULT nextval('cars.semitrailers_semitrailer_id_seq'::regclass);
 
 
 --
@@ -1350,6 +1556,30 @@ ALTER TABLE ONLY cars.autocategories
 
 ALTER TABLE ONLY cars.carsmodels
     ADD CONSTRAINT carsmodels_pkey PRIMARY KEY (carsmodel_id);
+
+
+--
+-- Name: description_semitrailers description_semitrailers_pkey; Type: CONSTRAINT; Schema: cars; Owner: postgres
+--
+
+ALTER TABLE ONLY cars.description_semitrailers
+    ADD CONSTRAINT description_semitrailers_pkey PRIMARY KEY (description_semitrailer_id);
+
+
+--
+-- Name: paletypes paletypes_pkey; Type: CONSTRAINT; Schema: cars; Owner: postgres
+--
+
+ALTER TABLE ONLY cars.paletypes
+    ADD CONSTRAINT paletypes_pkey PRIMARY KEY (paletype_id);
+
+
+--
+-- Name: semitrailers semitrailers_pkey; Type: CONSTRAINT; Schema: cars; Owner: postgres
+--
+
+ALTER TABLE ONLY cars.semitrailers
+    ADD CONSTRAINT semitrailers_pkey PRIMARY KEY (semitrailer_id);
 
 
 --
@@ -1529,6 +1759,14 @@ ALTER TABLE ONLY cars.carsmodels
 
 
 --
+-- Name: semitrailers semitrailers_description_semitrailer_id_fkey; Type: FK CONSTRAINT; Schema: cars; Owner: postgres
+--
+
+ALTER TABLE ONLY cars.semitrailers
+    ADD CONSTRAINT semitrailers_description_semitrailer_id_fkey FOREIGN KEY (description_semitrailer_id) REFERENCES cars.description_semitrailers(description_semitrailer_id) ON UPDATE CASCADE ON DELETE SET NULL;
+
+
+--
 -- Name: emploees emploees_autocategory_id_fkey; Type: FK CONSTRAINT; Schema: emploee; Owner: postgres
 --
 
@@ -1558,14 +1796,6 @@ ALTER TABLE ONLY orders.orders
 
 ALTER TABLE ONLY orders.orders
     ADD CONSTRAINT orders_payment_id_fkey FOREIGN KEY (payment_id) REFERENCES payment.payments(payment_id);
-
-
---
--- Name: orders orders_route_id_fkey; Type: FK CONSTRAINT; Schema: orders; Owner: postgres
---
-
-ALTER TABLE ONLY orders.orders
-    ADD CONSTRAINT orders_route_id_fkey FOREIGN KEY (route_id) REFERENCES route.routes(route_id);
 
 
 --
