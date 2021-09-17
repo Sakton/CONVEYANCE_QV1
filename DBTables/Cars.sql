@@ -74,9 +74,9 @@ CREATE TABLE cars.semitrailers (
     semitrailer_id SERIAL UNIQUE,			    -- PK
     semitrailer_name VARCHAR(64),			    -- имя типа
     semitrailer_carrying NUMERIC(4, 2),			    -- грузоподьемность
-    gabarit_lenth  NUMERIC(4, 2),
-    gabarit_width  NUMERIC(4, 2),
-    gabarit_height NUMERIC(4, 2),
+    semitrailer_gabarit_lenth  NUMERIC(4, 2),		    -- длина
+    semitrailer_gabarit_width  NUMERIC(4, 2),			    -- ширина
+    semitrailer_gabarit_height NUMERIC(4, 2),			    -- высота
     description_semitrailer_id INTEGER,			    -- описание типа
     PRIMARY KEY( semitrailer_id ),
     FOREIGN KEY( description_semitrailer_id ) REFERENCES cars.description_semitrailers ( description_semitrailer_id )
@@ -154,17 +154,31 @@ VALUES ( 'Мопеды и Легкие квадрициклы','M','M.png','Ка
 ( 'Троллейбусы', 'Tb', 'Tb.png', 'Дают право управлять троллейбусами' ),
 ( 'Трамваи', 'Tm', 'Tm.png', 'Дают право управлять трамваями' );
 
+
+
 -- ТАБЛИЦА МОДЕЛИ АВТОМОБИЛЕЙ
 CREATE TABLE cars.carsmodels (
     carsmodel_id SERIAL UNIQUE,								-- PK
     autobrand_id INTEGER NOT NULL,							-- FK КАКОМУ БРЕНДУ ПРИНАДЛЕЖИТ
     autocategory_id INTEGER NOT NULL,							-- FK К КАКОЙ КАТЕГОРИИ ОТНОСИТСЯ
     carsmodel_name VARCHAR ( 200 ),							-- ИМЯ МОДЕЛИ
-    semitrailer_id INTEGER,	-- ?????						-- ПОЛУПРИЦЕП
+    semitrailer_id INTEGER,								-- ПОЛУПРИЦЕП
     PRIMARY KEY ( carsmodel_id	  ),
     FOREIGN KEY ( autobrand_id	  ) REFERENCES cars.autobrands ( autobrand_id ),	-- NO ACTION по умолчанию
     FOREIGN KEY ( autocategory_id ) REFERENCES cars.autocategories ( autocategory_id )  -- NO ACTION по умолчанию
 );
+
+CREATE TABLE cars.cars (
+    car_id SERIAL UNIQUE,
+    car_vin VARCHAR(64) UNIQUE NOT NULL,
+    car_date_release DATE,
+    car_date_gto DATE,
+    carsmodel_id INTEGER,
+    PRIMARY KEY( car_id ),
+    FOREIGN KEY (carsmodel_id) REFERENCES cars.carsmodels (carsmodel_id)
+	ON DELETE SET NULL ON UPDATE CASCADE
+);
+
 -- NO ACTION - не даст удалить связанную строку из базовой тавблицы
 
 -- ФУНКЦИЯ ВОЗВРАЩАЕТ ID БРЕНДА ПО ЕГО ИМЕНИ
@@ -187,32 +201,85 @@ INSERT INTO cars.carsmodels ( autobrand_id, autocategory_id, carsmodel_name )
 VALUES ( ( SELECT cars.getAutobrand_id( nameBrand ) ), ( SELECT cars.getAutocategory_id( symbolCategory ) ), carModel );
 $$;
 
+/*
+CREATE VIEW cars.automobiles AS
+    SELECT cr.car_id,
+	   cr.car_vin,
+	   cr.car_date_release,
+	   cr.car_date_gto,
+	   mdl.carsmodel_id,
+	   mdl.autobrand_id,
+	   mdl.autocategory_id,
+	   mdl.carsmodel_name,
+	   mdl.semitrailer_id, --1
+	   mdl.autobrand_name,
+	   mdl.autobrand_icon,
+	   mdl.autocategory_name,
+	   mdl.autocategory_symbol,
+	   mdl.autocategory_icon,
+	   mdl.autocategory_description, --2
+	   mdl.semitrailer_name,
+	   mdl.semitrailer_carrying,
+	   mdl.semitrailer_gabarit_lenth,
+	   mdl.semitrailer_gabarit_width,
+	   mdl.semitrailer_gabarit_height,
+	   mdl.smtsemitrailer_description_semitrailer_id
+    FROM cars.cars AS cr
+    INNER JOIN (
+    -- 1 **********************
+	SELECT
+		cm.carsmodel_id,
+		cm.autobrand_id,
+		cm.autocategory_id,
+		cm.carsmodel_name,
+		cm.semitrailer_id, --1
+		ab.autobrand_name,
+		ab.autobrand_icon,
+		ac.autocategory_name,
+		ac.autocategory_symbol,
+		ac.autocategory_icon,
+		ac.autocategory_description, --2
+		smt.semitrailer_name,
+		smt.semitrailer_carrying,
+		smt.semitrailer_gabarit_lenth,
+		smt.semitrailer_gabarit_width,
+		smt.semitrailer_gabarit_height,
+		smt.smtsemitrailer_description_semitrailer_id
+	FROM cars.carsmodels AS cm
+	INNER JOIN cars.autobrands AS ab ON cm.autobrand_id = ab.autobrand_id
+	INNER JOIN cars.autocategories AS ac ON cm.autocategory_id = ac.autocategory_id
+	INNER JOIN cars.semitrailers AS smt ON cm.semitrailer_id = smt.semitrailer_id
+    -- /1 *********
+    ) AS mdl ON cr.carsmodel_id = mdl.carsmodel_id;
+*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+CREATE VIEW cars.automobiles AS
+SELECT cr.car_id,
+       cr.car_vin,
+       cr.car_date_release,
+       cr.car_date_gto,
+       cm.carsmodel_id,
+       cm.autobrand_id,
+       cm.autocategory_id,
+       cm.carsmodel_name,
+       cm.semitrailer_id, --1
+       ab.autobrand_name,
+       ab.autobrand_icon,
+       ac.autocategory_name,
+       ac.autocategory_symbol,
+       ac.autocategory_icon,
+       ac.autocategory_description, --2
+       smt.semitrailer_name,
+       smt.semitrailer_carrying,
+       smt.semitrailer_gabarit_lenth,
+       smt.semitrailer_gabarit_width,
+       smt.semitrailer_gabarit_height,
+       smt.description_semitrailer_id
+FROM cars.cars AS cr
+INNER JOIN cars.carsmodels AS cm ON cr.carsmodel_id = cm.carsmodel_id
+INNER JOIN cars.autobrands AS ab ON ab.autobrand_id = cm.autobrand_id
+INNER JOIN cars.autocategories AS ac ON ac.autocategory_id = cm.autocategory_id
+INNER JOIN cars.semitrailers AS smt ON smt.semitrailer_id = cm.semitrailer_id
+INNER JOIN cars.description_semitrailers AS dscr
+    ON smt.description_semitrailer_id = dscr.description_semitrailer_id;
 

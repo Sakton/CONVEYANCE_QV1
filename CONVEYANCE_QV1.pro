@@ -20,6 +20,7 @@ SOURCES += \
     Adress/citydialog.cpp \
     Adress/updateadressdialog.cpp \
     Adress/updatecitydialog.cpp \
+    Cars/ElementsCarsView/comboboxbrandnamecar.cpp \
     Cars/addbrandcardialog.cpp \
     Cars/addcarmodeldialog.cpp \
     Cars/commoncardialog.cpp \
@@ -69,6 +70,7 @@ HEADERS += \
 	Adress/citydialog.h \
 	Adress/updateadressdialog.h \
 	Adress/updatecitydialog.h \
+	Cars/ElementsCarsView/comboboxbrandnamecar.h \
 	Cars/addbrandcardialog.h \
 	Cars/addcarmodeldialog.h \
 	Cars/commoncardialog.h \
@@ -154,6 +156,7 @@ DISTFILES += \
 	Dump/dump_conveyance_db.sql \
 	DumpStructureDatabase/InsertConstatsDataInTable.sql \
 	DumpStructureDatabase/currentDump.sql \
+	DumpStructureDatabase/currentDumpSchema.sql \
 	DumpStructureDatabase/testDump.sql \
 	ErrorsFound \
 	IshodnyDanny/Adresses.ods \
