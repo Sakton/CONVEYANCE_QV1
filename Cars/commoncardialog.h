@@ -14,6 +14,9 @@ public:
   explicit CommonCarDialog( QWidget * parent = nullptr );
   ~CommonCarDialog( );
 
+public slots:
+  void slotDescriptionCategoryCar( int indexComboBox );
+
 private:
   Ui::CommonCarDialog * ui;
 };

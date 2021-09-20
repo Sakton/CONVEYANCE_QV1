@@ -20,7 +20,6 @@ SOURCES += \
     Adress/citydialog.cpp \
     Adress/updateadressdialog.cpp \
     Adress/updatecitydialog.cpp \
-    Cars/ElementsCarsView/comboboxbrandnamecar.cpp \
     Cars/addbrandcardialog.cpp \
     Cars/addcarmodeldialog.cpp \
     Cars/commoncardialog.cpp \
@@ -70,7 +69,6 @@ HEADERS += \
 	Adress/citydialog.h \
 	Adress/updateadressdialog.h \
 	Adress/updatecitydialog.h \
-	Cars/ElementsCarsView/comboboxbrandnamecar.h \
 	Cars/addbrandcardialog.h \
 	Cars/addcarmodeldialog.h \
 	Cars/commoncardialog.h \

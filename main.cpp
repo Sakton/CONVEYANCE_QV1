@@ -1,14 +1,12 @@
 
-#include "ElementsWidgets/actionpushbutton.h"
 #include "MainWindow/mainwindow.h"
-#include "Orders/ordertableview.h"
-#include "Orders/orderwidget.h"
 
 #include "DataBase/databasecreator.h"
-#include "Orders/commonorderform.h"
 
-#include "Cars/addbrandcardialog.h"
 #include "Cars/addcarmodeldialog.h"
+#include "Cars/commoncardialog.h"
+#include "ElementsWidgets/comboboxcarbrand.h"
+#include "ElementsWidgets/comboboxcarcategories.h"
 
 #include <QAction>
 #include <QApplication>
@@ -28,7 +26,6 @@ int main( int argc, char * argv[] ) {
 
   QApplication a( argc, argv );
 
-  /* *************************
   setsApp( a );
 
   //  DatabaseCreator dbc;
@@ -37,21 +34,21 @@ int main( int argc, char * argv[] ) {
   //  else
   //    qDebug( ) << "CREATE DB";
 
-  QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
-  splash.show( );
+  // **********
+
+  //  QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
+  //  splash.show( );
+  //  createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
+
+  //  MainWindow w;
+  //  w.show( );
+  //  splash.finish( &w );
+
+  // *****************
+
   createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
 
-  MainWindow w;
-  w.show( );
-  splash.finish( &w );
-*/
-
-  createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
-
-  //  AddBrandCarDialog bc;
-  //  bc.show( );
-
-  AddCarModelDialog md;
+  ComboBoxCarCategories md;
   md.show( );
 
   return a.exec( );
