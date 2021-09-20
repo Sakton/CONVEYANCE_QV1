@@ -20,11 +20,13 @@ SOURCES += \
     Adress/citydialog.cpp \
     Adress/updateadressdialog.cpp \
     Adress/updatecitydialog.cpp \
+
     Cars/addcardialog.cpp \
     Cars/allcarswiewform.cpp \
     Cars/carsqltablemodel.cpp \
     Cars/carsstyleditemdelegate.cpp \
     Cars/tablewiewcars.cpp \
+
     Contract/createcontractdialog.cpp \
     DataBase/databasecreator.cpp \
     ElementsWidgets/actionpushbutton.cpp \
@@ -71,11 +73,13 @@ HEADERS += \
 	Adress/citydialog.h \
 	Adress/updateadressdialog.h \
 	Adress/updatecitydialog.h \
+
 	Cars/addcardialog.h \
 	Cars/allcarswiewform.h \
 	Cars/carsqltablemodel.h \
 	Cars/carsstyleditemdelegate.h \
 	Cars/tablewiewcars.h \
+
 	Constants.h \
 	Contract/createcontractdialog.h \
 	DataBase/databasecreator.h \

@@ -13,6 +13,7 @@ CarCategoriesSqlQueryModel::CarCategoriesSqlQueryModel( QObject * parent ) : QSq
 QVariant CarCategoriesSqlQueryModel::data( const QModelIndex & index, int role ) const {
   if ( !index.isValid( ) )
     return { };
+
   switch ( role ) {
     case Qt::DisplayRole:
       return record( index.row( ) ).value( "autocategory_symbol" ).toString( );
@@ -36,12 +37,15 @@ QVariant CarCategoriesSqlQueryModel::data( const QModelIndex & index, int role )
 ComboBoxCarCategories::ComboBoxCarCategories( QWidget * parent ) : QComboBox( parent ) {
   _model = new CarCategoriesSqlQueryModel;
   setModel( _model );
+
   setIconSize( QSize { 76, 24 } );
 }
 
 void ComboBoxCarCategories::update( ) {
+
   CarCategoriesSqlQueryModel * dMod = _model;
   _model = new CarCategoriesSqlQueryModel;
   dMod->deleteLater( );
   setModel( _model );
+
 }

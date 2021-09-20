@@ -5,9 +5,9 @@
 
 #include <QSqlQueryModel>
 
+
 // ************ MODEL
 enum CarCategoriesRoles { AUTOCATEGORY_ID = Qt::UserRole, AUTOCATEGORY_NAME, AUTOCATEGORY_SYMBOL };
-
 class CarCategoriesSqlQueryModel : public QSqlQueryModel {
   Q_OBJECT
 public:
