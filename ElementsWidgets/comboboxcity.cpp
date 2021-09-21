@@ -24,3 +24,9 @@ void ComboBoxCity::updateCity( ) { getCity( currentIdCountry ); }
 void ComboBoxCity::updateCity( int idCountry ) { getCity( idCountry ); }
 
 int ComboBoxCity::getCurrentIdCountry( ) const { return currentIdCountry; }
+
+ComboBoxCitySqlQueryModel::ComboBoxCitySqlQueryModel( QObject * parent ) : QSqlQueryModel( parent ) {
+  // setQuery();
+}
+
+QVariant ComboBoxCitySqlQueryModel::data( const QModelIndex & index, int role ) const { return QSqlQueryModel::data( index, role ); }

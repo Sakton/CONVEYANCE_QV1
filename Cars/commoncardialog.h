@@ -13,6 +13,7 @@ class CommonCarDialog : public QDialog {
 public:
   explicit CommonCarDialog( QWidget * parent = nullptr );
   ~CommonCarDialog( );
+  void connections( );
 
 public slots:
   void slotDescriptionCategoryCar( int indexComboBox );

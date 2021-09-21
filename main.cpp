@@ -48,7 +48,7 @@ int main( int argc, char * argv[] ) {
 
   createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
 
-  ComboBoxCarCategories md;
+  CommonCarDialog md;
   md.show( );
 
   return a.exec( );

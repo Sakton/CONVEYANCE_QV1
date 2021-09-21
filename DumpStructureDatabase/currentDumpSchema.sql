@@ -763,6 +763,21 @@ ALTER SEQUENCE cars.autocategories_autocategory_id_seq OWNED BY cars.autocategor
 
 
 --
+-- Name: cars; Type: TABLE; Schema: cars; Owner: postgres
+--
+
+CREATE TABLE cars.cars (
+    car_id integer NOT NULL,
+    car_vin character varying(64) NOT NULL,
+    car_date_release date,
+    car_date_gto date,
+    carsmodel_id integer
+);
+
+
+ALTER TABLE cars.cars OWNER TO postgres;
+
+--
 -- Name: carsmodels; Type: TABLE; Schema: cars; Owner: postgres
 --
 
@@ -770,11 +785,100 @@ CREATE TABLE cars.carsmodels (
     carsmodel_id integer NOT NULL,
     autobrand_id integer NOT NULL,
     autocategory_id integer NOT NULL,
-    carsmodel_name character varying(200)
+    carsmodel_name character varying(200),
+    semitrailer_id integer
 );
 
 
 ALTER TABLE cars.carsmodels OWNER TO postgres;
+
+--
+-- Name: description_semitrailers; Type: TABLE; Schema: cars; Owner: postgres
+--
+
+CREATE TABLE cars.description_semitrailers (
+    description_semitrailer_id integer NOT NULL,
+    description_semitrailer_description text
+);
+
+
+ALTER TABLE cars.description_semitrailers OWNER TO postgres;
+
+--
+-- Name: semitrailers; Type: TABLE; Schema: cars; Owner: postgres
+--
+
+CREATE TABLE cars.semitrailers (
+    semitrailer_id integer NOT NULL,
+    semitrailer_name character varying(64),
+    semitrailer_carrying numeric(4,2),
+    semitrailer_gabarit_lenth numeric(4,2),
+    semitrailer_gabarit_width numeric(4,2),
+    semitrailer_gabarit_height numeric(4,2),
+    description_semitrailer_id integer,
+    semitrailer_img character varying(64)
+);
+
+
+ALTER TABLE cars.semitrailers OWNER TO postgres;
+
+--
+-- Name: automobiles; Type: VIEW; Schema: cars; Owner: postgres
+--
+
+CREATE VIEW cars.automobiles AS
+ SELECT cr.car_id,
+    cr.car_vin,
+    cr.car_date_release,
+    cr.car_date_gto,
+    cm.carsmodel_id,
+    cm.autobrand_id,
+    cm.autocategory_id,
+    cm.carsmodel_name,
+    cm.semitrailer_id,
+    ab.autobrand_name,
+    ab.autobrand_icon,
+    ac.autocategory_name,
+    ac.autocategory_symbol,
+    ac.autocategory_icon,
+    ac.autocategory_description,
+    smt.semitrailer_name,
+    smt.semitrailer_carrying,
+    smt.semitrailer_gabarit_lenth,
+    smt.semitrailer_gabarit_width,
+    smt.semitrailer_gabarit_height,
+    smt.description_semitrailer_id
+   FROM (((((cars.cars cr
+     JOIN cars.carsmodels cm ON ((cr.carsmodel_id = cm.carsmodel_id)))
+     JOIN cars.autobrands ab ON ((ab.autobrand_id = cm.autobrand_id)))
+     JOIN cars.autocategories ac ON ((ac.autocategory_id = cm.autocategory_id)))
+     JOIN cars.semitrailers smt ON ((smt.semitrailer_id = cm.semitrailer_id)))
+     JOIN cars.description_semitrailers dscr ON ((smt.description_semitrailer_id = dscr.description_semitrailer_id)));
+
+
+ALTER TABLE cars.automobiles OWNER TO postgres;
+
+--
+-- Name: cars_car_id_seq; Type: SEQUENCE; Schema: cars; Owner: postgres
+--
+
+CREATE SEQUENCE cars.cars_car_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE cars.cars_car_id_seq OWNER TO postgres;
+
+--
+-- Name: cars_car_id_seq; Type: SEQUENCE OWNED BY; Schema: cars; Owner: postgres
+--
+
+ALTER SEQUENCE cars.cars_car_id_seq OWNED BY cars.cars.car_id;
+
 
 --
 -- Name: carsmodels_carsmodel_id_seq; Type: SEQUENCE; Schema: cars; Owner: postgres
@@ -797,18 +901,6 @@ ALTER TABLE cars.carsmodels_carsmodel_id_seq OWNER TO postgres;
 
 ALTER SEQUENCE cars.carsmodels_carsmodel_id_seq OWNED BY cars.carsmodels.carsmodel_id;
 
-
---
--- Name: description_semitrailers; Type: TABLE; Schema: cars; Owner: postgres
---
-
-CREATE TABLE cars.description_semitrailers (
-    description_semitrailer_id integer NOT NULL,
-    description_semitrailer_description text
-);
-
-
-ALTER TABLE cars.description_semitrailers OWNER TO postgres;
 
 --
 -- Name: description_semitrailers_description_semitrailer_id_seq; Type: SEQUENCE; Schema: cars; Owner: postgres
@@ -869,23 +961,6 @@ ALTER SEQUENCE cars.paletypes_paletype_id_seq OWNED BY cars.paletypes.paletype_i
 
 
 --
--- Name: semitrailers; Type: TABLE; Schema: cars; Owner: postgres
---
-
-CREATE TABLE cars.semitrailers (
-    semitrailer_id integer NOT NULL,
-    semitrailer_name character varying(64),
-    semitrailer_carrying numeric(4,2),
-    gabarit_lenth numeric(4,2),
-    gabarit_width numeric(4,2),
-    gabarit_height numeric(4,2),
-    description_semitrailer_id integer
-);
-
-
-ALTER TABLE cars.semitrailers OWNER TO postgres;
-
---
 -- Name: semitrailers_semitrailer_id_seq; Type: SEQUENCE; Schema: cars; Owner: postgres
 --
 
@@ -906,6 +981,25 @@ ALTER TABLE cars.semitrailers_semitrailer_id_seq OWNER TO postgres;
 
 ALTER SEQUENCE cars.semitrailers_semitrailer_id_seq OWNED BY cars.semitrailers.semitrailer_id;
 
+
+--
+-- Name: semitrailers_view; Type: VIEW; Schema: cars; Owner: postgres
+--
+
+CREATE VIEW cars.semitrailers_view AS
+ SELECT st.semitrailer_id AS id,
+    st.semitrailer_name AS name,
+    st.semitrailer_carrying AS carrying,
+    st.semitrailer_gabarit_lenth AS lenth,
+    st.semitrailer_gabarit_width AS width,
+    st.semitrailer_gabarit_height AS height,
+    st.semitrailer_img AS img,
+    ds.description_semitrailer_description AS description
+   FROM (cars.semitrailers st
+     JOIN cars.description_semitrailers ds ON ((st.description_semitrailer_id = ds.description_semitrailer_id)));
+
+
+ALTER TABLE cars.semitrailers_view OWNER TO postgres;
 
 --
 -- Name: documents; Type: TABLE; Schema: document; Owner: postgres
@@ -1364,6 +1458,13 @@ ALTER TABLE ONLY cars.autocategories ALTER COLUMN autocategory_id SET DEFAULT ne
 
 
 --
+-- Name: cars car_id; Type: DEFAULT; Schema: cars; Owner: postgres
+--
+
+ALTER TABLE ONLY cars.cars ALTER COLUMN car_id SET DEFAULT nextval('cars.cars_car_id_seq'::regclass);
+
+
+--
 -- Name: carsmodels carsmodel_id; Type: DEFAULT; Schema: cars; Owner: postgres
 --
 
@@ -1548,6 +1649,22 @@ ALTER TABLE ONLY cars.autobrands
 
 ALTER TABLE ONLY cars.autocategories
     ADD CONSTRAINT autocategories_pkey PRIMARY KEY (autocategory_id);
+
+
+--
+-- Name: cars cars_car_vin_key; Type: CONSTRAINT; Schema: cars; Owner: postgres
+--
+
+ALTER TABLE ONLY cars.cars
+    ADD CONSTRAINT cars_car_vin_key UNIQUE (car_vin);
+
+
+--
+-- Name: cars cars_pkey; Type: CONSTRAINT; Schema: cars; Owner: postgres
+--
+
+ALTER TABLE ONLY cars.cars
+    ADD CONSTRAINT cars_pkey PRIMARY KEY (car_id);
 
 
 --
@@ -1743,6 +1860,14 @@ ALTER TABLE ONLY adres."сities"
 
 
 --
+-- Name: cars cars_carsmodel_id_fkey; Type: FK CONSTRAINT; Schema: cars; Owner: postgres
+--
+
+ALTER TABLE ONLY cars.cars
+    ADD CONSTRAINT cars_carsmodel_id_fkey FOREIGN KEY (carsmodel_id) REFERENCES cars.carsmodels(carsmodel_id) ON UPDATE CASCADE ON DELETE SET NULL;
+
+
+--
 -- Name: carsmodels carsmodels_autobrand_id_fkey; Type: FK CONSTRAINT; Schema: cars; Owner: postgres
 --
 
@@ -1756,14 +1881,6 @@ ALTER TABLE ONLY cars.carsmodels
 
 ALTER TABLE ONLY cars.carsmodels
     ADD CONSTRAINT carsmodels_autocategory_id_fkey FOREIGN KEY (autocategory_id) REFERENCES cars.autocategories(autocategory_id);
-
-
---
--- Name: semitrailers semitrailers_description_semitrailer_id_fkey; Type: FK CONSTRAINT; Schema: cars; Owner: postgres
---
-
-ALTER TABLE ONLY cars.semitrailers
-    ADD CONSTRAINT semitrailers_description_semitrailer_id_fkey FOREIGN KEY (description_semitrailer_id) REFERENCES cars.description_semitrailers(description_semitrailer_id) ON UPDATE CASCADE ON DELETE SET NULL;
 
 
 --

@@ -20,6 +20,8 @@ SOURCES += \
     Adress/citydialog.cpp \
     Adress/updateadressdialog.cpp \
     Adress/updatecitydialog.cpp \
+    Cars/ElementsCarsView/comboboxsemitrailers.cpp \
+    Cars/ElementsCarsView/semitrailersview.cpp \
     Cars/addbrandcardialog.cpp \
     Cars/addcarmodeldialog.cpp \
     Cars/commoncardialog.cpp \
@@ -69,6 +71,8 @@ HEADERS += \
 	Adress/citydialog.h \
 	Adress/updateadressdialog.h \
 	Adress/updatecitydialog.h \
+	Cars/ElementsCarsView/comboboxsemitrailers.h \
+	Cars/ElementsCarsView/semitrailersview.h \
 	Cars/addbrandcardialog.h \
 	Cars/addcarmodeldialog.h \
 	Cars/commoncardialog.h \
@@ -114,6 +118,7 @@ FORMS += \
 	Adress/citydialog.ui \
 	Adress/updateadressdialog.ui \
 	Adress/updatecitydialog.ui \
+	Cars/ElementsCarsView/semitrailersview.ui \
 	Cars/addbrandcardialog.ui \
 	Cars/addcarmodeldialog.ui \
 	Cars/commoncardialog.ui \
@@ -264,3 +269,4 @@ INCLUDEPATH += $$PWD/ElementsWidgets
 INCLUDEPATH += $$PWD/Adress
 INCLUDEPATH += $$PWD/Orders
 INCLUDEPATH += $$PWD/MainWindow
+INCLUDEPATH += $$PWD/Cars/ElementsCarsView

@@ -1,11 +1,30 @@
 #include "comboboxcarmodel.h"
 #include <QSqlError>
 #include <QSqlQuery>
+#include <QSqlRecord>
 
-ComboBoxCarModel::ComboBoxCarModel( QWidget *parent ) : QComboBox( parent ) {
+// ******** MODEL
+
+CarModelSqlQueryModel::CarModelSqlQueryModel( QObject * parent ) : QSqlQueryModel( parent ) {
+  // setQuery( "SELECT carsmodel_id, autobrand_id, " );
 }
 
-void ComboBoxCarModel::init( ) { QString qs = QString( "" ); }
+QVariant CarModelSqlQueryModel::data( const QModelIndex & index, int role ) const {
+  if ( !index.isValid( ) )
+    return { };
+  switch ( role ) {
+  case Qt::DisplayRole:
+    return record( index.row( ) ).value( "" ).toString( );
+  }
+
+  return QSqlQueryModel::data( index, role );
+}
+
+// ******** COMBOBOX
+
+ComboBoxCarModel::ComboBoxCarModel( QWidget * parent ) : QComboBox( parent ) {}
+
+void ComboBoxCarModel::init( ) {}
 
 void ComboBoxCarModel::update( ) {
   clear( );

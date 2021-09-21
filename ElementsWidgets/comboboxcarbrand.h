@@ -4,6 +4,8 @@
 #include <QComboBox>
 #include <QSqlQueryModel>
 
+// ********** MODEL
+
 class CarBrandSqlQueryModel : public QSqlQueryModel {
 public:
   explicit CarBrandSqlQueryModel( QObject * parent = nullptr );
@@ -13,10 +15,12 @@ public:
   QVariant data( const QModelIndex & index, int role ) const override;
 };
 
+// *********** COMBOBOX
+
 class ComboBoxCarBrand : public QComboBox {
   Q_OBJECT
 public:
-  ComboBoxCarBrand( QWidget *parent = nullptr );
+  explicit ComboBoxCarBrand( QWidget * parent = nullptr );
   void init( );
   void update( );
 

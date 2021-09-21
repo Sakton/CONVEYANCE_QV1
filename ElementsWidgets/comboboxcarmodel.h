@@ -3,6 +3,20 @@
 
 #include <QComboBox>
 
+#include <QSqlQueryModel>
+
+// ************ MODEL
+
+class CarModelSqlQueryModel : public QSqlQueryModel {
+public:
+  explicit CarModelSqlQueryModel( QObject * parent = nullptr );
+  // QAbstractItemModel interface
+public:
+  QVariant data( const QModelIndex & index, int role ) const override;
+};
+
+// ************ COMBOBOX
+
 class ComboBoxCarModel : public QComboBox {
   Q_OBJECT
 public:
