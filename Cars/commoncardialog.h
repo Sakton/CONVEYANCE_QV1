@@ -15,7 +15,8 @@ public:
   ~CommonCarDialog( );
 
 public slots:
-  void slotDescriptionCategoryCar( int indexComboBox );
+  void slotDescriptionCategoryCar( );
+  void slotClickedButtonAddBrandCar( );
 
 private:
   Ui::CommonCarDialog * ui;
