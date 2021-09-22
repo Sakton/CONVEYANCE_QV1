@@ -6,16 +6,50 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>721</width>
-    <height>321</height>
+    <width>403</width>
+    <height>270</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>ДОБАВИТЬ АВТОМОБИЛЬ</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_4">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetFixedSize</enum>
+   </property>
+   <item row="0" column="1">
+    <widget class="QGroupBox" name="groupBoxSemitrailers">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="title">
+      <string>Прицеп</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <widget class="SemitrailersView" name="widget" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
    <item row="0" column="0">
-    <widget class="QGroupBox" name="groupBox">
+    <widget class="QGroupBox" name="groupBoxAuto">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>
@@ -28,19 +62,10 @@
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="0" column="0">
        <layout class="QGridLayout" name="gridLayout">
-        <item row="4" column="1">
-         <widget class="QDateEdit" name="dateEdit"/>
-        </item>
-        <item row="3" column="1">
-         <widget class="QLineEdit" name="lineEdit"/>
-        </item>
-        <item row="1" column="1">
-         <widget class="ComboBoxCarCategories" name="comboBoxCarCategories">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Категория</string>
           </property>
          </widget>
         </item>
@@ -65,24 +90,40 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="1">
-         <widget class="ComboBoxCarBrand" name="comboBoxCarBrand">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>TextLabel</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="0" colspan="2">
-         <widget class="QLabel" name="labelCategoryName">
+        <item row="0" column="1">
+         <widget class="ComboBoxCarBrand" name="comboBoxCarBrand"/>
+        </item>
+        <item row="0" column="2">
+         <widget class="QPushButton" name="pushButtonAddCarBrand">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="maximumSize">
+           <size>
+            <width>30</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>add</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1" colspan="2">
+         <widget class="ComboBoxCarCategories" name="comboBoxCarCategories"/>
+        </item>
+        <item row="2" column="0" colspan="3">
+         <widget class="QLabel" name="labelCategoryName">
           <property name="font">
            <font>
             <pointsize>12</pointsize>
@@ -105,21 +146,13 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLabel" name="label_3">
-          <property name="text">
-           <string>Категория</string>
-          </property>
-         </widget>
+        <item row="3" column="1" colspan="2">
+         <widget class="QLineEdit" name="lineEdit"/>
         </item>
-        <item row="5" column="0">
-         <widget class="QLabel" name="label_5">
-          <property name="text">
-           <string>TextLabel</string>
-          </property>
-         </widget>
+        <item row="4" column="1" colspan="2">
+         <widget class="QDateEdit" name="dateEdit"/>
         </item>
-        <item row="5" column="1">
+        <item row="5" column="1" colspan="2">
          <widget class="QDateEdit" name="dateEdit_2"/>
         </item>
        </layout>
@@ -127,30 +160,8 @@
      </layout>
     </widget>
    </item>
-   <item row="0" column="1">
-    <widget class="QGroupBox" name="groupBox_2">
-     <property name="title">
-      <string>Прицеп</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_3">
-      <item row="0" column="0">
-       <widget class="SemitrailersView" name="widget" native="true">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="1" column="1">
+   <item row="1" column="0" colspan="2">
     <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
      <property name="standardButtons">
       <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
@@ -179,42 +190,10 @@
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>CommonCarDialog</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>CommonCarDialog</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>comboBoxCarCategories</sender>
    <signal>currentIndexChanged(int)</signal>
    <receiver>CommonCarDialog</receiver>
-   <slot>slotDescriptionCategoryCar(int)</slot>
+   <slot>slotDescriptionCategoryCar()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>225</x>
@@ -226,8 +205,25 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButtonAddCarBrand</sender>
+   <signal>clicked()</signal>
+   <receiver>CommonCarDialog</receiver>
+   <slot>slotClickedButtonAddBrandCarr()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>177</x>
+     <y>52</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>201</x>
+     <y>134</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
-  <slot>slotDescriptionCategoryCar(int)</slot>
+  <slot>slotDescriptionCategoryCar()</slot>
+  <slot>slotClickedButtonAddBrandCarr()</slot>
  </slots>
 </ui>

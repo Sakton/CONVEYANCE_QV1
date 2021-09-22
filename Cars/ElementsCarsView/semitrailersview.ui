@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>405</width>
-    <height>277</height>
+    <width>351</width>
+    <height>239</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,39 +25,92 @@
      <layout class="QGridLayout" name="gridLayout_3">
       <item row="0" column="1">
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="5" column="0">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item row="4" column="0">
          <widget class="QLabel" name="label_9">
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
           <property name="text">
            <string>Ширина</string>
           </property>
          </widget>
         </item>
-        <item row="6" column="1">
-         <widget class="QLabel" name="labelHeight">
+        <item row="4" column="1">
+         <widget class="QLabel" name="labelWidth">
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
           <property name="text">
            <string>TextLabel</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="0" colspan="2">
-         <widget class="QLabel" name="labelName">
+        <item row="5" column="1">
+         <widget class="QLabel" name="labelHeight">
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
           <property name="text">
-           <string>Наименование</string>
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="labelCarrying">
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="label_7">
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="midLineWidth">
+           <number>0</number>
+          </property>
+          <property name="text">
+           <string>Длина</string>
           </property>
          </widget>
         </item>
         <item row="0" column="0" colspan="2">
-         <widget class="ComboBoxSemitrailers" name="comboBoxSemitrailerName"/>
-        </item>
-        <item row="5" column="1">
-         <widget class="QLabel" name="labelWidth">
-          <property name="text">
-           <string>TextLabel</string>
+         <widget class="ComboBoxSemitrailers" name="comboBoxSemitrailerName">
+          <property name="frame">
+           <bool>true</bool>
           </property>
          </widget>
         </item>
-        <item row="2" column="0" colspan="2">
+        <item row="1" column="0" colspan="2">
          <widget class="QLabel" name="labelDescription">
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
           <property name="text">
            <string>Описание</string>
           </property>
@@ -69,48 +122,58 @@
           </property>
          </widget>
         </item>
-        <item row="3" column="0">
+        <item row="2" column="0">
          <widget class="QLabel" name="labelCarying">
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
           <property name="text">
            <string>Объем</string>
           </property>
          </widget>
         </item>
         <item row="3" column="1">
-         <widget class="QLabel" name="labelCarrying">
-          <property name="text">
-           <string>TextLabel</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0">
-         <widget class="QLabel" name="label_11">
-          <property name="text">
-           <string>Высота</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_7">
-          <property name="text">
-           <string>Длина</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
          <widget class="QLabel" name="labelLenth">
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
           <property name="text">
            <string>TextLabel</string>
           </property>
          </widget>
         </item>
-        <item row="7" column="0" colspan="2">
+        <item row="6" column="0" colspan="2">
          <widget class="QLabel" name="labelimg">
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
           <property name="text">
            <string>IMG</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0">
+         <widget class="QLabel" name="label_11">
+          <property name="frameShape">
+           <enum>QFrame::Box</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <property name="text">
+           <string>Высота</string>
           </property>
          </widget>
         </item>

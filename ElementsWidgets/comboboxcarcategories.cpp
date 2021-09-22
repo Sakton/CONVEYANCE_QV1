@@ -25,6 +25,8 @@ QVariant CarCategoriesSqlQueryModel::data( const QModelIndex & index, int role )
       return record( index.row( ) ).value( "autocategory_id" );
     case AUTOCATEGORY_NAME:
       return record( index.row( ) ).value( "autocategory_name" );
+    case AUTOCATEGORY_SYMBOL:
+      return record( index.row( ) ).value( "autocategory_symbol" );
   }
   return QSqlQueryModel::data( index, role );
 }

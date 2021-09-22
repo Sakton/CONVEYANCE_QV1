@@ -4,7 +4,6 @@
 #include <QSqlQueryModel>
 #include <QWidget>
 
-// ******** VIEW
 namespace Ui {
 class SemitrailersView;
 }
@@ -15,6 +14,7 @@ class SemitrailersView : public QWidget {
 public:
   explicit SemitrailersView( QWidget * parent = nullptr );
   ~SemitrailersView( );
+  int currentId( ) const;
 
 private slots:
   void slotCurrentIndexChanged( );

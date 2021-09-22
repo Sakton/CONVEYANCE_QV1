@@ -16,7 +16,8 @@ public:
   void connections( );
 
 public slots:
-  void slotDescriptionCategoryCar( int indexComboBox );
+  void slotDescriptionCategoryCar( );
+  void slotClickedButtonAddBrandCar( );
 
 private:
   Ui::CommonCarDialog * ui;

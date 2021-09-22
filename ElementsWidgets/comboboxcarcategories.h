@@ -6,16 +6,12 @@
 #include <QSqlQueryModel>
 
 // ************ MODEL
+enum CarCategoriesRoles { AUTOCATEGORY_ID = Qt::UserRole, AUTOCATEGORY_NAME, AUTOCATEGORY_SYMBOL };
 
 class CarCategoriesSqlQueryModel : public QSqlQueryModel {
   Q_OBJECT
 public:
-  enum CarCategoriesRoles { AUTOCATEGORY_ID = Qt::UserRole, AUTOCATEGORY_NAME };
-
   explicit CarCategoriesSqlQueryModel( QObject * parent = nullptr );
-
-  // QAbstractItemModel interface
-public:
   QVariant data( const QModelIndex & index, int role ) const override;
 };
 
