@@ -20,13 +20,11 @@ SOURCES += \
     Adress/citydialog.cpp \
     Adress/updateadressdialog.cpp \
     Adress/updatecitydialog.cpp \
-
-    Cars/addcardialog.cpp \
-    Cars/allcarswiewform.cpp \
-    Cars/carsqltablemodel.cpp \
-    Cars/carsstyleditemdelegate.cpp \
-    Cars/tablewiewcars.cpp \
-
+    Cars/ElementsCarsView/comboboxsemitrailers.cpp \
+    Cars/ElementsCarsView/semitrailersview.cpp \
+    Cars/addbrandcardialog.cpp \
+    Cars/addcarmodeldialog.cpp \
+    Cars/commoncardialog.cpp \
     Contract/createcontractdialog.cpp \
     DataBase/databasecreator.cpp \
     ElementsWidgets/actionpushbutton.cpp \
@@ -56,6 +54,7 @@ SOURCES += \
     Orders/ordersqltablemodel.cpp \
     Orders/ordertableview.cpp \
     Orders/orderwidget.cpp \
+    Orders/testform.cpp \
     Orders/updateorderdialog.cpp \
     Shippers/addshipperdialog.cpp \
     Wagons/addpullingdialog.cpp \
@@ -73,13 +72,11 @@ HEADERS += \
 	Adress/citydialog.h \
 	Adress/updateadressdialog.h \
 	Adress/updatecitydialog.h \
-
-	Cars/addcardialog.h \
-	Cars/allcarswiewform.h \
-	Cars/carsqltablemodel.h \
-	Cars/carsstyleditemdelegate.h \
-	Cars/tablewiewcars.h \
-
+	Cars/ElementsCarsView/comboboxsemitrailers.h \
+	Cars/ElementsCarsView/semitrailersview.h \
+	Cars/addbrandcardialog.h \
+	Cars/addcarmodeldialog.h \
+	Cars/commoncardialog.h \
 	Constants.h \
 	Contract/createcontractdialog.h \
 	DataBase/databasecreator.h \
@@ -110,6 +107,7 @@ HEADERS += \
 	Orders/ordersqltablemodel.h \
 	Orders/ordertableview.h \
 	Orders/orderwidget.h \
+	Orders/testform.h \
 	Orders/updateorderdialog.h \
 	Shippers/addshipperdialog.h \
 	Wagons/addpullingdialog.h
@@ -122,8 +120,10 @@ FORMS += \
 	Adress/citydialog.ui \
 	Adress/updateadressdialog.ui \
 	Adress/updatecitydialog.ui \
-	Cars/addcardialog.ui \
-	Cars/allcarswiewform.ui \
+	Cars/ElementsCarsView/semitrailersview.ui \
+	Cars/addbrandcardialog.ui \
+	Cars/addcarmodeldialog.ui \
+	Cars/commoncardialog.ui \
 	Contract/createcontractdialog.ui \
 	Emploee/addemploeedialog.ui \
 	Emploee/addfunctionemploeedialog.ui \
@@ -132,6 +132,7 @@ FORMS += \
 	MyTests/testqsqltableformform.ui \
 	Orders/commonorderform.ui \
 	Orders/orderwidget.ui \
+	Orders/testform.ui \
 	Shippers/addshipperdialog.ui \
 	Wagons/addpullingdialog.ui
 
@@ -156,7 +157,6 @@ DISTFILES += \
     DBTables/Routes.sql \
     DBTables/Shippers.sql \
     DBTables/VATs.sql \
-	DBTables/Wagons---.sql \
 	DBTables/Wagons.sql \
 	Dump/dump.sql \
 	Dump/dump1.sql \

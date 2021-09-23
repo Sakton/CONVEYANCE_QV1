@@ -14,6 +14,8 @@ public:
   explicit CommonCarDialog( QWidget * parent = nullptr );
   ~CommonCarDialog( );
 
+  void accept( ) override;
+
 public slots:
   void slotDescriptionCategoryCar( );
   void slotClickedButtonAddBrandCar( );
