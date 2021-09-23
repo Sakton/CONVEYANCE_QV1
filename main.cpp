@@ -1,6 +1,8 @@
 
 #include "MainWindow/mainwindow.h"
 
+#include "Cars/addbrandcardialog.h"
+#include "Cars/addcarmodeldialog.h"
 #include "DataBase/databasecreator.h"
 
 #include "Cars/addcarmodeldialog.h"
@@ -36,20 +38,21 @@ int main( int argc, char * argv[] ) {
 
   // **********
 
-  //  QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
-  //  splash.show( );
-  //  createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
+  QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
+  splash.show( );
+  createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
 
-  //  MainWindow w;
-  //  w.show( );
-  //  splash.finish( &w );
+  MainWindow w;
+  w.show( );
+  splash.finish( &w );
 
   // *****************
 
-  createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
+  //  createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
 
-  CommonCarDialog md;
-  md.show( );
+  //  // CommonCarDialog md;
+  //  AddCarModelDialog md;
+  //  md.show( );
 
   return a.exec( );
 }

@@ -7,6 +7,8 @@
 
 // ************ MODEL
 
+enum CarModelRole {};
+
 class CarModelSqlQueryModel : public QSqlQueryModel {
 public:
   explicit CarModelSqlQueryModel( QObject * parent = nullptr );

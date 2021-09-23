@@ -6,7 +6,7 @@
 // ******** MODEL
 
 CarModelSqlQueryModel::CarModelSqlQueryModel( QObject * parent ) : QSqlQueryModel( parent ) {
-  // setQuery( "SELECT carsmodel_id, autobrand_id, " );
+  
 }
 
 QVariant CarModelSqlQueryModel::data( const QModelIndex & index, int role ) const {

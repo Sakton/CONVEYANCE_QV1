@@ -57,6 +57,7 @@ SOURCES += \
     Orders/testform.cpp \
     Orders/updateorderdialog.cpp \
     Shippers/addshipperdialog.cpp \
+    Wagons/addpullingdialog.cpp \
     main.cpp
 
 HEADERS += \
@@ -108,7 +109,8 @@ HEADERS += \
 	Orders/orderwidget.h \
 	Orders/testform.h \
 	Orders/updateorderdialog.h \
-	Shippers/addshipperdialog.h
+	Shippers/addshipperdialog.h \
+	Wagons/addpullingdialog.h
 
 FORMS += \
 	Adress/addadress.ui \
@@ -131,7 +133,8 @@ FORMS += \
 	Orders/commonorderform.ui \
 	Orders/orderwidget.ui \
 	Orders/testform.ui \
-	Shippers/addshipperdialog.ui
+	Shippers/addshipperdialog.ui \
+	Wagons/addpullingdialog.ui
 
 TRANSLATIONS += \
     CONVEYANCE_QV1_pl_PL.ts
@@ -144,7 +147,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
 	.gitignore \
     DBTables/Adress.sql \
-    DBTables/Cars.sql \
+	DBTables/CarsOld---.sql \
     DBTables/Contracts.sql \
     DBTables/CreateDb.sql \
 	DBTables/Documents.sql \
@@ -154,6 +157,7 @@ DISTFILES += \
     DBTables/Routes.sql \
     DBTables/Shippers.sql \
     DBTables/VATs.sql \
+	DBTables/Wagons.sql \
 	Dump/dump.sql \
 	Dump/dump1.sql \
 	Dump/dump_conveyance_db.sql \

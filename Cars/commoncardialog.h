@@ -15,6 +15,8 @@ public:
   ~CommonCarDialog( );
   void connections( );
 
+  void accept( ) override;
+
 public slots:
   void slotDescriptionCategoryCar( );
   void slotClickedButtonAddBrandCar( );

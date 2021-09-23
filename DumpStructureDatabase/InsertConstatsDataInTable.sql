@@ -137,3 +137,27 @@ VALUES ( 'Еврофура 82 м³', 24, 13.6, 2.45, 2.45, 1, 'eurofura-82-kuba.
        ( 'Джамбо фура (JUMBO)', 24, 13.8, 2.45, 3, 2, 'jumbo-fura-96-kubov.png' ),
        ( 'Мега фура (MEGA)', 25, 13.6, 2.45, 3, 4, 'mega-fura-100-kubov.png' ),
        ( 'Сцепка / Автопоезд', 25, 15.1, 2.45, 3, 5, 'scepka-mega-120-kubov.png' );
+
+
+-- WAGONS *****************
+INSERT INTO wagons.description_semitrailers( description_semitrailer_description )
+VALUES ('Стандартный полуприцеп с ровным полом.'),
+       ('Конструкция полуприцепа с ломаным полом, уменьшенный диаметр колёс.'),
+       ('Стандартный полуприцеп увеличенной высоты с ровным полом.'),
+       ('Автопоезд - грузовик с прицепом увеличенной высоты и уменьшенным диаметром колёс.'),
+       ('Автопоезд - грузовик с прицепом.');
+
+INSERT INTO wagons.semitrailers ( semitrailer_name,
+				semitrailer_carrying,
+				semitrailer_gabarit_lenth,
+				semitrailer_gabarit_width,
+				semitrailer_gabarit_height,
+				description_semitrailer_id,
+				semitrailer_img
+				)
+VALUES ( 'Еврофура 82 м³', 24, 13.6, 2.45, 2.45, 1, 'eurofura-82-kuba.png' ),
+       ( 'Еврофура 86 м³', 24, 13.6, 2.45, 2.60, 1, 'eurofura-86-kubov.png' ),
+       ( 'Еврофура 90 м³', 24, 13.6, 2.45, 2.70, 1, 'eurofura-90-kubov.png' ),
+       ( 'Джамбо фура (JUMBO)', 24, 13.8, 2.45, 3, 2, 'jumbo-fura-96-kubov.png' ),
+       ( 'Мега фура (MEGA)', 25, 13.6, 2.45, 3, 4, 'mega-fura-100-kubov.png' ),
+       ( 'Сцепка / Автопоезд', 25, 15.1, 2.45, 3, 5, 'scepka-mega-120-kubov.png' );

@@ -58,6 +58,7 @@ void AddBrandCarDialog::accept( ) {
     }
   }
   insertDb( nameBrand, fileNameIcon );
+
   QDialog::accept( );
 }
 
