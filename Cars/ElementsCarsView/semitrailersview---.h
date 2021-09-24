@@ -1,5 +1,5 @@
-#ifndef SEMITRAILERSVIEW_H
-#define SEMITRAILERSVIEW_H
+#ifndef SEMITRAILERSVIEW //---_H
+#define SEMITRAILERSVIEW //---_H
 
 #include <QSqlQueryModel>
 #include <QWidget>
@@ -23,4 +23,4 @@ private:
   Ui::SemitrailersView * ui;
 };
 
-#endif // SEMITRAILERSVIEW_H
+#endif // SEMITRAILERSVIEW---_H

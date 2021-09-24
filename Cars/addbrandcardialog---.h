@@ -1,5 +1,5 @@
-#ifndef ADDBRANDCARDIALOG_H
-#define ADDBRANDCARDIALOG_H
+#ifndef ADDBRANDCARDIALOG //---_H
+#define ADDBRANDCARDIALOG //---_H
 
 #include <QDialog>
 
@@ -28,4 +28,4 @@ private:
   Ui::AddBrandCarDialog *ui;
 };
 
-#endif // ADDBRANDCARDIALOG_H
+#endif // ADDBRANDCARDIALOG---_H

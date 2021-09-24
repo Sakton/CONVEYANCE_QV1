@@ -1,4 +1,4 @@
-#include "semitrailersview.h"
+#include "semitrailersview---.h"
 #include "ui_semitrailersview.h"
 
 SemitrailersView::SemitrailersView( QWidget * parent ) : QWidget( parent ), ui( new Ui::SemitrailersView ) {

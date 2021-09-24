@@ -1,5 +1,5 @@
-#ifndef COMBOBOXSEMITRAILERS_H
-#define COMBOBOXSEMITRAILERS_H
+#ifndef COMBOBOXSEMITRAILERS //---_H
+#define COMBOBOXSEMITRAILERS // ---_H
 
 #include <QComboBox>
 #include <QSqlQueryModel>
@@ -25,4 +25,4 @@ private:
   ComboBoxSemitrailersSqlQueryModel * _model;
 };
 
-#endif // COMBOBOXSEMITRAILERS_H
+#endif // COMBOBOXSEMITRAILERS---_H
