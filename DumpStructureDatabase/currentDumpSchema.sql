@@ -1287,46 +1287,6 @@ ALTER SEQUENCE payment.payments_payment_id_seq OWNED BY payment.payments.payment
 
 
 --
--- Name: autos; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.autos (
-    auto_id integer NOT NULL,
-    auto_brand character varying(64),
-    auto_lenthtrailer numeric(4,2),
-    auto_widthtrailer numeric(4,2),
-    auto_heighttrailer numeric(4,2),
-    auto_vin character varying(17),
-    auto_datawork date,
-    auto_datagto date
-);
-
-
-ALTER TABLE public.autos OWNER TO postgres;
-
---
--- Name: autos_auto_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.autos_auto_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.autos_auto_id_seq OWNER TO postgres;
-
---
--- Name: autos_auto_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.autos_auto_id_seq OWNED BY public.autos.auto_id;
-
-
---
 -- Name: testadressview; Type: MATERIALIZED VIEW; Schema: public; Owner: postgres
 --
 
@@ -1465,6 +1425,46 @@ ALTER SEQUENCE vat.vats_vat_id_seq OWNED BY vat.vats.vat_id;
 
 
 --
+-- Name: autos; Type: TABLE; Schema: wagons; Owner: postgres
+--
+
+CREATE TABLE wagons.autos (
+    auto_id integer NOT NULL,
+    auto_brand character varying(64),
+    auto_lenthtrailer numeric(4,2),
+    auto_widthtrailer numeric(4,2),
+    auto_heighttrailer numeric(4,2),
+    auto_vin character varying(17),
+    auto_datawork date,
+    auto_datagto date
+);
+
+
+ALTER TABLE wagons.autos OWNER TO postgres;
+
+--
+-- Name: autos_auto_id_seq; Type: SEQUENCE; Schema: wagons; Owner: postgres
+--
+
+CREATE SEQUENCE wagons.autos_auto_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE wagons.autos_auto_id_seq OWNER TO postgres;
+
+--
+-- Name: autos_auto_id_seq; Type: SEQUENCE OWNED BY; Schema: wagons; Owner: postgres
+--
+
+ALTER SEQUENCE wagons.autos_auto_id_seq OWNED BY wagons.autos.auto_id;
+
+
+--
 -- Name: adress adres_id; Type: DEFAULT; Schema: adres; Owner: postgres
 --
 
@@ -1577,13 +1577,6 @@ ALTER TABLE ONLY payment.payments ALTER COLUMN payment_id SET DEFAULT nextval('p
 
 
 --
--- Name: autos auto_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.autos ALTER COLUMN auto_id SET DEFAULT nextval('public.autos_auto_id_seq'::regclass);
-
-
---
 -- Name: routes route_id; Type: DEFAULT; Schema: route; Owner: postgres
 --
 
@@ -1609,6 +1602,13 @@ ALTER TABLE ONLY vat.vatnames ALTER COLUMN vatname_id SET DEFAULT nextval('vat.v
 --
 
 ALTER TABLE ONLY vat.vats ALTER COLUMN vat_id SET DEFAULT nextval('vat.vats_vat_id_seq'::regclass);
+
+
+--
+-- Name: autos auto_id; Type: DEFAULT; Schema: wagons; Owner: postgres
+--
+
+ALTER TABLE ONLY wagons.autos ALTER COLUMN auto_id SET DEFAULT nextval('wagons.autos_auto_id_seq'::regclass);
 
 
 --
@@ -1820,14 +1820,6 @@ ALTER TABLE ONLY payment.payments
 
 
 --
--- Name: autos autos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.autos
-    ADD CONSTRAINT autos_pkey PRIMARY KEY (auto_id);
-
-
---
 -- Name: routes routes_pkey; Type: CONSTRAINT; Schema: route; Owner: postgres
 --
 
@@ -1881,6 +1873,22 @@ ALTER TABLE ONLY vat.vats
 
 ALTER TABLE ONLY vat.vats
     ADD CONSTRAINT vats_vat_stavka_key UNIQUE (vat_stavka);
+
+
+--
+-- Name: autos autos_auto_vin_key; Type: CONSTRAINT; Schema: wagons; Owner: postgres
+--
+
+ALTER TABLE ONLY wagons.autos
+    ADD CONSTRAINT autos_auto_vin_key UNIQUE (auto_vin);
+
+
+--
+-- Name: autos autos_pkey; Type: CONSTRAINT; Schema: wagons; Owner: postgres
+--
+
+ALTER TABLE ONLY wagons.autos
+    ADD CONSTRAINT autos_pkey PRIMARY KEY (auto_id);
 
 
 --

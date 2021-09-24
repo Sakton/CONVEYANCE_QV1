@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "Cars/allcarswiewform.h"
 #include "Constants.h"
 #include "DataBase/databasecreator.h"
 #include "Orders/orderwidget.h"
@@ -15,9 +16,7 @@ MainWindow::MainWindow( QWidget * parent ) : QMainWindow( parent ), ui( new Ui::
   ui->tabWidget->slotClosetab( 0 );
   createDatabase( );
   readSettings( );
-  // createToolBar( );
   createDatabaseConnection( );
-  createConnections( );
 }
 
 MainWindow::~MainWindow( ) {
@@ -35,19 +34,12 @@ void MainWindow::contextMenuEvent( QContextMenuEvent * event ) {
   }
 }
 
-void MainWindow::slotOrderWindow( ) { ui->tabWidget->addTab( new OrderWidget( ui->tabWidget ), "ОРДЕРА" ); }
-
+void MainWindow::slotOrderWindow( ) { ui->tabWidget->addTab( new OrderWidget( ui->tabWidget ), tr( "ОРДЕРА" ) ); }
 void MainWindow::slotCloseTab( int idx ) { ui->tabWidget->removeTab( idx ); }
 
+void MainWindow::slotCarsWindow( ) { ui->tabWidget->addTab( new AllCarsWiewForm( ui->tabWidget ), tr( "АВТО" ) ); }
 void MainWindow::writeSettings( ) { qDebug( ) << "work MainWindow::writeSettings( )"; }
-
 void MainWindow::readSettings( ) { qDebug( ) << "work MainWindow::readSettings( )"; }
-
-// void MainWindow::createToolBar( ) {
-//  QToolBar * tool = addToolBar( "123" );
-//  tool->addAction( "Tab1" );
-//  tool->addAction( "Tab2" );
-//}
 
 void MainWindow::createDatabaseConnection( ) {
   QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", ConveyanceConstats::NAME_DB_ALL );
@@ -61,8 +53,6 @@ void MainWindow::createDatabaseConnection( ) {
 }
 
 void MainWindow::createConnections( ) {
-  connect( ui->actionShowAllOrder, QOverload< bool >::of( &QAction::triggered ), this, QOverload<>::of( &MainWindow::slotOrderWindow ) );
-  connect( ui->tabWidget, QOverload< int >::of( &QTabWidget::tabCloseRequested ), this, QOverload< int >::of( &MainWindow::slotCloseTab ) );
 }
 
 void MainWindow::createDatabase( ) {

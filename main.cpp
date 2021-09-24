@@ -1,7 +1,7 @@
 
 #include "MainWindow/mainwindow.h"
 
-#include "Cars/addcardialog.h"
+#include "Cars/allcarswiewform.h"
 
 #include <QAction>
 #include <QApplication>
@@ -37,19 +37,9 @@ int main( int argc, char * argv[] ) {
 
   MainWindow w;
   w.show( );
-
-  AddCarDialog cd;
-  cd.show( );
-
   splash.finish( &w );
 
   // *****************
-
-  //  createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
-
-  //  // CommonCarDialog md;
-  //  AddCarModelDialog md;
-  //  md.show( );
 
   return a.exec( );
 }

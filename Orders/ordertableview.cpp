@@ -17,5 +17,5 @@ void OrderTableView::setContextMenu( QMenu * m ) {
 void OrderTableView::contextMenuEvent( QContextMenuEvent * event ) {
   if ( contextMenu )
     contextMenu->exec( event->globalPos( ) );
-  QWidget::contextMenuEvent( event );
+  QTableView::contextMenuEvent( event );
 }

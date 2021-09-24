@@ -25,11 +25,11 @@ protected:
 public slots:
   void slotOrderWindow( );
   void slotCloseTab( int idx );
+  void slotCarsWindow( );
 
 private:
   void writeSettings( );
   void readSettings( );
-  // void createToolBar( );
   void createStatusBar( );
   void createDatabaseConnection( );
   void createConnections( );

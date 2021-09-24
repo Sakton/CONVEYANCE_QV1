@@ -25,7 +25,10 @@ SOURCES += \
     Cars/addbrandcardialog---.cpp \
     Cars/addcardialog.cpp \
     Cars/addcarmodeldialog---.cpp \
+    Cars/allcarswiewform.cpp \
+    Cars/carsqltablemodel.cpp \
     Cars/commoncardialog---.cpp \
+    Cars/tablewiewcars.cpp \
     Contract/createcontractdialog.cpp \
     DataBase/databasecreator.cpp \
     ElementsWidgets/actionpushbutton.cpp \
@@ -78,7 +81,10 @@ HEADERS += \
 	Cars/addbrandcardialog---.h \
 	Cars/addcardialog.h \
 	Cars/addcarmodeldialog---.h \
+	Cars/allcarswiewform.h \
+	Cars/carsqltablemodel.h \
 	Cars/commoncardialog---.h \
+	Cars/tablewiewcars.h \
 	Constants.h \
 	Contract/createcontractdialog.h \
 	DataBase/databasecreator.h \
@@ -126,6 +132,7 @@ FORMS += \
 	Cars/addbrandcardialog---.ui \
 	Cars/addcardialog.ui \
 	Cars/addcarmodeldialog---.ui \
+	Cars/allcarswiewform.ui \
 	Cars/commoncardialog---.ui \
 	Contract/createcontractdialog.ui \
 	Emploee/addemploeedialog.ui \
