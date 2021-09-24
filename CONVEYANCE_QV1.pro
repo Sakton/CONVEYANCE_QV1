@@ -20,11 +20,12 @@ SOURCES += \
     Adress/citydialog.cpp \
     Adress/updateadressdialog.cpp \
     Adress/updatecitydialog.cpp \
-    Cars/ElementsCarsView/comboboxsemitrailers.cpp \
-    Cars/ElementsCarsView/semitrailersview.cpp \
-    Cars/addbrandcardialog.cpp \
-    Cars/addcarmodeldialog.cpp \
-    Cars/commoncardialog.cpp \
+    Cars/ElementsCarsView/comboboxsemitrailers---.cpp \
+    Cars/ElementsCarsView/semitrailersview---.cpp \
+    Cars/addbrandcardialog---.cpp \
+    Cars/addcardialog.cpp \
+    Cars/addcarmodeldialog---.cpp \
+    Cars/commoncardialog---.cpp \
     Contract/createcontractdialog.cpp \
     DataBase/databasecreator.cpp \
     ElementsWidgets/actionpushbutton.cpp \
@@ -72,11 +73,12 @@ HEADERS += \
 	Adress/citydialog.h \
 	Adress/updateadressdialog.h \
 	Adress/updatecitydialog.h \
-	Cars/ElementsCarsView/comboboxsemitrailers.h \
-	Cars/ElementsCarsView/semitrailersview.h \
-	Cars/addbrandcardialog.h \
-	Cars/addcarmodeldialog.h \
-	Cars/commoncardialog.h \
+	Cars/ElementsCarsView/comboboxsemitrailers---.h \
+	Cars/ElementsCarsView/semitrailersview---.h \
+	Cars/addbrandcardialog---.h \
+	Cars/addcardialog.h \
+	Cars/addcarmodeldialog---.h \
+	Cars/commoncardialog---.h \
 	Constants.h \
 	Contract/createcontractdialog.h \
 	DataBase/databasecreator.h \
@@ -120,10 +122,11 @@ FORMS += \
 	Adress/citydialog.ui \
 	Adress/updateadressdialog.ui \
 	Adress/updatecitydialog.ui \
-	Cars/ElementsCarsView/semitrailersview.ui \
-	Cars/addbrandcardialog.ui \
-	Cars/addcarmodeldialog.ui \
-	Cars/commoncardialog.ui \
+	Cars/ElementsCarsView/semitrailersview---.ui \
+	Cars/addbrandcardialog---.ui \
+	Cars/addcardialog.ui \
+	Cars/addcarmodeldialog---.ui \
+	Cars/commoncardialog---.ui \
 	Contract/createcontractdialog.ui \
 	Emploee/addemploeedialog.ui \
 	Emploee/addfunctionemploeedialog.ui \
@@ -157,6 +160,7 @@ DISTFILES += \
     DBTables/Routes.sql \
     DBTables/Shippers.sql \
     DBTables/VATs.sql \
+	DBTables/Wagons---.sql \
 	DBTables/Wagons.sql \
 	Dump/dump.sql \
 	Dump/dump1.sql \

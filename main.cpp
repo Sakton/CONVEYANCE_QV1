@@ -1,14 +1,7 @@
 
 #include "MainWindow/mainwindow.h"
 
-#include "Cars/addbrandcardialog.h"
-#include "Cars/addcarmodeldialog.h"
-#include "DataBase/databasecreator.h"
-
-#include "Cars/addcarmodeldialog.h"
-#include "Cars/commoncardialog.h"
-#include "ElementsWidgets/comboboxcarbrand.h"
-#include "ElementsWidgets/comboboxcarcategories.h"
+#include "Cars/addcardialog.h"
 
 #include <QAction>
 #include <QApplication>
@@ -40,10 +33,14 @@ int main( int argc, char * argv[] ) {
 
   QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
   splash.show( );
-  createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
+  // createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
 
   MainWindow w;
   w.show( );
+
+  AddCarDialog cd;
+  cd.show( );
+
   splash.finish( &w );
 
   // *****************

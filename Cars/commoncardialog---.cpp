@@ -1,7 +1,7 @@
-#include "commoncardialog.h"
+#include "commoncardialog---.h"
 #include "Constants.h"
 #include "ElementsWidgets/comboboxcarcategories.h"
-#include "addbrandcardialog.h"
+#include "addbrandcardialog---.h"
 #include "ui_commoncardialog.h"
 #include <QComboBox>
 #include <QModelIndex>

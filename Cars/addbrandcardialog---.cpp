@@ -1,4 +1,4 @@
-#include "addbrandcardialog.h"
+#include "addbrandcardialog---.h"
 #include "Constants.h"
 #include "ui_addbrandcardialog.h"
 

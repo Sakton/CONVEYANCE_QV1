@@ -1,5 +1,5 @@
-#ifndef COMMONCARDIALOG_H
-#define COMMONCARDIALOG_H
+#ifndef COMMONCARDIALOG //---_H
+#define COMMONCARDIALOG //---_H
 
 #include <QDialog>
 
@@ -24,4 +24,4 @@ private:
   Ui::CommonCarDialog * ui;
 };
 
-#endif // COMMONCARDIALOG_H
+#endif // COMMONCARDIALOG---_H
