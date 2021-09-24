@@ -14,10 +14,6 @@ AllCarsWiewForm::~AllCarsWiewForm( ) { delete ui; }
 void AllCarsWiewForm::initButton( ) {
   add = new QAction( tr( "Добавить" ), this );
   del = new QAction( tr( "Удалить" ), this );
-
-  connect( add, QOverload< bool >::of( &QAction::triggered ), this, QOverload<>::of( &AllCarsWiewForm::slotPushButtonAdd ) );
-  connect( del, QOverload< bool >::of( &QAction::triggered ), ui->tableView, QOverload<>::of( &TableWiewCars::slotDeleteRecord ) );
-
   ui->pushButtonAdd->setAction( add );
   ui->pushButtonDel->setAction( del );
 
@@ -31,6 +27,8 @@ void AllCarsWiewForm::initButton( ) {
 void AllCarsWiewForm::slotPushButtonAdd( ) {
   AddCarDialog addCar( this );
   if ( addCar.exec( ) ) {
-    emit signalPushButtonAdd( );
+    // ui->tableView->reload( ); //переустановука формы
   }
 }
+
+void AllCarsWiewForm::slotPushButtonDel( ) { qDebug( ) << "AllCarsWiewForm::slotPushButtonDel( )"; }

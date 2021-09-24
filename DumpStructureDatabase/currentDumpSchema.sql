@@ -1287,46 +1287,6 @@ ALTER SEQUENCE payment.payments_payment_id_seq OWNED BY payment.payments.payment
 
 
 --
--- Name: autos; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.autos (
-    auto_id integer NOT NULL,
-    auto_brand character varying(64),
-    auto_lenthtrailer numeric(4,2),
-    auto_widthtrailer numeric(4,2),
-    auto_heighttrailer numeric(4,2),
-    auto_vin character varying(17),
-    auto_datawork date,
-    auto_datagto date
-);
-
-
-ALTER TABLE public.autos OWNER TO postgres;
-
---
--- Name: autos_auto_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.autos_auto_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.autos_auto_id_seq OWNER TO postgres;
-
---
--- Name: autos_auto_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.autos_auto_id_seq OWNED BY public.autos.auto_id;
-
-
---
 -- Name: testadressview; Type: MATERIALIZED VIEW; Schema: public; Owner: postgres
 --
 
@@ -1617,13 +1577,6 @@ ALTER TABLE ONLY payment.payments ALTER COLUMN payment_id SET DEFAULT nextval('p
 
 
 --
--- Name: autos auto_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.autos ALTER COLUMN auto_id SET DEFAULT nextval('public.autos_auto_id_seq'::regclass);
-
-
---
 -- Name: routes route_id; Type: DEFAULT; Schema: route; Owner: postgres
 --
 
@@ -1864,14 +1817,6 @@ ALTER TABLE ONLY orders.orders
 
 ALTER TABLE ONLY payment.payments
     ADD CONSTRAINT payments_pkey PRIMARY KEY (payment_id);
-
-
---
--- Name: autos autos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.autos
-    ADD CONSTRAINT autos_pkey PRIMARY KEY (auto_id);
 
 
 --

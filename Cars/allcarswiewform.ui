@@ -59,10 +59,6 @@
    <class>TableWiewCars</class>
    <extends>QTableView</extends>
    <header>tablewiewcars.h</header>
-   <slots>
-    <slot>slotDeleteRecord()</slot>
-    <slot>updateModel()</slot>
-   </slots>
   </customwidget>
   <customwidget>
    <class>ActionPushButton</class>
@@ -73,25 +69,39 @@
  <resources/>
  <connections>
   <connection>
-   <sender>AllCarsWiewForm</sender>
-   <signal>signalPushButtonAdd()</signal>
-   <receiver>tableView</receiver>
-   <slot>updateModel()</slot>
+   <sender>pushButtonAdd</sender>
+   <signal>clicked()</signal>
+   <receiver>AllCarsWiewForm</receiver>
+   <slot>slotPushButtonAdd()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>254</x>
-     <y>168</y>
+     <x>50</x>
+     <y>22</y>
     </hint>
     <hint type="destinationlabel">
      <x>254</x>
-     <y>184</y>
+     <y>168</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButtonDel</sender>
+   <signal>clicked()</signal>
+   <receiver>AllCarsWiewForm</receiver>
+   <slot>slotPushButtonDel()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>136</x>
+     <y>22</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>254</x>
+     <y>168</y>
     </hint>
    </hints>
   </connection>
  </connections>
  <slots>
-  <signal>signalPushButtonDel()</signal>
-  <signal>signalPushButtonAdd()</signal>
   <slot>slotPushButtonAdd()</slot>
   <slot>slotPushButtonDel()</slot>
  </slots>

@@ -10,8 +10,8 @@ CarSqlTableModel::CarSqlTableModel( QObject * parent, const QSqlDatabase & db ) 
   setHeaderData( 3, Qt::Orientation::Horizontal, tr( "Ширина" ) );
   setHeaderData( 4, Qt::Orientation::Horizontal, tr( "Высота" ) );
   setHeaderData( 5, Qt::Orientation::Horizontal, tr( "ВИН" ) );
-  setHeaderData( 6, Qt::Orientation::Horizontal, tr( " Дата выпуска " ) );
-  setHeaderData( 7, Qt::Orientation::Horizontal, tr( "    Дата ГТО  " ) );
+  setHeaderData( 6, Qt::Orientation::Horizontal, tr( "Дата выпуска" ) );
+  setHeaderData( 7, Qt::Orientation::Horizontal, tr( "Дата ГТО" ) );
 }
 
 QVariant CarSqlTableModel::data( const QModelIndex & index, int role ) const {
