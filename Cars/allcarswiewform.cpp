@@ -34,5 +34,3 @@ void AllCarsWiewForm::slotPushButtonAdd( ) {
     emit signalPushButtonAdd( );
   }
 }
-
-// void AllCarsWiewForm::slotPushButtonDel( ) { emit signalPushButtonDel( ); }

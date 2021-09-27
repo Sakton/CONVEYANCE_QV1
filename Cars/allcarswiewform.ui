@@ -71,7 +71,24 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>AllCarsWiewForm</sender>
+   <signal>signalPushButtonAdd()</signal>
+   <receiver>tableView</receiver>
+   <slot>updateModel()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>254</x>
+     <y>168</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>254</x>
+     <y>184</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <slots>
   <signal>signalPushButtonDel()</signal>
   <signal>signalPushButtonAdd()</signal>
