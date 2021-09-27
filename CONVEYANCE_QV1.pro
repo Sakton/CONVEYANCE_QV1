@@ -20,15 +20,10 @@ SOURCES += \
     Adress/citydialog.cpp \
     Adress/updateadressdialog.cpp \
     Adress/updatecitydialog.cpp \
-    Cars/ElementsCarsView/comboboxsemitrailers---.cpp \
-    Cars/ElementsCarsView/semitrailersview---.cpp \
-    Cars/addbrandcardialog---.cpp \
     Cars/addcardialog.cpp \
-    Cars/addcarmodeldialog---.cpp \
     Cars/allcarswiewform.cpp \
     Cars/carsqltablemodel.cpp \
     Cars/carsstyleditemdelegate.cpp \
-    Cars/commoncardialog---.cpp \
     Cars/tablewiewcars.cpp \
     Contract/createcontractdialog.cpp \
     DataBase/databasecreator.cpp \
@@ -76,15 +71,10 @@ HEADERS += \
 	Adress/citydialog.h \
 	Adress/updateadressdialog.h \
 	Adress/updatecitydialog.h \
-	Cars/ElementsCarsView/comboboxsemitrailers---.h \
-	Cars/ElementsCarsView/semitrailersview---.h \
-	Cars/addbrandcardialog---.h \
 	Cars/addcardialog.h \
-	Cars/addcarmodeldialog---.h \
 	Cars/allcarswiewform.h \
 	Cars/carsqltablemodel.h \
 	Cars/carsstyleditemdelegate.h \
-	Cars/commoncardialog---.h \
 	Cars/tablewiewcars.h \
 	Constants.h \
 	Contract/createcontractdialog.h \
@@ -128,12 +118,8 @@ FORMS += \
 	Adress/citydialog.ui \
 	Adress/updateadressdialog.ui \
 	Adress/updatecitydialog.ui \
-	Cars/ElementsCarsView/semitrailersview---.ui \
-	Cars/addbrandcardialog---.ui \
 	Cars/addcardialog.ui \
-	Cars/addcarmodeldialog---.ui \
 	Cars/allcarswiewform.ui \
-	Cars/commoncardialog---.ui \
 	Contract/createcontractdialog.ui \
 	Emploee/addemploeedialog.ui \
 	Emploee/addfunctionemploeedialog.ui \
