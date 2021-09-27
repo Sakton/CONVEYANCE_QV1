@@ -20,7 +20,11 @@ public:
 
 public slots:
   void slotPushButtonAdd( );
-  void slotPushButtonDel( );
+  // void slotPushButtonDel( );
+
+signals:
+  void signalPushButtonAdd( );
+  // void signalPushButtonDel( );
 
 private:
   QAction * add;

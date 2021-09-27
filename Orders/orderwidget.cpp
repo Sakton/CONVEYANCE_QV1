@@ -86,6 +86,7 @@ void OrderWidget::slotSelectRow( const QModelIndex & idx ) {
 void OrderWidget::updateOrderWidget( ) {
   initModels( );
   setupView( );
+  //  model->select( );
 }
 
 void OrderWidget::createConnects( ) {

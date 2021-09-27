@@ -27,6 +27,7 @@ SOURCES += \
     Cars/addcarmodeldialog---.cpp \
     Cars/allcarswiewform.cpp \
     Cars/carsqltablemodel.cpp \
+    Cars/carsstyleditemdelegate.cpp \
     Cars/commoncardialog---.cpp \
     Cars/tablewiewcars.cpp \
     Contract/createcontractdialog.cpp \
@@ -58,7 +59,6 @@ SOURCES += \
     Orders/ordersqltablemodel.cpp \
     Orders/ordertableview.cpp \
     Orders/orderwidget.cpp \
-    Orders/testform.cpp \
     Orders/updateorderdialog.cpp \
     Shippers/addshipperdialog.cpp \
     Wagons/addpullingdialog.cpp \
@@ -83,6 +83,7 @@ HEADERS += \
 	Cars/addcarmodeldialog---.h \
 	Cars/allcarswiewform.h \
 	Cars/carsqltablemodel.h \
+	Cars/carsstyleditemdelegate.h \
 	Cars/commoncardialog---.h \
 	Cars/tablewiewcars.h \
 	Constants.h \
@@ -115,7 +116,6 @@ HEADERS += \
 	Orders/ordersqltablemodel.h \
 	Orders/ordertableview.h \
 	Orders/orderwidget.h \
-	Orders/testform.h \
 	Orders/updateorderdialog.h \
 	Shippers/addshipperdialog.h \
 	Wagons/addpullingdialog.h
@@ -142,7 +142,6 @@ FORMS += \
 	MyTests/testqsqltableformform.ui \
 	Orders/commonorderform.ui \
 	Orders/orderwidget.ui \
-	Orders/testform.ui \
 	Shippers/addshipperdialog.ui \
 	Wagons/addpullingdialog.ui
 
