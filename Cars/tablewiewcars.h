@@ -2,6 +2,8 @@
 #define TABLEWIEWCARS_H
 
 class QMenu;
+class CarSqlTableModel;
+// class QSortFilterProxyModel;
 
 #include <QTableView>
 
@@ -11,12 +13,17 @@ class TableWiewCars : public QTableView {
 public:
   explicit TableWiewCars( QWidget * parent = nullptr );
   void setContextMenu( QMenu * menu );
-  // QWidget interface
+
+public slots:
+  void updateModel( );
+  void slotDeleteRecord( );
+
 protected:
   void contextMenuEvent( QContextMenuEvent * event ) override;
 
 private:
   QMenu * contextMenu { nullptr };
+  CarSqlTableModel * _model;
 };
 
 #endif // TABLEWIEWCARS_H
