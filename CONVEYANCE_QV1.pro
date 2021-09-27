@@ -20,6 +20,11 @@ SOURCES += \
     Adress/citydialog.cpp \
     Adress/updateadressdialog.cpp \
     Adress/updatecitydialog.cpp \
+    Cars/addcardialog.cpp \
+    Cars/allcarswiewform.cpp \
+    Cars/carsqltablemodel.cpp \
+    Cars/carsstyleditemdelegate.cpp \
+    Cars/tablewiewcars.cpp \
     Contract/createcontractdialog.cpp \
     DataBase/databasecreator.cpp \
     ElementsWidgets/actionpushbutton.cpp \
@@ -49,9 +54,9 @@ SOURCES += \
     Orders/ordersqltablemodel.cpp \
     Orders/ordertableview.cpp \
     Orders/orderwidget.cpp \
-    Orders/testform.cpp \
     Orders/updateorderdialog.cpp \
     Shippers/addshipperdialog.cpp \
+    Wagons/addpullingdialog.cpp \
     main.cpp
 
 HEADERS += \
@@ -66,6 +71,11 @@ HEADERS += \
 	Adress/citydialog.h \
 	Adress/updateadressdialog.h \
 	Adress/updatecitydialog.h \
+	Cars/addcardialog.h \
+	Cars/allcarswiewform.h \
+	Cars/carsqltablemodel.h \
+	Cars/carsstyleditemdelegate.h \
+	Cars/tablewiewcars.h \
 	Constants.h \
 	Contract/createcontractdialog.h \
 	DataBase/databasecreator.h \
@@ -96,9 +106,9 @@ HEADERS += \
 	Orders/ordersqltablemodel.h \
 	Orders/ordertableview.h \
 	Orders/orderwidget.h \
-	Orders/testform.h \
 	Orders/updateorderdialog.h \
-	Shippers/addshipperdialog.h
+	Shippers/addshipperdialog.h \
+	Wagons/addpullingdialog.h
 
 FORMS += \
 	Adress/addadress.ui \
@@ -108,6 +118,8 @@ FORMS += \
 	Adress/citydialog.ui \
 	Adress/updateadressdialog.ui \
 	Adress/updatecitydialog.ui \
+	Cars/addcardialog.ui \
+	Cars/allcarswiewform.ui \
 	Contract/createcontractdialog.ui \
 	Emploee/addemploeedialog.ui \
 	Emploee/addfunctionemploeedialog.ui \
@@ -116,8 +128,8 @@ FORMS += \
 	MyTests/testqsqltableformform.ui \
 	Orders/commonorderform.ui \
 	Orders/orderwidget.ui \
-	Orders/testform.ui \
-	Shippers/addshipperdialog.ui
+	Shippers/addshipperdialog.ui \
+	Wagons/addpullingdialog.ui
 
 TRANSLATIONS += \
     CONVEYANCE_QV1_pl_PL.ts
@@ -130,7 +142,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
 	.gitignore \
     DBTables/Adress.sql \
-    DBTables/Cars.sql \
+	DBTables/CarsOld---.sql \
     DBTables/Contracts.sql \
     DBTables/CreateDb.sql \
 	DBTables/Documents.sql \
@@ -140,10 +152,14 @@ DISTFILES += \
     DBTables/Routes.sql \
     DBTables/Shippers.sql \
     DBTables/VATs.sql \
+	DBTables/Wagons---.sql \
+	DBTables/Wagons.sql \
 	Dump/dump.sql \
 	Dump/dump1.sql \
 	Dump/dump_conveyance_db.sql \
+	DumpStructureDatabase/InsertConstatsDataInTable.sql \
 	DumpStructureDatabase/currentDump.sql \
+	DumpStructureDatabase/currentDumpSchema.sql \
 	DumpStructureDatabase/testDump.sql \
 	ErrorsFound \
 	IshodnyDanny/Adresses.ods \
@@ -253,3 +269,4 @@ INCLUDEPATH += $$PWD/ElementsWidgets
 INCLUDEPATH += $$PWD/Adress
 INCLUDEPATH += $$PWD/Orders
 INCLUDEPATH += $$PWD/MainWindow
+INCLUDEPATH += $$PWD/Cars/ElementsCarsView
