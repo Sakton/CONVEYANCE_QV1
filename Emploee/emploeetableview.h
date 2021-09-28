@@ -8,20 +8,26 @@ class EmploeeTableView;
 }
 
 class EmploeeSqlTableModel;
+class QAction;
 
 class EmploeeTableView : public QWidget {
-  Q_OBJECT
+	Q_OBJECT
 
 public:
-  explicit EmploeeTableView( QWidget * parent = nullptr );
-  ~EmploeeTableView( );
-  // QWidget interface
-protected:
-  void contextMenuEvent( QContextMenuEvent * event ) override;
+	explicit EmploeeTableView( QWidget * parent = nullptr );
+	~EmploeeTableView( );
+//protected:
+//	void contextMenuEvent( QContextMenuEvent * event ) override;
+
+	private:
+		void initMenus();
 
 private:
-  Ui::EmploeeTableView * ui;
-  EmploeeSqlTableModel * model;
+	Ui::EmploeeTableView * ui;
+	EmploeeSqlTableModel * model;
+	QAction * add;
+	QAction * upd;
+	QAction * del;
 };
 
 #endif // EMPLOEETABLEVIEW_H

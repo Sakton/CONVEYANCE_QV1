@@ -45,6 +45,7 @@ SOURCES += \
     Emploee/addfunctionemploeedialog.cpp \
     Emploee/emploeesqltablemodel.cpp \
     Emploee/emploeetableview.cpp \
+    Emploee/tableviewemploee.cpp \
     MainWindow/mainwindow.cpp \
     MainWindow/mainwindowtabwidget.cpp \
     MyTests/testqsqltableformform.cpp \
@@ -97,6 +98,7 @@ HEADERS += \
 	Emploee/addfunctionemploeedialog.h \
 	Emploee/emploeesqltablemodel.h \
 	Emploee/emploeetableview.h \
+	Emploee/tableviewemploee.h \
 	MainWindow/mainwindow.h \
 	MainWindow/mainwindowtabwidget.h \
 	MyTests/testqsqltableformform.h \
@@ -270,3 +272,4 @@ INCLUDEPATH += $$PWD/Adress
 INCLUDEPATH += $$PWD/Orders
 INCLUDEPATH += $$PWD/MainWindow
 INCLUDEPATH += $$PWD/Cars/ElementsCarsView
+INCLUDEPATH += $$PWD/Emploee

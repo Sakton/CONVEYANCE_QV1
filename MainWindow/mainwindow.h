@@ -23,9 +23,10 @@ protected:
   void contextMenuEvent( QContextMenuEvent *event ) override;
 
 public slots:
-  void slotOrderWindow( );
   void slotCloseTab( int idx );
+  void slotOrderWindow( );
   void slotCarsWindow( );
+  void slotEmloeeWindow( );
 
 private:
   void writeSettings( );
