@@ -2,6 +2,7 @@
 #include "Cars/allcarswiewform.h"
 #include "Constants.h"
 #include "DataBase/databasecreator.h"
+#include "Emploee/emploeetableview.h"
 #include "Orders/orderwidget.h"
 #include "ui_mainwindow.h"
 #include <QAction>
@@ -36,8 +37,9 @@ void MainWindow::contextMenuEvent( QContextMenuEvent * event ) {
 
 void MainWindow::slotOrderWindow( ) { ui->tabWidget->addTab( new OrderWidget( ui->tabWidget ), tr( "ОРДЕРА" ) ); }
 void MainWindow::slotCloseTab( int idx ) { ui->tabWidget->removeTab( idx ); }
-
 void MainWindow::slotCarsWindow( ) { ui->tabWidget->addTab( new AllCarsWiewForm( ui->tabWidget ), tr( "АВТО" ) ); }
+void MainWindow::slotEmloeeWindow( ) { ui->tabWidget->addTab( new EmploeeTableView( ui->tabWidget ), tr( "СОТРУДНИКИ" ) ); }
+
 void MainWindow::writeSettings( ) { qDebug( ) << "work MainWindow::writeSettings( )"; }
 void MainWindow::readSettings( ) { qDebug( ) << "work MainWindow::readSettings( )"; }
 
@@ -53,6 +55,7 @@ void MainWindow::createDatabaseConnection( ) {
 }
 
 void MainWindow::createConnections( ) {
+  
 }
 
 void MainWindow::createDatabase( ) {
