@@ -9,6 +9,7 @@ class EmploeeTableView;
 
 class EmploeeSqlTableModel;
 class QAction;
+class QMenu;
 
 class EmploeeTableView : public QWidget {
 	Q_OBJECT
@@ -28,6 +29,7 @@ private:
 	QAction * add;
 	QAction * upd;
 	QAction * del;
+	QMenu *contextMenu;
 };
 
 #endif // EMPLOEETABLEVIEW_H

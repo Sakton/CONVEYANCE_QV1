@@ -53,7 +53,7 @@
     </layout>
    </item>
    <item row="1" column="0">
-    <widget class="QTableView" name="tableView">
+    <widget class="TableViewEmploee" name="tableView">
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>
@@ -72,6 +72,11 @@
    <class>ActionPushButton</class>
    <extends>QPushButton</extends>
    <header>actionpushbutton.h</header>
+  </customwidget>
+  <customwidget>
+   <class>TableViewEmploee</class>
+   <extends>QTableView</extends>
+   <header>tableviewemploee.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

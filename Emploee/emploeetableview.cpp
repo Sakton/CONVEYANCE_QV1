@@ -19,20 +19,24 @@ EmploeeTableView::EmploeeTableView( QWidget * parent )
 	ui->tableView->setColumnHidden( 0, true );
 	ui->tableView->setColumnHidden( 4, true );
 	ui->tableView->horizontalHeader( )->setSectionResizeMode( QHeaderView::ResizeMode::Stretch );
+
+	initMenus();
 }
 
 EmploeeTableView::~EmploeeTableView( ) { delete ui; }
 
 void EmploeeTableView::initMenus()
 {
+	ui->pushButtonAdd->setAction( add );
+	ui->pushButtonUpd->setAction( upd );
+	ui->pushButtonDel->setAction( del );
 
+	contextMenu = new QMenu( this );
+
+	contextMenu->addAction( add );
+	contextMenu->addAction( upd );
+	contextMenu->addAction( del );
+
+	ui->tableView->setContextMenu( contextMenu );
 }
-
-//void EmploeeTableView::contextMenuEvent( QContextMenuEvent * event ) {
-//	QMenu contextMenu( this );
-//	contextMenu.addAction( add );
-//	contextMenu.addAction( upd );
-//	contextMenu.addAction( del );
-//	contextMenu.exec( event->globalPos( ) );
-//}
 
