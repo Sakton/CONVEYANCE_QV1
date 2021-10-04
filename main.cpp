@@ -1,7 +1,6 @@
 
 #include "MainWindow/mainwindow.h"
-
-#include "Cars/allcarswiewform.h"
+#include "Autorization/autorizationdialog.h"
 
 #include <QAction>
 #include <QApplication>
@@ -29,15 +28,14 @@ int main( int argc, char * argv[] ) {
   //  else
   //    qDebug( ) << "CREATE DB";
 
+	// createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
   // **********
 
-  QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
-  splash.show( );
-  // createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
-
-  MainWindow w;
-  w.show( );
-  splash.finish( &w );
+		QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
+		splash.show( );
+		MainWindow w;
+		w.show( );
+		splash.finish( &w );
 
   // *****************
 
