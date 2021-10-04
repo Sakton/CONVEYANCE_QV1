@@ -118,8 +118,8 @@ void MainWindow::createConnections( ) {
 
 void MainWindow::createDatabase( ) {
 	DatabaseCreator dbc;
-	if ( !dbc.createDatabase( ) )
-		qDebug( ) << "ERROR CREATE DB";
-	else
-		qDebug( ) << "CREATE DB";
+	//	if ( !dbc.createDatabase( ) )
+	//		qDebug( ) << "ERROR CREATE DB";
+	//	else
+	//		qDebug( ) << "CREATE DB";
 }

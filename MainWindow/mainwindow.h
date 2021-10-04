@@ -29,7 +29,7 @@ public slots:
   void slotEmloeeWindow( );
 
 private:
-	QPair<bool, int> isAbsentTab(const QString & typeNameWidget ); //проверка наличия, и вернет индекс заодно
+	QPair<bool, int> isAbsentTab( const QString & typeNameWidget ); //проверка наличия, и вернет индекс заодно
 	QWidget * fabriqueCreateWindow( const QString &nameWindow );
 
 private:
