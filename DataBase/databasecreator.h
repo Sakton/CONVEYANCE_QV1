@@ -5,16 +5,18 @@
 class DatabaseCreator
 {
 public:
+	DatabaseCreator();
   bool createDatabase( );
   ~DatabaseCreator( );
 
 private:
-  bool createEmptyBase( );
-  bool createTablesAndUtilities( );
-  bool isCreateDataBase( const QSqlDatabase & db );
+	//  bool createEmptyBase( );
+	//  bool createTablesAndUtilities( );
+	//  bool isCreateDataBase( const QSqlDatabase & db );
   bool createDefaultConnectionDb( );
-  bool createConnectionToDb( );
-  bool addingConstantData( );
+	bool createNormalConnectionDb( );
+	bool createConnection( QSqlDatabase db, const QString &nameConnection = {} );
+	// bool addingConstantData( );
 };
 
 #endif // DATABASECREATOR_H

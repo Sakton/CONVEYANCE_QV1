@@ -1,6 +1,3 @@
---
--- ВТАВКА СПРАВОЧНЫХ ДАННЫХ В ТАБЛИЦУ "СТРАНЫ"
---
 
 INSERT INTO vat.vats ( vat_stavka )
 VALUES (20), (13), (10),(0.5),(12),(6),(9),(5),(27),(18),(19),(7),(24),(25),(13.5),(4.8),(11),(4),(8),(3.8),(2.5),(17),
@@ -109,7 +106,7 @@ VALUES ( 'Мопеды и Легкие квадрициклы','M','M.png','Ка
 ( 'Троллейбусы', 'Tb', 'Tb.png', 'Дают право управлять троллейбусами' ),
 ( 'Трамваи', 'Tm', 'Tm.png', 'Дают право управлять трамваями' );
 
-INSERT INTO emploee.functionWorker( functionWorker_name ) VALUES ('Водитель');
+INSERT INTO emploee.functionworker( functionworker_name ) VALUES ('Водитель');
 
 INSERT INTO cars.paletypes ( paletype_name, paletype_lenth, paletype_width )
 VALUES ('Финский', 1.2, 1),

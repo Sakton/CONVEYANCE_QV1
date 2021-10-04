@@ -82,8 +82,6 @@
         <file>img/CategoriesAuto/DE.png</file>
         <file>img/CategoriesAuto/Tb.png</file>
         <file>img/CategoriesAuto/Tm.png</file>
-        <file>DumpStructureDatabase/currentDump.sql</file>
-        <file>DumpStructureDatabase/currentDumpSchema.sql</file>
         <file>DumpStructureDatabase/InsertConstatsDataInTable.sql</file>
         <file>DumpStructureDatabase/conveyanceDbSchema.sql</file>
         <file>img/Eurofura/eurofura-82-kuba.png</file>
