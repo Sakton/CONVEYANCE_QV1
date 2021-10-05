@@ -2,6 +2,7 @@
 #include "ui_autorizationdialog.h"
 #include <QSqlDatabase>
 #include <QSqlError>
+#include "Constants.h"
 
 AutorizationDialog::AutorizationDialog(QWidget *parent) :
 	QDialog(parent),
@@ -23,7 +24,7 @@ void AutorizationDialog::accept()
 	QString pass = ui->lineEditPass->text();
 
 
-	QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL");
+	QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL", ConveyanceConstats::NAME_DATABASE_IN_SUBD );
 	db.setDatabaseName(dbName);
 	db.setHostName(host);
 	db.setUserName(userName);

@@ -16,8 +16,8 @@ MainWindow::MainWindow( QWidget * parent ) : QMainWindow( parent ), ui( new Ui::
   ui->tabWidget->slotClosetab( 1 );
   ui->tabWidget->slotClosetab( 0 );
   createDatabase( );
-  readSettings( );
-  createDatabaseConnection( );
+	// readSettings( );
+	// createDatabaseConnection( );
 }
 
 MainWindow::~MainWindow( ) {

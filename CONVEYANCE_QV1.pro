@@ -21,6 +21,7 @@ SOURCES += \
     Adress/updateadressdialog.cpp \
     Adress/updatecitydialog.cpp \
     Autorization/autorizationdialog.cpp \
+    Autorization/newuserdatabasedialog.cpp \
     Cars/addcardialog.cpp \
     Cars/allcarswiewform.cpp \
     Cars/carsqltablemodel.cpp \
@@ -74,6 +75,7 @@ HEADERS += \
 	Adress/updateadressdialog.h \
 	Adress/updatecitydialog.h \
 	Autorization/autorizationdialog.h \
+	Autorization/newuserdatabasedialog.h \
 	Cars/addcardialog.h \
 	Cars/allcarswiewform.h \
 	Cars/carsqltablemodel.h \
@@ -123,6 +125,7 @@ FORMS += \
 	Adress/updateadressdialog.ui \
 	Adress/updatecitydialog.ui \
 	Autorization/autorizationdialog.ui \
+	Autorization/newuserdatabasedialog.ui \
 	Cars/addcardialog.ui \
 	Cars/allcarswiewform.ui \
 	Contract/createcontractdialog.ui \

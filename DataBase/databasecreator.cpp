@@ -1,4 +1,5 @@
 #include "databasecreator.h"
+#include "Autorization/newuserdatabasedialog.h"
 
 #include "Constants.h"
 #include <QFile>
@@ -7,7 +8,31 @@
 
 DatabaseCreator::DatabaseCreator()
 {
+//	if( !createDefaultConnectionDb() ){
+//		qDebug() << "ERROR DatabaseCreator::createDefaultConnectionDb" << defaultConnect.lastError().text();
+//	}
 	createDefaultConnectionDb();
+	createDatabase();
+	qDebug() << "Is create DB = " << isCreateDataBase();
+}
+
+bool DatabaseCreator::createDatabase()
+{
+	//1/ Есть ли такая база в записях
+	if( !isCreateDataBase() ) { //если базы такой нет
+		if( !createNewDataBase() ) { //создаем и смотрим результат
+			qDebug() << "не могу создать базу";
+			return false;
+		} else {
+			QSqlDatabase::database("POSTGRES").close();
+			if( NewUserdataBaseDialog().exec() ) {
+
+			} else {
+
+			}
+		}
+	}
+	return true;
 }
 
 bool DatabaseCreator::createDefaultConnectionDb( ) {
@@ -17,6 +42,7 @@ bool DatabaseCreator::createDefaultConnectionDb( ) {
 	defaultConnect.setUserName( "postgres" );
 	defaultConnect.setPassword( "postgres" );
 	defaultConnect.setDatabaseName( "postgres" );
+	// return defaultConnect.open( );
 	if( defaultConnect.open( ) ) {
 		qDebug() << "CONNECTION OK";
 		return true;
@@ -24,6 +50,58 @@ bool DatabaseCreator::createDefaultConnectionDb( ) {
 	qDebug() << "ERROR DatabaseCreator::createDefaultConnectionDb" << defaultConnect.lastError().text();
 	return false;
 }
+
+QString DatabaseCreator::queryFromFile(const QString & fileName) const {
+	QFile file( fileName );
+	if( !file.open(QFile::ReadOnly | QFile::Text ) ) {
+		qDebug() << "ERROR open file dump create db";
+	}
+	return file.readAll();
+}
+
+bool DatabaseCreator::isCreateDataBase() const
+{
+	QString qs = QString( "SELECT EXISTS ( SELECT * FROM pg_database WHERE datname = '%1' );" ).arg(ConveyanceConstats::NAME_DATABASE_IN_SUBD);
+	QSqlQuery query( QSqlDatabase::database("POSTGRES") );
+	if( !query.exec(qs) ) {
+		qDebug() << "Error query: " << query.lastError().text();
+	}
+	bool res = true;
+	if( query.isSelect() ) {
+			query.next();
+			res = query.value(0).toBool();
+	}
+	return res;
+}
+
+bool DatabaseCreator::createNewDataBase()
+{
+	QString qs = QString("CREATE DATABASE %1").arg( ConveyanceConstats::NAME_DATABASE_IN_SUBD );
+	QSqlQuery query( QSqlDatabase::database("POSTGRES") );
+	if( !query.exec(qs) ) {
+		printErrorQuery(query);
+		return false;
+	}
+	return true;
+}
+
+bool DatabaseCreator::createTablesNewDataBase()
+{
+//	QString qs = queryFromFile( ":/DumpStructureDatabase/conveyanceDbSchema.sql" );
+//	QSqlQuery query(  );
+	return true;
+}
+
+bool DatabaseCreator::createNewServer() {
+	return true;
+}
+
+void DatabaseCreator::printErrorQuery(const QSqlQuery & query) const
+{
+	qDebug() << query.lastError().text();
+}
+
+
 
 //bool DatabaseCreator::createNormalConnectionDb( ) {
 //	QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", "CREATECONNECT" );
