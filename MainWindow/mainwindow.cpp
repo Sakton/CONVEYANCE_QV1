@@ -43,16 +43,16 @@ void MainWindow::slotEmloeeWindow( ) { ui->tabWidget->addTab( new EmploeeTableVi
 void MainWindow::writeSettings( ) { qDebug( ) << "work MainWindow::writeSettings( )"; }
 void MainWindow::readSettings( ) { qDebug( ) << "work MainWindow::readSettings( )"; }
 
-void MainWindow::createDatabaseConnection( ) {
-  QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", ConveyanceConstats::NAME_DB_ALL );
-  db.setHostName( "localhost" );
-  db.setPort( 5432 );
-  db.setDatabaseName( ConveyanceConstats::NAME_DATABASE_IN_SUBD );
-  db.setUserName( "postgres" );
-  db.setPassword( "postgres" );
-  bool ok = db.open( );
-  qDebug( ) << "database status = " << ok;
-}
+//void MainWindow::createDatabaseConnection( ) {
+//  QSqlDatabase db = QSqlDatabase::addDatabase( "QPSQL", ConveyanceConstats::NAME_DB_ALL );
+//  db.setHostName( "localhost" );
+//  db.setPort( 5432 );
+//  db.setDatabaseName( ConveyanceConstats::NAME_DATABASE_IN_SUBD );
+//  db.setUserName( "postgres" );
+//  db.setPassword( "postgres" );
+//  bool ok = db.open( );
+//  qDebug( ) << "database status = " << ok;
+//}
 
 void MainWindow::createConnections( ) {
   

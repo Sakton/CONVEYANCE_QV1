@@ -18,21 +18,11 @@ AutorizationDialog::~AutorizationDialog()
 
 void AutorizationDialog::accept()
 {
-	QString dbName = ui->lineEditNameDb->text();
-	QString host = ui->lineHost->text();
-	QString userName = ui->lineEditUser->text();
-	QString pass = ui->lineEditPass->text();
-
-
 	QSqlDatabase db = QSqlDatabase::addDatabase("QPSQL", ConveyanceConstats::NAME_DATABASE_IN_SUBD );
-	db.setDatabaseName(dbName);
-	db.setHostName(host);
-	db.setUserName(userName);
-	db.setPassword(pass);
-	if ( !db.open() ){
-		qDebug() << "ERROR DB open: " << db.lastError().text();
-		qDebug() << "Type Error = " << db.lastError().type();
-	} else {
-		QDialog::accept();
+	db.setDatabaseName( ConveyanceConstats::NAME_DATABASE_IN_SUBD );
+	if ( !db.open( ui->lineEditUser->text(), ui->lineEditPass->text() ) ) {
+		qDebug() << "ERROR DB autorization: " << db.lastError().text();
+		return;
 	}
+		return QDialog::accept();
 }

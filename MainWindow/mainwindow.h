@@ -36,7 +36,7 @@ private:
   void writeSettings( );
   void readSettings( );
   void createStatusBar( );
-  void createDatabaseConnection( );
+//  void createDatabaseConnection( );
   void createConnections( );
   void createDatabase( );
 
