@@ -66,7 +66,6 @@ void MainWindow::createDatabase( ) {
 	//	else
 	//		qDebug( ) << "CREATE DB";
 
-	DbCreatorThread *threadCreateDb = new DbCreatorThread(this);
+	DbCreatorThread *threadCreateDb = new DbCreatorThread(this); //Это только проба
 	threadCreateDb->start();
-
 }
