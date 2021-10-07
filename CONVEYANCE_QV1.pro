@@ -48,6 +48,7 @@ SOURCES += \
     Emploee/emploeesqltablemodel.cpp \
     Emploee/emploeetableview.cpp \
     Emploee/tableviewemploee.cpp \
+    MainWindow/dbcreatorthread.cpp \
     MainWindow/mainwindow.cpp \
     MainWindow/mainwindowtabwidget.cpp \
     MyTests/testqsqltableformform.cpp \
@@ -103,6 +104,7 @@ HEADERS += \
 	Emploee/emploeesqltablemodel.h \
 	Emploee/emploeetableview.h \
 	Emploee/tableviewemploee.h \
+	MainWindow/dbcreatorthread.h \
 	MainWindow/mainwindow.h \
 	MainWindow/mainwindowtabwidget.h \
 	MyTests/testqsqltableformform.h \

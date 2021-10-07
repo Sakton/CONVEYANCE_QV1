@@ -1,7 +1,8 @@
 #include "mainwindow.h"
 #include "Cars/allcarswiewform.h"
 #include "Constants.h"
-#include "DataBase/databasecreator.h"
+// #include "DataBase/databasecreator.h"
+#include "dbcreatorthread.h"
 #include "Emploee/emploeetableview.h"
 #include "Orders/orderwidget.h"
 #include "ui_mainwindow.h"
@@ -15,6 +16,7 @@ MainWindow::MainWindow( QWidget * parent ) : QMainWindow( parent ), ui( new Ui::
   ui->setupUi( this );
   ui->tabWidget->slotClosetab( 1 );
   ui->tabWidget->slotClosetab( 0 );
+	// в поток
   createDatabase( );
 	// readSettings( );
 	// createDatabaseConnection( );
@@ -55,13 +57,16 @@ void MainWindow::readSettings( ) { qDebug( ) << "work MainWindow::readSettings( 
 //}
 
 void MainWindow::createConnections( ) {
-  
 }
 
 void MainWindow::createDatabase( ) {
-	DatabaseCreator dbc;
+	// DatabaseCreator::initializationDatabase();
 	//	if ( !dbc.createDatabase( ) )
 	//		qDebug( ) << "ERROR CREATE DB";
 	//	else
 	//		qDebug( ) << "CREATE DB";
+
+	DbCreatorThread *threadCreateDb = new DbCreatorThread(this);
+	threadCreateDb->start();
+
 }

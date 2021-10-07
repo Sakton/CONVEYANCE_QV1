@@ -5,13 +5,15 @@
 class DatabaseCreator
 {
 	public:
-		DatabaseCreator();
-
+		// DatabaseCreator();
+		static void initializationDatabase();
 	private:
 		static void defaultConnect();
-		void createUser()const;
-		void createServer()const;
-		void createEmptyDatabase()const;
+		static void connectToNewDb();
+		static void closeDefaultConnect();
+		static void createDatabase();
+		static void createEmptyTablesInDatabase();
+		static void writeConstantDataInDb();
 };
 
 #endif // DATABASECREATOR_H
