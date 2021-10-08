@@ -8,6 +8,7 @@
 #include <QSplashScreen>
 #include <QSqlDatabase>
 #include "Constants.h"
+#include "ElementsWidgets/waitwidget.h"
 
 // global
 void setsApp( QApplication &app );
@@ -29,6 +30,7 @@ int main( int argc, char * argv[] ) {
   //    qDebug( ) << "CREATE DB";
 
 	// createDbConnection( ); //в MainWindow создание соединения. Эта вместо маин
+
   // **********
 
 		QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );

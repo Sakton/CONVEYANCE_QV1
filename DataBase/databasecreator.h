@@ -14,6 +14,7 @@ class DatabaseCreator
 		static void createDatabase();
 		static void createEmptyTablesInDatabase();
 		static void writeConstantDataInDb();
+		static bool isCreated();
 };
 
 #endif // DATABASECREATOR_H

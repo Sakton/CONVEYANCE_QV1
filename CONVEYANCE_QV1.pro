@@ -42,6 +42,7 @@ SOURCES += \
     ElementsWidgets/comboboxperiodsendmail.cpp \
     ElementsWidgets/comboboxshippers.cpp \
     ElementsWidgets/comboboxtypeadress.cpp \
+    ElementsWidgets/waitwidget.cpp \
     Emploee/adddriverdialog.cpp \
     Emploee/addemploeedialog.cpp \
     Emploee/addfunctionemploeedialog.cpp \
@@ -98,6 +99,7 @@ HEADERS += \
 	ElementsWidgets/comboboxperiodsendmail.h \
 	ElementsWidgets/comboboxshippers.h \
 	ElementsWidgets/comboboxtypeadress.h \
+	ElementsWidgets/waitwidget.h \
 	Emploee/adddriverdialog.h \
 	Emploee/addemploeedialog.h \
 	Emploee/addfunctionemploeedialog.h \
@@ -131,6 +133,7 @@ FORMS += \
 	Cars/addcardialog.ui \
 	Cars/allcarswiewform.ui \
 	Contract/createcontractdialog.ui \
+	ElementsWidgets/waitwidget.ui \
 	Emploee/addemploeedialog.ui \
 	Emploee/addfunctionemploeedialog.ui \
 	Emploee/emploeetableview.ui \

@@ -3,7 +3,6 @@
 
 DbCreatorThread::DbCreatorThread( QObject *parent ) : QThread( parent )
 {
-
 }
 
 void DbCreatorThread::run() {

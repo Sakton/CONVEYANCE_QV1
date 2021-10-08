@@ -7,19 +7,20 @@
 #include <QSqlQuery>
 #include <QFile>
 
-//DatabaseCreator::DatabaseCreator() {
-//	// только для тестов
-
-//}
-
 void DatabaseCreator::initializationDatabase()
 {
 	defaultConnect();
-	createDatabase();
-	closeDefaultConnect();
-	connectToNewDb();
-	createEmptyTablesInDatabase();
-	writeConstantDataInDb();
+	if( !isCreated() ) {
+		createDatabase();
+		closeDefaultConnect();
+		connectToNewDb();
+		createEmptyTablesInDatabase();
+		writeConstantDataInDb();
+		QSqlDatabase::removeDatabase( "CONVEYANCE" );
+	} else {
+		qDebug() << "DB BYLA SOZDANA RANYSHE";
+	}
+	QSqlDatabase::removeDatabase("POSTGRES");
 }
 
 void DatabaseCreator::defaultConnect() {
@@ -95,6 +96,15 @@ void DatabaseCreator::writeConstantDataInDb()
 	} else {
 		qDebug() << "OK WRITE DATA TO TABLE";
 	}
+}
+
+bool DatabaseCreator::isCreated()
+{
+	QString qs = QString( " SELECT EXISTS ( SELECT 1 FROM pg_database WHERE datname = '%1' );" ).arg( ConveyanceConstats::NAME_DATABASE_IN_SUBD );
+	QSqlQuery query( QSqlDatabase::database( "POSTGRES" ) );
+	query.exec(qs);
+	query.next();
+	return query.value(0).toBool();
 }
 
 

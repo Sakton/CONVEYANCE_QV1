@@ -11,6 +11,7 @@
 #include <QMenuBar>
 #include <QSqlDatabase>
 #include <QToolBar>
+#include "ElementsWidgets/waitwidget.h"
 
 MainWindow::MainWindow( QWidget * parent ) : QMainWindow( parent ), ui( new Ui::MainWindow ) {
   ui->setupUi( this );
@@ -60,12 +61,10 @@ void MainWindow::createConnections( ) {
 }
 
 void MainWindow::createDatabase( ) {
-	// DatabaseCreator::initializationDatabase();
-	//	if ( !dbc.createDatabase( ) )
-	//		qDebug( ) << "ERROR CREATE DB";
-	//	else
-	//		qDebug( ) << "CREATE DB";
-
-	DbCreatorThread *threadCreateDb = new DbCreatorThread(this); //Это только проба
+	WaitWidget* ww = new WaitWidget;
+	DbCreatorThread *threadCreateDb = new DbCreatorThread;
+	connect( threadCreateDb, &QThread::started, ww, &WaitWidget::show );
+	connect( threadCreateDb, &QThread::finished, threadCreateDb, &QThread::deleteLater );
+	connect( threadCreateDb, &QThread::finished, ww, &WaitWidget::deleteLater );
 	threadCreateDb->start();
 }
