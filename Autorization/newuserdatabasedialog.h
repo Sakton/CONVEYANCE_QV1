@@ -18,6 +18,8 @@ class NewUserdataBaseDialog : public QDialog
 	public slots:
 		void accept() override;
 
+private:
+		void createDefaultConnectToDb()const;
 
 	private:
 		Ui::NewUserdataBaseDialog *ui;

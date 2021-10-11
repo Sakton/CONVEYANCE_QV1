@@ -7,8 +7,7 @@ namespace Ui {
 	class AutorizationDialog;
 }
 
-class AutorizationDialog : public QDialog
-{
+class AutorizationDialog : public QDialog {
 		Q_OBJECT
 
 	public:
@@ -17,10 +16,10 @@ class AutorizationDialog : public QDialog
 
 	public slots:
 		void accept() override;
+		void registerNewUser();
 
 	private:
 		Ui::AutorizationDialog *ui;
-
 };
 
 #endif // AUTORIZATIONDIALOG_H

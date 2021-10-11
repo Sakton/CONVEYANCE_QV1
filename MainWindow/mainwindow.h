@@ -31,6 +31,7 @@ public slots:
 private:
 	QPair<bool, int> isAbsentTab( const QString & typeNameWidget ); //проверка наличия, и вернет индекс заодно
 	QWidget * fabriqueCreateWindow( const QString &nameWindow );
+	void autorizationUser() const;
 
 private:
   void writeSettings( );

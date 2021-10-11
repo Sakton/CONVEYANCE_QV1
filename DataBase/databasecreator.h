@@ -2,15 +2,14 @@
 #define DATABASECREATOR_H
 #include <QSqlDatabase>
 
-class DatabaseCreator
-{
+class DatabaseCreator {
 	public:
 		// DatabaseCreator();
 		static void initializationDatabase();
-	private:
 		static void defaultConnect();
-		static void connectToNewDb();
 		static void closeDefaultConnect();
+	private:
+		static void connectToNewDb();
 		static void createDatabase();
 		static void createEmptyTablesInDatabase();
 		static void writeConstantDataInDb();

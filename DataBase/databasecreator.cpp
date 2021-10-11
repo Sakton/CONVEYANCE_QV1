@@ -56,8 +56,7 @@ void DatabaseCreator::closeDefaultConnect() {
 	QSqlDatabase::removeDatabase("POSTGRES");
 }
 
-void DatabaseCreator::createDatabase()
-{
+void DatabaseCreator::createDatabase() {
 	QString qs = QString( "CREATE DATABASE %1;" ).arg( ConveyanceConstats::NAME_DATABASE_IN_SUBD );
 	QSqlQuery query( QSqlDatabase::database("POSTGRES") );
 	if( !query.exec( qs ) ) {
@@ -67,7 +66,7 @@ void DatabaseCreator::createDatabase()
 	}
 }
 
-void DatabaseCreator::createEmptyTablesInDatabase()  {
+void DatabaseCreator::createEmptyTablesInDatabase() {
 	QFile file( ":/DumpStructureDatabase/conveyanceDbSchema.sql" );
 	if( !file.open( QFile::ReadOnly | QFile::Text ) ) {
 		qDebug() << "ERROR OPEN FILE DB STRUCTURE";
