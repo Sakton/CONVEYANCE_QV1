@@ -7,26 +7,22 @@
 
 NewUserdataBaseDialog::NewUserdataBaseDialog(QWidget *parent) :
 	QDialog(parent),
-	ui(new Ui::NewUserdataBaseDialog)
-{
+	ui(new Ui::NewUserdataBaseDialog) {
 	ui->setupUi(this);
 	createDefaultConnectToDb();
 }
 
-NewUserdataBaseDialog::~NewUserdataBaseDialog()
-{
+NewUserdataBaseDialog::~NewUserdataBaseDialog() {
 	delete ui;
-
 }
 
-void NewUserdataBaseDialog::accept()
-{
+void NewUserdataBaseDialog::accept() {
 	QString nameUser = ui->lineNameUser->text();
 	QString pass = ui->linePassword->text();
 	QString confirmPass = ui->lineEditConfirmPassword->text();
 	if( pass == confirmPass ) {
 		QSqlQuery query( QSqlDatabase::database( "POSTGRES" ) );
-		QString qs = QString( "CREATE USER %1 WITH PASSWORD '%2' ;" ).arg(nameUser).arg(pass);
+		QString qs = QString( "CREATE USER %1 WITH SUPERUSER PASSWORD '%2' ;" ).arg(nameUser, pass);
 		if( !query.exec( qs ) ) {
 			qDebug() << "Error create user" << query.lastError().text() << "\nlastQuery = " << query.lastQuery();
 			return;

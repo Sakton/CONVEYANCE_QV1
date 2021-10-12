@@ -17,6 +17,7 @@ class AutorizationDialog : public QDialog {
 	public slots:
 		void accept() override;
 		void registerNewUser();
+		void reject() override;
 
 	private:
 		Ui::AutorizationDialog *ui;

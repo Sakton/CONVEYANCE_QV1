@@ -4,6 +4,7 @@
 #include <QMainWindow>
 
 class QToolBar;
+class QSignalMapper;
 
 namespace Ui {
 class MainWindow;
@@ -24,9 +25,10 @@ protected:
 
 public slots:
   void slotCloseTab( int idx );
-  void slotOrderWindow( );
-  void slotCarsWindow( );
-  void slotEmloeeWindow( );
+	void slotCreateWindow( const QString & typeNameWidget );
+//  void slotOrderWindow( );
+//  void slotCarsWindow( );
+//  void slotEmloeeWindow( );
 
 private:
 	QPair<bool, int> isAbsentTab( const QString & typeNameWidget ); //проверка наличия, и вернет индекс заодно
@@ -40,10 +42,11 @@ private:
 //  void createDatabaseConnection( );
   void createConnections( );
   void createDatabase( );
+	void initSignalMapper( );
 
 private:
   Ui::MainWindow *ui;
-  // QToolBar *tool;
+	QSignalMapper *map;
 };
 
 #endif // MAINWINDOW_H
