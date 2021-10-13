@@ -35,4 +35,5 @@ void AutorizationDialog::registerNewUser() {
 }
 
 void AutorizationDialog::reject() {
+	exit(0);
 }
