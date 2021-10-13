@@ -18,18 +18,18 @@ void AddCarDialog::accept( ) {
   QDate dGto = ui->dateEditGto->date( );
 
   QSqlQuery query( QSqlDatabase::database( ConveyanceConstats::NAME_DB_ALL ) );
-  query.prepare(
-      "INSERT INTO wagons.autos ( auto_brand, auto_vin, auto_lenthtrailer, auto_widthtrailer, auto_heighttrailer, auto_datawork, auto_datagto ) "
-      "VALUES ( :name, :vin, :len, :width, :height, :dwork, :dgto );" );
-  query.bindValue( ":name", name );
-  query.bindValue( ":vin", vin );
-  query.bindValue( ":len", lenth );
-  query.bindValue( ":width", width );
-  query.bindValue( ":height", height );
-  query.bindValue( ":dwork", dWork );
-  query.bindValue( ":dgto", dGto );
-  if ( !query.exec( ) )
-    qDebug( ) << query.lastError( ).text( );
+	query.prepare(
+			"INSERT INTO cars.tempauto ( tempauto_name, tempauto_vin, tempauto_lenth, tempauto_width, tempauto_height, tempauto_datework, tempauto_dategto ) "
+			"VALUES ( :name, :vin, :len, :width, :height, :dwork, :dgto );" );
+	query.bindValue( ":name", name );
+	query.bindValue( ":vin", vin );
+	query.bindValue( ":len", lenth );
+	query.bindValue( ":width", width );
+	query.bindValue( ":height", height );
+	query.bindValue( ":dwork", dWork );
+	query.bindValue( ":dgto", dGto );
+	if ( !query.exec( ) )
+		qDebug( ) << query.lastError( ).text( );
 
   QDialog::accept( );
 }

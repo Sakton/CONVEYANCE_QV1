@@ -10,12 +10,10 @@
 #define MyAppAssocExt ".myp"
 #define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
 #define DbFileExe "PostgreSQL_13.1_64bit_Setup.exe"
-// #define MyRKK_Path "E:\CPP\MyProects\CONVEYANCE_QV1\deploy"
-#define MyHome_Path "E:\Project_CPP_QT\CONVEYANCE_QV1\deploy"
-// #define CurrentPath MyRKK_Path
-#define CurrentPath MyHome_Path
-
-
+#define MyRKK_Path "E:\CPP\MyProects\CONVEYANCE_QV1\deploy"
+// #define MyHome_Path "E:\Project_CPP_QT\CONVEYANCE_QV1\deploy"
+#define CurrentPath MyRKK_Path
+// #define CurrentPath MyHome_Path
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -34,8 +32,8 @@ ChangesAssociations=yes
 DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-// OutputDir=E:\CPP\MyProects\CONVEYANCE_QV1\Inno
-OutputDir=E:\Project_CPP_QT\CONVEYANCE_QV1\SepupFolder
+OutputDir=E:\CPP\MyProects\CONVEYANCE_QV1\Inno
+// OutputDir=E:\Project_CPP_QT\CONVEYANCE_QV1\SetupFolder
 OutputBaseFilename={#MyAppName}
 Compression=lzma
 SolidCompression=yes

@@ -24,9 +24,7 @@ EmploeeTableView::EmploeeTableView( QWidget * parent )
 EmploeeTableView::~EmploeeTableView( ) { delete ui; }
 
 void EmploeeTableView::initMenus()
-{
-
-}
+{  }
 
 //void EmploeeTableView::contextMenuEvent( QContextMenuEvent * event ) {
 //	QMenu contextMenu( this );

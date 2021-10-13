@@ -25,7 +25,7 @@ protected:
 
 public slots:
   void slotCloseTab( int idx );
-	void slotCreateWindow( const QString & typeNameWidget );
+	void slotCreateTabWidget( const QString & typeNameWidget );
 //  void slotOrderWindow( );
 //  void slotCarsWindow( );
 //  void slotEmloeeWindow( );

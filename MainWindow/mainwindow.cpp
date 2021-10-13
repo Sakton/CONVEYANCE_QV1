@@ -44,7 +44,7 @@ void MainWindow::contextMenuEvent( QContextMenuEvent * event ) {
 
 void MainWindow::slotCloseTab( int idx ) { ui->tabWidget->removeTab( idx ); }
 
-void MainWindow::slotCreateWindow(const QString & typeNameWidget) {
+void MainWindow::slotCreateTabWidget(const QString & typeNameWidget) {
 	auto [ result, index ] = isAbsentTab( typeNameWidget );
 	if( !result ) {
 		auto w = fabriqueCreateWindow(typeNameWidget);
@@ -81,8 +81,7 @@ void MainWindow::slotCreateWindow(const QString & typeNameWidget) {
 //	}
 //}
 
-QPair<bool, int> MainWindow::isAbsentTab(const QString & typeNameWidget)
-{
+QPair<bool, int> MainWindow::isAbsentTab(const QString & typeNameWidget) {
 	for( int i = 0; i < ui->tabWidget->count(); ++i ) {
 		if( ui->tabWidget->widget(i)->objectName() == typeNameWidget ) {
 			return { true, i };
@@ -91,8 +90,7 @@ QPair<bool, int> MainWindow::isAbsentTab(const QString & typeNameWidget)
 	return { false, -1 };
 }
 
-QWidget * MainWindow::fabriqueCreateWindow(const QString & nameWindow)
-{
+QWidget * MainWindow::fabriqueCreateWindow(const QString & nameWindow) {
 	QWidget *res = nullptr;
 	if( nameWindow == "OrderWidget" ){
 		res = new OrderWidget( ui->tabWidget );
@@ -104,7 +102,7 @@ QWidget * MainWindow::fabriqueCreateWindow(const QString & nameWindow)
 	}
 	if( nameWindow == "EmploeeTableView" ) {
 		res = new EmploeeTableView( ui->tabWidget );
-		res->setProperty("nameWindowWidget", tr("СОТРУДНИКИ"));
+		res->setProperty( "nameWindowWidget", tr("СОТРУДНИКИ") );
 	}
 	return res;
 }
@@ -130,27 +128,29 @@ void MainWindow::readSettings( ) { qDebug( ) << "work MainWindow::readSettings( 
 //}
 
 void MainWindow::createConnections( ) {
+
 }
 
 void MainWindow::createDatabase( ) {
 	WaitWidget* ww = new WaitWidget;
+
 	DbCreatorThread *threadCreateDb = new DbCreatorThread;
 	connect( threadCreateDb, &QThread::started, ww, &WaitWidget::show );
 	connect( threadCreateDb, &QThread::finished, threadCreateDb, &QThread::deleteLater );
 	connect( threadCreateDb, &QThread::finished, ww, &WaitWidget::deleteLater );
+
 	threadCreateDb->start();
 }
 
-void MainWindow::initSignalMapper()
-{
+void MainWindow::initSignalMapper() {
 	map = new QSignalMapper( this );
 
-	connect( ui->actionShowAllOrder, QOverload<bool>::of(&QAction::triggered), map, QOverload<>::of(&QSignalMapper::map) );
+	connect( ui->actionShowAllOrder, QOverload<bool>::of( &QAction::triggered ), map, QOverload<>::of( &QSignalMapper::map ) );
 	map->setMapping( ui->actionShowAllOrder, "OrderWidget" );
-	connect( ui->actionViewAllAuto, QOverload<bool>::of( &QAction::triggered ), map, QOverload<>::of(&QSignalMapper::map) );
-	map->setMapping(ui->actionViewAllAuto, "AllCarsWiewForm" );
-	connect( ui->actionViewAllEmploee, QOverload<bool>::of(&QAction::triggered), map, QOverload<>::of(&QSignalMapper::map) );
-	map->setMapping(ui->actionViewAllEmploee, "EmploeeTableView");
+	connect( ui->actionViewAllAuto, QOverload<bool>::of( &QAction::triggered ), map, QOverload<>::of( &QSignalMapper::map ) );
+	map->setMapping( ui->actionViewAllAuto, "AllCarsWiewForm" );
+	connect( ui->actionViewAllEmploee, QOverload<bool>::of( &QAction::triggered ), map, QOverload<>::of( &QSignalMapper::map ) );
+	map->setMapping( ui->actionViewAllEmploee, "EmploeeTableView" );
 
-	connect( map, &QSignalMapper::mappedString, this, &MainWindow::slotCreateWindow );
+	connect( map, &QSignalMapper::mappedString, this, &MainWindow::slotCreateTabWidget );
 }

@@ -1,7 +1,7 @@
 #include "carsqltablemodel.h"
 
 CarSqlTableModel::CarSqlTableModel( QObject * parent, const QSqlDatabase & db ) : QSqlTableModel( parent, db ) {
-  setTable( "wagons.autos" );
+	setTable( "cars.tempauto" );
   select( );
   setEditStrategy( QSqlTableModel::EditStrategy::OnFieldChange );
   setHeaderData( 0, Qt::Orientation::Horizontal, "ID" );
