@@ -19,6 +19,7 @@ AutorizationDialog::~AutorizationDialog() {
 void AutorizationDialog::accept() {
 	QSqlDatabase db = QSqlDatabase::database(ConveyanceConstats::NAME_DB_ALL);
 	if( !db.isValid() ){
+		qDebug() << "!db.isValid() in AutorizationDialog::accept() create new Connection";
 		db = QSqlDatabase::addDatabase("QPSQL", ConveyanceConstats::NAME_DB_ALL );
 	}
 	db.setDatabaseName( ConveyanceConstats::NAME_DATABASE_IN_SUBD );

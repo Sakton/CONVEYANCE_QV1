@@ -101,7 +101,9 @@ bool DatabaseCreator::isCreated()
 {
 	QString qs = QString( " SELECT EXISTS ( SELECT 1 FROM pg_database WHERE datname = '%1' );" ).arg( ConveyanceConstats::NAME_DATABASE_IN_SUBD );
 	QSqlQuery query( QSqlDatabase::database( "POSTGRES" ) );
-	query.exec(qs);
+	if( !query.exec(qs) ) {
+		qDebug() << "Error isCreated(): " << query.lastError().text();
+	}
 	query.next();
 	return query.value(0).toBool();
 }

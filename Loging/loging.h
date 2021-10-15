@@ -3,11 +3,14 @@
 #include <QMessageLogContext>
 #include <QFile>
 #include <QTextStream>
+#include <QDate>
 
 void myMessageHandler ( QtMsgType type, const QMessageLogContext &, const QString & message ) {
 	QFile file( "logfile.txt" );
 	file.open( QFile::Text | QFile::Append );
 	QTextStream out( &file );
+
+	out << QDate::currentDate().toString() << '\n';
 
 	switch (type) {
 		case QtInfoMsg:     out << "INFO     : "; break;
