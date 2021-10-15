@@ -28,17 +28,17 @@ void DatabaseCreator::defaultConnect() {
 	db.setHostName( "127.0.0.1" );
 	db.setDatabaseName( "postgres" );
 	if( !db.open( "postgres", "postgres" ) ){
-		qDebug() << "ERROR open default DB";
+		qDebug() << "ERROR open ---DEFAULT--- DB: " << db.lastError().text();
 	} else {
 		qDebug() << "Dafault DB open";
 	}
-	if( QSqlDatabase::database( "POSTGRES" ).tables().size() ) {
-		for( auto &el : QSqlDatabase::database( "POSTGRES" ).tables() ) {
-			qDebug() << el;
-		}
-	} else {
-		qDebug() << "DB empty";
-	}
+//	if( QSqlDatabase::database( "POSTGRES" ).tables().size() ) {
+//		for( auto &el : QSqlDatabase::database( "POSTGRES" ).tables() ) {
+//			qDebug() << el;
+//		}
+//	} else {
+//		qDebug() << "DB empty";
+//	}
 }
 
 void DatabaseCreator::connectToNewDb() {
@@ -46,7 +46,7 @@ void DatabaseCreator::connectToNewDb() {
 	db.setHostName( "127.0.0.1" );
 	db.setDatabaseName( ConveyanceConstats::NAME_DATABASE_IN_SUBD );
 	if( !db.open( "postgres", "postgres" ) ) {
-		qDebug() << "ERROR open CONVEYANCE DB";
+		qDebug() << "ERROR open CONVEYANCE DB: " << db.lastError().text();
 	} else {
 		qDebug() << "Open CONVEYANCE DB";
 	}
@@ -81,8 +81,7 @@ void DatabaseCreator::createEmptyTablesInDatabase() {
 	}
 }
 
-void DatabaseCreator::writeConstantDataInDb()
-{
+void DatabaseCreator::writeConstantDataInDb() {
 	QFile file(":/DumpStructureDatabase/InsertConstatsDataInTable.sql");
 	if( !file.open( QFile::ReadOnly | QFile::Text ) ) {
 		qDebug() << "ERROR OPEN FILE CONSTANT DATA";
@@ -97,12 +96,11 @@ void DatabaseCreator::writeConstantDataInDb()
 	}
 }
 
-bool DatabaseCreator::isCreated()
-{
-	QString qs = QString( " SELECT EXISTS ( SELECT 1 FROM pg_database WHERE datname = '%1' );" ).arg( ConveyanceConstats::NAME_DATABASE_IN_SUBD );
+bool DatabaseCreator::isCreated() {
+	QString qs = QString( "SELECT EXISTS ( SELECT 1 FROM pg_database WHERE datname = '%1' );" ).arg( ConveyanceConstats::NAME_DATABASE_IN_SUBD );
 	QSqlQuery query( QSqlDatabase::database( "POSTGRES" ) );
 	if( !query.exec(qs) ) {
-		qDebug() << "Error isCreated(): " << query.lastError().text();
+		qDebug() << "Error query in isCreated(): " << query.lastError().text();
 	}
 	query.next();
 	return query.value(0).toBool();

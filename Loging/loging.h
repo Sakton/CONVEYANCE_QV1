@@ -6,11 +6,11 @@
 #include <QDate>
 
 void myMessageHandler ( QtMsgType type, const QMessageLogContext &, const QString & message ) {
-	QFile file( "logfile.txt" );
+	QFile file( "log.txt" );
 	file.open( QFile::Text | QFile::Append );
 	QTextStream out( &file );
 
-	out << QDate::currentDate().toString() << '\n';
+	out << QDate::currentDate().toString() << "  ";
 
 	switch (type) {
 		case QtInfoMsg:     out << "INFO     : "; break;
