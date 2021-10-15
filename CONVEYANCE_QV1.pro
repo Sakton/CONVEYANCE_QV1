@@ -106,6 +106,7 @@ HEADERS += \
 	Emploee/emploeesqltablemodel.h \
 	Emploee/emploeetableview.h \
 	Emploee/tableviewemploee.h \
+	Loging/loging.h \
 	MainWindow/dbcreatorthread.h \
 	MainWindow/mainwindow.h \
 	MainWindow/mainwindowtabwidget.h \

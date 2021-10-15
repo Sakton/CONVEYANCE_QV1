@@ -4,6 +4,7 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include "Constants.h"
+#include <QDebug>
 
 AutorizationDialog::AutorizationDialog(QWidget *parent) :
 	QDialog(parent),

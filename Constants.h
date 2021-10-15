@@ -16,6 +16,8 @@ static const char * NAME_EMPTY_IMG_ICON = "no_icon.png";
 static const char * PATH_NAME_DUMP_SCHEMA_TO_FIRST_LOAD = ":/DumpStructureDatabase/conveyanceDbSchema.sql";
 static const char * PATH_NAME_DUMP_CONSTATNTS_DATA_INSERT = ":/DumpStructureDatabase/InsertConstatsDataInTable.sql";
 
+static const char * NAME_LOG_FILE = "log.txt";
+
 } // namespace ConveyanceConstats
 
 #endif // CONSTANTS_H

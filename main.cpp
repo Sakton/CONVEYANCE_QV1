@@ -9,6 +9,7 @@
 #include <QSqlDatabase>
 #include "Constants.h"
 #include "ElementsWidgets/waitwidget.h"
+#include "Loging/loging.h"
 
 // global
 void setsApp( QApplication &app );
@@ -35,6 +36,7 @@ int main( int argc, char * argv[] ) {
 
 		QSplashScreen splash( QPixmap( ":/img/splash.jpg" ) );
 		splash.show( );
+		qInstallMessageHandler( myMessageHandler );
 		MainWindow w;
 		w.show( );
 		splash.finish( &w );
@@ -43,6 +45,7 @@ int main( int argc, char * argv[] ) {
 
   return a.exec( );
 }
+
 //***********************************************
 
 void setsApp( QApplication &app ) {
